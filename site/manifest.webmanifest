@@ -1,0 +1,14 @@
+{
+  "name": "Beanbook",
+  "short_name": "Beanbook",
+  "description": "Track the coffees you buy, how you prepare them and how they taste.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F2F5FA",
+  "theme_color": "#DE2C4A",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

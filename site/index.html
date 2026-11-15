@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beanbook</title>
+<meta name="theme-color" content="#DE2C4A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Beanbook">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one phone-width column; big type header, dense tappable rows,
+   every brew method carries its own colour (the way nzb360 colours each service),
+   bottom tabs + one floating action, forms rise as sheets. */
+:root{
+  --bg:#F2F5FA; --outer:#E4E9F1; --surface:#FFFFFF; --soft:#EAEFF6; --line:#DDE3EC;
+  --ink:#0E1626; --muted:#5C6879;
+  --accent:#DE2C4A; --accent-ink:#FFFFFF; --gold:#EFA400; --good:#16875A; --bad:#C62F2F;
+  --shadow:0 1px 2px rgba(14,22,38,.05),0 6px 20px rgba(14,22,38,.06);
+  --font-display:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif;
+  --font-body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:18px; --r-s:12px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D121D; --outer:#070A11; --surface:#161C2A; --soft:#1F2737; --line:#283144;
+    --ink:#EEF2F8; --muted:#98A4B8;
+    --accent:#FF5C74; --accent-ink:#1A0508; --gold:#FFC23D; --good:#4CCB94; --bad:#FF7A7A;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D121D; --outer:#070A11; --surface:#161C2A; --soft:#1F2737; --line:#283144;
+  --ink:#EEF2F8; --muted:#98A4B8;
+  --accent:#FF5C74; --accent-ink:#1A0508; --gold:#FFC23D; --good:#4CCB94; --bad:#FF7A7A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--outer);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;overscroll-behavior:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation;border:0;background:none;padding:0}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--font-display);margin:0;text-wrap:balance;letter-spacing:-.02em}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;border-radius:8px}
+.num{font-variant-numeric:tabular-nums}
+
+#app{position:relative;height:100%;max-width:480px;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+@media (min-width:520px){#app{box-shadow:0 0 0 1px var(--line),0 20px 60px rgba(14,22,38,.12)}}
+#view{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 16px 104px}
+#view.enter>*{animation:rise .2s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* tabs */
+#tabs{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0 4px;border-radius:14px;color:var(--muted);font-size:11.5px;font-weight:600;transition:color .12s,transform .1s}
+.tab .pill{display:grid;place-items:center;width:56px;height:30px;border-radius:15px;transition:background .15s}
+.tab[aria-current="page"]{color:var(--ink)}
+.tab[aria-current="page"] .pill{background:color-mix(in srgb,var(--accent) 16%,var(--surface));color:var(--accent)}
+.tab:active{transform:scale(.94)}
+
+/* fab */
+#fab{position:absolute;right:16px;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;align-items:center;gap:8px;
+  height:54px;padding:0 20px 0 16px;border-radius:27px;background:var(--accent);color:var(--accent-ink);font-weight:700;
+  box-shadow:0 8px 22px color-mix(in srgb,var(--accent) 40%,transparent);transition:transform .1s}
+#fab:active{transform:scale(.95)}
+#fab[hidden]{display:none}
+
+/* headers */
+.hero{padding:22px 0 12px;display:flex;flex-direction:column;gap:10px}
+.hero h1{font-size:34px;font-weight:800;line-height:1.02}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.sub{color:var(--muted)}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.strip div{padding:12px 14px;display:flex;flex-direction:column;gap:1px}
+.strip div+div{border-left:1px solid var(--line)}
+.strip b{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:-.02em}
+.strip span{font-size:12px;color:var(--muted);font-weight:500}
+.bar{position:sticky;top:0;z-index:4;display:flex;align-items:center;gap:8px;margin:0 -16px;padding:10px 8px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px)}
+.bar h2{flex:1;font-size:17px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ib{width:42px;height:42px;border-radius:21px;display:grid;place-items:center;color:var(--ink);transition:background .12s,transform .1s;flex:none}
+.ib:active{background:var(--soft);transform:scale(.92)}
+.section{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:22px 0 10px}
+.section h3{font-size:19px;font-weight:700}
+.section span{color:var(--muted);font-size:13px}
+
+/* controls */
+.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 14px;height:46px;color:var(--muted)}
+.search input{flex:1;border:0;background:none;outline:0;min-width:0;color:var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:34px;padding:0 14px;border-radius:17px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:13.5px;color:var(--muted);transition:transform .1s,background .12s}
+.chip:active{transform:scale(.95)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 18px;border-radius:14px;font-weight:700;background:var(--soft);color:var(--ink);transition:transform .1s,filter .12s}
+.btn:active{transform:scale(.97);filter:brightness(.96)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:none;border:1px solid var(--line)}
+.btn.danger{color:var(--bad)}
+.btn.small{height:38px;padding:0 14px;border-radius:12px;font-size:14px}
+.btn.block{width:100%}
+.row-btns{display:flex;gap:10px;flex-wrap:wrap}
+.row-btns .btn{flex:1}
+
+/* cards and rows */
+.list{display:flex;flex-direction:column;gap:10px}
+.card{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--surface);border-radius:var(--r);padding:10px 12px 10px 10px;box-shadow:var(--shadow);transition:transform .1s}
+button.card:active{transform:scale(.985)}
+.thumb{flex:none;width:64px;height:64px;border-radius:14px;overflow:hidden;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:26px;color:#fff;background:linear-gradient(140deg,hsl(var(--h) 72% 52%),hsl(calc(var(--h) + 38) 78% 44%))}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.card .body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.card .t{font-weight:700;font-size:16px;line-height:1.2;overflow-wrap:anywhere}
+.card .m{color:var(--muted);font-size:13.5px;overflow-wrap:anywhere}
+.tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:3px}
+.tag{font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:8px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.tag.m{background:color-mix(in srgb,var(--mc) 15%,var(--surface));color:color-mix(in srgb,var(--mc) 72%,var(--ink))}
+.tag.demo{background:color-mix(in srgb,var(--gold) 22%,var(--surface));color:color-mix(in srgb,var(--gold) 55%,var(--ink))}
+.tag.done{text-decoration:line-through}
+.score{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.score b{font-family:var(--font-display);font-size:21px;font-weight:700;line-height:1}
+.score small{font-size:11.5px;color:var(--muted);font-weight:600}
+.pips{display:inline-block;flex:none;position:relative;width:60px;height:12px;background:radial-gradient(circle,var(--line) 0 4.6px,transparent 5px) 0 0/12px 12px repeat-x}
+.pips i{position:absolute;inset:0 auto 0 0;background:radial-gradient(circle,var(--gold) 0 4.6px,transparent 5px) 0 0/12px 12px repeat-x}
+.mtile{flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:14px;letter-spacing:-.02em;
+  background:color-mix(in srgb,var(--mc) 16%,var(--surface));color:color-mix(in srgb,var(--mc) 75%,var(--ink))}
+.banner{display:flex;gap:12px;align-items:center;background:color-mix(in srgb,var(--gold) 16%,var(--surface));border:1px solid color-mix(in srgb,var(--gold) 40%,var(--surface));border-radius:var(--r);padding:12px 14px;font-size:14px}
+.banner p{margin:0;flex:1}
+.empty{text-align:center;padding:36px 20px;background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;align-items:center}
+.empty h3{font-size:20px}
+.empty p{margin:0;color:var(--muted);max-width:32ch}
+.day{font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:18px 2px 8px}
+
+/* detail */
+.cover{position:relative;border-radius:22px;overflow:hidden;min-height:150px;display:flex;align-items:flex-end;padding:16px;color:#fff;
+  background:linear-gradient(140deg,hsl(var(--h) 72% 50%),hsl(calc(var(--h) + 38) 78% 38%))}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,0) 62%)}
+.cover.photo{min-height:230px}
+.cover div{position:relative;z-index:1;display:flex;flex-direction:column;gap:2px}
+.cover h1{font-size:28px;font-weight:800;line-height:1.05;overflow-wrap:anywhere}
+.cover span{opacity:.92;font-weight:500}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-top:12px}
+.facts div{background:var(--surface);padding:10px 12px;display:flex;flex-direction:column;gap:1px;min-width:0}
+.facts span{font-size:11.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.facts b{font-weight:700;font-size:15px;overflow-wrap:anywhere}
+.note{background:var(--surface);border-radius:var(--r);padding:14px;box-shadow:var(--shadow);white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px}
+.cmp{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:6px 14px}
+.cmp-row{display:grid;grid-template-columns:104px 1fr 76px;gap:10px;align-items:center;padding:9px 0}
+.cmp-row+.cmp-row{border-top:1px solid var(--line)}
+.cmp-row .track{height:10px;border-radius:5px;background:var(--soft);overflow:hidden}
+.cmp-row .track i{display:block;height:100%;border-radius:5px;background:var(--mc)}
+.cmp-row .v{text-align:right;font-size:13px;color:var(--muted)}
+.cmp-row .v b{color:var(--ink);font-family:var(--font-display);font-size:16px}
+.big-score{display:flex;align-items:center;gap:14px;background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 16px;margin-top:12px}
+.big-score b{font-family:var(--font-display);font-size:46px;font-weight:800;line-height:1;letter-spacing:-.03em}
+.big-score .pips{transform:scale(1.5);transform-origin:left center}
+.photo-full{border-radius:var(--r);overflow:hidden;margin-top:12px;box-shadow:var(--shadow)}
+
+/* sheets */
+#sheet-root{position:absolute;inset:0;z-index:20;display:none}
+#sheet-root.open{display:block}
+.scrim{position:absolute;inset:0;background:rgba(8,12,22,.5);animation:fade .18s}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:94%;overflow:hidden;display:flex;flex-direction:column;background:var(--bg);border-radius:24px 24px 0 0;animation:up .24s cubic-bezier(.2,.9,.25,1);box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+.sheet.pop{left:20px;right:20px;bottom:auto;top:50%;transform:translateY(-50%);border-radius:24px;animation:pop .28s cubic-bezier(.2,1.3,.4,1)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes up{from{transform:translateY(40%);opacity:.6}to{transform:none;opacity:1}}
+@keyframes pop{from{transform:translateY(-50%) scale(.85);opacity:.5}to{transform:translateY(-50%);opacity:1}}
+.sheet-head{display:flex;align-items:center;gap:8px;padding:12px 8px 8px 20px}
+.sheet-head h2{flex:1;font-size:21px;font-weight:700}
+.sheet-body{flex:1;min-height:0;overflow-y:auto;padding:4px 20px 20px;display:flex;flex-direction:column;gap:16px}
+.sheet-foot{padding:12px 20px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--bg);display:flex;gap:10px}
+.sheet-foot .btn{flex:1}
+form{display:contents}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f>label,.f>.lbl{font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.f input[type=text],.f input[type=date],.f input[type=datetime-local],.f select,.f textarea{width:100%;height:48px;padding:0 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);outline:0;transition:border-color .12s,box-shadow .12s;min-width:0}
+.f textarea{height:auto;min-height:92px;padding:12px 14px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.seg{display:flex;background:var(--soft);border-radius:14px;padding:4px;gap:4px}
+.seg label{flex:1;position:relative}
+.seg input,.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:grid;place-items:center;height:40px;border-radius:11px;font-weight:600;color:var(--muted);font-size:14px;transition:background .12s}
+.seg input:checked+span{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.seg input:focus-visible+span,.opt input:focus-visible+span{outline:2.5px solid var(--accent);outline-offset:1px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt span{display:inline-flex;align-items:center;height:38px;padding:0 13px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:14px;color:var(--muted);transition:transform .1s}
+.opt:active span{transform:scale(.95)}
+.opt input:checked+span{background:color-mix(in srgb,var(--mc,var(--accent)) 16%,var(--surface));border-color:var(--mc,var(--accent));color:color-mix(in srgb,var(--mc,var(--accent)) 75%,var(--ink))}
+.rate{background:var(--surface);border-radius:var(--r);padding:14px 16px;border:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.rate-top{display:flex;align-items:center;justify-content:space-between}
+.rate output{font-family:var(--font-display);font-size:38px;font-weight:800;line-height:1;letter-spacing:-.03em}
+.rate .pips{transform:scale(1.4);transform-origin:right center}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:none;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:5px;background:linear-gradient(to right,var(--gold) var(--p,0%),var(--soft) var(--p,0%))}
+input[type=range]::-moz-range-track{height:10px;border-radius:5px;background:var(--soft)}
+input[type=range]::-moz-range-progress{height:10px;border-radius:5px;background:var(--gold)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--surface);border:3px solid var(--gold);margin-top:-10px;box-shadow:var(--shadow)}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--surface);border:3px solid var(--gold)}
+.photo-pick{display:flex;gap:12px;align-items:center}
+.photo-pick .prev{width:84px;height:84px;border-radius:16px;background:var(--soft);display:grid;place-items:center;color:var(--muted);overflow:hidden;flex:none}
+.photo-pick .prev img{width:100%;height:100%;object-fit:cover}
+.photo-pick .acts{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.file-btn{position:relative;overflow:hidden}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.hint{font-size:13px;color:var(--muted);margin:0}
+.ratio{font-weight:700;color:var(--accent)}
+
+/* badges */
+.progress{height:10px;border-radius:5px;background:var(--soft);overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.badge{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;background:var(--surface);border-radius:var(--r);padding:14px 6px 12px;box-shadow:var(--shadow);transition:transform .1s;min-width:0}
+.badge:active{transform:scale(.95)}
+.badge b{font-size:13px;line-height:1.15;font-weight:700}
+.badge.off b{color:var(--muted)}
+.lv{display:flex;gap:4px;height:6px}
+.lv i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.lv i.on{background:var(--gold)}
+.medal .m-bg{fill:var(--soft)}
+.medal .m-ring{fill:none;stroke:var(--line);stroke-width:1.5}
+.medal .m-ic{fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.medal.on .m-bg{fill:var(--c)}
+.medal.on .m-ring{stroke:rgba(255,255,255,.5)}
+.medal.on .m-ic{stroke:#fff}
+.won{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:26px 22px 8px}
+.won .medal{animation:spin .7s cubic-bezier(.2,1.4,.4,1)}
+@keyframes spin{from{transform:scale(.3) rotate(-90deg)}to{transform:none}}
+.won small{font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;font-size:12px}
+.won h2{font-size:26px;font-weight:800}
+.won p{margin:0;color:var(--muted)}
+
+.panel{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column;gap:12px}
+.panel h3{font-size:17px}
+.panel p{margin:0;color:var(--muted);font-size:14px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
+.kv:first-of-type{border-top:0}
+.kv span{color:var(--muted)}
+.kv b{text-align:right;overflow-wrap:anywhere}
+.status{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--good);flex:none}
+.dot.warn{background:var(--gold)}
+
+.adv{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:0 14px}
+.adv summary{height:50px;display:flex;align-items:center;font-weight:700;cursor:pointer;list-style:none}
+.adv summary::-webkit-details-marker{display:none}
+.adv summary::after{content:"+";margin-left:auto;font-size:22px;font-weight:500;color:var(--muted)}
+.adv[open] summary::after{content:"–"}
+.adv-body{display:flex;flex-direction:column;gap:10px;padding-bottom:14px}
+.stage{display:grid;grid-template-columns:66px 70px 1fr 36px;gap:8px;align-items:center}
+.stage.hd{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.stage input,.add-row input{height:44px;padding:0 10px;border-radius:12px;border:1px solid var(--line);background:var(--bg);min-width:0;width:100%;outline:0}
+.stage input:focus,.add-row input:focus{border-color:var(--accent)}
+.stage .ib{width:36px;height:36px;color:var(--muted)}
+.add-row{display:flex;gap:8px}
+.add-row[hidden]{display:none}
+.add-row .btn{flex:none}
+[hidden]{display:none!important}
+.tick{display:flex;align-items:center;gap:10px;font-weight:600;min-height:32px;cursor:pointer}
+.tick input{width:22px;height:22px;margin:0;accent-color:var(--accent);flex:none}
+#adv-wrap,#c-more-box{display:flex;flex-direction:column;gap:16px}
+.opt-add{display:inline-flex;align-items:center;height:38px;padding:0 13px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:14px;color:var(--muted);transition:transform .1s}
+.opt-add:active{transform:scale(.95)}
+#extras-box{display:contents}
+.wide{grid-column:1/-1}
+.kv{flex-wrap:wrap}
+#editor{position:absolute;inset:0;z-index:40;background:var(--bg);display:flex;flex-direction:column}
+.ed-stage{flex:1;min-height:0;display:grid;place-items:center;background:#0A0E17;padding:16px;overflow:hidden}
+.ed-stage canvas{touch-action:none;cursor:grab;border-radius:6px;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.ed-tools{padding:12px 20px 2px}
+.ed-zoom{display:flex;align-items:center;gap:12px;font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.ed-zoom output{min-width:38px;text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+input[type=range].plain::-webkit-slider-runnable-track{background:var(--soft)}
+input[type=range].plain::-moz-range-progress{background:none}
+.ed-hint{color:rgba(255,255,255,.75);font-size:13px;text-align:center;margin:0;padding:0 16px 14px;background:#0A0E17}
+.roast-top{display:flex;justify-content:space-between;align-items:baseline}
+.roast-top output{font-weight:700}
+.roast-top label{font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+input[type=range].roast::-webkit-slider-runnable-track{background:linear-gradient(to right,var(--soft) 0 8%,#E2B77E 14%,#B8742F 55%,#4A2410 100%)}
+input[type=range].roast::-moz-range-track{background:linear-gradient(to right,var(--soft) 0 8%,#E2B77E 14%,#B8742F 55%,#4A2410 100%)}
+input[type=range].roast::-moz-range-progress{background:none}
+input[type=range].roast::-webkit-slider-thumb{border-color:var(--ink)}
+input[type=range].roast::-moz-range-thumb{border-color:var(--ink)}
+.roast-ticks{position:relative;height:18px;margin:0 15px;font-size:12px;font-weight:600;color:var(--muted)}
+.roast-ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.roast-ticks span:first-child{transform:translateX(-15px)}
+.roast-ticks span:last-child{transform:translateX(calc(-100% + 15px))}
+#toasts{position:absolute;left:16px;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:14px;font-weight:600;font-size:14px;box-shadow:var(--shadow);animation:rise .2s}
+.loading{display:grid;place-items:center;height:60%;color:var(--muted);text-align:center;gap:12px;padding:40px 20px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+  <main id="view"><div class="loading"><p>Opening your coffee shelf…</p></div></main>
+  <button id="fab" type="button" data-act="fab" hidden></button>
+  <nav id="tabs" aria-label="Sections"></nav>
+  <div id="sheet-root"></div>
+  <div id="editor" hidden></div>
+  <div id="toasts" aria-live="polite"></div>
+</div>
+<script>
+"use strict";
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const okId=v=>typeof v==="string"&&/^[a-z0-9]{6,24}$/.test(v);
+const str=(v,n=120)=>typeof v==="string"?v.trim().slice(0,n):"";
+const num=(v,min,max)=>{if(v===""||v==null)return null;const x=Number(String(v).replace(",","."));return Number.isFinite(x)&&x>=min&&x<=max?x:null};
+const pad=n=>String(n).padStart(2,"0");
+const localStamp=(d=new Date())=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+const dayOf=s=>String(s||"").slice(0,10);
+const fmtNum=(x,d=1)=>x==null?"–":(Math.round(x*10**d)/10**d).toString();
+const fmtRate=x=>x==null?"–":x.toFixed(2).replace(/0$/,"");
+const avg=a=>a.length?a.reduce((s,x)=>s+x,0)/a.length:null;
+const hue=s=>{let h=0;for(const ch of String(s))h=(h*31+ch.charCodeAt(0))%360;return h};
+const fmtDay=s=>{const d=new Date(dayOf(s)+"T12:00");if(isNaN(d))return "";const t=dayOf(localStamp());const y=dayOf(localStamp(new Date(Date.now()-864e5)));
+  if(dayOf(s)===t)return "Today";if(dayOf(s)===y)return "Yesterday";return d.toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short",year:d.getFullYear()===new Date().getFullYear()?undefined:"numeric"})};
+const fmtDate=s=>{if(!s)return "–";const d=new Date(dayOf(s)+"T12:00");return isNaN(d)?"–":d.toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"})};
+
+const I={
+ cup:'<path d="M4 9h13v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H16.6"/><path d="M8 3v3M12 3v3"/>',
+ bean:'<ellipse cx="12" cy="12" rx="6" ry="9" transform="rotate(35 12 12)"/><path d="M7.5 17c2.5-3 1-6.5 3.8-8.2S15.5 8 16.5 6.5"/>',
+ book:'<path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M9 9h6M9 13h4"/>',
+ medal:'<circle cx="12" cy="14.5" r="5.5"/><path d="M8.5 10 6 3h4l2 4 2-4h4l-2.5 7"/>',
+ data:'<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>', rot:'<path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 3.5v5h-5"/>', back:'<path d="M15 5l-7 7 7 7"/>', close:'<path d="M6 6l12 12M18 6L6 18"/>',
+ search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+ edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+ trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
+ camera:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+ star:'<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/>',
+ down:'<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>', up:'<path d="M12 16V5M7 9l5-5 5 5M5 20h14"/>',
+ globe:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/>',
+ pin:'<path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+ flame:'<path d="M12 3c1 4 5 5.5 5 10.5a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5 1-9z"/>',
+ moon:'<path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>',
+ pen:'<path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="M4 20h16"/>',
+ snow:'<path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9M9.5 4.5L12 7l2.5-2.5M9.5 19.5L12 17l2.5 2.5"/>',
+ layers:'<path d="M12 4l9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/>',
+ cal:'<rect x="4" y="5.5" width="16" height="15" rx="2.5"/><path d="M4 10.5h16M8.5 3.5v4M15.5 3.5v4"/>',
+ shield:'<path d="M12 3l8 3v6c0 4.5-3.3 7.8-8 9-4.7-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+ box:'<path d="M4 8l8-4 8 4v9l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v9"/>',
+ target:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/>',
+ drop:'<path d="M12 3.5s6.5 6.8 6.5 11a6.5 6.5 0 0 1-13 0c0-4.2 6.5-11 6.5-11z"/>',
+ leaf:'<path d="M5 19c0-9 5-14 15-14 0 10-5 15-14 14z"/><path d="M5 19c3-5 6-8 10-10"/>',
+ check:'<circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.7 2.7L16 9.5"/>',
+ meh:'<circle cx="12" cy="12" r="8.5"/><path d="M8.5 15.5h7M9 10h.01M15 10h.01"/>',
+ swap:'<path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"/>',
+ heart:'<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.5 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/>'
+};
+const ic=(n,s=22)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]||""}</svg>`;
+
+/* ---------- domain ---------- */
+const METHODS=[
+ {id:"espresso",name:"Espresso",ab:"ES",c:"#D6334C",dose:18,water:36,temp:93,time:"0:28",out:"Yield"},
+ {id:"v60",name:"Pour-over",ab:"V60",c:"#1E88E5",dose:15,water:250,temp:94,time:"2:45",pour:true},
+ {id:"aeropress",name:"AeroPress",ab:"AP",c:"#F47B20",dose:15,water:220,temp:88,time:"2:00"},
+ {id:"frenchpress",name:"French press",ab:"FP",c:"#1F9D6B",dose:30,water:500,temp:95,time:"4:00"},
+ {id:"moka",name:"Moka pot",ab:"MK",c:"#7A4FD6",dose:16,water:150,temp:null,time:"4:00"},
+ {id:"chemex",name:"Chemex",ab:"CX",c:"#0FA3B1",dose:30,water:500,temp:94,time:"4:15",pour:true},
+ {id:"batch",name:"Filter machine",ab:"FM",c:"#5B6B8C",dose:60,water:1000,temp:null,time:""},
+ {id:"coldbrew",name:"Cold brew",ab:"CB",c:"#2F6BD9",dose:80,water:1000,temp:null,time:""},
+ {id:"cezve",name:"Cezve",ab:"CZ",c:"#B8741A",dose:8,water:70,temp:null,time:"2:30"},
+ {id:"other",name:"Other",ab:"··",c:"#8A93A3",dose:null,water:null,temp:null,time:""}
+];
+const MCOLORS=["#C2187A","#0B8A6B","#B4530A","#4457D6","#8E3FBF","#00838F","#A33B2A","#5A7D0C"];
+const customs=()=>S.meta.methods||[];
+const allMethods=()=>[...METHODS.slice(0,-1),...customs(),METHODS[METHODS.length-1]];
+const M=id=>METHODS.find(m=>m.id===id)||customs().find(m=>m.id===id)||METHODS[METHODS.length-1];
+const abbr=n=>{const w=n.replace(/[^A-Za-z0-9 ]/g,"").split(/\s+/).filter(Boolean);return((w.length>1?w.map(x=>x[0]).join(""):(w[0]||"?")).slice(0,3)).toUpperCase()};
+function normMethod(o){o=o||{};const name=str(o.name,30);return{id:/^x[a-z0-9]{6,24}$/.test(o.id||"")?o.id:"x"+newId(),name,ab:abbr(name),c:/^#[0-9a-fA-F]{6}$/.test(o.c||"")?o.c:MCOLORS[0],pour:!!o.pour}}
+/* extra options per method; pouring stages are separate and only for methods with pour:true */
+const ADV={
+ espresso:[{k:"preinf",l:"Pre-infusion (s)",t:"num",max:120},{k:"bar",l:"Pressure (bar)",t:"num",max:20}],
+ aeropress:[{k:"pos",l:"Position",t:"seg",o:["Standard","Inverted"]},{k:"steep",l:"Steep before pressing",t:"text",ph:"1:30"}],
+ coldbrew:[{k:"hours",l:"Steep time (hours)",t:"num",max:200},{k:"where",l:"Steeped in",t:"seg",o:["Fridge","Room temp"]}],
+ moka:[{k:"start",l:"Water in the base",t:"seg",o:["Cold","Pre-heated"]}]
+};
+function normExtra(method,e){const out={};e=e&&typeof e==="object"?e:{};
+  if(M(method).id!==method)return keepExtra(e,{}); /* a method this version does not know: keep its options untouched */
+  (ADV[M(method).id]||[]).forEach(d=>{const v=e[d.k];
+  if(d.t==="num"){const n=num(v,0,d.max);if(n!=null)out[d.k]=n}else if(d.t==="seg"){if(d.o.includes(v))out[d.k]=v}else{const t=str(v,20);if(t)out[d.k]=t}});return out}
+const normStages=l=>Array.isArray(l)?l.slice(0,12).map(x=>({t:str(x&&x.t,8),g:num(x&&x.g,0,50000),note:str(x&&x.note,40)})).filter(x=>x.t||x.g!=null||x.note):[];
+const FLAVORS=["Chocolate","Cocoa","Caramel","Honey","Brown sugar","Vanilla","Nutty","Hazelnut","Almond","Berry","Blueberry","Strawberry","Cherry","Citrus","Lemon","Orange","Stone fruit","Apple","Tropical","Floral","Jasmine","Black tea","Spicy","Earthy","Smoky","Winey","Creamy","Bright","Juicy","Bitter","Sour","Flat"];
+const ROASTV=["","light","medium-light","medium","medium-dark","dark"];
+const ROASTN=["Unknown","Light","Medium-light","Medium","Medium-dark","Dark"];
+const PROCESSES=["","Washed","Natural","Honey","Anaerobic","Wet-hulled","Decaf","Blend / unknown"];
+const ORIGINS=["Brazil","Burundi","Colombia","Costa Rica","DR Congo","Ecuador","El Salvador","Ethiopia","Guatemala","Honduras","India","Indonesia","Kenya","Mexico","Nicaragua","Panama","Peru","Rwanda","Tanzania","Uganda","Vietnam","Yemen","Blend"];
+
+/* ---------- data format ----------
+   SCHEMA is the version of the stored data and of export files. Rules that keep old and new data compatible:
+   1. New fields are optional and get a default in normCoffee / normBrew, so old records load unchanged.
+   2. Fields, methods, flavours and badges this version does not know are kept as they are, so data written
+      by a newer version survives being opened, edited and exported here.
+   3. A change that renames or reshapes existing fields raises SCHEMA and adds a step to MIGRATIONS;
+      stored data and imported files are upgraded step by step from whatever version they have. */
+const SCHEMA=1;
+const MIGRATIONS={ /* 2:{coffee:c=>c,brew:b=>b} */ };
+function upgrade(kind,rec,from){let r=rec;for(let v=from+1;v<=SCHEMA;v++){const m=MIGRATIONS[v];if(m&&m[kind])r=m[kind]({...r})}return r}
+function keepExtra(o,out){let n=0;for(const[key,v]of Object.entries(o||{})){
+    if(key in out||key==="demo"||key==="k"||!/^[A-Za-z][A-Za-z0-9]{0,30}$/.test(key))continue;
+    let j;try{j=JSON.stringify(v)}catch(e){continue}if(j===undefined||j.length>2000||++n>20)continue;out[key]=JSON.parse(j)}
+  return out}
+function normCoffee(o){o=o||{};return keepExtra(o,{k:"coffee",id:okId(o.id)?o.id:newId(),name:str(o.name,80),roaster:str(o.roaster,60),origin:str(o.origin,60),
+  process:str(o.process,40),roast:ROASTV.includes(o.roast)?o.roast:"",
+  form:o.form==="ground"?"ground":"beans",roastDate:/^\d{4}-\d\d-\d\d$/.test(o.roastDate||"")?o.roastDate:"",bought:/^\d{4}-\d\d-\d\d$/.test(o.bought||"")?o.bought:"",
+  weight:num(o.weight,1,100000),price:num(o.price,0,100000),notes:str(o.notes,2000),photoId:okId(o.photoId)?o.photoId:null,
+  catalogId:str(o.catalogId,90),region:str(o.region,60),producer:str(o.producer,60),variety:str(o.variety,60),altitude:num(o.altitude,0,5000),
+  roastFor:["filter","espresso","omni"].includes(o.roastFor)?o.roastFor:"",roasterNotes:str(o.roasterNotes,120),finished:!!o.finished,createdAt:Number(o.createdAt)||Date.now()})}
+function normBrew(o){o=o||{};const r=num(o.rating,0.25,5);return keepExtra(o,{k:"brew",id:okId(o.id)?o.id:newId(),coffeeId:String(o.coffeeId||""),method:typeof o.method==="string"&&/^[a-z0-9]{2,30}$/.test(o.method)?o.method:"other",
+  date:/^\d{4}-\d\d-\d\dT\d\d:\d\d/.test(o.date||"")?o.date.slice(0,16):localStamp(),dose:num(o.dose,0.1,5000),water:num(o.water,1,50000),
+  temp:num(o.temp,0,100),time:str(o.time,12),grind:str(o.grind,40),rating:r==null?null:Math.round(r*4)/4,
+  flavors:Array.isArray(o.flavors)?o.flavors.filter(f=>typeof f==="string"&&f.length>0&&f.length<=30).slice(0,16):[],stages:normStages(o.stages),extra:normExtra(o.method,o.extra),notes:str(o.notes,2000),photoId:okId(o.photoId)?o.photoId:null})}
+const okPhoto=d=>typeof d==="string"&&/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(d)&&d.length<240000;
+
+/* ---------- state ---------- */
+const S={coffees:{},brews:{},photos:{},meta:{badges:{},exports:0,demoOff:false,methods:[],schema:SCHEMA},demo:false,ready:false};
+const ui={q:"",filter:"all",jm:"all"};
+const coffees=()=>Object.values(S.coffees);
+const brews=()=>Object.values(S.brews);
+const brewsOf=id=>brews().filter(b=>b.coffeeId===id).sort((a,b)=>b.date.localeCompare(a.date));
+const rated=l=>l.filter(b=>b.rating!=null).map(b=>b.rating);
+const ratio=b=>b.dose&&b.water?"1:"+fmtNum(b.water/b.dose,1):null;
+
+/* ---------- storage: private per-person cloud docs, else this browser ---------- */
+const Store={
+  mode:"memory",col:null,idb:null,q:{},
+  async init(){
+    const use=n=>window.claude&&typeof window.claude.use==="function"?window.claude.use(n).catch(()=>null):Promise.resolve(null);
+    try{
+      const[db,user]=await Promise.all([use("db"),use("user")]);this.db=db;this.user=user;
+      const uid=user?await user.id():null;
+      if(db&&uid){
+        this.col=db.collection("data/users/"+uid);
+        const snap=await Promise.race([this.col.get(),new Promise((_,rej)=>setTimeout(()=>rej({code:"timeout"}),10000))]);
+        const out={};snap.docs.forEach(d=>{if(d.exists)out[d.id]=JSON.parse(JSON.stringify(d.data()))});
+        let canWrite=true;
+        if(!Object.keys(out).length){try{await this.col.doc("meta").set({k:"meta",badges:{},exports:0,demoOff:false,methods:[]})}catch(e){canWrite=false}}
+        if(canWrite){this.mode="cloud";return out}
+        this.col=null; /* this viewer may not save to the page: keep their data in this browser instead */
+      }
+    }catch(e){if(this.col){this.col=null;return null}}
+    try{
+      this.idb=await new Promise((res,rej)=>{const r=indexedDB.open("beanbook",1);r.onupgradeneeded=()=>r.result.createObjectStore("kv");r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);r.onblocked=()=>rej(0);setTimeout(()=>rej(0),4000)});
+      const out=await new Promise((res,rej)=>{const o={};const c=this.idb.transaction("kv").objectStore("kv").openCursor();
+        c.onsuccess=()=>{const cur=c.result;if(cur){o[cur.key]=cur.value;cur.continue()}else res(o)};c.onerror=()=>rej(c.error)});
+      this.mode="local";return out;
+    }catch(e){this.mode="memory";return{}}
+  },
+  run(key,fn){this.q[key]=(this.q[key]||Promise.resolve()).then(fn).catch(e=>{
+    toast(e&&e.code==="quota_exceeded"?"Storage is full. Remove some photos or old entries.":"Could not save that change. Export a backup to be safe.")});return this.q[key]},
+  put(key,body){const b=JSON.parse(JSON.stringify(body));
+    if(this.mode==="cloud")return this.run(key,()=>this.col.doc(key).set(b));
+    if(this.mode==="local")return this.run(key,()=>new Promise((res,rej)=>{const t=this.idb.transaction("kv","readwrite");t.objectStore("kv").put(b,key);t.oncomplete=res;t.onerror=()=>rej(t.error)}));
+    return Promise.resolve()},
+  del(key){
+    if(this.mode==="cloud")return this.run(key,()=>this.col.doc(key).delete());
+    if(this.mode==="local")return this.run(key,()=>new Promise((res,rej)=>{const t=this.idb.transaction("kv","readwrite");t.objectStore("kv").delete(key);t.oncomplete=res;t.onerror=()=>rej(t.error)}));
+    return Promise.resolve()}
+};
+const saveMeta=()=>Store.put("meta",{k:"meta",...S.meta});
+function addPhoto(data){const id=newId();S.photos[id]=data;Store.put("p_"+id,{k:"photo",d:data});return id}
+function delPhoto(id){if(id&&S.photos[id]){delete S.photos[id];Store.del("p_"+id)}}
+
+function hydrate(docs){
+  S.coffees={};S.brews={};S.photos={};
+  const mv=docs&&docs.meta,from=Math.max(1,Number(mv&&mv.schema)||1);
+  if(mv&&typeof mv==="object")S.meta=keepExtra(mv,{badges:(mv.badges&&typeof mv.badges==="object")?JSON.parse(JSON.stringify(mv.badges)):{},exports:Number(mv.exports)||0,demoOff:!!mv.demoOff,
+    methods:Array.isArray(mv.methods)?mv.methods.map(normMethod).filter(m=>m.name).slice(0,40):[],schema:Math.max(SCHEMA,from)});
+  for(const[key,v]of Object.entries(docs||{})){
+    if(!v||typeof v!=="object"||key==="meta")continue;
+    if(key.startsWith("c_")){const c=normCoffee({...upgrade("coffee",v,from),id:key.slice(2)});S.coffees[c.id]=c}
+    else if(key.startsWith("b_")){const b=normBrew({...upgrade("brew",v,from),id:key.slice(2)});S.brews[b.id]=b}
+    else if(key.startsWith("p_")&&okPhoto(v.d))S.photos[key.slice(2)]=v.d;
+  }
+  if(mv&&from<SCHEMA){coffees().forEach(c=>Store.put("c_"+c.id,c));brews().forEach(b=>Store.put("b_"+b.id,b));saveMeta()} /* stored data was upgraded: write it back once */
+}
+
+/* ---------- examples shown until the first real coffee ---------- */
+function loadDemo(){
+  const at=(days,t)=>dayOf(localStamp(new Date(Date.now()-days*864e5)))+"T"+t;
+  const d=n=>dayOf(at(n,"00:00"));
+  const C=[["demo0001","Guji Hambela","Friedhats","Ethiopia","Natural","light","beans",12,250,14.5],
+           ["demo0002","La Esperanza","Manhattan Coffee","Colombia","Washed","medium","beans",20,250,16],
+           ["demo0003","House Espresso","Local roastery","Brazil","Natural","dark","ground",30,500,11.9]];
+  C.forEach(([id,name,roaster,origin,process,roast,form,age,weight,price])=>{S.coffees[id]={...normCoffee({id,name,roaster,origin,process,roast,form,roastDate:d(age+6),bought:d(age),weight,price}),demo:true}});
+  const B=[["demo1001","demo0001","v60",1,"08:10",15,250,94,"2:50","22 clicks",4.5,["Blueberry","Floral","Juicy"],"Sweet and clean. Finer than last time, which fixed the sourness."],
+           ["demo1002","demo0001","v60",3,"08:25",15,250,92,"2:20","26 clicks",3.25,["Sour","Citrus"],"Ran through too fast."],
+           ["demo1003","demo0001","aeropress",5,"15:40",16,220,88,"2:00","18 clicks",4,["Berry","Black tea"],""],
+           ["demo1004","demo0002","espresso",2,"07:50",18,38,93,"0:29","2.4",4.25,["Caramel","Cherry","Creamy"],"Good with milk too."],
+           ["demo1005","demo0002","frenchpress",6,"10:15",30,500,95,"4:00","coarse",3.5,["Chocolate","Nutty"],""],
+           ["demo1006","demo0003","moka",9,"09:05",16,150,null,"4:10","",2.75,["Bitter","Smoky"],"Pre-ground is a bit stale by now."]];
+  B.forEach(([id,coffeeId,method,days,t,dose,water,temp,time,grind,rating,flavors,notes])=>{S.brews[id]={...normBrew({id,method,date:at(days,t),dose,water,temp,time,grind,rating,flavors,notes}),coffeeId,demo:true}});
+  S.demo=true;
+}
+function dropDemo(){if(!S.demo)return;S.coffees={};S.brews={};S.demo=false}
+
+/* ---------- badges ---------- */
+function facts(){
+  if(S.demo)return null;
+  const cs=coffees(),bs=brews();
+  const set=f=>new Set(f.filter(Boolean).map(x=>x.toLowerCase())).size;
+  const perC={},mPerC={};bs.forEach(b=>{perC[b.coffeeId]=(perC[b.coffeeId]||0)+1;(mPerC[b.coffeeId]=mPerC[b.coffeeId]||new Set()).add(b.method)});
+  const days=[...new Set(bs.map(b=>dayOf(b.date)))].sort();
+  let streak=0,run=0,prev=null;days.forEach(d=>{const t=Date.parse(d+"T12:00");run=prev!=null&&Math.round((t-prev)/864e5)===1?run+1:1;prev=t;streak=Math.max(streak,run)});
+  const dset=new Set(days);let weekends=0;days.forEach(d=>{const x=new Date(d+"T12:00");if(x.getDay()===6&&dset.has(dayOf(localStamp(new Date(x.getTime()+864e5)))))weekends++});
+  const hr=b=>Number(b.date.slice(11,13));
+  return{
+    coffees:cs.length,brews:bs.length,methods:new Set(bs.map(b=>b.method)).size,origins:set(cs.map(c=>c.origin)),roasters:set(cs.map(c=>c.roaster)),
+    maxPer:Math.max(0,...Object.values(perC)),maxM:Math.max(0,...Object.values(mPerC).map(s=>s.size)),
+    five:bs.filter(b=>b.rating===5).length,high:bs.filter(b=>b.rating>=4.5).length,low:bs.filter(b=>b.rating!=null&&b.rating<=2).length,
+    flavors:new Set(bs.flatMap(b=>b.flavors)).size,notes:bs.filter(b=>b.notes.length>=10).length,
+    photos:cs.filter(c=>c.photoId).length+bs.filter(b=>b.photoId).length,early:bs.filter(b=>hr(b)<7).length,late:bs.filter(b=>hr(b)>=21).length,
+    streak,weekends,fresh:bs.filter(b=>{const c=S.coffees[b.coffeeId];if(!c||!c.roastDate)return false;const n=(Date.parse(dayOf(b.date))-Date.parse(c.roastDate))/864e5;return n>=0&&n<=14}).length,
+    cold:bs.filter(b=>b.method==="coldbrew").length,finished:cs.filter(c=>c.finished).length,exports:S.meta.exports
+  }
+}
+const BADGES=[
+ {id:"stocked",name:"Stocked Up",icon:"box",color:"#1E88E5",key:"coffees",goals:[1],what:"Add your first coffee."},
+ {id:"firstsip",name:"First Sip",icon:"cup",color:"#DE2C4A",key:"brews",goals:[1],what:"Log your first preparation."},
+ {id:"counter",name:"Bean Counter",icon:"bean",color:"#8B5A2B",key:"coffees",goals:[5,10,25,50],what:"Coffees on your shelf.",unit:"coffees"},
+ {id:"grind",name:"Daily Grind",icon:"heart",color:"#E0447C",key:"brews",goals:[10,25,50,100,250],what:"Preparations logged.",unit:"preparations"},
+ {id:"actor",name:"Method Actor",icon:"layers",color:"#7A4FD6",key:"methods",goals:[3,5,8],what:"Different brew methods used.",unit:"methods"},
+ {id:"second",name:"Second Opinion",icon:"swap",color:"#0FA3B1",key:"maxM",goals:[2,3,4],what:"Prepare one coffee with different methods.",unit:"methods on one coffee"},
+ {id:"dialed",name:"Dialed In",icon:"target",color:"#F47B20",key:"maxPer",goals:[5,10,20],what:"Keep tuning the same coffee.",unit:"preparations of one coffee"},
+ {id:"globe",name:"Globetrotter",icon:"globe",color:"#1F9D6B",key:"origins",goals:[3,6,10],what:"Coffees from different origins.",unit:"origins"},
+ {id:"roasters",name:"Roaster Hopper",icon:"pin",color:"#C2410C",key:"roasters",goals:[3,6,10],what:"Buy from different roasters.",unit:"roasters"},
+ {id:"godshot",name:"God Shot",icon:"star",color:"#E0A100",key:"five",goals:[1],what:"Rate a preparation a perfect 5."},
+ {id:"sweet",name:"Sweet Spot",icon:"check",color:"#16875A",key:"high",goals:[3,10,25],what:"Preparations rated 4.5 or higher.",unit:"top-rated cups"},
+ {id:"honest",name:"Honest Cup",icon:"meh",color:"#5B6B8C",key:"low",goals:[1],what:"Rate a preparation 2 or lower. Not every cup is a winner."},
+ {id:"palate",name:"Palate",icon:"drop",color:"#B02A8F",key:"flavors",goals:[8,16,24],what:"Different flavour notes picked.",unit:"flavour notes"},
+ {id:"words",name:"Wordsmith",icon:"pen",color:"#2F6BD9",key:"notes",goals:[5,20,50],what:"Preparations with written tasting notes.",unit:"written notes"},
+ {id:"shutter",name:"Shutterbug",icon:"camera",color:"#D6334C",key:"photos",goals:[3,10,25],what:"Photos added to coffees and preparations.",unit:"photos"},
+ {id:"early",name:"Early Bird",icon:"sun",color:"#F2A900",key:"early",goals:[1,5,20],what:"Brew before 07:00.",unit:"early cups"},
+ {id:"owl",name:"Night Owl",icon:"moon",color:"#3F3D9E",key:"late",goals:[1,5,20],what:"Brew after 21:00.",unit:"late cups"},
+ {id:"streak",name:"On a Roll",icon:"flame",color:"#E8541E",key:"streak",goals:[3,7,14,30],what:"Log a preparation on consecutive days.",unit:"days in a row"},
+ {id:"weekend",name:"Weekend Ritual",icon:"cal",color:"#0E8F8F",key:"weekends",goals:[1,4,12],what:"Brew on both Saturday and Sunday.",unit:"full weekends"},
+ {id:"fresh",name:"Fresh Roast",icon:"leaf",color:"#3D9A2B",key:"fresh",goals:[1,5,15],what:"Brew within 14 days of the roast date.",unit:"fresh cups"},
+ {id:"cold",name:"Cold Snap",icon:"snow",color:"#2B9FD9",key:"cold",goals:[1,5],what:"Make cold brew.",unit:"cold brews"},
+ {id:"bottom",name:"Bottom of the Bag",icon:"check",color:"#8B5A2B",key:"finished",goals:[1,5,15],what:"Finish a bag and mark it done.",unit:"bags finished"},
+ {id:"backup",name:"Safety Net",icon:"shield",color:"#16875A",key:"exports",goals:[1],what:"Export a backup of your data."}
+];
+const levelFor=(b,f)=>f?b.goals.filter(g=>(f[b.key]||0)>=g).length:0;
+const ROSETTE=(()=>{const n=12,r=26.5;let d="";const p=(a,R)=>(32+R*Math.cos(a)).toFixed(1)+" "+(32+R*Math.sin(a)).toFixed(1);
+  for(let i=0;i<n;i++){const a=i/n*2*Math.PI;if(!i)d="M"+p(a,r);d+="Q"+p(a+Math.PI/n,34)+" "+p(a+2*Math.PI/n,r)}return d+"Z"})();
+const medal=(b,lvl,size=60)=>`<svg class="medal ${lvl?"on":""}" style="--c:${b.color}" width="${size}" height="${size}" viewBox="0 0 64 64" aria-hidden="true"><path class="m-bg" d="${ROSETTE}"/><circle class="m-ring" cx="32" cy="32" r="20.5"/><g class="m-ic" transform="translate(20 20)">${I[b.icon]}</g></svg>`;
+const pipsLv=(b,lvl)=>b.goals.length>1?`<span class="lv">${b.goals.map((_,i)=>`<i class="${i<lvl?"on":""}"></i>`).join("")}</span>`:`<span class="lv"></span>`;
+
+function checkBadges(quiet){
+  const f=facts();if(!f)return;const won=[];
+  BADGES.forEach(b=>{const lvl=levelFor(b,f),have=(S.meta.badges[b.id]||{}).level||0;
+    if(lvl>have){S.meta.badges[b.id]={level:lvl,at:dayOf(localStamp())};won.push({b,lvl})}});
+  if(!won.length)return;saveMeta();
+  if(quiet){if(S.ready)toast(won.length===1?"Badge earned: "+won[0].b.name:won.length+" badges earned");return}
+  const first=won[0];
+  openSheet(`<div class="won">${medal(first.b,first.lvl,112)}<small>Badge earned</small><h2>${esc(first.b.name)}${first.b.goals.length>1?" · Level "+first.lvl:""}</h2><p>${esc(first.b.what)}</p>
+    ${won.length>1?`<p>Also earned: ${won.slice(1).map(w=>esc(w.b.name)).join(", ")}</p>`:""}</div>
+    <div class="sheet-foot"><button class="btn primary" type="button" data-act="close-sheet">Nice</button></div>`,{pop:true});
+  try{navigator.vibrate&&navigator.vibrate([20,40,30])}catch(e){}
+}
+
+/* ---------- routing ---------- */
+let cur="coffees";
+const TABS=[["coffees","Coffees","bean"],["journal","Journal","book"],["badges","Badges","medal"],["data","Data","data"]];
+function route(){if(cur.startsWith("coffee-"))return{v:"coffee",id:cur.slice(7)};if(cur.startsWith("brew-"))return{v:"brew",id:cur.slice(5)};return{v:TABS.some(t=>t[0]===cur)?cur:"coffees"}}
+function go(h){cur=h;try{if(location.hash.slice(1)!==h)location.hash=h}catch(e){}render(true)}
+addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h&&h!==cur){cur=h;closeSheet();render(true)}});
+
+/* ---------- rendering ---------- */
+const view=$("#view"),fab=$("#fab");
+const pips=r=>`<span class="pips" role="img" aria-label="${r==null?"Not rated":fmtRate(r)+" out of 5"}"><i style="width:${(r||0)*12}px"></i></span>`;
+const mtag=id=>{const m=M(id);return`<span class="tag m" style="--mc:${m.c}">${esc(m.name)}</span>`};
+const thumb=(c)=>{const p=c.photoId&&S.photos[c.photoId];return`<span class="thumb" style="--h:${hue(c.name+c.origin)}">${p?`<img src="${p}" alt="">`:esc((c.name||"?").trim().charAt(0).toUpperCase())}</span>`};
+const recipe=b=>[b.dose?fmtNum(b.dose)+" g":null,b.water?fmtNum(b.water,0)+" g "+(M(b.method).out?"out":"water"):null,b.temp?fmtNum(b.temp,0)+" °C":null,b.time||null].filter(Boolean).join(" · ");
+
+function render(isNav){
+  if(!S.ready)return;
+  const r=route(),top=view.scrollTop;
+  const tabOf=r.v==="coffee"?"coffees":r.v==="brew"?(S.brews[r.id]?"coffees":"journal"):r.v;
+  $("#tabs").innerHTML=TABS.map(([id,label,icon])=>`<button class="tab" type="button" data-act="tab" data-id="${id}" ${tabOf===id?'aria-current="page"':""}><span class="pill">${ic(icon)}</span>${label}</button>`).join("");
+  let html="",f=null;
+  if(r.v==="coffees"){html=vCoffees();f=["Add coffee","add-coffee"]}
+  else if(r.v==="journal"){html=vJournal();if(coffees().length&&!S.demo)f=["Log preparation","pick-coffee"]}
+  else if(r.v==="badges")html=vBadges();
+  else if(r.v==="data")html=vData();
+  else if(r.v==="coffee"){const c=S.coffees[r.id];if(!c){cur="coffees";return render(true)}html=vCoffee(c);if(!c.demo)f=["Add preparation","add-brew",c.id]}
+  else if(r.v==="brew"){const b=S.brews[r.id];if(!b){cur="journal";return render(true)}html=vBrew(b)}
+  view.innerHTML=html;
+  if(f){fab.hidden=false;fab.innerHTML=ic("plus")+esc(f[0]);fab.dataset.do=f[1];fab.dataset.id=f[2]||""}else fab.hidden=true;
+  if(isNav){view.scrollTop=0;view.classList.remove("enter");void view.offsetWidth;view.classList.add("enter")}else view.scrollTop=top;
+}
+
+function coffeeCard(c){
+  const bs=brewsOf(c.id),rs=rated(bs),best=rs.length?Math.max(...rs):null,ms=[...new Set(bs.map(b=>b.method))];
+  return`<button class="card" type="button" data-act="open" data-id="coffee-${c.id}">${thumb(c)}
+    <span class="body"><span class="t">${esc(c.name)}</span><span class="m">${esc([c.roaster,c.origin].filter(Boolean).join(" · ")||"No roaster or origin yet")}</span>
+    <span class="tags">${c.demo?'<span class="tag demo">Example</span>':""}<span class="tag">${c.form==="ground"?"Ground":"Beans"}</span>${c.finished?'<span class="tag">Finished</span>':""}${ms.slice(0,2).map(mtag).join("")}${ms.length>2?`<span class="tag">+${ms.length-2}</span>`:""}</span></span>
+    <span class="score"><b class="num">${fmtRate(best)}</b>${pips(best)}<small>${bs.length?bs.length+(bs.length===1?" prep":" preps"):"not brewed"}</small></span></button>`;
+}
+function coffeeList(){
+  const q=ui.q.toLowerCase();
+  let l=coffees().filter(c=>(!q||[c.name,c.roaster,c.origin,c.process].join(" ").toLowerCase().includes(q))&&
+    (ui.filter==="all"||(ui.filter==="open"&&!c.finished)||(ui.filter==="finished"&&c.finished)||ui.filter===c.form));
+  if(ui.filter==="top")l=l.filter(c=>rated(brewsOf(c.id)).length).sort((a,b)=>Math.max(...rated(brewsOf(b.id)))-Math.max(...rated(brewsOf(a.id))));
+  else l.sort((a,b)=>(a.finished-b.finished)||(b.createdAt-a.createdAt));
+  if(!l.length)return coffees().length?`<div class="empty"><h3>Nothing matches</h3><p>Try another search or filter.</p></div>`
+    :`<div class="empty"><h3>Your shelf is empty</h3><p>Add the bag you are drinking now. Then log each way you prepare it and rate the cup.</p><button class="btn primary" type="button" data-act="add-coffee">${ic("plus")}Add your first coffee</button></div>`;
+  return l.map(coffeeCard).join("");
+}
+function vCoffees(){
+  const bs=brews(),a=avg(rated(bs));
+  const chip=(id,label)=>`<button class="chip" type="button" data-act="filter" data-id="${id}" aria-pressed="${ui.filter===id}">${label}</button>`;
+  return`<header class="hero"><h1>Bean<em>book</em></h1>
+    <div class="strip"><div><b class="num">${coffees().length}</b><span>coffees</span></div><div><b class="num">${bs.length}</b><span>preparations</span></div><div><b class="num">${fmtNum(a,2)}</b><span>average rating</span></div></div></header>
+    <div class="list">
+    ${S.demo?`<div class="banner"><p><b>These are example coffees.</b> They disappear when you add your own.</p><button class="btn small ghost" type="button" data-act="clear-demo">Clear</button></div>`:""}
+    <label class="search">${ic("search",20)}<input id="q" type="search" placeholder="Search name, roaster, origin" value="${esc(ui.q)}" autocomplete="off" aria-label="Search coffees"></label>
+    <div class="chips">${chip("all","All")}${chip("open","Open bags")}${chip("top","Top rated")}${chip("beans","Beans")}${chip("ground","Ground")}${chip("finished","Finished")}</div>
+    <div class="list" id="coffee-list">${coffeeList()}</div></div>`;
+}
+function brewRow(b,withCoffee){
+  const m=M(b.method),c=S.coffees[b.coffeeId];
+  return`<button class="card" type="button" data-act="open" data-id="brew-${b.id}"><span class="mtile" style="--mc:${m.c}">${esc(m.ab)}</span>
+    <span class="body"><span class="t">${esc(withCoffee?(c?c.name:"Deleted coffee"):m.name)}</span><span class="m num">${esc((withCoffee?m.name+(recipe(b)?" · ":""):"")+recipe(b)||(withCoffee?"":"No recipe details"))}</span>
+    ${b.flavors.length?`<span class="tags">${b.flavors.slice(0,3).map(f=>`<span class="tag">${esc(f)}</span>`).join("")}${b.flavors.length>3?`<span class="tag">+${b.flavors.length-3}</span>`:""}</span>`:""}</span>
+    <span class="score"><b class="num">${fmtRate(b.rating)}</b>${pips(b.rating)}<small>${withCoffee?b.date.slice(11,16):esc(fmtDay(b.date))}</small></span></button>`;
+}
+function vJournal(){
+  const used=[...new Set(brews().map(b=>b.method))];
+  const l=brews().filter(b=>ui.jm==="all"||b.method===ui.jm).sort((a,b)=>b.date.localeCompare(a.date));
+  let out="",day="";l.forEach(b=>{const d=dayOf(b.date);if(d!==day){day=d;out+=`<div class="day">${esc(fmtDay(b.date))}</div>`}out+=`<div style="margin-bottom:10px">${brewRow(b,true)}</div>`});
+  return`<header class="hero"><h1>Journal</h1><p class="sub" style="margin:0">Every cup you have logged, newest first.</p></header>
+    ${used.length>1?`<div class="chips"><button class="chip" type="button" data-act="jm" data-id="all" aria-pressed="${ui.jm==="all"}">All methods</button>${used.map(id=>`<button class="chip" type="button" data-act="jm" data-id="${id}" aria-pressed="${ui.jm===id}">${esc(M(id).name)}</button>`).join("")}</div>`:""}
+    ${l.length?out:`<div class="empty" style="margin-top:12px"><h3>No preparations yet</h3><p>${coffees().length?"Open a coffee and add how you prepared it.":"Add a coffee first, then log how you prepared it."}</p></div>`}`;
+}
+function vCoffee(c){
+  const bs=brewsOf(c.id),rs=rated(bs),p=c.photoId&&S.photos[c.photoId];
+  const by={};bs.forEach(b=>(by[b.method]=by[b.method]||[]).push(b));
+  const cmp=Object.entries(by).map(([id,l])=>({m:M(id),n:l.length,a:avg(rated(l))})).sort((x,y)=>(y.a||0)-(x.a||0));
+  const fact=(k,v)=>`<div><span>${k}</span><b>${esc(v)}</b></div>`;
+  const age=c.roastDate?Math.round((Date.now()-Date.parse(c.roastDate))/864e5):null;
+  return`<div class="bar"><button class="ib" type="button" data-act="open" data-id="coffees" aria-label="Back to coffees">${ic("back")}</button><h2></h2>
+      ${c.demo?"":`<button class="ib" type="button" data-act="edit-coffee" data-id="${c.id}" aria-label="Edit coffee">${ic("edit")}</button>`}</div>
+    <div class="cover ${p?"photo":""}" style="--h:${hue(c.name+c.origin)}">${p?`<img src="${p}" alt="Photo of ${esc(c.name)}">`:""}<div><h1>${esc(c.name)}</h1><span>${esc([c.roaster,c.origin].filter(Boolean).join(" · "))}</span></div></div>
+    ${c.demo?`<div class="banner" style="margin-top:12px"><p>This is an example. Add your own coffee to start tracking.</p></div>`:""}
+    <div class="facts">${fact("Form",c.form==="ground"?"Ground":"Whole beans")}${fact("Roast",c.roast?c.roast[0].toUpperCase()+c.roast.slice(1):"–")}${fact("Process",c.process||"–")}
+      ${fact("Roasted",c.roastDate?fmtDate(c.roastDate)+(age!=null&&age>=0&&!c.finished?` (${age} d)`:""):"–")}${fact("Bag",c.weight?fmtNum(c.weight,0)+" g":"–")}${fact("Price",c.price!=null?"€ "+c.price.toFixed(2):"–")}</div>
+    ${moreOn(c)?`<div class="cmp" style="margin-top:12px">${[["Region",c.region],["Producer",c.producer],["Variety",c.variety],["Altitude",c.altitude?fmtNum(c.altitude,0)+" m":""],["Roasted for",{filter:"Filter",espresso:"Espresso",omni:"Filter and espresso"}[c.roastFor]||""],["Roaster's notes",c.roasterNotes]].filter(x=>x[1]).map(([k,v])=>`<div class="kv"><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div>`:""}
+    ${c.notes?`<div class="note">${esc(c.notes)}</div>`:""}
+    ${cmp.length>1||rs.length>1?`<div class="section"><h3>Best method</h3><span>average rating</span></div><div class="cmp">${cmp.map(x=>`<div class="cmp-row" style="--mc:${x.m.c}"><span>${mtag(x.m.id)}</span><span class="track"><i style="width:${(x.a||0)/5*100}%"></i></span><span class="v num"><b>${fmtNum(x.a,2)}</b> · ${x.n}×</span></div>`).join("")}</div>`:""}
+    <div class="section"><h3>Preparations</h3><span>${bs.length?bs.length+" logged":""}</span></div>
+    <div class="list">${bs.length?bs.map(b=>brewRow(b,false)).join(""):`<div class="empty"><h3>Not brewed yet</h3><p>Log each way you prepare this coffee. Each preparation gets its own rating.</p>${c.demo?"":`<button class="btn primary" type="button" data-act="add-brew" data-id="${c.id}">${ic("plus")}Add preparation</button>`}</div>`}</div>
+    ${c.demo?"":`<div class="row-btns" style="margin-top:22px"><button class="btn" type="button" data-act="toggle-finished" data-id="${c.id}">${ic("check",20)}${c.finished?"Reopen bag":"Mark bag finished"}</button><button class="btn danger" type="button" data-act="ask-del-coffee" data-id="${c.id}">${ic("trash",20)}Delete</button></div>`}`;
+}
+function vBrew(b){
+  const c=S.coffees[b.coffeeId],m=M(b.method),p=b.photoId&&S.photos[b.photoId];
+  const fact=(k,v)=>`<div><span>${k}</span><b class="num">${esc(v)}</b></div>`;
+  return`<div class="bar"><button class="ib" type="button" data-act="open" data-id="${c?"coffee-"+c.id:"journal"}" aria-label="Back">${ic("back")}</button><h2>${esc(c?c.name:"Preparation")}</h2>
+      ${b.demo?"":`<button class="ib" type="button" data-act="edit-brew" data-id="${b.id}" aria-label="Edit preparation">${ic("edit")}</button>`}</div>
+    <div class="card" style="margin-top:4px"><span class="mtile" style="--mc:${m.c}">${esc(m.ab)}</span><span class="body"><span class="t">${esc(m.name)}</span><span class="m">${esc(fmtDay(b.date))} at ${b.date.slice(11,16)}</span></span></div>
+    <div class="big-score"><b class="num">${fmtRate(b.rating)}</b><div>${pips(b.rating)}<div class="sub" style="font-size:13px;margin-top:8px">${b.rating==null?"Not rated yet":"out of 5"}</div></div></div>
+    <div class="facts">${fact("Coffee",b.dose?fmtNum(b.dose)+" g":"–")}${fact(m.out||"Water",b.water?fmtNum(b.water,0)+" g":"–")}${fact("Ratio",ratio(b)||"–")}${fact("Temp",b.temp?fmtNum(b.temp,0)+" °C":"–")}${fact("Time",b.time||"–")}${fact("Grind",b.grind||"–")}</div>
+    ${Object.keys(b.extra).length?`<div class="section"><h3>Advanced</h3></div><div class="cmp">${(ADV[m.id]||[]).filter(d=>b.extra[d.k]!=null).map(d=>`<div class="kv"><span>${d.l}</span><b class="num">${esc(b.extra[d.k])}</b></div>`).join("")}</div>`:""}
+    ${b.stages.length&&m.pour?`<div class="section"><h3>Pouring stages</h3><span>${b.stages.length} pours</span></div><div class="cmp">${b.stages.map(x=>`<div class="kv"><span class="num">${esc(x.t||"–")}</span><b class="num">${esc([x.g!=null?"to "+fmtNum(x.g,0)+" g":"",x.note].filter(Boolean).join(" · ")||"–")}</b></div>`).join("")}</div>`:""}
+    ${b.flavors.length?`<div class="section"><h3>Tasting notes</h3></div><div class="tags">${b.flavors.map(f=>`<span class="tag" style="font-size:13px;padding:6px 11px;border-radius:10px;background:var(--surface)">${esc(f)}</span>`).join("")}</div>`:""}
+    ${b.notes?`<div class="note">${esc(b.notes)}</div>`:""}
+    ${p?`<div class="photo-full"><img src="${p}" alt="Photo of this preparation"></div>`:""}
+    ${b.demo||!c?"":`<div class="row-btns" style="margin-top:22px"><button class="btn" type="button" data-act="again" data-id="${b.id}">${ic("swap",20)}Brew again</button><button class="btn danger" type="button" data-act="ask-del-brew" data-id="${b.id}">${ic("trash",20)}Delete</button></div>`}`;
+}
+function vBadges(){
+  const f=facts();const got=BADGES.filter(b=>(S.meta.badges[b.id]||{}).level).length;
+  return`<header class="hero"><h1>Badges</h1><p class="sub" style="margin:0"><b style="color:var(--ink)" class="num">${got} of ${BADGES.length}</b> earned${S.demo?". Add your own coffee to start earning.":""}</p>
+    <div class="progress" role="img" aria-label="${got} of ${BADGES.length} badges earned"><i style="width:${got/BADGES.length*100}%"></i></div></header>
+    <div class="bgrid">${BADGES.map(b=>{const lvl=(S.meta.badges[b.id]||{}).level||0;return`<button class="badge ${lvl?"":"off"}" type="button" data-act="badge" data-id="${b.id}">${medal(b,lvl)}<b>${esc(b.name)}</b>${pipsLv(b,lvl)}</button>`}).join("")}</div>`;
+}
+function vData(){
+  const bs=brews(),fav={};bs.forEach(b=>fav[b.method]=(fav[b.method]||0)+1);
+  const favM=Object.entries(fav).sort((a,b)=>b[1]-a[1])[0];
+  const top=coffees().map(c=>({c,a:avg(rated(brewsOf(c.id)))})).filter(x=>x.a!=null).sort((a,b)=>b.a-a.a)[0];
+  const grams=bs.reduce((s,b)=>s+(b.dose||0),0);
+  const st={cloud:["","Saved privately to your Claude account. Only you can read it, on any device where you open this page."],
+    local:["","Saved on this device only. Nothing is uploaded. Export a backup now and then, and to move to another phone."],memory:["warn","This browser blocks storage, so nothing is kept after you close the page. Export before leaving."]}[Store.mode];
+  return`<header class="hero"><h1>Data</h1></header>
+    <div class="list">
+    <div class="panel"><h3>Your numbers</h3><div>
+      <div class="kv"><span>Favourite method</span><b>${favM?esc(M(favM[0]).name)+" ("+favM[1]+"×)":"–"}</b></div>
+      <div class="kv"><span>Best coffee so far</span><b>${top?esc(top.c.name)+" · "+fmtNum(top.a,2):"–"}</b></div>
+      <div class="kv"><span>Coffee brewed</span><b class="num">${grams?fmtNum(grams,0)+" g":"–"}</b></div>
+      <div class="kv"><span>Photos</span><b class="num">${Object.keys(S.photos).length}</b></div></div></div>
+    <div class="panel"><h3>Move or back up</h3><p>Export writes everything to one file: coffees, preparations, photos and badges. Import that file on another device to carry on there.</p>
+      <div class="row-btns"><button class="btn primary" type="button" data-act="export">${ic("down",20)}Export</button>
+      <label class="btn file-btn">${ic("up",20)}Import<input id="import-file" type="file" accept=".json,application/json" aria-label="Import a Beanbook export file"></label></div>
+      <div class="status"><span class="dot ${st[0]}"></span><span>${st[1]}</span></div></div>
+    <div class="panel"><h3>Coffee catalog</h3><p>${CAT.items.length?`${CAT.items.length} coffees from ${new Set(CAT.items.map(i=>i.roaster)).size} roasters to pick from when you add a coffee.${CAT.updatedAt?" Updated "+esc(fmtDate(CAT.updatedAt))+".":""}`:"Empty for now. After the scraper has run, its coffees show up as suggestions when you add a coffee."}${CAT.items.length&&!Store.db?" It refreshes by itself.":""}</p>
+      ${CAT.canEdit?`<label class="btn file-btn">${ic("up",20)}Load scraper file<input id="catalog-file" type="file" accept=".json,application/json" aria-label="Load a catalog file made by the scraper"></label>`:""}</div>
+    ${customs().length?`<div class="panel"><h3>Your brew methods</h3><div>${customs().map(m=>`<div class="kv" style="align-items:center"><span>${mtag(m.id)}</span><span style="display:flex;gap:8px"><button class="btn small ghost" type="button" data-act="pour-method" data-id="${m.id}" aria-pressed="${!!m.pour}">Pouring stages: ${m.pour?"on":"off"}</button><button class="btn small ghost danger" type="button" data-act="del-method" data-id="${m.id}">Remove</button></span></div>`).join("")}</div></div>`:""}
+    <div class="panel"><h3>Privacy</h3><p>Nothing here is shared with other people or used for statistics. There are no accounts to follow and no public feed.</p></div>
+    <button class="btn ghost danger block" type="button" data-act="ask-wipe">${ic("trash",20)}Delete all my data</button></div>`;
+}
+
+/* ---------- sheets ---------- */
+const sheetRoot=$("#sheet-root");let formPhoto={data:null,changed:false};
+function openSheet(html,o={}){sheetRoot.innerHTML=`<div class="scrim" data-act="close-sheet"></div><section class="sheet ${o.pop?"pop":""}" role="dialog" aria-modal="true">${html}</section>`;sheetRoot.classList.add("open")}
+function closeSheet(){sheetRoot.classList.remove("open");sheetRoot.innerHTML=""}
+function toast(t){const el=document.createElement("div");el.className="toast";el.textContent=t;$("#toasts").append(el);setTimeout(()=>el.remove(),3200)}
+function confirmSheet(title,text,label,act,id){openSheet(`<div class="sheet-head"><h2>${esc(title)}</h2></div><div class="sheet-body"><p class="hint" style="font-size:15px">${esc(text)}</p></div>
+  <div class="sheet-foot"><button class="btn" type="button" data-act="close-sheet">Cancel</button><button class="btn primary" type="button" data-act="${act}" data-id="${id||""}">${esc(label)}</button></div>`)}
+const head=t=>`<div class="sheet-head"><h2>${t}</h2><button class="ib" type="button" data-act="close-sheet" aria-label="Close">${ic("close")}</button></div>`;
+const photoField=()=>`<div class="f"><span class="lbl">Photo</span><div class="photo-pick"><div class="prev" id="photo-prev">${formPhoto.data?`<img src="${formPhoto.data}" alt="Selected photo">`:ic("camera",28)}</div>
+  <div class="acts"><label class="btn small file-btn">${ic("camera",18)}${formPhoto.data?"Change photo":"Add photo"}<input id="photo-file" type="file" accept="image/*" aria-label="Choose a photo"></label>
+  ${formPhoto.data?`<button class="btn small ghost" type="button" data-act="photo-clear">Remove</button>`:`<p class="hint">Take one or pick from your gallery.</p>`}</div></div></div>`;
+const seg=(name,opts,val)=>`<div class="seg">${opts.map(([v,l])=>`<label><input type="radio" name="${name}" id="${name}-${v||"none"}" value="${v}" ${val===v?"checked":""}><span>${l}</span></label>`).join("")}</div>`;
+
+const procList=cur=>[...new Set([...PROCESSES,...coffees().filter(x=>!x.demo).map(x=>x.process),cur||""])];
+function setProcess(f,val){const sel=f.process;if(val&&![...sel.options].some(o=>o.value===val))sel.insertAdjacentHTML("afterbegin",`<option value="${esc(val)}">${esc(val)}</option>`);sel.value=val||"";$("#c-process-box").hidden=true}
+const moreOn=c=>!!(c.region||c.producer||c.variety||c.altitude||c.roastFor||c.roasterNotes);
+function coffeeForm(c){
+  c=c||{form:"beans",roast:"",bought:dayOf(localStamp())};formPhoto={data:c.photoId?S.photos[c.photoId]||null:null,changed:false};
+  openSheet(`${head(c.id?"Edit coffee":"New coffee")}<form id="coffee-form" data-id="${c.id||""}" novalidate><div class="sheet-body"><input type="hidden" name="catalogId" id="c-catalog" value="${esc(c.catalogId)}">
+    <div class="f"><label for="c-name">Name</label><input id="c-name" name="name" type="text" required maxlength="80" placeholder="e.g. Guji Hambela" value="${esc(c.name)}" autocomplete="off">${c.id?"":`<div class="list" id="cat-results"></div>`}</div>
+    <div class="grid2"><div class="f"><label for="c-roaster">Roaster</label><input id="c-roaster" name="roaster" type="text" maxlength="60" list="dl-roasters" value="${esc(c.roaster)}" autocomplete="off"></div>
+      <div class="f"><label for="c-origin">Origin</label><input id="c-origin" name="origin" type="text" maxlength="60" list="dl-origins" value="${esc(c.origin)}" autocomplete="off"></div></div>
+    <datalist id="dl-origins">${ORIGINS.map(o=>`<option value="${o}">`).join("")}</datalist>
+    <datalist id="dl-roasters">${[...new Set([...coffees().filter(x=>!x.demo).map(x=>x.roaster),...CAT.items.map(i=>i.roaster)].filter(Boolean))].slice(0,800).map(o=>`<option value="${esc(o)}">`).join("")}</datalist>
+    <div class="f"><span class="lbl">Bought as</span>${seg("form",[["beans","Whole beans"],["ground","Ground"]],c.form)}</div>
+    <div class="f"><div class="roast-top"><label for="c-roast">Roast</label><output id="c-roast-out" for="c-roast">${ROASTN[Math.max(0,ROASTV.indexOf(c.roast||""))]}</output></div>
+      <input class="roast" id="c-roast" name="roastIdx" type="range" min="0" max="5" step="1" value="${Math.max(0,ROASTV.indexOf(c.roast||""))}" aria-valuetext="${ROASTN[Math.max(0,ROASTV.indexOf(c.roast||""))]}">
+      <div class="roast-ticks" aria-hidden="true"><span style="left:0">Unknown</span><span style="left:20%">Light</span><span style="left:60%">Medium</span><span style="left:100%">Dark</span></div></div>
+    <div class="grid2"><div class="f"><label for="c-process">Process</label><select id="c-process" name="process">${procList(c.process).map(p=>`<option value="${esc(p)}" ${(c.process||"")===p?"selected":""}>${esc(p||"Not sure")}</option>`).join("")}<option value="__custom">Custom…</option></select></div>
+      <div class="f"><label for="c-roastdate">Roast date</label><input id="c-roastdate" name="roastDate" type="date" value="${esc(c.roastDate)}"></div></div>
+    <div class="f" id="c-process-box" hidden><label for="c-process-custom">Custom process</label><input id="c-process-custom" name="processCustom" type="text" maxlength="40" placeholder="e.g. Yeast-inoculated natural" autocomplete="off"></div>
+    <label class="tick"><input type="checkbox" id="c-more" ${moreOn(c)?"checked":""}><span>Show more details</span></label>
+    <div id="c-more-box" ${moreOn(c)?"":"hidden"}>
+      <div class="grid2"><div class="f"><label for="c-region">Region</label><input id="c-region" name="region" type="text" maxlength="60" placeholder="e.g. Pitalito, Huila" value="${esc(c.region)}" autocomplete="off"></div>
+        <div class="f"><label for="c-producer">Producer or farm</label><input id="c-producer" name="producer" type="text" maxlength="60" value="${esc(c.producer)}" autocomplete="off"></div></div>
+      <div class="grid2"><div class="f"><label for="c-variety">Variety</label><input id="c-variety" name="variety" type="text" maxlength="60" placeholder="e.g. Caturra, Chiroso" value="${esc(c.variety)}" autocomplete="off"></div>
+        <div class="f"><label for="c-altitude">Altitude (m)</label><input id="c-altitude" name="altitude" type="text" inputmode="numeric" value="${c.altitude??""}"></div></div>
+      <div class="f"><span class="lbl">Roasted for</span>${seg("roastFor",[["","Not sure"],["filter","Filter"],["espresso","Espresso"],["omni","Both"]],c.roastFor||"")}</div>
+      <div class="f"><label for="c-rnotes">Roaster's tasting notes</label><input id="c-rnotes" name="roasterNotes" type="text" maxlength="120" placeholder="What the bag promises" value="${esc(c.roasterNotes)}" autocomplete="off"></div>
+    </div>
+    <div class="grid3"><div class="f"><label for="c-bought">Bought</label><input id="c-bought" name="bought" type="date" value="${esc(c.bought)}"></div>
+      <div class="f"><label for="c-weight">Bag (g)</label><input id="c-weight" name="weight" type="text" inputmode="decimal" value="${c.weight??""}" placeholder="250"></div>
+      <div class="f"><label for="c-price">Price (€)</label><input id="c-price" name="price" type="text" inputmode="decimal" value="${c.price??""}"></div></div>
+    ${photoField()}
+    <div class="f"><label for="c-notes">Notes</label><textarea id="c-notes" name="notes" maxlength="2000" placeholder="What the bag says, where you bought it…">${esc(c.notes)}</textarea></div>
+  </div><div class="sheet-foot"><button class="btn primary" type="submit">${c.id?"Save changes":"Add coffee"}</button></div></form>`);
+  if(!c.id)setTimeout(()=>$("#c-name")&&$("#c-name").focus(),260);
+}
+function brewForm(coffeeId,b,copy){
+  const c=S.coffees[coffeeId];if(!c)return;const last=brewsOf(coffeeId)[0];
+  const editing=b&&!copy;let v;
+  if(editing)v={...b};
+  else{const src=b||last;const m=src?M(src.method):METHODS[c.form==="ground"?6:1];
+    v=src?{method:src.method,dose:src.dose,water:src.water,temp:src.temp,time:src.time,grind:src.grind,flavors:[],stages:(src.stages||[]).map(x=>({...x})),extra:{...(src.extra||{})}}:{method:m.id,dose:m.dose,water:m.water,temp:m.temp,time:m.time,grind:"",flavors:[],stages:[],extra:{}};
+    v.date=localStamp();v.rating=null;v.notes=""}
+  formPhoto={data:editing&&v.photoId?S.photos[v.photoId]||null:null,changed:false};
+  const r=v.rating||0;
+  openSheet(`${head(editing?"Edit preparation":"New preparation")}<form id="brew-form" data-id="${editing?b.id:""}" data-coffee="${coffeeId}" novalidate><div class="sheet-body">
+    <p class="hint"><b style="color:var(--ink)">${esc(c.name)}</b>${!editing&&(b||last)?" · recipe copied from your last cup":""}</p>
+    <div class="f"><span class="lbl">Method</span><div class="opts" id="method-opts">${allMethods().map(m=>methodOpt(m,v.method===m.id)).join("")}<button class="opt-add" type="button" data-act="new-method" id="new-method-btn">+ Custom</button></div>
+      <div class="adv-body" id="new-method-row" style="padding:0" hidden><div class="add-row"><input id="new-method-name" type="text" maxlength="30" placeholder="e.g. Hario Switch" aria-label="Name of your brew method" autocomplete="off"><button class="btn small primary" type="button" data-act="add-method">Add</button></div>
+        <div class="opts"><label class="opt"><input type="checkbox" id="new-method-pour"><span>This method has pouring stages</span></label></div></div></div>
+    <div class="rate"><div class="rate-top"><div><div class="lbl" style="font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Rating</div><output id="rate-out" for="b-rating" class="num">${r?fmtRate(r):"–"}</output></div><span id="rate-pips">${pips(r||null)}</span></div>
+      <input id="b-rating" name="rating" type="range" min="0" max="5" step="0.25" value="${r}" style="--p:${r*20}%" aria-label="Rating from 0 to 5 in quarter steps"><p class="hint">Slide to rate in quarter steps. Leave at zero to rate later.</p></div>
+    <div class="grid3"><div class="f"><label for="b-dose">Coffee (g)</label><input id="b-dose" name="dose" type="text" inputmode="decimal" value="${v.dose??""}"></div>
+      <div class="f"><label for="b-water" id="b-water-lbl">${M(v.method).out||"Water"} (g)</label><input id="b-water" name="water" type="text" inputmode="decimal" value="${v.water??""}"></div>
+      <div class="f"><label for="b-temp">Temp (°C)</label><input id="b-temp" name="temp" type="text" inputmode="decimal" value="${v.temp??""}"></div></div>
+    <p class="hint" id="ratio-line"></p>
+    <div class="grid2"><div class="f"><label for="b-time">Brew time</label><input id="b-time" name="time" type="text" inputmode="numeric" placeholder="2:30" maxlength="12" value="${esc(v.time)}"></div>
+      <div class="f"><label for="b-grind">Grind setting</label><input id="b-grind" name="grind" type="text" maxlength="40" placeholder="${c.form==="ground"?"Pre-ground":"e.g. 22 clicks"}" value="${esc(v.grind)}"></div></div>
+    ${(()=>{const m=M(v.method),has=m.pour||ADV[m.id],on=(m.pour&&(v.stages||[]).length)||Object.keys(v.extra||{}).length;
+      return`<label class="tick" id="adv-tick" ${has?"":"hidden"}><input type="checkbox" id="adv-toggle" ${on?"checked":""}><span>Show advanced options</span></label><div id="adv-wrap" ${has&&on?"":"hidden"}>`})()}
+    <details class="adv" id="stages" open ${M(v.method).pour?"":"hidden"}><summary>Advanced: pouring stages</summary><div class="adv-body">
+      <div class="stage hd"><span>Start</span><span>Pour to</span><span>Note</span><span></span></div>
+      <div class="adv-body" id="stage-list" style="padding:0">${(v.stages||[]).map(stageRow).join("")}</div>
+      <div class="row-btns"><button class="btn small" type="button" data-act="stage-add">${ic("plus",18)}Add stage</button><button class="btn small ghost" type="button" data-act="stage-preset">Bloom + 2 pours</button></div>
+      <p class="hint">Start time of each pour and the total grams on the scale when it ends.</p></div></details>
+    <div id="extras-box">${extrasBox(v.method,v.extra||{})}</div></div>
+    <div class="f"><span class="lbl">Tasting notes</span><div class="opts">${[...FLAVORS,...v.flavors.filter(f=>!FLAVORS.includes(f))].map((f,i)=>`<label class="opt"><input type="checkbox" name="flavors" id="fl-${i}" value="${esc(f)}" ${v.flavors.includes(f)?"checked":""}><span>${esc(f)}</span></label>`).join("")}</div></div>
+    <div class="f"><label for="b-notes">In your own words</label><textarea id="b-notes" name="notes" maxlength="2000" placeholder="What worked, what to change next time…">${esc(v.notes)}</textarea></div>
+    ${photoField()}
+    <div class="f"><label for="b-date">When</label><input id="b-date" name="date" type="datetime-local" value="${esc(v.date)}"></div>
+  </div><div class="sheet-foot"><button class="btn primary" type="submit">${editing?"Save changes":"Save preparation"}</button></div></form>`);
+  updRatio();
+}
+const methodOpt=(m,on)=>`<label class="opt" style="--mc:${m.c}"><input type="radio" name="method" id="m-${m.id}" value="${m.id}" ${on?"checked":""}><span>${esc(m.name)}</span></label>`;
+let stageN=0;
+const stageRow=x=>{const n=++stageN;x=x||{};return`<div class="stage"><input id="st-t-${n}" name="st-t" type="text" inputmode="numeric" maxlength="8" placeholder="0:45" aria-label="Start time" value="${esc(x.t)}"><input id="st-g-${n}" name="st-g" type="text" inputmode="decimal" placeholder="g" aria-label="Pour to grams" value="${x.g??""}"><input id="st-n-${n}" name="st-n" type="text" maxlength="40" placeholder="Bloom, swirl…" aria-label="Stage note" value="${esc(x.note)}"><button class="ib" type="button" data-act="stage-del" aria-label="Remove stage">${ic("close",18)}</button></div>`};
+function extrasBox(mid,ex){const m=M(mid),defs=ADV[m.id];if(!defs)return"";
+  return`<details class="adv" open><summary>Advanced: ${esc(m.name)} options</summary><div class="adv-body"><div class="grid2">${defs.map(d=>d.t==="seg"
+    ?`<div class="f wide"><span class="lbl">${d.l}</span><div class="seg">${["",...d.o].map((o,i)=>`<label><input type="radio" name="ex-${d.k}" id="ex-${d.k}-${i}" value="${o}" ${(ex[d.k]||"")===o?"checked":""}><span>${o||"Not set"}</span></label>`).join("")}</div></div>`
+    :`<div class="f"><label for="ex-${d.k}">${d.l}</label><input id="ex-${d.k}" name="ex-${d.k}" type="text" inputmode="${d.t==="num"?"decimal":"numeric"}" maxlength="20" placeholder="${d.ph||""}" value="${esc(ex[d.k]??"")}"></div>`).join("")}</div></div></details>`}
+function methodChanged(id){const m=M(id);$("#b-water-lbl").textContent=(m.out||"Water")+" (g)";$("#stages").hidden=!m.pour;$("#extras-box").innerHTML=extrasBox(id,{});
+  const has=!!(m.pour||ADV[m.id]);$("#adv-tick").hidden=!has;$("#adv-wrap").hidden=!has||!$("#adv-toggle").checked}
+function addMethod(){const inp=$("#new-method-name");if(!inp)return;const name=str(inp.value,30);if(!name){inp.focus();return}
+  let m=allMethods().find(x=>x.name.toLowerCase()===name.toLowerCase());
+  if(!m){m=normMethod({name,c:MCOLORS[customs().length%MCOLORS.length],pour:$("#new-method-pour").checked});S.meta.methods=[...customs(),m];saveMeta();$("#new-method-btn").insertAdjacentHTML("beforebegin",methodOpt(m,false))}
+  const r=$("#m-"+m.id);if(r){r.checked=true;methodChanged(m.id)}
+  inp.value="";$("#new-method-pour").checked=false;$("#new-method-row").hidden=true}
+function updRatio(){const f=$("#brew-form");if(!f)return;const d=num(f.dose.value,0.1,5000),w=num(f.water.value,1,50000);
+  $("#ratio-line").innerHTML=d&&w?`Ratio <span class="ratio num">1:${fmtNum(w/d,1)}</span>`:"Fill in coffee and water to see the ratio."}
+
+async function readPhoto(file){
+  const url=URL.createObjectURL(file);
+  try{const img=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=url});
+    let max=1000,q=.8,out="";
+    for(let n=0;n<7;n++){const s=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));const cv=document.createElement("canvas");
+      cv.width=Math.max(1,Math.round(img.naturalWidth*s));cv.height=Math.max(1,Math.round(img.naturalHeight*s));cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+      out=cv.toDataURL("image/jpeg",q);if(out.length<180000)break;max*=.8;q-=.05}
+    return okPhoto(out)?out:null}catch(e){return null}finally{URL.revokeObjectURL(url)}
+}
+/* ---------- photo editor: crop, rotate, zoom ---------- */
+const ED={img:null,ang:0,rot:0,asp:"orig",zoom:1,tx:0,ty:0,W:0,H:0,ptrs:new Map(),url:null};
+const editor=$("#editor");
+const edDims=()=>{const q=ED.rot%180!==0,i=ED.img;return{rw:q?i.naturalHeight:i.naturalWidth,rh:q?i.naturalWidth:i.naturalHeight}};
+const edAng=()=>(ED.rot+ED.ang)*Math.PI/180;
+const edBox=()=>{const a=edAng(),c=Math.abs(Math.cos(a)),n=Math.abs(Math.sin(a));return{bw:ED.W*c+ED.H*n,bh:ED.W*n+ED.H*c}};
+const edScale=()=>{const{bw,bh}=edBox(),i=ED.img;return Math.max(bw/i.naturalWidth,bh/i.naturalHeight)*ED.zoom};
+function edClamp(){ /* keep the frame inside the photo at any angle */
+  const a=edAng(),c=Math.cos(a),n=Math.sin(a),i=ED.img,sc=edScale(),{bw,bh}=edBox(),mx=Math.max(0,(i.naturalWidth*sc-bw)/2),my=Math.max(0,(i.naturalHeight*sc-bh)/2);
+  let ux=ED.tx*c+ED.ty*n,uy=-ED.tx*n+ED.ty*c;ux=Math.min(mx,Math.max(-mx,ux));uy=Math.min(my,Math.max(-my,uy));ED.tx=ux*c-uy*n;ED.ty=ux*n+uy*c}
+function edPaint(ctx,k){const i=ED.img,sc=edScale();ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle="#000";ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+  ctx.setTransform(k,0,0,k,0,0);ctx.translate(ED.W/2+ED.tx,ED.H/2+ED.ty);ctx.rotate(edAng());ctx.scale(sc,sc);ctx.drawImage(i,-i.naturalWidth/2,-i.naturalHeight/2)}
+function edDraw(){const cv=$("#ed-canvas");if(!cv)return;edClamp();edPaint(cv.getContext("2d"),cv.width/ED.W);
+}
+function edLayout(){const st=$("#ed-stage"),cv=$("#ed-canvas");if(!st||!cv)return;const{rw,rh}=edDims();
+  const asp=ED.asp==="orig"?rw/rh:{"1":1,"4:3":4/3,"3:4":3/4}[ED.asp],aw=Math.max(80,st.clientWidth-32),ah=Math.max(80,st.clientHeight-32);
+  let W=aw,H=W/asp;if(H>ah){H=ah;W=H*asp}ED.W=W;ED.H=H;const dpr=Math.min(2,window.devicePixelRatio||1);
+  cv.style.width=W+"px";cv.style.height=H+"px";cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+  editor.querySelectorAll("[data-act=ed-asp]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.id===ED.asp));edDraw()}
+function closeEditor(){editor.hidden=true;editor.innerHTML="";if(ED.url){URL.revokeObjectURL(ED.url);ED.url=null}ED.img=null;ED.ptrs.clear()}
+async function openEditor(src,isUrl){
+  let img;try{img=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src})}
+  catch(e){if(isUrl)URL.revokeObjectURL(src);toast("That image could not be read. Try a JPEG or PNG.");return}
+  Object.assign(ED,{img,ang:0,rot:0,asp:"1",zoom:1,tx:0,ty:0,url:isUrl?src:null});ED.ptrs.clear();
+  editor.innerHTML=`<div class="sheet-head"><h2>Move and scale</h2><button class="ib" type="button" data-act="ed-rot" data-id="90" aria-label="Rotate">${ic("rot")}</button></div>
+    <div class="ed-stage" id="ed-stage"><canvas id="ed-canvas" aria-label="Photo preview. Drag to move, pinch to zoom."></canvas></div>
+    <p class="ed-hint">Drag to move, pinch to zoom</p>
+    <div class="ed-tools"><label class="ed-zoom" for="ed-ang"><span>Rotate</span><input class="plain" id="ed-ang" type="range" min="-45" max="45" step="1" value="0"><output id="ed-ang-out" for="ed-ang">0°</output></label></div>
+    <div class="sheet-foot"><button class="btn" type="button" data-act="ed-cancel">Cancel</button><button class="btn primary" type="button" data-act="ed-done">Done</button></div>`;
+  editor.hidden=false;
+  const cv=$("#ed-canvas"),P=ED.ptrs,dist=()=>{const[p,q]=[...P.values()];return Math.hypot(p.x-q.x,p.y-q.y)||1};
+  cv.addEventListener("pointerdown",e=>{try{cv.setPointerCapture(e.pointerId)}catch(x){}P.set(e.pointerId,{x:e.clientX,y:e.clientY})});
+  cv.addEventListener("pointermove",e=>{const p=P.get(e.pointerId);if(!p)return;
+    if(P.size===1){ED.tx+=e.clientX-p.x;ED.ty+=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY}
+    else if(P.size===2){const d0=dist();p.x=e.clientX;p.y=e.clientY;ED.zoom=Math.min(4,Math.max(1,ED.zoom*dist()/d0))}
+    edDraw()});
+  cv.addEventListener("wheel",e=>{e.preventDefault();ED.zoom=Math.min(4,Math.max(1,ED.zoom*(e.deltaY<0?1.08:.93)));edDraw()},{passive:false});
+  const up=e=>P.delete(e.pointerId);cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up);
+  edLayout();
+}
+function edDone(){
+  const cv=document.createElement("canvas"),ctx=cv.getContext("2d");let k=Math.min(1000/Math.max(ED.W,ED.H),1/edScale()),q=.82,out="";
+  for(let n=0;n<8;n++){cv.width=Math.max(1,Math.round(ED.W*k));cv.height=Math.max(1,Math.round(ED.H*k));edPaint(ctx,cv.width/ED.W);out=cv.toDataURL("image/jpeg",q);if(out.length<180000)break;k*=.82;q-=.05}
+  if(!okPhoto(out)){toast("That photo could not be saved. Try another one.");return}
+  formPhoto={data:out,changed:true};closeEditor();refreshPhotoField();
+}
+addEventListener("resize",()=>{if(!editor.hidden)edLayout()});
+function refreshPhotoField(){const el=$(".photo-pick",sheetRoot);if(el){const t=document.createElement("div");t.innerHTML=photoField();el.closest(".f").replaceWith(t.firstElementChild)}}
+
+/* ---------- mutations ---------- */
+function applyPhoto(old,obj){if(!formPhoto.changed)return;if(old&&old.photoId)delPhoto(old.photoId);obj.photoId=formPhoto.data?addPhoto(formPhoto.data):null}
+function saveCoffee(f){
+  const fd=new FormData(f),old=S.coffees[f.dataset.id];
+  if(!str(fd.get("name"))){toast("Give the coffee a name first.");f.name.focus();return}
+  if(!old&&S.demo){dropDemo();toast("Examples cleared. This is your shelf now.")}
+  const c=normCoffee({...(old||{}),id:old?old.id:newId(),name:fd.get("name"),roaster:fd.get("roaster"),origin:fd.get("origin"),form:fd.get("form"),roast:ROASTV[Number(fd.get("roastIdx"))||0],
+    catalogId:fd.get("catalogId"),process:fd.get("process")==="__custom"?fd.get("processCustom"):fd.get("process"),region:fd.get("region"),producer:fd.get("producer"),variety:fd.get("variety"),altitude:fd.get("altitude"),roastFor:fd.get("roastFor"),roasterNotes:fd.get("roasterNotes"),roastDate:fd.get("roastDate"),bought:fd.get("bought"),weight:fd.get("weight"),price:fd.get("price"),notes:fd.get("notes")});
+  applyPhoto(old,c);S.coffees[c.id]=c;Store.put("c_"+c.id,c);closeSheet();
+  if(old)render();else go("coffee-"+c.id);checkBadges();
+}
+function saveBrew(f){
+  const fd=new FormData(f),old=S.brews[f.dataset.id],cid=f.dataset.coffee;if(!S.coffees[cid])return;
+  const b=normBrew({...(old||{}),id:old?old.id:newId(),coffeeId:cid,method:fd.get("method"),date:fd.get("date"),dose:fd.get("dose"),water:fd.get("water"),temp:fd.get("temp"),
+    time:fd.get("time"),grind:fd.get("grind"),stages:M(fd.get("method")).pour?fd.getAll("st-t").map((t,i)=>({t,g:fd.getAll("st-g")[i],note:fd.getAll("st-n")[i]})):[],
+    extra:Object.fromEntries((ADV[M(fd.get("method")).id]||[]).map(d=>[d.k,fd.get("ex-"+d.k)])),rating:Number(fd.get("rating"))||null,flavors:fd.getAll("flavors"),notes:fd.get("notes")});
+  applyPhoto(old,b);S.brews[b.id]=b;Store.put("b_"+b.id,b);closeSheet();
+  if(old)render();else{go("coffee-"+cid);toast("Preparation saved")}checkBadges();
+}
+function delBrew(id){const b=S.brews[id];if(!b)return;delPhoto(b.photoId);delete S.brews[id];Store.del("b_"+id)}
+function delCoffee(id){const c=S.coffees[id];if(!c)return;brewsOf(id).forEach(b=>delBrew(b.id));delPhoto(c.photoId);delete S.coffees[id];Store.del("c_"+id)}
+
+/* ---------- export / import ---------- */
+async function doExport(){
+  if(S.demo||!coffees().length){toast("Nothing to export yet. Add a coffee first.");return}
+  const data=JSON.stringify({format:"beanbook",version:SCHEMA,app:"Beanbook",exportedAt:new Date().toISOString(),exportedAtLocal:localStamp(),
+    coffees:coffees().map(({k,...c})=>c),brews:brews().map(({k,...b})=>b),photos:S.photos,badges:S.meta.badges,methods:customs()},null,1);
+  const filename=`beanbook-${localStamp().replace("T","-").replace(":","")}.json`;let ok=false;
+  try{const dl=window.claude&&window.claude.use?await window.claude.use("downloads"):null;
+    if(dl){await dl.save({filename,data});ok=true}
+    else{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type:"application/json"}));a.download=filename;document.body.append(a);a.click();a.remove();ok=true}
+  }catch(e){toast(e&&e.code==="declined"?"Export cancelled.":"Export is not available in this view. Open the page in a browser and try again.");return}
+  if(ok){S.meta.exports=(S.meta.exports||0)+1;saveMeta();toast("Export ready: "+filename);render();checkBadges()}
+}
+let pendingImport=null;
+async function readImport(file){
+  let o;try{o=JSON.parse(await file.text())}catch(e){toast("That file is not a Beanbook export.");return}
+  if(!o||o.format!=="beanbook"||!Array.isArray(o.coffees)||!Array.isArray(o.brews)){toast("That file is not a Beanbook export.");return}
+  (Array.isArray(o.methods)?o.methods:[]).slice(0,40).map(normMethod).forEach(m=>{if(m.name&&!customs().some(x=>x.id===m.id))S.meta.methods=[...customs(),m]});
+  const from=Math.max(1,Number(o.version)||1);
+  const map={},pmap={},photos={};
+  Object.entries(o.photos&&typeof o.photos==="object"?o.photos:{}).forEach(([id,d])=>{if(okPhoto(d)){const nid=okId(id)?id:newId();pmap[id]=nid;photos[nid]=d}});
+  const cs=o.coffees.slice(0,5000).filter(c=>c&&str(c.name)).map(c=>{const n=normCoffee({...upgrade("coffee",c,from),photoId:pmap[c.photoId]});map[c.id]=n.id;return n});
+  const bs=o.brews.slice(0,20000).filter(b=>b&&map[b.coffeeId]).map(b=>normBrew({...upgrade("brew",b,from),coffeeId:map[b.coffeeId],photoId:pmap[b.photoId]}));
+  pendingImport={cs,bs,photos,badges:o.badges&&typeof o.badges==="object"?o.badges:{}};
+  const mine=S.demo?0:coffees().length;
+  openSheet(`${head("Import data")}<div class="sheet-body"><p class="hint" style="font-size:15px">This file holds <b style="color:var(--ink)">${cs.length} coffees</b> and <b style="color:var(--ink)">${bs.length} preparations</b>${Object.keys(photos).length?` with ${Object.keys(photos).length} photos`:""}.</p>
+    ${from>SCHEMA?`<p class="hint">This file was made by a newer version of Beanbook. Everything is imported. Details this version does not know are kept, but not shown.</p>`:""}
+    ${o.exportedAtLocal||o.exportedAt?`<p class="hint">Exported ${esc(fmtDate(o.exportedAtLocal||o.exportedAt))}${/T\d\d:\d\d/.test(o.exportedAtLocal||"")?" at "+esc(o.exportedAtLocal.slice(11,16)):""}.</p>`:""}
+    ${mine?`<p class="hint">You already have ${mine} coffees here. Merge keeps them and adds the file. Replace deletes what is here first.</p>`:""}</div>
+    <div class="sheet-foot">${mine?`<button class="btn" type="button" data-act="import-replace">Replace</button><button class="btn primary" type="button" data-act="import-merge">Merge</button>`:`<button class="btn primary" type="button" data-act="import-merge">Import</button>`}</div>`);
+}
+function wipe(){Object.keys(S.coffees).forEach(id=>S.demo?0:delCoffee(id));Object.keys(S.photos).forEach(delPhoto);S.coffees={};S.brews={};S.demo=false}
+function runImport(replace){
+  const p=pendingImport;pendingImport=null;if(!p)return;
+  if(replace)wipe();else dropDemo();
+  Object.entries(p.photos).forEach(([id,d])=>{S.photos[id]=d;Store.put("p_"+id,{k:"photo",d})});
+  p.cs.forEach(c=>{S.coffees[c.id]=c;Store.put("c_"+c.id,c)});p.bs.forEach(b=>{S.brews[b.id]=b;Store.put("b_"+b.id,b)});
+  Object.entries(p.badges).forEach(([id,x])=>{if(!BADGES.some(b=>b.id===id)&&!S.meta.badges[id]&&/^[a-z0-9]{2,30}$/.test(id)&&x&&Number(x.level)>0)S.meta.badges[id]={level:Number(x.level)|0,at:okDate(x.at)}});
+  BADGES.forEach(b=>{const x=p.badges[b.id];if(x&&Number(x.level)>((S.meta.badges[b.id]||{}).level||0))S.meta.badges[b.id]={level:Math.min(b.goals.length,Number(x.level)|0),at:/^\d{4}-\d\d-\d\d$/.test(x.at||"")?x.at:dayOf(localStamp())}});
+  saveMeta();closeSheet();go("coffees");toast(`Imported ${p.cs.length} coffees and ${p.bs.length} preparations`);checkBadges(true);
+}
+
+/* ---------- shared coffee catalog, filled by the scraper ---------- */
+const CAT={items:[],keys:[],updatedAt:"",canEdit:false};
+const okDate=x=>/^\d{4}-\d\d-\d\d/.test(x||"")?x.slice(0,10):"";
+function normCat(o){o=o||{};return{id:str(o.id,90).toLowerCase().replace(/[^a-z0-9:_.-]/g,""),name:str(o.name,80),roaster:str(o.roaster,60),origin:str(o.origin,60),
+  process:str(o.process,40),roast:ROASTV.includes(o.roast)?o.roast:"",
+  url:/^https?:\/\//.test(o.url||"")?str(o.url,300):"",firstSeen:okDate(o.firstSeen),lastSeen:okDate(o.lastSeen),removed:!!o.removed}}
+async function loadCatalog(){
+  if(!Store.db){ /* standalone site: the scheduled scraper publishes catalog.json next to this page */
+    try{const r=await fetch("catalog.json",{cache:"no-cache"});if(r.ok){const o=await r.json();
+      CAT.items=(Array.isArray(o.items)?o.items:[]).map(normCat).filter(i=>i.id&&i.name);CAT.updatedAt=okDate(o.updatedAt)}}catch(e){}
+    if(S.ready&&route().v==="data"&&!sheetRoot.classList.contains("open"))render();return}
+  try{const snap=await Store.db.collection("catalog").get();const items=[],keys=[];let up="";
+    snap.docs.forEach(d=>{if(!d.exists)return;const v=d.data();keys.push(d.id);if(typeof v.updatedAt==="string"&&v.updatedAt>up)up=v.updatedAt;
+      (Array.isArray(v.items)?v.items:[]).forEach(i=>{const n=normCat(i);if(n.id&&n.name)items.push(n)})});
+    CAT.items=items;CAT.keys=keys;CAT.updatedAt=okDate(up);
+    CAT.canEdit=Store.user?!!(await Store.user.canEdit()):false;
+  }catch(e){}
+  if(S.ready&&route().v==="data"&&!sheetRoot.classList.contains("open"))render();
+}
+async function importCatalog(file){
+  let o;try{o=JSON.parse(await file.text())}catch(e){o=null}
+  if(!o||o.format!=="beanbook-catalog"||!Array.isArray(o.items)){toast("That file is not a catalog made by the scraper.");return}
+  if(!Store.db){toast("The catalog can only be updated inside Claude.");return}
+  const today=dayOf(localStamp()),map=new Map(CAT.items.map(i=>[i.id,{...i,removed:true}]));let added=0;
+  o.items.slice(0,60000).forEach(x=>{const n=normCat(x);if(!n.id||!n.name)return;const old=map.get(n.id);if(!old)added++;
+    map.set(n.id,{...n,firstSeen:(old&&old.firstSeen)||n.firstSeen||today,lastSeen:n.lastSeen||today})});
+  const groups={};map.forEach(i=>{const k=(i.roaster.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,50))||"unknown";(groups[k]=groups[k]||[]).push(i)});
+  const docs={},stamp=new Date().toISOString();
+  Object.entries(groups).forEach(([k,l])=>{for(let p=0;p*500<l.length;p++)docs[p?k+"-p"+(p+1):k]={roaster:l[0].roaster,updatedAt:stamp,items:l.slice(p*500,p*500+500)}});
+  toast("Updating catalog…");
+  try{const col=Store.db.collection("catalog");
+    for(const[k,body]of Object.entries(docs))await col.doc(k).set(body);
+    for(const k of CAT.keys)if(!docs[k])await col.doc(k).delete();
+  }catch(e){toast("The catalog could not be saved. Only the owner or an editor can update it.");return}
+  await loadCatalog();toast(`Catalog updated: ${CAT.items.length} coffees, ${added} new`);render();
+}
+function catSearch(){
+  const box=$("#cat-results"),f=$("#coffee-form");if(!box||!f)return;
+  const q=f.name.value.trim().toLowerCase(),ro=f.roaster.value.trim().toLowerCase(),ts=q.split(/\s+/).filter(Boolean);
+  if(!CAT.items.length||q.length<2){box.innerHTML="";return}
+  const hits=[];
+  for(const i of CAT.items){const n=i.name.toLowerCase(),r=i.roaster.toLowerCase(),h=n+" "+r+" "+i.origin.toLowerCase();
+    if(ro&&!r.includes(ro))continue;if(!ts.every(t=>h.includes(t)))continue;
+    hits.push([(n.startsWith(q)?0:n.includes(q)?1:2)+(i.removed?3:0),i]);if(hits.length>400)break}
+  hits.sort((x,y)=>x[0]-y[0]||x[1].name.localeCompare(y[1].name));
+  box.innerHTML=hits.length?hits.slice(0,6).map(([,i])=>`<button class="card" type="button" data-act="cat-pick" data-id="${esc(i.id)}"><span class="body"><span class="t">${esc(i.name)}</span><span class="m">${esc([i.roaster,i.origin,i.process].filter(Boolean).join(" · "))}</span></span></button>`).join("")
+    :(q.length>2?`<p class="hint">Not in the catalog. Fill in the details yourself.</p>`:"");
+}
+
+/* ---------- events ---------- */
+const ACT={
+  tab:id=>go(id),open:id=>go(id),"close-sheet":()=>closeSheet(),
+  fab:()=>{const d=fab.dataset.do;ACT[d]&&ACT[d](fab.dataset.id)},
+  "add-coffee":()=>coffeeForm(),"edit-coffee":id=>coffeeForm(S.coffees[id]),
+  "add-brew":id=>brewForm(id),"edit-brew":id=>{const b=S.brews[id];b&&brewForm(b.coffeeId,b)},again:id=>{const b=S.brews[id];b&&brewForm(b.coffeeId,b,true)},
+  "pick-coffee":()=>{const l=coffees().sort((a,b)=>(a.finished-b.finished)||(b.createdAt-a.createdAt));
+    openSheet(`${head("Which coffee?")}<div class="sheet-body"><div class="list">${l.map(c=>`<button class="card" type="button" data-act="add-brew" data-id="${c.id}">${thumb(c)}<span class="body"><span class="t">${esc(c.name)}</span><span class="m">${esc([c.roaster,c.finished?"Finished":""].filter(Boolean).join(" · "))}</span></span></button>`).join("")}</div></div>`)},
+  filter:id=>{ui.filter=id;render()},jm:id=>{ui.jm=id;render()},
+  "clear-demo":()=>{dropDemo();S.meta.demoOff=true;saveMeta();render()},
+  "toggle-finished":id=>{const c=S.coffees[id];if(!c)return;c.finished=!c.finished;Store.put("c_"+id,c);render();toast(c.finished?"Bag marked finished":"Bag reopened");checkBadges()},
+  "ask-del-coffee":id=>{const n=brewsOf(id).length;confirmSheet("Delete this coffee?",n?`Its ${n} preparation${n===1?"":"s"} and photos are deleted too. This cannot be undone.`:"This cannot be undone.","Delete","del-coffee",id)},
+  "del-coffee":id=>{delCoffee(id);closeSheet();go("coffees");toast("Coffee deleted")},
+  "ask-del-brew":id=>confirmSheet("Delete this preparation?","This cannot be undone.","Delete","del-brew",id),
+  "del-brew":id=>{const b=S.brews[id];const back=b&&S.coffees[b.coffeeId]?"coffee-"+b.coffeeId:"journal";delBrew(id);closeSheet();go(back);toast("Preparation deleted")},
+  "photo-edit":()=>{formPhoto.data&&openEditor(formPhoto.data)},
+  "ed-cancel":()=>closeEditor(),"ed-done":()=>edDone(),
+  "ed-rot":id=>{ED.rot=(ED.rot+Number(id)+360)%360;ED.tx=ED.ty=0;edLayout()},
+  "ed-asp":id=>{ED.asp=id;ED.tx=ED.ty=0;edLayout()},
+  "photo-clear":()=>{formPhoto={data:null,changed:true};refreshPhotoField()},
+  badge:id=>{const b=BADGES.find(x=>x.id===id),f=facts(),have=S.meta.badges[id]||{},lvl=have.level||0,val=f?f[b.key]||0:0,next=b.goals[lvl];
+    openSheet(`<div class="won">${medal(b,lvl,104)}<small>${lvl?(b.goals.length>1?"Level "+lvl+" of "+b.goals.length:"Earned"):"Locked"}</small><h2>${esc(b.name)}</h2><p>${esc(b.what)}</p>
+      ${next?`<div style="width:100%"><div class="progress"><i style="width:${Math.min(100,val/next*100)}%"></i></div><p class="num" style="margin-top:8px;font-size:13.5px">${val} of ${next} ${esc(b.unit||"")}${lvl?" for the next level":""}</p></div>`:""}
+      ${have.at?`<p style="font-size:13.5px">Earned ${esc(fmtDate(have.at))}</p>`:""}</div><div class="sheet-foot"><button class="btn" type="button" data-act="close-sheet">Close</button></div>`,{pop:true})},
+  "new-method":()=>{const r=$("#new-method-row");r.hidden=!r.hidden;if(!r.hidden)$("#new-method-name").focus()},
+  "add-method":()=>addMethod(),
+  "pour-method":id=>{S.meta.methods=customs().map(m=>m.id===id?{...m,pour:!m.pour}:m);saveMeta();render()},
+  "del-method":id=>{const n=brews().filter(b=>b.method===id).length;if(n){toast(`Used by ${n} preparation${n===1?"":"s"}. Change or delete those first.`);return}
+    S.meta.methods=customs().filter(m=>m.id!==id);saveMeta();render()},
+  "stage-add":()=>{$("#stage-list").insertAdjacentHTML("beforeend",stageRow());const l=$("#stage-list").lastElementChild;l&&l.querySelector("input").focus()},
+  "stage-del":(id,el)=>el.closest(".stage").remove(),
+  "stage-preset":()=>{const f=$("#brew-form"),d=num(f.dose.value,0.1,5000),w=num(f.water.value,1,50000);if(!w){toast("Fill in the water amount first.");return}
+    const bloom=Math.round(Math.min(w*.25,d?d*3:w*.15));
+    $("#stage-list").innerHTML=[{t:"0:00",g:bloom,note:"Bloom"},{t:"0:45",g:Math.round(w*.6),note:""},{t:"1:30",g:Math.round(w),note:""}].map(stageRow).join("")},
+  "cat-pick":id=>{const i=CAT.items.find(x=>x.id===id),f=$("#coffee-form");if(!i||!f)return;
+    f.name.value=i.name;f.roaster.value=i.roaster;f.origin.value=i.origin;setProcess(f,i.process);f.catalogId.value=i.id;
+    const r=$("#c-roast");r.value=Math.max(0,ROASTV.indexOf(i.roast));r.dispatchEvent(new Event("input",{bubbles:true}));$("#cat-results").innerHTML="";toast("Filled in from the catalog")},
+  export:()=>doExport(),"import-merge":()=>runImport(false),"import-replace":()=>runImport(true),
+  "ask-wipe":()=>confirmSheet("Delete all your data?","Every coffee, preparation and photo is removed. Your badges stay. Export first if you want a copy.","Delete everything","wipe"),
+  wipe:()=>{wipe();S.meta.demoOff=true;saveMeta();closeSheet();go("coffees");toast("All data deleted")},
+  retry:()=>boot()
+};
+document.addEventListener("click",e=>{const el=e.target.closest("[data-act]");if(!el)return;const fn=ACT[el.dataset.act];if(fn){e.preventDefault();fn(el.dataset.id,el)}});
+document.addEventListener("submit",e=>{e.preventDefault();if(e.target.id==="coffee-form")saveCoffee(e.target);else if(e.target.id==="brew-form")saveBrew(e.target)});
+document.addEventListener("input",e=>{const t=e.target;
+  if(t.id==="q"){ui.q=t.value;$("#coffee-list").innerHTML=coffeeList()}
+  else if(t.id==="c-name"||t.id==="c-roaster")catSearch()
+  else if(t.id==="b-rating"){const r=Number(t.value);t.style.setProperty("--p",r*20+"%");$("#rate-out").textContent=r?fmtRate(r):"–";$("#rate-pips").innerHTML=pips(r||null)}
+  else if(t.id==="b-dose"||t.id==="b-water")updRatio();
+  else if(t.id==="ed-ang"){ED.ang=Number(t.value)||0;$("#ed-ang-out").textContent=ED.ang+"°";edDraw()}
+  else if(t.id==="c-roast"){const n=ROASTN[Number(t.value)||0];$("#c-roast-out").textContent=n;t.setAttribute("aria-valuetext",n)}
+});
+document.addEventListener("change",async e=>{const t=e.target;
+  if(t.name==="method"&&t.form&&t.form.id==="brew-form")methodChanged(t.value)
+  else if(t.id==="adv-toggle")$("#adv-wrap").hidden=!t.checked
+  else if(t.id==="c-process"){const on=t.value==="__custom";$("#c-process-box").hidden=!on;if(on)$("#c-process-custom").focus()}
+  else if(t.id==="c-more")$("#c-more-box").hidden=!t.checked
+  else if((t.id==="photo-file"||t.id==="photo-cam")&&t.files[0]){const f=t.files[0];t.value="";openEditor(URL.createObjectURL(f),true)}
+  else if(t.id==="import-file"&&t.files[0]){const f=t.files[0];t.value="";readImport(f)}
+  else if(t.id==="catalog-file"&&t.files[0]){const f=t.files[0];t.value="";importCatalog(f)}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!editor.hidden){closeEditor();return}
+  if(e.key==="Escape"&&sheetRoot.classList.contains("open"))closeSheet();
+  if(e.key==="Enter"&&e.target.tagName==="INPUT"&&e.target.form&&!e.target.name){e.preventDefault();if(e.target.id==="new-method-name")addMethod()}});
+
+/* ---------- boot ---------- */
+async function boot(){
+  view.innerHTML=`<div class="loading"><p>Opening your coffee shelf…</p></div>`;
+  const docs=await Store.init();
+  if(docs===null){view.innerHTML=`<div class="loading"><div class="empty"><h3>Your data can't be reached yet</h3><p>Check your connection and try again. Nothing has been lost.</p><button class="btn primary" type="button" data-act="retry">Try again</button></div></div>`;return}
+  hydrate(docs);
+  if(!coffees().length&&!S.meta.demoOff)loadDemo();
+  const h=location.hash.slice(1);if(h)cur=h;
+  S.ready=true;checkBadges(true);render(true);loadCatalog();
+}
+boot();
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
