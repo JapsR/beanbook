@@ -105,6 +105,8 @@ def lines(markup):
     t = re.sub(r"(?i)</(td|th|dt)>", " : ", t)
     t = re.sub(r"(?i)<(br|/p|/div|/li|/tr|/dd|/h[1-6]|/table)[^>]*>", "\n", t)
     t = html.unescape(re.sub(r"<[^>]+>", " ", t))
+    t = re.sub(r"\[/?[a-z_][^\]]{0,80}\]", " ", t)        # [vc_column_text] and other page-builder leftovers
+    t = t.replace("\ufeff", "").replace("\u200b", "")
     out = []
     for ln in t.split("\n"):
         ln = re.sub(r"[ \t\xa0]+", " ", ln).strip(" :\u2013\u2014-")
@@ -442,7 +444,7 @@ DETAIL_LABELS = [
 ]
 LABEL_RE = {key: re.compile(r"(?im)^\s*(?:" + "|".join(re.escape(w) for w in sorted(words, key=len, reverse=True)) +
                             r")\s*[:\-\u2013]\s*(.+)$") for key, words in DETAIL_LABELS}
-BAD_VALUE = re.compile(r"(?i)^(n[/.]?a|unknown|onbekend|-+|\?+)$")
+BAD_VALUE = re.compile(r"(?i)^(n[/.]?a|unknown|onbekend|various|-+|\?+)$")
 
 
 def detail(text, key, cap=60):
@@ -450,11 +452,15 @@ def detail(text, key, cap=60):
     m = LABEL_RE[key].search(text or "")
     if not m:
         return ""
-    v = m.group(1).strip(" .;,|")
+    v = m.group(1).replace("\ufeff", "").replace("\u200b", "").strip(" .;,|")
+    if "[" in v or "]" in v or "{" in v:
+        return ""
     v = re.split(r"(?<=[a-z0-9\)])\.\s+[A-Z]", v)[0]          # stop at the next sentence
     v = re.sub(r"\s+", " ", v).strip(" .;,|")
     if not v or BAD_VALUE.match(v) or len(v) > 120:
         return ""
+    if v.islower() and len(v) < 25:
+        v = v[0].upper() + v[1:]
     return v[:cap]
 
 
@@ -466,7 +472,7 @@ def detect_altitude(text):
         raw = " ".join(x for x in (m.group(1), m.group(2)) if x) if m else ""
     nums = [int(x.replace(".", "").replace(",", "").replace(" ", "").replace("'", ""))
             for x in re.findall(r"\d[\d .,']{1,6}", raw)]
-    nums = [n for n in nums if 200 <= n <= 3200]
+    nums = [n for n in nums if 500 <= n <= 3200]  # below 500 m it is almost always a weight or a stray number
     if not nums:
         return None
     return int(round(sum(nums[:2]) / len(nums[:2])))
@@ -503,7 +509,8 @@ def to_item(p, src, roaster):
         "roasterNotes": notes,
         "url": p["url"],
     }
-    if item["region"] and item["region"].lower() == item["origin"].lower():
+    if item["region"] and (item["region"].lower() == item["origin"].lower()
+                           or ORIGINS.get(item["region"].lower()) == item["origin"]):
         item["region"] = ""
     return item
 
@@ -583,6 +590,9 @@ def main():
                                             ("name", "region", "producer", "variety", "altitude", "roastFor", "roasterNotes")
                                             and v} for i in found[:3]],
                        "with_details": sum(1 for i in found if i["variety"] or i["producer"] or i["altitude"])})
+        if report[-1]["with_details"] < max(2, len(found) // 4):
+            bodies = [(p.get("lines") or p["text"])[:400] for p in products if is_coffee(p, src)][:2]
+            report[-1]["body_samples"] = bodies
         if products and not found:
             log(f"! {src['url']}: {len(products)} products but none looked like coffee. Left untouched; "
                 f"add \"include\" words for this source.")
