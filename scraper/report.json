@@ -1,23 +1,24 @@
 {
- "ranAt": "2026-11-15T22:34:11+00:00",
+ "ranAt": "2026-11-15T23:12:44+00:00",
  "sources": [
   {
    "url": "https://friedhats.com",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 423 candidate pages, 80 read this run, 263 still to read, 160 products",
-   "products": 160,
-   "coffees": 144,
+   "info": "sitemap: 423 candidate pages, 80 read this run, 183 still to read, 240 products",
+   "products": 240,
+   "coffees": 207,
    "taken_types": {
-    "Archived Coffee": 138,
+    "Archived Coffee": 201,
     "Espresso": 3,
     "Coffee": 1,
     "Filter": 1,
     "Omni": 1
    },
    "skipped_types": {
-    "Merchandise": 12,
-    "Tools": 3,
+    "Merchandise": 21,
+    "Tools": 9,
+    "Archived Coffee": 2,
     "Subscription": 1
    },
    "skipped_examples": [
@@ -33,15 +34,18 @@
      "altitude": 1800
     },
     {
-     "name": "Brazil Daterra Santa Colomba",
-     "altitude": 200
+     "name": "Brazil Daterra Santa Colomba"
     },
     {
      "name": "El Salvador La Divina Kenya Natural",
      "altitude": 1750
     }
    ],
-   "with_details": 34
+   "with_details": 35,
+   "body_samples": [
+    "This coffee is part of a project run by Nordic Approach called “bomba de fruta” and produced by José Manuel Jimenez, owner of the dry mill Seco de Manrepo. It’s a blend of natural processed cherries from many small producers in the department of Caldas grown at around 1800 masl and mostly castillo variety. This particular coffee didn’t turn out to be the crazy tropical fruit punch we thought it wo",
+    "The Daterra farm located in Minas Gerais in the Cerrado region at 1000 - 1200 masl is famous for producing last years world brewers cup winning coffee. Lex visited the farm in 2018 and through that connection we will now have a range of their coffees on offer. This one is a classic, natural processed, easy - going coffee with, as you would expect, nuts, chocolate, caramel and dried fruits."
+   ]
   },
   {
    "url": "https://manhattancoffeeroasters.com",
@@ -80,7 +84,11 @@
      "name": "Oswaldo Toro"
     }
    ],
-   "with_details": 2
+   "with_details": 2,
+   "body_samples": [
+    "Produced at the Haro Wachu washing station in Uraga, in Ethiopia’s Oromia region, this naturally processed coffee showcases the vibrant character of Ethiopian coffee.\nVersatile and enjoyable as both filter and espresso, it offers a rounded mouthfeel with a rich and expressive flavour profile. Expect notes of blueberry, lemon curd, and floral honey, coming together in a beautifully balanced cup.\nA ",
+    "A very limited lot from coffee producer Eddy Macdonald!\nThis natural Pacamara coffee is harvested at peak maturity and begins drying approximately four hours after harvesting. The first five days of drying take place on a sun patio, where the cherries are turned every hour and exposed to sunlight from 9 AM to 3 PM each day. After this initial period, the cherries are moved to African-style raised "
+   ]
   },
   {
    "url": "https://dakcoffeeroasters.com",
@@ -122,7 +130,11 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 3
+   "with_details": 3,
+   "body_samples": [
+    "Honey Melon is our latest Indonesian coffee from Frinsa Collective in West Java, produced by a community of smallholder farmers working with Wildan Mustofa and Atieq Mustikaningtyas. This lot undergoes a honey-lactic process, with a controlled fermentation using Lactobacillus. The cup is fruity and sweet, with notes of melon, grapefruit and orange, bringing together a nice balance of sweetness and",
+    "Los Nogales does decaf a little differently. This Caturra is grown, processed and decaffeinated at the farm in Pitalito, giving Oscar Hernandez and his team control over the coffee from cherry to finished decaf. It’s bright and sweet, with starfruit, agave and rosemary. A decaf we’d happily drink whether we were looking for one or not. * Due to the decaffeination process, the beans may have an unu"
+   ]
   },
   {
    "url": "https://bocca.nl",
@@ -157,7 +169,11 @@
      "name": "Specialty Coffee to go"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Sinds de uitvinding door Karl Lendrich aan het begin van de 20e eeuw wordt waterdamp gebruikt om de kwaliteit van groene koffie te verbeteren. De verschillende stoomprocessen van CR3 zijn gebaseerd op het Lendrich-proces en zijn in de afgelopen 50 jaar voortdurend verfijnd. Deze processen worden vooral toegepast voor een milde behandeling van hoogwaardige Arabica-koffies. Koffie die op deze manier",
+    "Speciaal ontwikkeld door ons kwaliteitsteam: barista-kwaliteit koffie gemaakt met jouw Baristina!\nDe Baristina Blend is een echte allrounder, geliefd bij zowel espresso- als cappuccinodrinkers.\nDeze blend is afgestemd op de extractie en workflow van de Baristina machine, waardoor hij consistent presteert en altijd goede resultaten geeft. Een koffie die eigenlijk niet fout kan gaan op deze machine."
+   ]
   },
   {
    "url": "https://rumbaba.nl",
@@ -296,11 +312,14 @@
     },
     {
      "name": "Ethiopia - Idido",
-     "altitude": 200,
      "roastFor": "omni"
     }
    ],
-   "with_details": 4
+   "with_details": 2,
+   "body_samples": [
+    "Three hours of bumping along unpaved roads past Buesaco and you're there: Tablón de Gómez, in Colombia's Nariño. Over forty smallholders grow coffee here on volcanic soil, above 1,850 metres. Their harvests come together in this one coffee.\nThe process is called honey: after 48 hours of fermentation the bean dries in the sun with a layer of fruit flesh still on. No actual honey involved, but the r",
+    "Jesus Pablo Pablo is one of those coffees that has quietly become part of Stooker. We are six seasons into buying coffee from Jesús, following his work at Finca Meste in Concepcion Huista, Guatemala, and getting to know the care he puts into both his farm and his community.\nLast year, after several harvests together, we bought a water tank for him. It sounds simple, but on his farm it makes a real"
+   ]
   },
   {
    "url": "https://giraffecoffee.com",
@@ -341,7 +360,11 @@
      "altitude": 2400
     }
    ],
-   "with_details": 3
+   "with_details": 3,
+   "body_samples": [
+    "Deze nieuwe Indonesische koffie hebben we ingekocht via Sucafina en is een goed voorbeeld van een klassiek Indonesisch profiel. Het lot brengt oogsten samen van verschillende boeren uit Sumatra, Java, Flores en Sulawesi, en is vernoemd naar het bedreigde Javaanse schubdier ( T renggiling ). Door de bonen te verwerken via de traditionele wet-hulled methode ( giling basah ), ontstaat het klassiek vo",
+    "Deze Nicaraguaanse koffie van landgoed La Reserva El Jaguar laat zien hoe specialty coffee en de bescherming van de natuur elkaar kunnen versterken. Producent Jean-Yves Duriaux verbouwt hier samen met zijn team, in harmonie met het omringende nevelwoud, een bijzondere kruising: de Maracaturra-variëteit. Door de koffie te verwerken via de honey methode, ontstaat het uitgesproken profiel dat Jean-Yv"
+   ]
   },
   {
    "url": "https://amatterofconcrete.com",
@@ -558,7 +581,11 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 1
+   "with_details": 1,
+   "body_samples": [
+    "Deze koffie is een blend van 30 premium boeren in de West Valley regio van Costa Rica.\nSmaak\nBijzonder aangename koffie met een medium body, romige textuur en smaaktonen van sinaasappel, karamel en cacao.\nSoort\nCaturra, Catuai & Typica\nVerwerking\nWashed anaerobic\nBranding\nOmniroast",
+    "Deze koffie wordt met zorg geproduceerd door de familie Ramirez-Navarro. Sinds de oprichting van hun micro-mill “Los Campos” in 2015 heeft de familie volledige controle over kwaliteit en herkomst, met een sterke focus op directe handel. Op de farm groeien onder andere Caturra, Catuai en innovatieve F1-hybriden, terwijl op 2.000 meter hoogte zelfs exclusieve Gesha wordt verbouwd.\nDoor te experiment"
+   ]
   },
   {
    "url": "https://koffiestation.nl",
@@ -667,16 +694,16 @@
    "url": "https://www.simonlevelt.nl",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 1410 candidate pages, 80 read this run, 1250 still to read, 160 products",
-   "products": 160,
+   "info": "sitemap: 1410 candidate pages, 80 read this run, 1170 still to read, 240 products",
+   "products": 240,
    "coffees": 2,
    "taken_types": {
     "be": 1,
     "nl": 1
    },
    "skipped_types": {
-    "be": 79,
-    "nl": 79
+    "be": 119,
+    "nl": 119
    },
    "skipped_examples": [
     "Aarke Kettle 1,2L",
@@ -693,7 +720,11 @@
      "name": "Bodum Kenya"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Bodum Kenya cafetière 3 kops of 8 kops, een cafetière voor volle, aromatische koffie met pure smaak.",
+    "Bodum Kenya cafetière 3 kops of 8 kops, een cafetière voor volle, aromatische koffie met pure smaak."
+   ]
   },
   {
    "url": "https://kaldi.nl",
@@ -781,7 +812,11 @@
      "roastFor": "espresso"
     }
    ],
-   "with_details": 1
+   "with_details": 1,
+   "body_samples": [
+    "Deze extra Krachtige espresso koffiebonen geschikt voor zakelijk gebruik in koffiebonenmachines.\nDeze blend is een blend van Arabica & Robusta koffiebonen.\nMet smaaktonen van pure chocolade & hazelnoot",
+    "NU BESCHIKBAAR\nGeen Arabica. Geen Robusta. Dit is Excelsa!\nOntdek een compleet andere kant van koffie met de Mooleh Manay Excelsa uit India . Deze bijzondere koffiesoort ( Coffea dewevrei ) onderscheidt zich met een uitgesproken smaakprofiel en heeft de potentie om een belangrijke rol te spelen in de toekomst van koffie.\nDankzij een 60 uur durende Carbonic Maceration-fermentatie ontwikkelt deze ko"
+   ]
   },
   {
    "url": "https://wakuli.com",
@@ -822,7 +857,11 @@
      "name": "Seasonal Microlot [Light Roast]"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "",
+    "Highlighting some serious specialty gems from our origin partners around world."
+   ]
   },
   {
    "url": "https://monkscoffee.nl",
@@ -858,7 +897,11 @@
      "name": "Colombia"
     }
    ],
-   "with_details": 2
+   "with_details": 2,
+   "body_samples": [
+    "Meet the Black Sheep of the family: a dark-roasted Peru, roasted espresso style for those who like their coffee bold and uncompromising.\nSince their first meeting in 2004, the women of the Café Femenino Peru Program have marshald widespread social change into their communities. By overcoming a variety of barriers— including inferior societal status due to gender prejudice, adverse living condition",
+    "This Brazilian coffee has a very smooth and indulgent rich flavoured harmony of velvety milk chocolate, roasted hazelnuts, and buttery caramel.\nA balanced sweetness meets a silky texture, evoking notes of nougat and toasted praline in every delicious sip."
+   ]
   },
   {
    "url": "https://blackandbloom.nl",
@@ -886,7 +929,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 1
+   "with_details": 1,
+   "body_samples": [
+    "We will end 2026 with two stellar Colombia coffees. Our friends from Primavera hooked us up with these. First we roast one for filter and it is one of my favorite varietals of Pink Bourbon. The farm is a true family business, with current owner Yulieth being the third generation. We’re excited about this coffee, giving us sweet notes of honey , elderflowers and some grapefruit .\nVilla Pastora farm",
+    "Falcon provides us with our second Brazil of the season. Seasonality is very important for us and we try to buy coffees in season as much as possible. The last harvest in Brazil was not good, resulting in low quality coffees and raising overall coffee prices. This one is perfect for our house espresso, with notes of cherry and plums , cocoa and vanilla hazelnut praline.\nThe Cocatrel Cooperative wa"
+   ]
   },
   {
    "url": "https://www.bootkoffie.nl",
@@ -908,7 +955,8 @@
     "* NIEUW * - Kruidige Vruchtenmelange Bio"
    ],
    "detail_examples": [],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": []
   },
   {
    "url": "https://screamingbeans.nl",
@@ -947,7 +995,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 1
+   "with_details": 1,
+   "body_samples": [
+    "This natural coffee from Colombia is named after the Jaguarundi, a native wild cat. Grown at 1700-1800 meters and carefully dried in the fruit, allowing natural sugars and flavours to fully develop.\nTaste: Round body, juicy red fruits, cocoa, molasses.\nWhole beans.",
+    "This exceptional washed coffee comes from Ethiopia, grown at around 2000 meters above sea level.\nTaste: Sweet apricot, blueberry notes, medium body.\nWhole beans."
+   ]
   },
   {
    "url": "https://espressofabriek.nl",
@@ -969,7 +1021,7 @@
     {
      "name": "Filter roast - Burundi - Masha",
      "region": "Gihororo, Kayanza",
-     "variety": "red bourbon",
+     "variety": "Red bourbon",
      "roastFor": "filter"
     },
     {
@@ -1026,7 +1078,7 @@
      "altitude": 2173
     }
    ],
-   "with_details": 4
+   "with_details": 3
   },
   {
    "url": "https://heiligeboontjes.com",
@@ -1069,7 +1121,11 @@
      "name": "Hier En Daar Dark Roast"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Deze koffie is neutraal van smaak, een beetje zoet met een frisse afdronk. Zeer geschikt als een espresso koffie, maar gedijt ook, prima in een melange. Een koffie om zachtjes dansend de dag mee te beginnen.\nDe Brazil Cascavel Verde koffiebonen zijn afkomstig van een coöperatie uit Brazilië die duurzame en consistente kwaliteitskoffie biedt. De koffiebonen groeien op een hoogte van 800 tot 1100 me",
+    "1 euro van de verkoopprijs gaat naar micro-kredieten voor de koffieboeren in Afrika.\n100 % Arabica\nHardwerkende koffieboeren verdienen een eerlijke prijs. Dat is in onze ogen heel normaal.\nPure Africa koopt deze koffiebonen direct in; geen tussenhandel, transparant en volledig traceerbaar. In penitentiaire inrichting Veenhuizen worden de bonen elektrisch gebrand en verpakt door Koffielust, waarna "
+   ]
   },
   {
    "url": "https://zwarteroes.nl",
@@ -1108,7 +1164,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 1
+   "with_details": 1,
+   "body_samples": [
+    "Too Good To Go. Deze zakken Blend N˚1 zijn onze belofte van vers gebrand voorbij. Nog steeds heerlijke koffie, alleen niet meer wat wij normaal garanderen. Daarom met korting, en hoe ouder de zak hoe groter de korting. De roast date staat bij elke variant.\nDe absolute bestseller uit de Zwarte Roes collectie. Vol en zacht van smaak, nooit bitter. Heerlijk van espresso tot cappuccino.\nChocolade, kar",
+    "Limited edition: APPLE EXPLOSION 🍏\nGeel fruit, karamel en een romige finish\nDeze koffie ruikt naar rijpe gele appel en zet door met karamel en een volle, romige body. De zuren zijn rond in plaats van scherp. Als je normaal een beetje huiverig bent voor fruitige filterkoffie: dit is de zachte variant. Alles zit in balans, niks steekt eruit.\nWaar die appel vandaan komt\nDe naam is geen marketing. Bij"
+   ]
   },
   {
    "url": "https://www.specialtycoffee.nl",
@@ -1149,7 +1209,11 @@
      "name": "Segafredo Extra Strong"
     }
    ],
-   "with_details": 2
+   "with_details": 2,
+   "body_samples": [
+    "Barbera Classica is een blend die bestaat uit vijf zorgvuldig geselecteerde koffiebonen van over de hele wereld. De melange combineert ongeveer 75% Arabica met hoogwaardige Robusta bonen, wat resulteert in een koffie die zowel krachtig als perfect in balans is.\nDe koffiebonen, afkomstig uit landen zoals Brazilië, India, Uganda, Midden-Amerika en Indonesië, worden door Barbera met de grootste zorg ",
+    "Een zorgvuldig samengestelde mix van 66% Braziliaanse en 34% Ethiopische koffie, altijd vers en zonder concessies. Geen goedkope vulmiddelen, geen oude oogst—alleen koffie die perfect samenkomt in smaak.\nFriedhats Blend is een Frisse koffie met kenmerken van melkchocolade, noten, en bessen.\nSpecificaties\nLanden van herkomst: Ethiopië en Brazilië.\nKoffiesoort: Blend\nHoeveelheid: 2 kg"
+   ]
   },
   {
    "url": "https://labroast.com",
@@ -1195,7 +1259,7 @@
      "producer": "Pedro Echavarría"
     }
    ],
-   "with_details": 41
+   "with_details": 40
   },
   {
    "url": "https://koffiekenner.com",
@@ -1243,7 +1307,11 @@
      "name": "Gutiti Lion"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Een frisse, florale filterkoffie uit Gedeb, Ethiopië, met levendige tonen van citrus, citroenschil en witte bloemen. De gewassen verwerking zorgt voor een helder, verfijnd kopje met een lange, gestructureerde afdronk.",
+    "Met de Acaia Orion doseer je koffiebonen razendsnel en uiterst nauwkeurig op gewicht voor de ultieme workflow. Dit slimme systeem schakelt moeiteloos tussen automatische porties en handmatige controle voor jouw ideale koffieroutine. Dankzij de robuuste aluminium behuizing, Bluetooth-connectiviteit en handige USB-C oplaadpoort tilt dit doseersysteem elke koffiebar of branderij naar een hoger niveau"
+   ]
   },
   {
    "url": "https://gerritskoffie.nl",
@@ -1284,7 +1352,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Organic Coffee: Biologische Koffie van Topkwaliteit\nGeniet van luxe koffie die goed is voor jou én de planeet. Organic Coffee biedt een intense smaakbeleving met rijke tonen van chocolade, kruiden en florale nuances.\nWaarom Kiezen voor Organic Coffee?\n100% Biologisch: Geen pesticiden of kunstmest voor een pure, natuurlijke smaak.\nClimate Neutral: Volledig CO2-gecompenseerd en duurzaam geproduceerd",
+    "Espresso Koffiebonen 1,5 KG – 3 x 500g Donker Gebrand\nVoor liefhebbers van krachtige espresso\nOntdek drie verschillende donker gebrande espresso koffiebonen in één premium bundel van 1,5 kg (3 x 500g). Speciaal geselecteerd voor een intense smaakbeleving met volle body, diepe aroma’s en een rijke cremalaag.\nDonkere Espresso Variatie\nDeze espresso koffiebonen behoren tot de smaakgroep donker en int"
+   ]
   },
   {
    "url": "https://www.casabarista.nl",
@@ -1322,13 +1394,17 @@
      "name": "Macafe Koffiebonen - Milano Geel"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Helaas zien ook wij inmiddels de prijzen voor de koffie bijzonder hard stijgen. We doen ons best om de prijzen zo competitief mogelijk te houden. Maar helaas zijn ook wij genoodzaakt om de prijzen constant in de gaten te houden",
+    "Helaas zien ook wij inmiddels de prijzen voor de koffie bijzonder hard stijgen. We doen ons best om de prijzen zo competitief mogelijk te houden. Maar helaas zijn ook wij genoodzaakt om de prijzen constant in de gaten te houden"
+   ]
   },
   {
    "url": "https://www.cafedujour.nl",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 103 candidate pages, 23 read this run, 0 still to read, 2 products",
+   "info": "sitemap: 103 candidate pages, 0 read this run, 0 still to read, 2 products",
    "products": 2,
    "coffees": 0,
    "taken_types": {},
@@ -1340,7 +1416,8 @@
     "Koffiebonen pakket - Meest verkocht - 4 x 1 kilo"
    ],
    "detail_examples": [],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": []
   },
   {
    "url": "https://thebarn.de",
@@ -1386,7 +1463,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 9
+   "with_details": 9,
+   "body_samples": [
+    "Another Fruity Release from Jairo Arcila 🍒\nFollowing our first Co-Ferment coffee, we are very excited to introduce another exceptional coffee from Colombian producer Jairo Arcila . This time, he brings us a Honey Co-Ferment , offering a new expression of his experimental approach to coffee processing.\nKnown for pushing the boundaries of coffee fermentation, Jairo combines the sweetness of Honey pr",
+    "From the highlands of Guji, Ethiopia, this exceptional Natural coffee brings together vibrant fruit character and delicate floral complexity.\nProduced at Lacho Torka washing station, founded by Hirut Berhanu and Inku Teklewold, this lot reflects a shared commitment to quality and the local farming community. Expect juicy notes of blueberry and raspberry , complemented by brown sugar sweetness and "
+   ]
   },
   {
    "url": "https://www.bonanzacoffee.de",
@@ -1424,7 +1505,11 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 2
+   "with_details": 2,
+   "body_samples": [
+    "Antonio and Aracely’s coffees are processed with incredible care and attention. All happens in the mill, located lower on the mountain, meaning more sun and warmer days, perfect for drying naturals. Once the Cherry is picked, it is rested in sealed bags in the shade to begin fermentation. The morning after, the cherry is soaked and cleaned, the soaking helps to homogenise the temperature and lower",
+    "Don Eli Reposado has become a favourite of ours from our Costa Rican coffees year after year. We trust Carlos and Jacob to continue to produce excellent coffees from their farms, and this coffee is the perfect example of this. We purchase many different lots from the Don Eli farm, for this particular lot, after the cherry is first picked, the coffee is left to rest over night before being touched."
+   ]
   },
   {
    "url": "https://coffeecollective.dk",
@@ -1462,7 +1547,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Sweet and creamy. Notes of dried apple, bergamot and milk chocolate.",
+    ""
+   ]
   },
   {
    "url": "https://www.lacabra.com",
@@ -1503,7 +1592,11 @@
      "name": "Altos Natural"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "A washed Pacamara from Vanessa Braun Valle with floral notes, stone fruit, melon and an intense finish.",
+    "A red honey Geisha from Mauricio Vindas and his son Mauricio Jr. at Altos del Abejonal in Tarrazú, Costa Rica."
+   ]
   },
   {
    "url": "https://timwendelboe.no",
@@ -1534,7 +1627,11 @@
      "name": "Finca Tamana Variedad Colombia"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "A comforting and sweet coffee with flavours of caramel, chocolate and red fruits.",
+    "A comforting and sweet coffee with flavours of caramel, chocolate and red fruits."
+   ]
   },
   {
    "url": "https://www.dropcoffee.com",
@@ -1622,7 +1719,11 @@
      "name": "Esperanza"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Jhenrry Chávez es uno de los productores más jóvenes y meticulosos con los que trabajamos en Perú. Su finca Huachaqpampa, en el valle de Incahuasi (Cusco), produce esta Geisha Inca a 2.130 metros de altitud. En taza destaca por sus notas a mango, miel y mandarina, acompañadas de matices florales, papaya y nectarina. Tiene un cuerpo terso y jugoso, con una acidez brillante y limpia que aporta vivez",
+    "Este producto es de venta exclusiva para clientes b2b. Para poder hacer la compra debes iniciar sesión en tu perfil.\nEste es uno de los lotes más singulares y experimentales que hemos tenido en NOMAD. Sus notas más distintivas nos recuerdan a cola de cereza, ruibarbo y caramelo de sandía, acompañadas de toques de ciruela negra, mosto de uva y caramelo de grosella. Tiene una acidez brillante y elev"
+   ]
   },
   {
    "url": "https://shop.squaremilecoffee.com",
@@ -1665,7 +1766,11 @@
      "roastFor": "espresso"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "This natural process Typica variety from Don Cayito in Dota, Tarrazú creates an idealised version of Arabica’s original, historical cup profile. Head-turning berry flavours envelop notes of peach and white flowers.\nAvailable in 175g or 1kg bags. All single bag 175g orders will be sent in our letterbag packaging.",
+    "The third lot in our Costa Rica special projects highlight is another example of a Gesha, San Martín! Shining as espresso; expect a decadent, creamy texture amplified by blackberry and a floral sweetness."
+   ]
   },
   {
    "url": "https://www.hasbean.co.uk",
@@ -1758,7 +1863,11 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "The return of an experimental series exploring the influence of beer yeast on coffee fermentation. A Norwegian brewer's yeast, Voss Kviek develops a rich depth of flavour in the cup, balancing cherry sweetness with the full-bodied character of a fortified wine.\n*Coffee will be sent out in our mailer bags",
+    "The return of an experimental series exploring the influence of beer yeast on coffee fermentation. A two-stage fermentation and souring process creates a complex cup profile with striking fruit intensity.\n*Coffee will be sent out in our mailer bags"
+   ]
   },
   {
    "url": "https://www.darkartscoffee.co.uk",
@@ -1893,7 +2002,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "A bright and vibrant Kenyan filter, with crisp acidity and elegant notes. A lively festive coffee to enjoy alongside richer seasonal dishes.",
+    "A festive espresso from Ethiopia, with rich cassis-like fruit and warming notes of chocolate orange, made for the colder months."
+   ]
   },
   {
    "url": "https://onyxcoffeelab.com",
@@ -1938,7 +2051,11 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 8
+   "with_details": 8,
+   "body_samples": [
+    "Sourced in partnership with Pergamino Exporters, this decaf brings together carefully selected washed micro-lots from San Antonio, Inzá, a region of Colombia we've been buying coffee from for nearly a decade. Rather than purchasing an already-decaffeinated coffee, we build the lot specifically for sugarcane EA decaffeination, prioritizing sweetness, balance, and clarity. We roast this coffee a bit",
+    "Grown at 1,750 meters above sea level at Las Flores in Huila, Colombia, this washed Gesha reflects Jhoan Vergara’s meticulous approach to coffee production. Combining generations of agricultural knowledge with a deep understanding of fermentation and sensory analysis, Jhoan has established Las Flores as a source of exceptional coffees featured on competition stages around the world. This Gesha hig"
+   ]
   },
   {
    "url": "https://counterculturecoffee.com",
@@ -1976,7 +2093,11 @@
      "name": "Laba Gesha - Natural Sundried"
     }
    ],
-   "with_details": 2
+   "with_details": 2,
+   "body_samples": [
+    "Pacamara originated in El Salvador by crossbreeding the local Pacas variety with Maragogipe, a cultivar known for its large seeds and bold fruit flavors. This distinctive hybrid has become synonymous with high cup quality in the country and remains a staple of Salvadoran specialty coffee. This selection from Finca Idania is sweet and chocolatey, with red grape- and plum-like fruit complexity.\nPron",
+    "We’ve worked with Marysabel Caballero and Moisés Herrera of Finca El Puente since 2005, and after two decades, we’re still finding new things to try together. This year we’re debuting Finca El Puente decaffeinated by Swiss Water. Starting with a fruit-forward, natural sundried coffee and using Swiss Water’s gentle decaffeination process preserved the coffee’s vibrant flavors. Expect notes of cherr"
+   ]
   },
   {
    "url": "https://www.intelligentsia.com",
@@ -2018,7 +2139,11 @@
      "roastFor": "espresso"
     }
    ],
-   "with_details": 5
+   "with_details": 5,
+   "body_samples": [
+    "Grown and processed by José Fernando López at his farm, Finca La Montaña, this washed lot is part of a series highlighting individual members of the Coopesqui cooperative in the mountains of Huehuetenango.",
+    "Crafted by our coffee team in a spirit of gratitude, this blend is a celebration of all those who make extraordinary coffee possible. Layered with lively fruit notes reminiscent of the season, it is designed to brighten your holiday gatherings and quiet moments alike."
+   ]
   },
   {
    "url": "https://www.stumptowncoffee.com",
@@ -2064,7 +2189,11 @@
      "name": "Kenya Karumandi"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Pink Bourbon likely gets its name from its pale, pinkish cherries and its discovery amid a thick crop of Bourbon plants. Genetic testing in 2023 revealed it’s a mutation of an Ethiopian heirloom variety, though how it reached Colombia remains a mystery.\nProducers across the country have taken note of its cup quality, and some exceptional lots have emerged. Stumptown is excited to bring you this 10",
+    "Heirloom varieties and exceptional growing conditions – combined with immaculate processing – have made Nano Challa’s quality renowned in the coffee world."
+   ]
   },
   {
    "url": "https://www.heartroasters.com",
@@ -2146,7 +2275,11 @@
      "name": "Necessary Holiday Blend 2026"
     }
    ],
-   "with_details": 2
+   "with_details": 2,
+   "body_samples": [
+    "Benefiting from its proximity to the Chapada Diamantina mountain range, the Piatã municipality in Brazil’s Bahia region is home to some of the most celebrated coffees in the country. This dry processed lot from legendary producer Silvio Leite in Piatã was awarded second place among a collection of his auction lot coffees from the 2022 harvest year. Kept in freezer preservation since it's arrival t",
+    "This year’s Holiday Coffee features a selection from our newest Foundational Partnership, Thamani, in Kenya. This washed Kamathura lot, sourced through our partners at Kamavindi Coffee Labs, brings together coffees from two distinct cooperative societies: Gichathaini Factory and Murarandia Factory. In the cup, we find a festive array of seasonal flavors, including notes of spiced plum and cranberr"
+   ]
   },
   {
    "url": "https://www.blackwhiteroasters.com",
@@ -2187,7 +2320,11 @@
      "name": "The Future - Cherry Cobbler"
     }
    ],
-   "with_details": 1
+   "with_details": 1,
+   "body_samples": [
+    "The Future has been a beloved staple on our year-round menu for quite awhile now. With it, we have been able to showcase excellence in processing techniques, particularly in regard to anaerobic and co-fermentation endeavors. Our goal with each of these unique blends is to elevate flavor as the guiding principle for each creation.\nHOW WE GOT HERE | This coffee asks a pivotal question during the spo",
+    "For every bag of Holiday Blend we sell, $1 will be donated to a producer education project in El Cedral, Santa Barbara, Honduras.\n'TIS THE SEASON | Every year around this time – though it seems to be earlier and earlier each year – we release what is perhaps our most anticipated, most beloved menu offering: the Holiday Blend. It is a big, warm, liquid hug to our family who has supported us for yea"
+   ]
   },
   {
    "url": "https://www.vervecoffee.com",
@@ -2226,7 +2363,11 @@
      "altitude": 2300
     }
    ],
-   "with_details": 26
+   "with_details": 26,
+   "body_samples": [
+    "Holiday Blend combines washed coffee from Guatemala’s Antigua Valley with naturally processed coffee from Ethiopia’s Guji region. The Guatemalan component is grown on volcanic slopes above 1,400 meters, while the Ethiopian coffee is dried on raised beds for up to 20 days.",
+    "Grown at 1,900 meters in Colombia’s Urrao Valley, this washed Chiroso comes from a region known for its cool temperatures and distinctive growing conditions. The variety has been cultivated in Urrao for roughly two decades, producing elongated seeds and coffees recognized for their bright, floral character."
+   ]
   },
   {
    "url": "https://georgehowellcoffee.com",
@@ -2273,7 +2414,11 @@
      "name": "Tenejapa, Mexico"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "In 2004, La Esmeralda and the Peterson family introduced the world to the exquisite Panamanian Gesha, forever changing the landscape of specialty coffee. Since then, their coffees have captured hearts and awards alike, culminating in a historic moment at the 2025 Best of Panama auction where La Esmeralda took first place in every single category, securing a historic Triple Crown victory with the h",
+    "Finca La Chorrera is a 3.5-hectare farm in Huila, managed by third-generation producer Víctor Alfonso Bonilla. At 6,200 ft, the entire farm is dedicated to 5,500 rare Bourbon Aruzi trees. Bourbon Aruzi is a unique Colombian variety, first discovered as an unusual mutation in Cauca, now being grown in Huila. Its genetics trace back to Ethiopian Landrace, connecting this distinctive variety to the a"
+   ]
   },
   {
    "url": "https://www.roguewavecoffee.ca",
@@ -2318,7 +2463,7 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 94
+   "with_details": 88
   },
   {
    "url": "https://www.subtext.coffee",
@@ -2360,7 +2505,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "Order by Sunday 11:59 pm EST for Wednesday shipment or Tuesday 11:59 pm EST for Friday shipment.",
+    "Order by Sunday at 11:59 pm EST for Wednesday shipment or by Tuesday 11:59 pm EST for Friday shipment."
+   ]
   },
   {
    "url": "https://marketlane.com.au",
@@ -2413,10 +2562,10 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 86,
-   "coffees": 24,
+   "products": 85,
+   "coffees": 23,
    "taken_types": {
-    "Coffee": 24
+    "Coffee": 23
    },
    "skipped_types": {
     "Brew Gear": 23,
@@ -2445,7 +2594,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 0
+   "with_details": 0,
+   "body_samples": [
+    "A Peaberry selection from Kiambu's Washed regional lots, where the coffee delivers a concentrated, juicy cup of fresh plum and raisin over a sweet toffee finish.",
+    "Mandarin, caramel and lavender\n200g"
+   ]
   },
   {
    "url": "https://www.proudmarycoffee.com.au",
@@ -2497,7 +2650,7 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 734
+   "with_details": 733
   },
   {
    "url": "https://sevenseeds.com.au",
