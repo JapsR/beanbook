@@ -1,22 +1,24 @@
 {
- "ranAt": "2026-11-15T21:06:02+00:00",
+ "ranAt": "2026-11-15T22:34:11+00:00",
  "sources": [
   {
    "url": "https://friedhats.com",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 423 candidate pages, 80 read this run, 343 still to read, 80 products",
-   "products": 80,
-   "coffees": 72,
+   "info": "sitemap: 423 candidate pages, 80 read this run, 263 still to read, 160 products",
+   "products": 160,
+   "coffees": 144,
    "taken_types": {
-    "Archived Coffee": 69,
+    "Archived Coffee": 138,
+    "Espresso": 3,
     "Coffee": 1,
-    "Espresso": 1,
-    "Filter": 1
+    "Filter": 1,
+    "Omni": 1
    },
    "skipped_types": {
-    "Merchandise": 5,
-    "Tools": 3
+    "Merchandise": 12,
+    "Tools": 3,
+    "Subscription": 1
    },
    "skipped_examples": [
     "Aeropress Paper Filters",
@@ -24,7 +26,22 @@
     "Friedhats \"Employee of the Month\" T-shirt",
     "Friedhats \"King Kong\" T-shirt",
     "Pällo Grindminder"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Colombia Seco de Manrepo",
+     "altitude": 1800
+    },
+    {
+     "name": "Brazil Daterra Santa Colomba",
+     "altitude": 200
+    },
+    {
+     "name": "El Salvador La Divina Kenya Natural",
+     "altitude": 1750
+    }
+   ],
+   "with_details": 34
   },
   {
    "url": "https://manhattancoffeeroasters.com",
@@ -32,16 +49,16 @@
    "reader": "woocommerce",
    "info": "",
    "products": 72,
-   "coffees": 29,
+   "coffees": 27,
    "taken_types": {
-    "Coffees": 27,
-    "Bundles": 2
+    "Coffees": 27
    },
    "skipped_types": {
     "Accessories": 23,
     "Subscriptions": 9,
     "Meraki X MCR": 6,
     "Merchandise": 3,
+    "Bundles": 2,
     "Uncategorized": 1,
     "Trainings &amp; Cuppings": 1
    },
@@ -51,7 +68,19 @@
     "Origami Dripper Air Matte Green S",
     "Origami Dripper Air Matte Beige S",
     "Origami Sensory Flavour Cup Matte Black"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Haro Wachu"
+    },
+    {
+     "name": "Eddy Macdonald"
+    },
+    {
+     "name": "Oswaldo Toro"
+    }
+   ],
+   "with_details": 2
   },
   {
    "url": "https://dakcoffeeroasters.com",
@@ -59,16 +88,17 @@
    "reader": "woocommerce",
    "info": "",
    "products": 33,
-   "coffees": 19,
+   "coffees": 18,
    "taken_types": {
     "Espresso": 13,
-    "Filter": 6
+    "Filter": 5
    },
    "skipped_types": {
     "Wear": 9,
     "Goods": 3,
     "Back in Stock": 1,
-    "(none)": 1
+    "(none)": 1,
+    "Filter": 1
    },
    "skipped_examples": [
     "DAK Book Tour 2026 White Long Sleeve T-Shirt",
@@ -76,7 +106,23 @@
     "DAK Sixth Anniversary Vintage White T-Shirt",
     "Vintage Black T-Shirt",
     "Dak x Kappy Socks"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Honey Melon",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Pillow Talk",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Peachy Daze",
+     "altitude": 2173,
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 3
   },
   {
    "url": "https://bocca.nl",
@@ -84,12 +130,12 @@
    "reader": "shopify",
    "info": "",
    "products": 101,
-   "coffees": 16,
+   "coffees": 14,
    "taken_types": {
-    "(none)": 16
+    "(none)": 14
    },
    "skipped_types": {
-    "(none)": 83,
+    "(none)": 85,
     "Espresso-machine": 1,
     "Horeca-machine": 1
    },
@@ -99,12 +145,19 @@
     "Philips Baristina Espresso Machine Metal",
     "Philips Baristina Latte Zwart",
     "Philips Baristina Espresso Machine Metal"
-   ]
-  },
-  {
-   "url": "https://lot61.com",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 403: Forbidden; sitemap: no sitemap found"
+   ],
+   "detail_examples": [
+    {
+     "name": "Decaf | Ethiopië Gewassen"
+    },
+    {
+     "name": "Baristina Blend"
+    },
+    {
+     "name": "Specialty Coffee to go"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://rumbaba.nl",
@@ -112,30 +165,55 @@
    "reader": "shopify",
    "info": "",
    "products": 52,
-   "coffees": 22,
+   "coffees": 19,
    "taken_types": {
-    "Filter Coffee Beans": 14,
+    "Filter Coffee Beans": 12,
     "Espresso Coffee Beans": 6,
-    "Canned Coffee Drink": 1,
     "waterfilter": 1
    },
    "skipped_types": {
     "Loose Leaf Tea": 7,
     "Filter paper": 6,
+    "Filter Coffee Beans": 2,
     "waterfilter": 2,
     "Tote bag": 2,
     "Brewers": 2,
     "Gift Card": 2,
-    "barista cloth": 1,
-    "Chocolate": 1
+    "barista cloth": 1
    },
    "skipped_examples": [
+    "Decaf Bundle",
+    "Kenya Bundle",
     "Cafec Abaca Filter Paper",
     "Barista Towel",
-    "Moccamaster no. 4 - filter paper",
-    "Baba Milk Bar - 50% milk chocolate & coffee bar",
-    "Coffeebag Clip - fourpack"
-   ]
+    "Diamond Rush Nitro Cold Brew"
+   ],
+   "detail_examples": [
+    {
+     "name": "Kaleidoscope 7.2 Pomelo Mambo",
+     "producer": "Nestor Lasso",
+     "variety": "Aji Bourbon",
+     "roastFor": "filter",
+     "roasterNotes": "Pomelo Fanta, Tropical"
+    },
+    {
+     "name": "Kaleidoscope 5.0 Gesha Lotus Cloud",
+     "region": "Acevedo- Huila, Colombia",
+     "producer": "Peñas Blancas",
+     "variety": "Gesha",
+     "roastFor": "filter",
+     "roasterNotes": "Silky, Sweet Lotus"
+    },
+    {
+     "name": "Ethiopia Gorbitu",
+     "region": "Gedeo Zone, Yirgacheffe",
+     "producer": "Negele Gorbitu",
+     "variety": "Heirloom",
+     "roastFor": "filter",
+     "roasterNotes": "Winegum, Golden Berries"
+    }
+   ],
+   "with_details": 17
   },
   {
    "url": "https://backtoblackcoffee.nl",
@@ -160,12 +238,28 @@
     "Cadeau abonnement koffie",
     "Koffie-abonnement",
     "Groene Back to Black Mok"
-   ]
-  },
-  {
-   "url": "https://whitelabelcoffee.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+   ],
+   "detail_examples": [
+    {
+     "name": "Burundi – Heza Hills – washed",
+     "region": "Kayanza province",
+     "variety": "Bourbon",
+     "altitude": 2080
+    },
+    {
+     "name": "Indonesia- Reza Nurullah- Double Mosto",
+     "region": "Jlegong Village, Temanggung, Centraal-Java, Indonesië",
+     "variety": "BP en Tugusari",
+     "altitude": 850
+    },
+    {
+     "name": "Indonesia- Reza Nurullah- Lactic Natural",
+     "region": "Jlegong Village, Temanggung, Centraal-Java, Indonesië",
+     "variety": "BP en Tugusari",
+     "altitude": 850
+    }
+   ],
+   "with_details": 10
   },
   {
    "url": "https://stookerspecialtycoffee.com",
@@ -189,7 +283,24 @@
     "Hospitality Barista Training",
     "Gift Card",
     "Home Brewing Workshop (English)"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Colombia - Honey Mountain",
+     "altitude": 1850
+    },
+    {
+     "name": "Guatemala - Jesus Pablo Pablo",
+     "altitude": 2300,
+     "roastFor": "omni"
+    },
+    {
+     "name": "Ethiopia - Idido",
+     "altitude": 200,
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 4
   },
   {
    "url": "https://giraffecoffee.com",
@@ -197,10 +308,9 @@
    "reader": "shopify",
    "info": "",
    "products": 210,
-   "coffees": 20,
+   "coffees": 16,
    "taken_types": {
-    "koffiebonen": 17,
-    "Bundle": 3
+    "koffiebonen": 16
    },
    "skipped_types": {
     "tools": 85,
@@ -210,15 +320,28 @@
     "cadeaus": 8,
     "waterkoker": 7,
     "weegschaal": 6,
-    "reinigingsmiddelen": 2
+    "koffiebonen": 3
    },
    "skipped_examples": [
     "Hario – V60 20 Year Anniversery Color Dripper",
+    "El Vergel Gesha Processing Box",
     "Giraffe Coffee Roasters Sokken",
     "Rotterdam Coffee Fest x Giraffe Coffee - Rondleiding in de B",
-    "Rotterdam Coffee Fest x Giraffe Coffee - ‘Omakase’ Filterses",
-    "Rotterdam Coffee Fest x Giraffe Coffee - Mini Sensory Traini"
-   ]
+    "Rotterdam Coffee Fest x Giraffe Coffee - ‘Omakase’ Filterses"
+   ],
+   "detail_examples": [
+    {
+     "name": "Trenggiling"
+    },
+    {
+     "name": "El Jaguar Oropendola"
+    },
+    {
+     "name": "Gogogu",
+     "altitude": 2400
+    }
+   ],
+   "with_details": 3
   },
   {
    "url": "https://amatterofconcrete.com",
@@ -226,13 +349,13 @@
    "reader": "woocommerce",
    "info": "",
    "products": 310,
-   "coffees": 25,
+   "coffees": 24,
    "taken_types": {
-    "+ ALL PRODUCTS": 24,
+    "+ ALL PRODUCTS": 23,
     "ALL": 1
    },
    "skipped_types": {
-    "+ ALL PRODUCTS": 141,
+    "+ ALL PRODUCTS": 142,
     "BREWING EQUIPMENT": 50,
     "BARISTA TOOLS": 43,
     "+ A.M.O.C. ESSENTIALS": 13,
@@ -247,7 +370,22 @@
     "Barista Hustle AutoComb Black",
     "SIBARIST FAST FLAT brewer filters",
     "SIBARIST B3 FLAT brewer filters"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "GESHA Honduras — Las Virginias [COE #4]",
+     "altitude": 750
+    },
+    {
+     "name": "EUGENIOIDES Colombia — Finca La Inmaculada",
+     "altitude": 1700
+    },
+    {
+     "name": "LIBERICA Indonesia — Reza",
+     "altitude": 1700
+    }
+   ],
+   "with_details": 19
   },
   {
    "url": "https://shokunin.coffee",
@@ -272,7 +410,27 @@
     "Origami Resin Holder",
     "V60 Abaca filters",
     "T-shirt"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Gogogu",
+     "region": "Guji, Ethiopia",
+     "variety": "Kurume"
+    },
+    {
+     "name": "Karimikui",
+     "region": "Kirinyaga, Kenya",
+     "variety": "SL28 & SL34",
+     "altitude": 1650
+    },
+    {
+     "name": "San Isidro",
+     "region": "Tarrazu, Costa Rica",
+     "variety": "Gesha, peaberry selection",
+     "altitude": 2100
+    }
+   ],
+   "with_details": 31
   },
   {
    "url": "https://www.schotkoffie.nl",
@@ -280,16 +438,18 @@
    "reader": "woocommerce",
    "info": "",
    "products": 61,
-   "coffees": 20,
+   "coffees": 16,
    "taken_types": {
-    "Coffee": 17,
-    "Brazilië": 3
+    "Coffee": 15,
+    "Brazilië": 1
    },
    "skipped_types": {
     "Brewers": 15,
     "Filters": 10,
     "Gear": 9,
     "Tea": 5,
+    "Brazilië": 2,
+    "Coffee": 2,
     "Espresso tools": 1,
     "Cleaning": 1
    },
@@ -299,7 +459,22 @@
     "Origami Aroma Cup – Pink",
     "APAX LAB Water Kit",
     "Aeropress Clear Purple"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Peru Oscar Vilchez Geisha",
+     "altitude": 2290
+    },
+    {
+     "name": "Boliva Lucía Núñez Geisha",
+     "altitude": 1630
+    },
+    {
+     "name": "Kenya Sakami SL28 Washed",
+     "altitude": 1800
+    }
+   ],
+   "with_details": 15
   },
   {
    "url": "https://www.singleestatecoffee.nl",
@@ -307,10 +482,9 @@
    "reader": "woocommerce",
    "info": "",
    "products": 42,
-   "coffees": 16,
+   "coffees": 14,
    "taken_types": {
     "Espresso": 13,
-    "Boxen": 2,
     "Filter": 1
    },
    "skipped_types": {
@@ -319,6 +493,7 @@
     "Sage Espressomachine": 4,
     "Training": 3,
     "Abonnementen": 2,
+    "Boxen": 2,
     "Workshop": 1
    },
    "skipped_examples": [
@@ -327,12 +502,25 @@
     "Kinto travel Tumbler",
     "Tote bag XL",
     "Sleutelhanger"
-   ]
-  },
-  {
-   "url": "https://blommers.coffee",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 94 candidate pages, 80 read this run, 14 still to read, 0 products)"
+   ],
+   "detail_examples": [
+    {
+     "name": "El Salvador – Finca Los Angeles",
+     "altitude": 1380,
+     "roastFor": "omni"
+    },
+    {
+     "name": "El Salvador – Himalaya Pineapple",
+     "altitude": 1550,
+     "roastFor": "omni"
+    },
+    {
+     "name": "El Salvador – Himalaya Maragogype",
+     "altitude": 1550,
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 8
   },
   {
    "url": "https://sampietro.nl",
@@ -354,12 +542,23 @@
     "Sage | the Barista Pro",
     "Sage | the Barista Express",
     "Drago (blend no. 1)"
-   ]
-  },
-  {
-   "url": "https://www.koffiebranderijvenetie.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nFound; sitemap: sitemap reader found no product data (sitemap: 3 candidate pages, 3 read this run, 3 still to read, 0 produc"
+   ],
+   "detail_examples": [
+    {
+     "name": "Costa Rica – West Valley",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Costa Rica – Tablón del Guarco",
+     "altitude": 2000,
+     "roastFor": "omni"
+    },
+    {
+     "name": "Colombia | decaf",
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 1
   },
   {
    "url": "https://koffiestation.nl",
@@ -385,12 +584,28 @@
     "Airscape Container Brushed Steel (500 gram)",
     "Airscape Container Matte White (500 gram)",
     "Airscape Container Lichen (500 gram)"
-   ]
-  },
-  {
-   "url": "https://30mlcoffeeroasters.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 500: Internal Server Error; woocommerce: HTTP Error 500: Internal Server Error; sitemap: no sitemap found"
+   ],
+   "detail_examples": [
+    {
+     "name": "Peru – Puente Solaya",
+     "region": "Callayuc",
+     "altitude": 1900
+    },
+    {
+     "name": "Guatemala – Vecino de Perez – direct trade by sail",
+     "region": "Acatenango",
+     "variety": "Caturra",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Colombia – Porfidio Rojas (direct trade)",
+     "region": "Paicol, Huila",
+     "producer": "Palo Grande",
+     "variety": "Colombia, Castillo en Tabi",
+     "altitude": 1525
+    }
+   ],
+   "with_details": 10
   },
   {
    "url": "https://luukscoffee.com",
@@ -421,27 +636,47 @@
     "HARIO V60 Paper Filters 01 – Natural, 40 pcs",
     "LUUK'S LINE UP",
     "TOTE BAG"
-   ]
-  },
-  {
-   "url": "https://www.moyeecoffee.com",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 41 candidate pages, 41 read this run, 0 still to read, 0 products)"
+   ],
+   "detail_examples": [
+    {
+     "name": "COSTA RICA SEASONAL SPECIAL 250G",
+     "region": "Tarrazú, San Marcos",
+     "producer": "Finca La Esmeralda",
+     "variety": "Caturra, Catuai",
+     "altitude": 1650,
+     "roastFor": "filter"
+    },
+    {
+     "name": "KENYA FILTER 250G",
+     "region": "Central Region — Murang'a",
+     "variety": "Batian | Ruiru 11 | SL28 | SL34",
+     "altitude": 1675,
+     "roastFor": "filter"
+    },
+    {
+     "name": "ETHIOPIA FILTER 250G",
+     "region": "Sidamo",
+     "variety": "Local Landraces (Ethiopian Heirloom)",
+     "altitude": 2269,
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 4
   },
   {
    "url": "https://www.simonlevelt.nl",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 1410 candidate pages, 80 read this run, 1330 still to read, 80 products",
-   "products": 80,
+   "info": "sitemap: 1410 candidate pages, 80 read this run, 1250 still to read, 160 products",
+   "products": 160,
    "coffees": 2,
    "taken_types": {
     "be": 1,
     "nl": 1
    },
    "skipped_types": {
-    "be": 39,
-    "nl": 39
+    "be": 79,
+    "nl": 79
    },
    "skipped_examples": [
     "Aarke Kettle 1,2L",
@@ -449,7 +684,16 @@
     "Ad Hoc Thee-ei",
     "Ad Hoc Thee-ei",
     "Aerolatte Melkopschuimer"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Bodum Kenya"
+    },
+    {
+     "name": "Bodum Kenya"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://kaldi.nl",
@@ -457,10 +701,9 @@
    "reader": "shopify",
    "info": "",
    "products": 276,
-   "coffees": 50,
+   "coffees": 42,
    "taken_types": {
-    "Koffiebonen": 42,
-    "Koffiebonen proefpakket": 8
+    "Koffiebonen": 42
    },
    "skipped_types": {
     "Thee": 73,
@@ -468,6 +711,7 @@
     "Onderhoud": 39,
     "Accessoires": 29,
     "Koffiecups": 13,
+    "Koffiebonen proefpakket": 8,
     "Koffiesiroop": 6,
     "Zetmethodes": 1
    },
@@ -477,7 +721,26 @@
     "Thee pakket - Wintermoment",
     "Thee pakket - Herfstmoment",
     "Thee pakket - Zomermoment"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Sicilian Blend",
+     "region": "Ethiopië, Uganda en Rwanda",
+     "variety": "Lokaal geselecteerde variëteit, Robusta, Bourbon"
+    },
+    {
+     "name": "Rwanda",
+     "variety": "Bourbon",
+     "altitude": 1750
+    },
+    {
+     "name": "Papoea-Nieuw-Guinea",
+     "region": "Papoea-Nieuw-Guinea",
+     "variety": "Arusha, Blue Mountain, Bourbon, Typica",
+     "altitude": 1850
+    }
+   ],
+   "with_details": 40
   },
   {
    "url": "https://hoekschebranders.nl",
@@ -505,22 +768,20 @@
     "Etna Dorado Medium ES121 7″ Mediaspeler",
     "Privat Label coffee Micky Beans",
     "Opstartkosten"
-   ]
-  },
-  {
-   "url": "https://www.debonenbrander.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 1 candidate pages, 1 read this run, 0 still to read, 0 products)"
-  },
-  {
-   "url": "https://brandzaak.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 4 candidate pages, 4 read this run, 0 still to read, 0 products)"
-  },
-  {
-   "url": "https://keencoffee.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+   ],
+   "detail_examples": [
+    {
+     "name": "Grand Roast"
+    },
+    {
+     "name": "India Mooleh Manay"
+    },
+    {
+     "name": "Office Blend – Espresso 6x1000gram",
+     "roastFor": "espresso"
+    }
+   ],
+   "with_details": 1
   },
   {
    "url": "https://wakuli.com",
@@ -528,18 +789,14 @@
    "reader": "shopify",
    "info": "",
    "products": 42,
-   "coffees": 16,
+   "coffees": 10,
    "taken_types": {
-    "Coffee Pouches": 10,
-    "Coffee Pods": 2,
-    "Gifting & Bundles": 2,
-    "Drip Bags": 1,
-    "Coffee": 1
+    "Coffee Pouches": 10
    },
    "skipped_types": {
-    "Gifting & Bundles": 5,
+    "Gifting & Bundles": 7,
+    "Coffee Pods": 6,
     "Brew Gear": 5,
-    "Coffee Pods": 4,
     "Coffee Pouches": 3,
     "(none)": 2,
     "Coffee Gear (Saleable)": 2,
@@ -552,17 +809,20 @@
     "Orange Holiday Blend",
     "Green Holiday Blend",
     "Acme x Wakuli Coffee Cups"
-   ]
-  },
-  {
-   "url": "https://www.manmetbrilkoffie.nl",
-   "ok": false,
-   "error": "shopify: Expecting value: line 1 column 1 (char 0); woocommerce: Expecting value: line 1 column 1 (char 0); sitemap: no sitemap found"
-  },
-  {
-   "url": "https://hoppercoffee.nl",
-   "ok": false,
-   "error": "shopify: <urlopen error [Errno 104] Connection reset by peer>; woocommerce: <urlopen error [Errno 104] Connection reset by peer>; sitemap: no sitemap found"
+   ],
+   "detail_examples": [
+    {
+     "name": "Single Origin Filter",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Seasonal Microlot [Medium Roast]"
+    },
+    {
+     "name": "Seasonal Microlot [Light Roast]"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://monkscoffee.nl",
@@ -570,27 +830,35 @@
    "reader": "shopify",
    "info": "",
    "products": 24,
-   "coffees": 17,
+   "coffees": 12,
    "taken_types": {
-    "Coffee": 17
+    "Coffee": 12
    },
    "skipped_types": {
+    "Coffee": 5,
     "Merchandise": 4,
     "Training": 2,
     "Coffee Liqueur": 1
    },
    "skipped_examples": [
-    "Hario V60 Set",
-    "Chemex filter papers (100)",
-    "Aeropress",
-    "Monks Coffee Liqueur",
-    "Introduction to Coffee Roasting Course - Enquire about times"
-   ]
-  },
-  {
-   "url": "https://lucifercoffeeroasters.com",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+    "The Dark Side (coffee bundle)",
+    "The BIG Bundle",
+    "The Explorer (coffee bundle)",
+    "The Origins (coffee bundle)",
+    "The Blends (coffee bundle)"
+   ],
+   "detail_examples": [
+    {
+     "name": "The Black Sheep - Peru"
+    },
+    {
+     "name": "Brazil (Essencia)"
+    },
+    {
+     "name": "Colombia"
+    }
+   ],
+   "with_details": 2
   },
   {
    "url": "https://blackandbloom.nl",
@@ -603,23 +871,28 @@
     "(none)": 5
    },
    "skipped_types": {},
-   "skipped_examples": []
-  },
-  {
-   "url": "https://www.blanchedael.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 9 candidate pages, 9 read this run, 0 still to read, 0 products)"
-  },
-  {
-   "url": "https://www.peeze.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 21 candidate pages, 21 read this run, 0 still to read, 0 products)"
+   "skipped_examples": [],
+   "detail_examples": [
+    {
+     "name": "Special Series Filter: Colombia Huila Villa Pastora Natural Pink Bourbon",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Espresso: Brazil Caixa de Fruta Natural",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Filter: Ethiopia Limu-2 Wolemso Washed",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 1
   },
   {
    "url": "https://www.bootkoffie.nl",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 49 candidate pages, 49 read this run, 0 still to read, 5 products",
+   "info": "sitemap: 49 candidate pages, 0 read this run, 0 still to read, 5 products",
    "products": 5,
    "coffees": 0,
    "taken_types": {},
@@ -633,12 +906,9 @@
     "Japan Sencha Premium Bio",
     "Nana Munt Bio",
     "* NIEUW * - Kruidige Vruchtenmelange Bio"
-   ]
-  },
-  {
-   "url": "https://coffeecompany.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 500: Internal Server Error; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+   ],
+   "detail_examples": [],
+   "with_details": 0
   },
   {
    "url": "https://screamingbeans.nl",
@@ -661,7 +931,23 @@
     "On The Daily Grind Milkcup",
     "Coming in Hot Tee",
     "Take Me To Your Barista Tee"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Jaguarundi Colombia | Filter",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Chelbessa Ethiopia | Filter",
+     "altitude": 2000,
+     "roastFor": "filter"
+    },
+    {
+     "name": "El Mandarino Honduras | Filter",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 1
   },
   {
    "url": "https://espressofabriek.nl",
@@ -678,7 +964,29 @@
    },
    "skipped_examples": [
     "Espressofabriek tote bag"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Filter roast - Burundi - Masha",
+     "region": "Gihororo, Kayanza",
+     "variety": "red bourbon",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Espresso roast - Colombia - El bombo mujeres",
+     "region": "Huila, Pitalito",
+     "variety": "Bourbon – Castillo – Caturra",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Espresso roast - Guatemala -finca wiwitz",
+     "region": "Huehuetenango - Jacaltenango",
+     "variety": "100% Caturra",
+     "altitude": 1800,
+     "roastFor": "espresso"
+    }
+   ],
+   "with_details": 5
   },
   {
    "url": "https://badeta.nl",
@@ -705,12 +1013,20 @@
     "Subminimal Subscale",
     "Sage machine – Oracle Jet",
     "Sage machine – Bambino Plus"
-   ]
-  },
-  {
-   "url": "https://www.dekoffiejongens.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 42 candidate pages, 42 read this run, 0 still to read, 0 products)"
+   ],
+   "detail_examples": [
+    {
+     "name": "Costa Rica Corazón de Jesús"
+    },
+    {
+     "name": "Uganda Bantu Blossom"
+    },
+    {
+     "name": "Ethiopië Chelbesa",
+     "altitude": 2173
+    }
+   ],
+   "with_details": 4
   },
   {
    "url": "https://heiligeboontjes.com",
@@ -718,19 +1034,18 @@
    "reader": "woocommerce",
    "info": "",
    "products": 57,
-   "coffees": 12,
+   "coffees": 10,
    "taken_types": {
     "Blend #1": 5,
     "Brazil": 2,
     "Hier en Daar": 2,
-    "Pakketten": 2,
     "Blend 010": 1
    },
    "skipped_types": {
     "Merchandise": 11,
     "Matcha": 8,
     "Kleding": 6,
-    "Pakketten": 4,
+    "Pakketten": 6,
     "Kerstpakketten": 3,
     "Boeken": 3,
     "(none)": 2,
@@ -742,7 +1057,19 @@
     "Heilige Boontjes Matcha Ceremonial Highest Quality Grade | 4",
     "Heilige Boontjes Matcha Ceremonial Highest Quality Grade | 1",
     "Heilige Boontjes X RDAM® – Love HB Hoodie"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Brazil 250 gram"
+    },
+    {
+     "name": "Hier En Daar Mild Roast"
+    },
+    {
+     "name": "Hier En Daar Dark Roast"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://zwarteroes.nl",
@@ -750,14 +1077,15 @@
    "reader": "shopify",
    "info": "",
    "products": 66,
-   "coffees": 28,
+   "coffees": 22,
    "taken_types": {
-    "Koffie": 28
+    "Koffie": 22
    },
    "skipped_types": {
     "Accessoires": 20,
     "(none)": 11,
     "Sage Onderhoud": 6,
+    "Koffie": 6,
     "Gift Cards": 1
    },
    "skipped_examples": [
@@ -766,7 +1094,21 @@
     "1Zpresso K-Ultra Manual Grinder",
     "Huskee Original 8oz | 235 ml",
     "Sage the Machine Descaler™ x12"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Blend N˚1 - ACTIE!"
+    },
+    {
+     "name": "Apple Explosion",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Pink Borbon Creation",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 1
   },
   {
    "url": "https://www.specialtycoffee.nl",
@@ -774,9 +1116,9 @@
    "reader": "shopify",
    "info": "",
    "products": 120,
-   "coffees": 17,
+   "coffees": 15,
    "taken_types": {
-    "Koffie": 17
+    "Koffie": 15
    },
    "skipped_types": {
     "Barista tools": 53,
@@ -785,6 +1127,7 @@
     "Machine": 4,
     "(none)": 4,
     "Zetmethodes": 4,
+    "Koffie": 2,
     "Barista tools, Mazzer": 1
    },
    "skipped_examples": [
@@ -793,7 +1136,20 @@
     "Joe Frex Cleaning Steam Brush",
     "Mazzer Mini",
     "Mazzer Mini G"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Barbera Classica koffiebonen"
+    },
+    {
+     "name": "Friedhats Blend 2kg",
+     "variety": "Blend"
+    },
+    {
+     "name": "Segafredo Extra Strong"
+    }
+   ],
+   "with_details": 2
   },
   {
    "url": "https://labroast.com",
@@ -801,16 +1157,16 @@
    "reader": "woocommerce",
    "info": "",
    "products": 103,
-   "coffees": 80,
+   "coffees": 79,
    "taken_types": {
-    "Vind jouw perfecte koffie": 37,
+    "Vind jouw perfecte koffie": 36,
     "Single Origin": 33,
     "Blend": 10
    },
    "skipped_types": {
     "Barista Tools": 5,
+    "Vind jouw perfecte koffie": 4,
     "Discovery Boxes": 3,
-    "Vind jouw perfecte koffie": 3,
     "Cadeaubon": 3,
     "Filters": 3,
     "Beste Barista Tools": 2,
@@ -820,10 +1176,26 @@
    "skipped_examples": [
     "Onze Coffee Club – Discovery Box – Nederlandse branders",
     "Friedhats Espresso Blend",
+    "Dak Coffee Roasters Juice Box – Colombia",
     "Coffee & Coconuts Maboya – Venezuela",
-    "50 gram Proefzakje",
-    "Sprout Pitcher Perfect Blend"
-   ]
+    "50 gram Proefzakje"
+   ],
+   "detail_examples": [
+    {
+     "name": "UN.COMMON Wilton Benitez – Colombia",
+     "producer": "Wilton Benitez",
+     "altitude": 1955
+    },
+    {
+     "name": "UN.COMMON Los Rodriguez – Bolivia"
+    },
+    {
+     "name": "Kolibri Coffee Nectar drops – Colombia",
+     "region": "Los Naranjos, Santa Bárbara, Antioquia, Colombia",
+     "producer": "Pedro Echavarría"
+    }
+   ],
+   "with_details": 41
   },
   {
    "url": "https://koffiekenner.com",
@@ -858,7 +1230,20 @@
     "Dualit Cino Melkopschuimer met Stoom",
     "Espressions Koffiekloplade RVS",
     "Espressions Gooseneck Pour Over Waterkoker 1 L"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Lemon Spritz",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Acaia Orion Automatische Bonendoseerder"
+    },
+    {
+     "name": "Gutiti Lion"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://gerritskoffie.nl",
@@ -866,17 +1251,17 @@
    "reader": "shopify",
    "info": "",
    "products": 113,
-   "coffees": 56,
+   "coffees": 41,
    "taken_types": {
-    "(none)": 27,
-    "koffiebonen": 25,
+    "koffiebonen": 23,
+    "(none)": 14,
     "Gemalen Koffie": 4
    },
    "skipped_types": {
-    "(none)": 31,
+    "(none)": 44,
     "thee": 18,
     "Koffiecups": 5,
-    "koffiebonen": 2,
+    "koffiebonen": 4,
     "bonenmaler": 1
    },
    "skipped_examples": [
@@ -885,7 +1270,21 @@
     "Carmen Classic Premium Koffie 500 g – Chocolade & Cacao",
     "Bio Suikersticks Kristalsuiker - 500 Stuks Biologisch",
     "Langnese Natuurlijke Honingsticks 80 Stuks"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Test Product Organic Coffee - Do not order"
+    },
+    {
+     "name": "Espresso Dark Roast Collectie – 3 x 500g Premium Bonen",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Premium Biologische Koffie – 3 x 500g Duurzame Topmerken",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.casabarista.nl",
@@ -893,9 +1292,9 @@
    "reader": "shopify",
    "info": "",
    "products": 406,
-   "coffees": 21,
+   "coffees": 16,
    "taken_types": {
-    "Koffiebonen": 21
+    "Koffiebonen": 16
    },
    "skipped_types": {
     "Accessoires": 189,
@@ -903,7 +1302,7 @@
     "(none)": 67,
     "Barista sets": 27,
     "Koffiemolens": 21,
-    "Koffiebonen": 2
+    "Koffiebonen": 7
    },
    "skipped_examples": [
     "QuickMill Elevate R - Instant Stability",
@@ -911,25 +1310,37 @@
     "Eureka Tamper Dynamometrisch - Regolo",
     "Mahlkonig Xenia - Zwart",
     "PIETRO Maalschijven"
-   ]
-  },
-  {
-   "url": "https://www.koffiecentrale.nl",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+   ],
+   "detail_examples": [
+    {
+     "name": "Macafe Koffiebonen - Classic bruin"
+    },
+    {
+     "name": "Macafe Koffiebonen - Crema Rood"
+    },
+    {
+     "name": "Macafe Koffiebonen - Milano Geel"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.cafedujour.nl",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 103 candidate pages, 80 read this run, 23 still to read, 2 products",
+   "info": "sitemap: 103 candidate pages, 23 read this run, 0 still to read, 2 products",
    "products": 2,
-   "coffees": 2,
-   "taken_types": {
+   "coffees": 0,
+   "taken_types": {},
+   "skipped_types": {
     "Koffie": 2
    },
-   "skipped_types": {},
-   "skipped_examples": []
+   "skipped_examples": [
+    "Koffiebonen zelf melangeren - Verse koffiebonen - 1 kg",
+    "Koffiebonen pakket - Meest verkocht - 4 x 1 kilo"
+   ],
+   "detail_examples": [],
+   "with_details": 0
   },
   {
    "url": "https://thebarn.de",
@@ -937,24 +1348,22 @@
    "reader": "shopify",
    "info": "",
    "products": 206,
-   "coffees": 97,
+   "coffees": 89,
    "taken_types": {
     "(none)": 45,
     "Filter Coffee": 30,
-    "Espresso Coffee": 13,
-    "Coffee Bundle": 3,
-    "Misc": 3,
-    "Instant & Capsules": 3
+    "Espresso Coffee": 12,
+    "Misc": 2
    },
    "skipped_types": {
     "Equipment": 56,
     "(none)": 30,
+    "Misc": 8,
     "Merchandise": 7,
-    "Misc": 7,
+    "Coffee Bundle": 3,
     "Gift Subscription": 3,
     "Subscription": 3,
-    "Filter Coffee": 1,
-    "Book": 1
+    "Instant & Capsules": 3
    },
    "skipped_examples": [
     "Sage the Knock Box™ 10",
@@ -962,7 +1371,22 @@
     "SAGE PRECISION SCALE DUO",
     "Sage the Knock Box™",
     "Sage Force Gauge Tamper™"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "JAIRO ARCILA HONEY",
+     "roastFor": "omni"
+    },
+    {
+     "name": "INKU",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "SANTA TERESA",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 9
   },
   {
    "url": "https://www.bonanzacoffee.de",
@@ -970,22 +1394,37 @@
    "reader": "shopify",
    "info": "",
    "products": 23,
-   "coffees": 14,
+   "coffees": 13,
    "taken_types": {
-    "Coffee": 14
+    "Coffee": 13
    },
    "skipped_types": {
     "brewing gear": 6,
-    "Merchandise": 2,
-    "Coffee": 1
+    "Coffee": 2,
+    "Merchandise": 2
    },
    "skipped_examples": [
+    "The Universal Set",
     "Bonanza Essentials Subscription",
     "Kalita Filter Papers",
     "Bonanza Longsleeve Black",
-    "Not Your Typical Cotton Bag",
-    "Gabi Master Dripper"
-   ]
+    "Not Your Typical Cotton Bag"
+   ],
+   "detail_examples": [
+    {
+     "name": "La Nueva Montaña",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Don Eli Reposado",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Los Nogales",
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 2
   },
   {
    "url": "https://coffeecollective.dk",
@@ -1008,7 +1447,22 @@
     "Cap Beige/Blue",
     "Mahlkönig Flapper Upgrade X80",
     "Mahlkönig E80 Top Cover Set"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Albuls, 3kg",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Familia Lizaraso, 3kg",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Julekaffe, 1kg",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.lacabra.com",
@@ -1037,12 +1491,19 @@
     "K.H. Würtz Cup - Justicia",
     "Ground Chocolate - Bejofo",
     "Würtz Set"
-   ]
-  },
-  {
-   "url": "https://aprilcoffeeroasters.com",
-   "ok": false,
-   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 403: Forbidden; sitemap: no sitemap found"
+   ],
+   "detail_examples": [
+    {
+     "name": "Concepción"
+    },
+    {
+     "name": "Altos Geisha"
+    },
+    {
+     "name": "Altos Natural"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://timwendelboe.no",
@@ -1063,7 +1524,17 @@
     "Ngerwe - Christmas Edition",
     "Nacimiento Pacas",
     "Test Roast 1kg"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Finca Tamana Variedad Colombia Espresso",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Finca Tamana Variedad Colombia"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.dropcoffee.com",
@@ -1071,13 +1542,13 @@
    "reader": "shopify",
    "info": "",
    "products": 40,
-   "coffees": 14,
+   "coffees": 12,
    "taken_types": {
-    "Coffee": 14
+    "Coffee": 12
    },
    "skipped_types": {
     "Brewing Equipment": 11,
-    "Coffee": 6,
+    "Coffee": 8,
     "Book": 4,
     "Merch": 2,
     "Sack": 1,
@@ -1085,12 +1556,33 @@
     "Gift card": 1
    },
    "skipped_examples": [
+    "The 2026 Advent Calendar",
     "What I Know About Growing a Coffee Business - Colin Harmon",
     "Ceado Life X Grinder",
-    "Kalita 500 Server G",
-    "Drop Coffee Cap",
-    "Kalita Wave 185 Dripper Style Up Set"
-   ]
+    "Tasting Box",
+    "Kalita 500 Server G"
+   ],
+   "detail_examples": [
+    {
+     "name": "Los Altares, Anaerobic Washed Caturra, Guatemala",
+     "producer": "Guadalupe Alberto Reyes with family",
+     "variety": "Caturra",
+     "altitude": 1850
+    },
+    {
+     "name": "La Fany, Washed Heirloom, El Salvador",
+     "producer": "Rafael and Carmen da Silva Hoff with family",
+     "variety": "Heirloom",
+     "altitude": 1600
+    },
+    {
+     "name": "Vicente Paye, Washed Caturra, Bolivia",
+     "producer": "Vicente Paye",
+     "variety": "Caturra",
+     "altitude": 1450
+    }
+   ],
+   "with_details": 12
   },
   {
    "url": "https://nomadcoffee.es",
@@ -1118,7 +1610,19 @@
     "Acaia Balanza Lunar",
     "Cafetera de goteo Fellow - Aiden Precision Coffee Maker",
     "Taza y plato Serveis de café V1"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Jhenrry Chávez"
+    },
+    {
+     "name": "OMBLIGÓN - LAS FLORES | EXCLUSIVO WHOLESALE CLIENTS"
+    },
+    {
+     "name": "Esperanza"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://shop.squaremilecoffee.com",
@@ -1126,9 +1630,9 @@
    "reader": "shopify",
    "info": "",
    "products": 290,
-   "coffees": 19,
+   "coffees": 13,
    "taken_types": {
-    "Coffee": 19
+    "Coffee": 13
    },
    "skipped_types": {
     "(none)": 161,
@@ -1136,17 +1640,32 @@
     "Apparel": 21,
     "Brewing Equipment": 14,
     "Publication": 11,
+    "Coffee": 7,
     "Sample": 5,
-    "Merchandise": 4,
-    "Event": 2
+    "Merchandise": 4
    },
    "skipped_examples": [
     "Half Caff Filter Subscription",
     "Rebero Sample",
     "Paya' Sample",
-    "Shortcut Sample",
-    "XBloom Studio Coffee Machine"
-   ]
+    "Filter Assortment Pack",
+    "Shortcut Sample"
+   ],
+   "detail_examples": [
+    {
+     "name": "Don Cayito",
+     "roastFor": "filter"
+    },
+    {
+     "name": "San Martín",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Winter Espresso",
+     "roastFor": "espresso"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.hasbean.co.uk",
@@ -1154,9 +1673,9 @@
    "reader": "shopify",
    "info": "",
    "products": 248,
-   "coffees": 26,
+   "coffees": 23,
    "taken_types": {
-    "coffee": 26
+    "coffee": 23
    },
    "skipped_types": {
     "brewing-equipment": 97,
@@ -1174,7 +1693,24 @@
     "West Coast Cocoa Festive Bundle",
     "Festive Puzzle Bundle: Scene 02 - Sourcing",
     "Festive Clever Dripper Bundle"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "El Salvador: Finca Argentina, Icatu, Natural",
+     "altitude": 1350,
+     "roastFor": "omni"
+    },
+    {
+     "name": "Costa Rica: Arbar, San Roque Kenya, Honey",
+     "altitude": 1600,
+     "roastFor": "filter"
+    },
+    {
+     "name": "Festive Blend",
+     "roastFor": "espresso"
+    }
+   ],
+   "with_details": 16
   },
   {
    "url": "https://www.origincoffee.co.uk",
@@ -1182,13 +1718,11 @@
    "reader": "shopify",
    "info": "",
    "products": 265,
-   "coffees": 31,
+   "coffees": 20,
    "taken_types": {
     "Coffee (Feature)": 9,
-    "Coffee (Gift Sets)": 7,
     "Coffee (Mainstay SO)": 5,
-    "Coffee (Blend)": 4,
-    "Coffee (Pods)": 3,
+    "Coffee (Blend)": 3,
     "Coffee (Special Edition)": 1,
     "Coffee (Cold Brew)": 1,
     "Coffee (Decaf)": 1
@@ -1201,7 +1735,7 @@
     "Brewers": 19,
     "Bundles": 15,
     "Grinders": 13,
-    "Subscriptions (Prepaid)": 9
+    "Coffee (Gift Sets)": 12
    },
    "skipped_examples": [
     "Sage Bambino & Baratza Encore ESP Bundle - Black",
@@ -1209,7 +1743,22 @@
     "Lelit Bianca & Baratza Encore Pro Bundle - Black",
     "Lelit Bianca & Baratza Encore Pro Bundle - Steel",
     "Lelit Elizabeth & Baratza Encore Pro Bundle"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Guatalón / Kveik",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Matazano / Philly Sour & Kveik",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Banko Gotiti",
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.darkartscoffee.co.uk",
@@ -1217,15 +1766,15 @@
    "reader": "shopify",
    "info": "",
    "products": 87,
-   "coffees": 11,
+   "coffees": 8,
    "taken_types": {
-    "Coffee": 8,
-    "Coffee Capsules": 3
+    "Coffee": 8
    },
    "skipped_types": {
     "Merch": 38,
     "Equipment": 30,
     "Subscription Coffee": 4,
+    "Coffee Capsules": 3,
     "Gift Subscription": 3,
     "Coffee": 1
    },
@@ -1235,7 +1784,27 @@
     "LONGSWORD WAFFLE KNIT LONG-SLEEVE - Camo",
     "LONGSWORD WAFFLE KNIT LONG-SLEEVE - Black",
     "LONGSWORD WAFFLE KNIT LONG-SLEEVE - Washed Black"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "WILD ONE - Colombia",
+     "variety": "Castillo",
+     "altitude": 1475,
+     "roastFor": "espresso"
+    },
+    {
+     "name": "DRIVE ALONE - China",
+     "variety": "Mixed",
+     "altitude": 1700,
+     "roastFor": "espresso"
+    },
+    {
+     "name": "GRACE - Ethiopia",
+     "altitude": 2400,
+     "roastFor": "espresso"
+    }
+   ],
+   "with_details": 6
   },
   {
    "url": "https://colonnacoffee.com",
@@ -1243,14 +1812,14 @@
    "reader": "shopify",
    "info": "",
    "products": 140,
-   "coffees": 21,
+   "coffees": 19,
    "taken_types": {
-    "Beans": 21
+    "Beans": 19
    },
    "skipped_types": {
     "Accessories": 71,
     "Capsules": 35,
-    "Beans": 5,
+    "Beans": 7,
     "(none)": 4,
     "Instant": 3,
     "FREEGIFT_HIDDEN": 1
@@ -1261,7 +1830,20 @@
     "Gesha Espresso Capsules",
     "All 3 + Gesha Capsules Espresso",
     "All 3 Beans – Subscription"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "027 - Elida Washed Gesha"
+    },
+    {
+     "name": "017 - Typica Mejorado Washed",
+     "altitude": 750
+    },
+    {
+     "name": "026 - Ethiopia/Yemen Blend"
+    }
+   ],
+   "with_details": 6
   },
   {
    "url": "https://workshopcoffee.com",
@@ -1269,15 +1851,15 @@
    "reader": "shopify",
    "info": "",
    "products": 108,
-   "coffees": 23,
+   "coffees": 18,
    "taken_types": {
-    "Filter": 8,
+    "Filter": 6,
     "Single Origin": 5,
-    "Espresso": 3,
-    "Cold Brew": 3,
+    "Espresso": 2,
     "Pinnacle": 1,
     "Coffee Liqueur": 1,
     "Cascara": 1,
+    "Cold Brew": 1,
     "House Blends": 1
    },
    "skipped_types": {
@@ -1285,10 +1867,10 @@
     "House Blends": 10,
     "Brewers": 9,
     "Merchandise": 8,
+    "Espresso": 5,
     "Espresso Machine": 4,
     "Sage": 4,
-    "Filters": 4,
-    "Espresso": 4
+    "Filter": 4
    },
    "skipped_examples": [
     "Hario V60 Dripper NEO (Size 01)",
@@ -1296,7 +1878,22 @@
     "Espresso Capsules & Workshop Tin",
     "OPAL One Coffee Pod Machine (White)",
     "Masterclass Gift Card"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Githembe | Festive Filter",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Idido | Festive Espresso",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Sipi Tangwen",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://onyxcoffeelab.com",
@@ -1304,20 +1901,19 @@
    "reader": "shopify",
    "info": "",
    "products": 249,
-   "coffees": 120,
+   "coffees": 112,
    "taken_types": {
-    "Coffee": 119,
-    "(none)": 1
+    "Coffee": 112
    },
    "skipped_types": {
     "Merchandise": 53,
     "Warehouse": 49,
-    "(none)": 15,
+    "(none)": 16,
+    "Coffee": 8,
     "Equipment": 6,
     "DOUGHP Catering": 3,
     "Brewers": 1,
-    "RTD": 1,
-    "Coffee": 1
+    "RTD": 1
    },
    "skipped_examples": [
     "Providers Small Pastry Bag",
@@ -1325,7 +1921,24 @@
     "NotNeutral Clear Gibralter 12oz",
     "Acopa Pangea 10 oz. Mauve Rocks / Old Fashioned Glass - 12/C",
     "Acopa Pangea 16 oz. Mauve Beverage Glass - 12/Case (Lakeside"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Decaf Espresso - Colombia San Antonio",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Colombia Jhoan Vergara Gesha",
+     "altitude": 1750,
+     "roastFor": "omni"
+    },
+    {
+     "name": "Guatemala Finca Libano Gesha",
+     "altitude": 1900,
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 8
   },
   {
    "url": "https://counterculturecoffee.com",
@@ -1333,17 +1946,16 @@
    "reader": "shopify",
    "info": "",
    "products": 181,
-   "coffees": 147,
+   "coffees": 142,
    "taken_types": {
-    "Coffee": 141,
-    "Bundle": 4,
+    "Coffee": 140,
     "coffee": 2
    },
    "skipped_types": {
     "Merch": 19,
-    "Coffee": 8,
+    "Coffee": 9,
     "(none)": 5,
-    "Bundle": 1,
+    "Bundle": 5,
     "Gift Cards": 1
    },
    "skipped_examples": [
@@ -1352,7 +1964,19 @@
     "Rainbow Camp Cup - 12oz",
     "Coffee Canister - 12oz",
     "Carter Carry Water Bottle"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Finca Idania – Pacamara Variety"
+    },
+    {
+     "name": "Finca El Puente Swiss Water Decaf"
+    },
+    {
+     "name": "Laba Gesha - Natural Sundried"
+    }
+   ],
+   "with_details": 2
   },
   {
    "url": "https://www.intelligentsia.com",
@@ -1360,9 +1984,9 @@
    "reader": "shopify",
    "info": "",
    "products": 246,
-   "coffees": 162,
+   "coffees": 157,
    "taken_types": {
-    "Coffee": 160,
+    "Coffee": 155,
     "(none)": 2
    },
    "skipped_types": {
@@ -1370,9 +1994,9 @@
     "Gifts": 13,
     "Drinkware": 10,
     "Apparel": 8,
+    "Coffee": 6,
     "(none)": 3,
     "Lattes + Cold Coffee": 3,
-    "Coffee": 1,
     "Tea Ware": 1
    },
    "skipped_examples": [
@@ -1381,7 +2005,20 @@
     "White Miso Paste - 1kg",
     "Black Sesame Powder - 300 g",
     "Maple Syrup - 1 gallon"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Guatemala José Fernando López"
+    },
+    {
+     "name": "Celebration Blend"
+    },
+    {
+     "name": "Colombia Cauca Castillo Single Origin Espresso",
+     "roastFor": "espresso"
+    }
+   ],
+   "with_details": 5
   },
   {
    "url": "https://www.stumptowncoffee.com",
@@ -1389,11 +2026,10 @@
    "reader": "shopify",
    "info": "",
    "products": 122,
-   "coffees": 25,
+   "coffees": 21,
    "taken_types": {
     "Coffee/Latin America": 12,
-    "Coffee/Africa": 6,
-    "Coffee/Africa,Coffee/Asia Pacific,Coffee": 3,
+    "Coffee/Africa": 5,
     "Coffee/Blends": 2,
     "Cold Brew": 1,
     "Coffee/Asia Pacific": 1
@@ -1406,7 +2042,7 @@
     "Gear/Merch,Gear/Mugs": 11,
     "(none)": 7,
     "Gear/Filters + Parts": 6,
-    "Coffee/BYOB": 3
+    "Coffee/Africa,Coffee/Asia Pacific,Coffee": 5
    },
    "skipped_examples": [
     "Joyful Things Bundle",
@@ -1414,7 +2050,21 @@
     "Bodum French Press (8-Cup)",
     "Camp Coffee Tumbler",
     "Maker’s Bundle"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Colombia La Montaña Pink Bourbon",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Ethiopia Nano Challa",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Kenya Karumandi"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.heartroasters.com",
@@ -1438,7 +2088,25 @@
     "Stagg EKG® Pro Electric Kettle",
     "Martina Thornhill x heart ear mug",
     "Martina Thornhill x heart espresso cup/saucer"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Kenya Spikes AB",
+     "variety": "SL28",
+     "altitude": 1750
+    },
+    {
+     "name": "Honduras Patricio Navarro Pérez",
+     "variety": "Catuai",
+     "altitude": 1650
+    },
+    {
+     "name": "Honduras Rolando Moreno",
+     "variety": "Pacas",
+     "altitude": 1900
+    }
+   ],
+   "with_details": 8
   },
   {
    "url": "https://www.passengercoffee.com",
@@ -1446,19 +2114,19 @@
    "reader": "shopify",
    "info": "",
    "products": 583,
-   "coffees": 273,
+   "coffees": 253,
    "taken_types": {
-    "Coffee": 273
+    "Coffee": 253
    },
    "skipped_types": {
     "Tea": 112,
     "Merchandise": 67,
     "Archival Release": 37,
     "Coffee Subscription": 31,
+    "Coffee": 24,
     "(none)": 15,
     "Tea Subscription": 13,
-    "Supplies": 10,
-    "Ticket": 7
+    "Supplies": 10
    },
    "skipped_examples": [
     "Archival Release #64 - Mercedes Flores - 2023",
@@ -1466,7 +2134,19 @@
     "2026 Holiday Tea Bundle",
     "2026 Holiday Bundle",
     "2026 Holiday Coffee & Herbal Blend"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Silvio Leite - Natural Process - 2023"
+    },
+    {
+     "name": "Holiday Coffee - Washed Process - 2026"
+    },
+    {
+     "name": "Necessary Holiday Blend 2026"
+    }
+   ],
+   "with_details": 2
   },
   {
    "url": "https://www.blackwhiteroasters.com",
@@ -1495,7 +2175,19 @@
     "Diego Bermudez - M03",
     "Andres Martinez - Aponte Floral",
     "Andres Martinez - Aponte Floral"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "The Future - Halloween Candy"
+    },
+    {
+     "name": "Holiday Blend - 'Tis The Season 2026"
+    },
+    {
+     "name": "The Future - Cherry Cobbler"
+    }
+   ],
+   "with_details": 1
   },
   {
    "url": "https://www.vervecoffee.com",
@@ -1503,23 +2195,38 @@
    "reader": "shopify",
    "info": "",
    "products": 179,
-   "coffees": 122,
+   "coffees": 108,
    "taken_types": {
-    "Coffee": 122
+    "Coffee": 108
    },
    "skipped_types": {
     "Merchandise": 47,
-    "Coffee": 8,
+    "Coffee": 22,
     "Tea": 1,
     "Gift Cards": 1
    },
    "skipped_examples": [
+    "Holiday Blend Craft Instant Coffee 6 Pack",
     "Creature Comfort Camp Mug",
     "In Bloom Tumbler",
     "Ripple Effect Mini Tote",
-    "High Alert Cold Tumbler",
-    "Sip + Shred Milk Glass Mug"
-   ]
+    "High Alert Cold Tumbler"
+   ],
+   "detail_examples": [
+    {
+     "name": "Holiday Blend",
+     "altitude": 1400
+    },
+    {
+     "name": "Colombia Fray David",
+     "altitude": 1900
+    },
+    {
+     "name": "Ethiopia Malawo",
+     "altitude": 2300
+    }
+   ],
+   "with_details": 26
   },
   {
    "url": "https://georgehowellcoffee.com",
@@ -1554,7 +2261,19 @@
     "Coffee Blossom Honey Francisco Cardona",
     "Coffee Blossom Honey Mini Jar",
     "Fellow Electric Kettle"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "La Esmeralda Tumaco, Panama"
+    },
+    {
+     "name": "Finca La Chorrera, Colombia"
+    },
+    {
+     "name": "Tenejapa, Mexico"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.roguewavecoffee.ca",
@@ -1562,9 +2281,9 @@
    "reader": "shopify",
    "info": "",
    "products": 804,
-   "coffees": 324,
+   "coffees": 319,
    "taken_types": {
-    "Coffee": 317,
+    "Coffee": 312,
     "Espresso": 5,
     "(none)": 2
    },
@@ -1579,12 +2298,27 @@
     "Kettle": 13
    },
    "skipped_examples": [
+    "[PRE-ORDER] Coffee Gift Box | 6x Premium Coffees (440g) & Gi",
     "OREA - STAC Cup 2-Pack (150ml)",
     "OREA - Service Pitcher Carafe (2026)",
     "1ZPRESSO - Q",
-    "ORIGAMI - Dripper S | Sabi - Maruyoshi Kosaka Limited Collec",
-    "Barista Hustle - Terroir: Coffee From Seed to Harvest"
-   ]
+    "ORIGAMI - Dripper S | Sabi - Maruyoshi Kosaka Limited Collec"
+   ],
+   "detail_examples": [
+    {
+     "name": "Colombia - Granja Paraiso 92 Pink Bourbon | Sugarcane EA Decaf",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Panama - Carmen Palomar Estate Lot 6 Geisha | Natural - 100g",
+     "roastFor": "omni"
+    },
+    {
+     "name": "Ecuador - Loma Redonda | Washed",
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 94
   },
   {
    "url": "https://www.subtext.coffee",
@@ -1592,9 +2326,9 @@
    "reader": "shopify",
    "info": "",
    "products": 104,
-   "coffees": 23,
+   "coffees": 22,
    "taken_types": {
-    "Coffee": 21,
+    "Coffee": 20,
     "Classes and experiences": 2
    },
    "skipped_types": {
@@ -1602,7 +2336,8 @@
     "(none)": 27,
     "Merch": 6,
     "Classes and experiences": 2,
-    "Pastry": 2
+    "Pastry": 2,
+    "Coffee": 1
    },
    "skipped_examples": [
     "Menu Cupping — November 28th, ‘26",
@@ -1610,7 +2345,22 @@
     "SIBARIST - OREA Special Edition | FLAT Paper Filter (Pack of",
     "NextLevel — Pulsar Brewer",
     "OREA - Filter Paper - WAVE (100pc)"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "Jaime Urrea Pizo, Washed Gesha (Wholesale Only)",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Fredy Orantes, Guatemala Natural Pacamara",
+     "roastFor": "filter"
+    },
+    {
+     "name": "Elias Pérez Méndez, Guatemala Washed Caturra",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://marketlane.com.au",
@@ -1618,9 +2368,9 @@
    "reader": "shopify",
    "info": "",
    "products": 103,
-   "coffees": 13,
+   "coffees": 11,
    "taken_types": {
-    "Coffee Beans": 13
+    "Coffee Beans": 11
    },
    "skipped_types": {
     "Equipment": 37,
@@ -1630,15 +2380,33 @@
     "Physical": 5,
     "Filter Papers": 5,
     "Linea Micra": 4,
-    "Gift Voucher": 3
+    "Coffee Beans": 3
    },
    "skipped_examples": [
+    "Filter Coffee Bundle",
+    "Espresso Coffee Bundle",
     "Ongoing Subscription",
     "Ongoing Subscription",
-    "Market Lane Journal: Edition 04",
-    "Coffee Class: Learn How To Roast Coffee Beans (Japanese-Lang",
-    "Moccamaster Select 1.25L Coffee Maker Dutch Cocoa"
-   ]
+    "Market Lane Journal: Edition 04"
+   ],
+   "detail_examples": [
+    {
+     "name": "Muhathi",
+     "producer": "Peris Wambui Karugondo",
+     "variety": "SL28, SL34 & Batian"
+    },
+    {
+     "name": "Guacamaya",
+     "producer": "Nery Pablo López",
+     "variety": "Caturra"
+    },
+    {
+     "name": "Seasonal Blend",
+     "producer": "Lucia Zelaya and Rony Asensio",
+     "variety": "Bourbon & Caturra"
+    }
+   ],
+   "with_details": 10
   },
   {
    "url": "https://onacoffee.com.au",
@@ -1646,23 +2414,38 @@
    "reader": "shopify",
    "info": "",
    "products": 86,
-   "coffees": 33,
+   "coffees": 24,
    "taken_types": {
-    "Coffee": 33
+    "Coffee": 24
    },
    "skipped_types": {
     "Brew Gear": 23,
     "Merch": 17,
     "(none)": 11,
-    "Coffee": 2
+    "Coffee": 11
    },
    "skipped_examples": [
     "Crops + Cups Board Game",
     "Water For Good Bottle",
     "Moku Ceremonial Matcha Latte",
     "Single Origin Subscription (Filter Coffee)",
-    "Single Origin Subscription (Espresso Coffee)"
-   ]
+    "Instant Coffee - Mutheka Kiandu AB, Kenya, Washed"
+   ],
+   "detail_examples": [
+    {
+     "name": "Kiambu Regional PB, Kenya, Washed",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Thageini Lot 2226, Kenya, CM Washed Indigo",
+     "roastFor": "espresso"
+    },
+    {
+     "name": "Guji Mudole, Ethiopia, Supernatural",
+     "roastFor": "filter"
+    }
+   ],
+   "with_details": 0
   },
   {
    "url": "https://www.proudmarycoffee.com.au",
@@ -1670,15 +2453,15 @@
    "reader": "shopify",
    "info": "",
    "products": 885,
-   "coffees": 779,
+   "coffees": 774,
    "taken_types": {
-    "coffee-archive": 624,
+    "coffee-archive": 620,
     "upcoming-coffees": 141,
-    "coffee": 12,
+    "coffee": 11,
     "coffee-deluxe": 2
    },
    "skipped_types": {
-    "coffee-archive": 32,
+    "coffee-archive": 36,
     "brewing equipment": 28,
     "merchandise": 11,
     "coffee machines": 10,
@@ -1691,9 +2474,30 @@
     "Ghost Rider Savic Edition",
     "Forté™ AP",
     "Vario™ W+",
-    "Breville Luxe Brewer Thermal",
-    "Chocolate Bunnies | Limited Edition Blend"
-   ]
+    "Special Release | THE GRACIANO CRUZ BUNDLE",
+    "Breville Luxe Brewer Thermal"
+   ],
+   "detail_examples": [
+    {
+     "name": "Honduras | Ovidio Gomez | Pacas | Natural",
+     "region": "Las Flores, Santa Barbara",
+     "altitude": 1700,
+     "roastFor": "omni"
+    },
+    {
+     "name": "Honduras | Balbina Sabillon | Parainema | Natural",
+     "region": "Las Flores, Santa Barbara",
+     "altitude": 1300,
+     "roastFor": "omni"
+    },
+    {
+     "name": "Honduras | Javier Fernandez | Parainema | Honey",
+     "region": "Las Flores, Santa Barbara",
+     "altitude": 1525,
+     "roastFor": "omni"
+    }
+   ],
+   "with_details": 734
   },
   {
    "url": "https://sevenseeds.com.au",
@@ -1701,16 +2505,16 @@
    "reader": "shopify",
    "info": "",
    "products": 73,
-   "coffees": 46,
+   "coffees": 44,
    "taken_types": {
-    "Coffee": 41,
+    "Coffee": 39,
     "(none)": 3,
     "Items": 2
    },
    "skipped_types": {
     "(none)": 16,
     "Items": 7,
-    "Coffee": 2,
+    "Coffee": 4,
     "mws_fee_generated": 1,
     "Gift Cards": 1
    },
@@ -1720,7 +2524,31 @@
     "Seven Seeds Logo Mug",
     "Seven Seeds Bold Tee",
     "Seven Seeds Classic Tee"
-   ]
+   ],
+   "detail_examples": [
+    {
+     "name": "El Limoncillo Ethiosar, Nicaragua",
+     "producer": "Mierisch Family",
+     "variety": "Ethiosar",
+     "altitude": 975,
+     "roasterNotes": "Smooth & Balanced"
+    },
+    {
+     "name": "Mustefa Abalulessa, Ethiopia",
+     "producer": "Mustefa Abalulessa",
+     "variety": "Mix of 74110, 74165",
+     "altitude": 2150,
+     "roasterNotes": "Juicy & Sweet"
+    },
+    {
+     "name": "Bekele Belaycho, Ethiopia",
+     "producer": "Bekele Belaycho",
+     "variety": "Mix Variety",
+     "altitude": 2300,
+     "roasterNotes": "Vibrant & Approachable"
+    }
+   ],
+   "with_details": 40
   }
  ]
 }
