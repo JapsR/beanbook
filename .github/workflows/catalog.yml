@@ -26,13 +26,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      # Scrape on the schedule and on manual runs; a plain push only republishes the site.
+      # Runs on the schedule, on manual runs and on every push (so a changed source list takes effect at once).
       - name: Update catalog
-        if: github.event_name != 'push'
         run: python scraper/beanbook_scraper.py --sources scraper/sources.json --out site/catalog.json
 
       - name: Commit catalog
-        if: github.event_name != 'push'
         run: |
           git config user.name "beanbook-bot"
           git config user.email "beanbook-bot@users.noreply.github.com"

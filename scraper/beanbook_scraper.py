@@ -290,7 +290,7 @@ def main():
         found = []
         for p in products:
             if is_coffee(p, src):
-                found.append(to_item(p, src, src.get("roaster") or p["vendor"] or key))
+                found.append(to_item(p, src, src.get("roaster") or p["vendor"] or src.get("name") or key))
         if products and not found:
             log(f"! {src['url']}: {len(products)} products but none looked like coffee. Left untouched; "
                 f"add \"include\" words for this source.")
