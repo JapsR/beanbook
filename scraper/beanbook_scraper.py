@@ -464,6 +464,84 @@ def detail(text, key, cap=60):
     return v[:cap]
 
 
+# Most roasters write prose rather than labelled fields, so these read the same facts out of sentences.
+NAME = r"[A-Z\u00c0-\u00dd][\w\u00c0-\u017f'\u2019`-]*(?:\s+(?:de|del|la|do|da|dos)\s+[A-Z\u00c0-\u00dd]?[\w\u00c0-\u017f'\u2019`-]*|\s+[A-Z\u00c0-\u00dd][\w\u00c0-\u017f'\u2019`-]*){0,3}"
+STOP_NAME = {"the", "a", "an", "our", "this", "that", "we", "it", "they", "his", "her", "their", "expect", "coffee",
+             "arabica", "robusta", "every", "each", "all", "both", "some", "many", "these", "those", "there", "due"}
+PRODUCER_RE = [
+    re.compile(r"(?i:\b(?:produced|grown|processed|cultivated|farmed)\s+(?:and\s+\w+\s+)?(?:by|at|on)\s+(?:the\s+)?)(" + NAME + r")"),
+    re.compile(r"(?i:\b(?:producers?|farmers?|growers?)\s+)(" + NAME + r")"),
+    re.compile(r"(?i:\bworking\s+with\s+)(" + NAME + r")"),
+    re.compile(r"(" + NAME + r")(?i:\s+(?:washing\s+station|dry\s+mill|wet\s+mill|estate|cooperative|co-operative|farm)\b)"),
+    re.compile(r"(?i:\b(?:finca|fazenda|hacienda|boerderij)\s+)(" + NAME + r")"),
+]
+REGION_RE = [
+    re.compile(r"(?i:\b(?:in|from|of)\s+the\s+)(" + NAME + r")(?i:\s+(?:region|valley|highlands|department|province|district|municipality))"),
+    re.compile(r"(?i:\b(?:region|department|province|district|highlands|valley)\s+of\s+(?:the\s+)?)(" + NAME + r")"),
+    re.compile(r"(?i:['\u2019]s\s+)(" + NAME + r")(?i:\s+region)"),
+]
+NOTES_RE = re.compile(r"(?i)\b(?:tast(?:ing|es?)\s+(?:notes?|like)|flavou?r\s+notes?|notes?\s+of)\s*:?\s+(.{3,160})")
+VARIETIES = ["Pink Bourbon", "Red Bourbon", "Yellow Bourbon", "Orange Bourbon", "Bourbon", "Caturra", "Castillo",
+             "Catuai", "Catua\u00ed", "Catucai", "Catuca\u00ed", "Typica", "Mundo Novo", "Gesha", "Geisha", "Pacamara", "Pacas",
+             "Maragogipe", "Maragogype", "Maracaturra", "SL28", "SL-28", "SL34", "SL-34", "Ruiru 11", "Batian",
+             "Heirloom", "Chiroso", "Wush Wush", "Sidra", "Laurina", "Sudan Rume", "Villa Sarchi", "Parainema",
+             "Icatu", "Acaia", "Obata", "Marsellesa", "Tabi", "Typica Mejorado", "Kenya 48", "Caturron"]
+VARIETY_RE = re.compile(r"(?<![\w-])(" + "|".join(sorted((re.escape(v) for v in VARIETIES), key=len, reverse=True)) + r")(?![\w-])", re.I)
+
+
+def good_name(v):
+    v = re.sub(r"\s+", " ", (v or "")).strip(" .,;:'\u2019-")
+    if not v or v.split()[0].lower() in STOP_NAME or len(v) < 3 or len(v) > 50:
+        return ""
+    return v
+
+
+NOT_A_PLACE = re.compile(r"(?i)^(washed|natural|honey|anaerobic|decaf|blend|mixed|arabica|robusta|espresso|filter|"
+                         r"its|the|this|our|their|his|her|a|an)\b")
+
+
+def prose_find(patterns, text):
+    for rx in patterns:
+        for m in rx.finditer(text or ""):
+            v = good_name(m.group(1))
+            if v and not NOT_A_PLACE.match(v):
+                return v
+    return ""
+
+
+def prose_notes(text):
+    """The flavour words after "notes of", without the sentence that follows them."""
+    m = NOTES_RE.search(text or "")
+    if not m:
+        return ""
+    out = []
+    for part in re.split(r"\s*(?:,|;|&|/|\band\b|\ben\b)\s*", m.group(1)):
+        part = part.strip(" .;:!\u2019'\"")
+        if not part:
+            continue
+        if len(part.split()) > 3 or len(part) > 28:
+            break
+        out.append(part)
+        if len(out) >= 5:
+            break
+    text = ", ".join(out)
+    if NOT_A_PLACE.match(text):
+        return ""
+    return text if len(text) >= 5 else ""
+
+
+def prose_variety(text):
+    seen = []
+    for m in VARIETY_RE.finditer(text or ""):
+        v = m.group(1)
+        v = v[0].upper() + v[1:] if v.islower() else v
+        if v.lower() not in [x.lower() for x in seen]:
+            seen.append(v)
+        if len(seen) >= 3:
+            break
+    return ", ".join(seen)
+
+
 def detect_altitude(text):
     """Metres above sea level, as one number; the middle of a range."""
     raw = detail(text, "altitude", cap=60) or ""
@@ -501,14 +579,18 @@ def to_item(p, src, roaster):
         "origin": detect_origin(head) or detect_origin(everything),
         "process": labelled_process or detect(PROCESSES, head) or detect(PROCESSES, rest),
         "roast": detect(ROASTS, everything),
-        "region": detail(body, "region"),
-        "producer": detail(body, "producer"),
-        "variety": detail(body, "variety"),
+        "region": detail(body, "region") or prose_find(REGION_RE, body),
+        "producer": detail(body, "producer") or prose_find(PRODUCER_RE, body),
+        "variety": ("" if NOT_A_PLACE.match(detail(body, "variety") or "") else detail(body, "variety"))
+                   or prose_variety(head + " " + body),
         "altitude": detect_altitude(body),
         "roastFor": detect_roast_for(head),
-        "roasterNotes": notes,
+        "roasterNotes": notes or prose_notes(body),
         "url": p["url"],
     }
+    for k in ("region", "producer"):  # a country or a bare origin name is not one of these
+        if item[k] and (ORIGINS.get(item[k].lower()) or item[k].lower() == item["origin"].lower()):
+            item[k] = ""
     if item["region"] and (item["region"].lower() == item["origin"].lower()
                            or ORIGINS.get(item["region"].lower()) == item["origin"]):
         item["region"] = ""
