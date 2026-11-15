@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "beanbook-bot"
           git config user.email "beanbook-bot@users.noreply.github.com"
-          git add site/catalog.json
+          git add site/catalog.json scraper/report.json
           git diff --cached --quiet || git commit -m "Update coffee catalog"
           git push
 

@@ -10,7 +10,8 @@ growing catalog file that the Beanbook app can load.
     python3 beanbook_scraper.py --dry-run            # show what would change, write nothing
 
 Rules it follows
-- Coffees are only ever ADDED. Nothing is deleted from catalog.json.
+- Coffees are only ever ADDED. No coffee is deleted from catalog.json. (The one exception: entries that
+  turn out not to be coffee at all, such as a grinder a shop filed under "coffee", are dropped.)
 - A coffee that a shop no longer lists is kept and flagged "removed": true
   (with "removedAt"). If it comes back, the flag is cleared.
 - If a shop cannot be reached, its coffees are left untouched (never flagged).
@@ -186,20 +187,57 @@ def has_word(hay, word):
     return re.search(r"(?<![a-zà-ÿ])" + re.escape(word) + r"(?![a-zà-ÿ])", hay) is not None
 
 
+# Dutch and German glue words together (koffiemachine, koffiemolen), so these are matched anywhere in the text.
+EXCLUDE_ANYWHERE = ["machine", "molen", "grinder", "kettle", "waterkoker", "dripper", "weegschaal", "tamper", "brewer",
+                    "toolset", "pitcher", "melkkan", "opschuimer", "frother", "filterhouder", "portafilter", "ontkalk",
+                    "reinig", "onderhoud", "accessoire", "thermos", "karaf", "carafe", "kopjes", "glazen", "bekers",
+                    "servies", "onderdelen", "spare part", "barista tool", "knockbox", "uitklopbak",
+                    "jura", "quick mill", "mahlkonig", "mahlkönig", "macap", "wilfa", "hario", "brewista", "comandante",
+                    "timemore", "fellow", "sage ", "rocket", "bezzera", "eureka", "rancilio", "lelit", "ecm ", "profitec",
+                    "moccamaster", "kalita", "bialetti", "kinto", "acme", "puqpress", "baratza", "mazzer", "quamar", "quickmill",
+                    "nivona", "everpure", "brita", "sanremo", "beker", "ecoffee", "testset", "filterbakje", "barista attitude",
+                    "abonnement", "giftcard", "cadeau", "proefpakket apparaat"]
+
+
+def is_junk(text):
+    """True for equipment, merchandise and other things that are never a coffee."""
+    text = text.lower()
+    return any(x in text for x in EXCLUDE_ANYWHERE) or any(starts_word(text, x) for x in EXCLUDE)
+
+
+def clean_name(name):
+    """Drop shop housekeeping words such as 'Archived' from a product title."""
+    name = re.sub(r"(?i)^\s*archived?\s*[:\-|]\s*", "", name)
+    name = re.sub(r"(?i)\s*[\-|(]\s*archived?\)?\s*$", "", name)
+    return name.strip()
+
+
 def starts_word(hay, word):
     """Short words must match whole; longer ones may be the start of a word (grinder -> grinders)."""
     tail = r"(?![a-zà-ÿ])" if len(word) <= 4 else ""
     return re.search(r"(?<![a-zà-ÿ])" + re.escape(word) + tail, hay) is not None
 
 
+COFFEE_KINDS = {"coffee", "coffees", "koffie", "koffies", "kaffee", "café", "cafe", "coffee beans", "koffiebonen",
+                "bonen", "beans", "espresso", "espressobonen", "filter", "filter coffee", "filterkoffie", "single origin",
+                "single origins", "single estate", "blend", "blends", "roasted coffee", "whole bean", "whole bean coffee",
+                "specialty coffee", "specialty koffie", "omni", "decaf", "cafeïnevrij"}
+COFFEE_HINTS = ["koffiebonen", "coffee beans", "espressobonen", "filterkoffie", "single origin", "whole bean"]
+
+
 def is_coffee(p, src):
-    kinds = " | ".join(p["kinds"]).lower()
+    """A product counts as coffee when its type or a tag says so, or its title names a coffee origin,
+    and neither its title nor its product type looks like equipment or merchandise."""
+    kinds = [k.strip().lower() for k in p["kinds"] if k and k.strip()]
+    ptype = kinds[0] if kinds else ""
     title = p["title"].lower()
-    exclude = EXCLUDE + [x.lower() for x in src.get("exclude", [])]
-    include = INCLUDE + [x.lower() for x in src.get("include", [])]
-    if any(starts_word(kinds, x) or starts_word(title, x) for x in exclude):
+    extra_out = [x.lower() for x in src.get("exclude", [])]
+    if is_junk(title) or is_junk(ptype) or any(x in title or x in ptype for x in extra_out):
         return False
-    return any(x in kinds for x in include) or detect_origin(title + " " + kinds) != ""
+    wanted = COFFEE_KINDS | {x.lower() for x in src.get("include", [])}
+    if any(k in wanted for k in kinds) or any(h in k for k in kinds for h in COFFEE_HINTS):
+        return True
+    return detect_origin(title) != ""
 
 
 def detect_origin(text):
@@ -226,7 +264,7 @@ def to_item(p, src, roaster):
     everything = head + " " + p["text"][:1500]
     return {
         "id": f"{slug(roaster)}:{slug(p['handle'])}",
-        "name": p["title"].strip()[:80],
+        "name": clean_name(p["title"])[:80],
         "roaster": roaster[:60],
         "origin": detect_origin(head) or detect_origin(everything),
         "process": detect(PROCESSES, head) or detect(PROCESSES, everything),
@@ -273,10 +311,12 @@ def main():
     catalog = {}
     if out.exists():
         for it in json.loads(out.read_text(encoding="utf-8")).get("items", []):
-            catalog[it["id"]] = it
+            if not is_junk(it.get("name", "")):  # drop anything an earlier, looser filter let in by mistake
+                catalog[it["id"]] = it
     today = datetime.date.today().isoformat()
     fetcher = Fetcher(args.delay)
     failed = 0
+    report = []
     for src in sources:
         if src.get("enabled") is False:
             continue
@@ -286,11 +326,21 @@ def main():
         except Exception as e:
             failed += 1
             log(f"! {src['url']}: skipped ({e}). Its coffees are left as they were.")
+            report.append({"url": src["url"], "ok": False, "error": str(e)[:300]})
             continue
         found = []
         for p in products:
             if is_coffee(p, src):
                 found.append(to_item(p, src, src.get("roaster") or p["vendor"] or src.get("name") or key))
+        kind_of = lambda p: (p["kinds"][0] if p["kinds"] and p["kinds"][0] else "(none)")[:40]
+        taken, left = {}, {}
+        for p in products:
+            bucket = taken if is_coffee(p, src) else left
+            bucket[kind_of(p)] = bucket.get(kind_of(p), 0) + 1
+        top = lambda d: dict(sorted(d.items(), key=lambda kv: -kv[1])[:8])
+        report.append({"url": src["url"], "ok": True, "products": len(products), "coffees": len(found),
+                       "taken_types": top(taken), "skipped_types": top(left),
+                       "skipped_examples": [p["title"][:60] for p in products if not is_coffee(p, src)][:5]})
         if products and not found:
             log(f"! {src['url']}: {len(products)} products but none looked like coffee. Left untouched; "
                 f"add \"include\" words for this source.")
@@ -311,6 +361,8 @@ def main():
         tmp.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
         tmp.replace(out)
         log(f"Wrote {out}")
+        rep = pathlib.Path(args.sources).with_name("report.json")
+        rep.write_text(json.dumps({"ranAt": result["updatedAt"], "sources": report}, ensure_ascii=False, indent=1), encoding="utf-8")
     return 1 if failed and failed == len([s for s in sources if s.get("enabled") is not False]) else 0
 
 
