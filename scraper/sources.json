@@ -29,7 +29,8 @@
    "url": "https://lot61.com",
    "roaster": "Lot Sixty One",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://rumbaba.nl",
@@ -47,7 +48,8 @@
    "url": "https://whitelabelcoffee.nl",
    "roaster": "White Label Coffee",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://stookerspecialtycoffee.com",
@@ -94,7 +96,8 @@
    "url": "https://blommers.coffee",
    "roaster": "Blommers Coffee Roasters",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and its product pages carry no machine-readable product data, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://sampietro.nl",
@@ -106,7 +109,8 @@
    "url": "https://www.koffiebranderijvenetie.nl",
    "roaster": "Koffiebranderij Venetië",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and its product pages carry no machine-readable product data, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://koffiestation.nl",
@@ -118,7 +122,8 @@
    "url": "https://30mlcoffeeroasters.nl",
    "roaster": "30ML Coffee Roasters",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://luukscoffee.com",
@@ -130,7 +135,8 @@
    "url": "https://www.moyeecoffee.com",
    "roaster": "Moyee Coffee",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and its product pages carry no machine-readable product data, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://www.simonlevelt.nl",
@@ -154,19 +160,22 @@
    "url": "https://www.debonenbrander.nl",
    "roaster": "De Bonen Brander",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and its product pages carry no machine-readable product data, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://brandzaak.nl",
    "roaster": "Brandzaak",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and its product pages carry no machine-readable product data, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://keencoffee.nl",
    "roaster": "Keen Coffee",
    "country": "NL",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://wakuli.com",
@@ -178,13 +187,15 @@
    "url": "https://www.manmetbrilkoffie.nl",
    "roaster": "Man Met Bril Koffie",
    "country": "NL",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://hoppercoffee.nl",
    "roaster": "Hopper Coffee",
    "country": "NL",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://monkscoffee.nl",
@@ -196,7 +207,8 @@
    "url": "https://lucifercoffeeroasters.com",
    "roaster": "Lucifer Coffee Roasters",
    "country": "NL",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://blackandbloom.nl",
@@ -208,13 +220,15 @@
    "url": "https://www.blanchedael.nl",
    "roaster": "Blanche Dael",
    "country": "NL",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and its product pages carry no machine-readable product data, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://www.peeze.nl",
    "roaster": "Peeze",
    "country": "NL",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and its product pages carry no machine-readable product data, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://www.bootkoffie.nl",
@@ -226,7 +240,8 @@
    "url": "https://coffeecompany.nl",
    "roaster": "Coffeecompany",
    "country": "NL",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://screamingbeans.nl",
@@ -250,7 +265,8 @@
    "url": "https://www.dekoffiejongens.nl",
    "roaster": "De Koffiejongens",
    "country": "NL",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and its product pages carry no machine-readable product data, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://heiligeboontjes.com",
@@ -304,7 +320,8 @@
    "name": "Koffiecentrale",
    "country": "NL",
    "shop": true,
-   "note": "found in a web search on 2026-11-15"
+   "note": "found in a web search on 2026-11-15; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://www.cafedujour.nl",
@@ -336,7 +353,8 @@
   {
    "url": "https://aprilcoffeeroasters.com",
    "roaster": "April",
-   "note": "address from memory, not checked"
+   "note": "address from memory, not checked; paused 2026-11-15: no product feed and has no sitemap, so this shop needs a reader of its own",
+   "enabled": false
   },
   {
    "url": "https://timwendelboe.no",

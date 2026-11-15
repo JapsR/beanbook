@@ -11,7 +11,7 @@ growing catalog file that the Beanbook app can load.
 
 Rules it follows
 - Coffees are only ever ADDED. No coffee is deleted from catalog.json. (The one exception: entries that
-  turn out not to be coffee at all, such as a grinder a shop filed under "coffee", are dropped.)
+  turn out not to be a single bag of coffee, such as a grinder or a tasting box, are dropped.)
 - A coffee that a shop no longer lists is kept and flagged "removed": true
   (with "removedAt"). If it comes back, the flag is cleared.
 - If a shop cannot be reached, its coffees are left untouched (never flagged).
@@ -99,6 +99,37 @@ def plain(markup):
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", markup or ""))).strip()
 
 
+def lines(markup):
+    """A description as text that keeps its line structure, so "Region: Huila" and table rows survive."""
+    t = markup or ""
+    t = re.sub(r"(?i)</(td|th|dt)>", " : ", t)
+    t = re.sub(r"(?i)<(br|/p|/div|/li|/tr|/dd|/h[1-6]|/table)[^>]*>", "\n", t)
+    t = html.unescape(re.sub(r"<[^>]+>", " ", t))
+    out = []
+    for ln in t.split("\n"):
+        ln = re.sub(r"[ \t\xa0]+", " ", ln).strip(" :\u2013\u2014-")
+        if ln:
+            out.append(ln)
+    return "\n".join(out)[:4000]
+
+
+# Multi-coffee boxes, gift sets and things that are not a bag of beans at all.
+PACK_WORDS = [r"bundles?", r"gift ?sets?", r"gifts?", r"cadeau\w*", r"geschenk\w*", r"tasting ?(pack|set|box|kit)s?",
+              r"sampler?s?", r"samples?", r"proef\w*", r"variet(y|ies) (pack|bundle|set|box)", r"discovery \w+",
+              r"advent ?kalender", r"advent", r"calendar", r"kalender", r"\d+[- ]pack", r"packs?", r"pakket\w*",
+              r"multi\w*pack", r"case pack", r"mix ?(&|and|\+) ?match", r"mixpakket", r"melangeren", r"trio", r"duo",
+              r"boxe?s?", r"doos", r"selection ?(box|pack|set)", r"starter ?(pack|kit|set)", r"sets?",
+              r"subscriptions?", r"abonnement\w*", r"capsules?", r"pods?", r"instant", r"cold brew (can|bottle|blik)\w*",
+              r"canned", r"blikje\w*", r"bottles?", r"flesje\w*", r"ready[- ]to[- ]drink", r"rtd",
+              r"voucher\w*", r"gift ?card", r"e-?gift"]
+PACK = re.compile(r"(?i)(?<![a-z\u00e0-\u00ff])(" + "|".join(PACK_WORDS) + r")(?![a-z\u00e0-\u00ff])")
+
+
+def is_pack(title):
+    """True for a box of several coffees, a gift set, capsules or a ready-made drink: not one bag to track."""
+    return PACK.search(title) is not None
+
+
 class Fetcher:
     def __init__(self, delay):
         self.delay = delay
@@ -174,7 +205,8 @@ def fetch_shopify(f, base):
             seen.add(p.get("id"))
             out.append({"handle": p.get("handle") or str(p.get("id")), "title": p.get("title") or "",
                         "vendor": p.get("vendor") or "", "kinds": [p.get("product_type") or ""] + as_list(p.get("tags")),
-                        "text": plain(p.get("body_html")), "url": f"{base}/products/{p.get('handle')}"})
+                        "text": plain(p.get("body_html")), "lines": lines(p.get("body_html")),
+                        "url": f"{base}/products/{p.get('handle')}"})
         if len(products) < 250:
             break
     return out
@@ -194,6 +226,7 @@ def fetch_woocommerce(f, base):
             out.append({"handle": p.get("slug") or str(p.get("id")), "title": plain(p.get("name")), "vendor": "",
                         "kinds": as_list(p.get("categories")) + as_list(p.get("tags")),
                         "text": plain((p.get("short_description") or "") + " " + (p.get("description") or "")),
+                        "lines": lines((p.get("short_description") or "") + "<br>" + (p.get("description") or "")),
                         "url": p.get("permalink") or base})
         if len(data) < 100:
             break
@@ -270,7 +303,8 @@ def product_from_page(page, url):
              if k and k.strip().lower() not in GENERIC_CRUMBS and k.strip().lower() != title.lower()]
     desc = product.get("description")
     return {"p": 1, "handle": path[-1] if path else "home", "title": title, "vendor": brand if isinstance(brand, str) else "",
-            "kinds": kinds[:8], "text": plain(desc)[:600] if isinstance(desc, str) else ""}
+            "kinds": kinds[:8], "text": plain(desc)[:600] if isinstance(desc, str) else "",
+            "lines": lines(desc) if isinstance(desc, str) else ""}
 
 
 def fetch_sitemap(f, base, key):
@@ -368,6 +402,8 @@ def is_coffee(p, src):
     extra_out = [x.lower() for x in src.get("exclude", [])]
     if is_junk(title) or is_junk(ptype) or any(x in title or x in ptype for x in extra_out):
         return False
+    if is_pack(title) or is_pack(ptype):
+        return False
     wanted = COFFEE_KINDS | {x.lower() for x in src.get("include", [])}
     if any(k in wanted for k in kinds) or any(h in k for k in kinds for h in COFFEE_HINTS):
         return True
@@ -393,18 +429,83 @@ def detect(pairs, text):
     return ""
 
 
+DETAIL_LABELS = [
+    ("region",   ["region", "regio", "región", "growing region", "area", "zone", "district", "gebied", "herkomst"]),
+    ("producer", ["producer", "producers", "producent", "farm", "farmer", "finca", "fazenda", "estate", "boerderij",
+                  "washing station", "station", "cooperative", "coöperatie", "co-op", "grower", "hacienda", "mill"]),
+    ("variety",  ["variety", "varietal", "varieties", "varietals", "variëteit", "varieteit", "variedad", "cultivar",
+                  "bean variety", "koffiesoort", "ras"]),
+    ("altitude", ["altitude", "elevation", "hoogte", "altitud", "masl", "growing altitude", "height"]),
+    ("process",  ["process", "processing", "processing method", "proces", "verwerking", "bewerking", "fermentation"]),
+    ("notes",    ["tasting notes", "taste notes", "flavour notes", "flavor notes", "cupping notes", "notes",
+                  "smaaknoten", "smaaknotities", "smaakprofiel", "smaak", "profile", "flavour", "flavor"]),
+]
+LABEL_RE = {key: re.compile(r"(?im)^\s*(?:" + "|".join(re.escape(w) for w in sorted(words, key=len, reverse=True)) +
+                            r")\s*[:\-\u2013]\s*(.+)$") for key, words in DETAIL_LABELS}
+BAD_VALUE = re.compile(r"(?i)^(n[/.]?a|unknown|onbekend|-+|\?+)$")
+
+
+def detail(text, key, cap=60):
+    """The value a description gives for one label, or "" when it names none."""
+    m = LABEL_RE[key].search(text or "")
+    if not m:
+        return ""
+    v = m.group(1).strip(" .;,|")
+    v = re.split(r"(?<=[a-z0-9\)])\.\s+[A-Z]", v)[0]          # stop at the next sentence
+    v = re.sub(r"\s+", " ", v).strip(" .;,|")
+    if not v or BAD_VALUE.match(v) or len(v) > 120:
+        return ""
+    return v[:cap]
+
+
+def detect_altitude(text):
+    """Metres above sea level, as one number; the middle of a range."""
+    raw = detail(text, "altitude", cap=60) or ""
+    if not raw:
+        m = re.search(r"(?i)(\d[\d .,']{2,6})\s*(?:-|\u2013|to|tot)?\s*(\d[\d .,']{2,6})?\s*(?:m\.?a\.?s\.?l|masl|meters?|metres?|meter boven|\bm\b)", text or "")
+        raw = " ".join(x for x in (m.group(1), m.group(2)) if x) if m else ""
+    nums = [int(x.replace(".", "").replace(",", "").replace(" ", "").replace("'", ""))
+            for x in re.findall(r"\d[\d .,']{1,6}", raw)]
+    nums = [n for n in nums if 200 <= n <= 3200]
+    if not nums:
+        return None
+    return int(round(sum(nums[:2]) / len(nums[:2])))
+
+
+def detect_roast_for(head):
+    """Whether the roaster made this for filter, for espresso, or for both."""
+    t = head.lower()
+    if has_word(t, "omni") or "omniroast" in t or "omni-roast" in t:
+        return "omni"
+    f, e = has_word(t, "filter"), has_word(t, "espresso")
+    return "omni" if f and e else "filter" if f else "espresso" if e else ""
+
+
 def to_item(p, src, roaster):
     head = p["title"] + " " + " ".join(p["kinds"])
+    body = p.get("lines") or p["text"]
     everything = head + " " + p["text"][:1500]
-    return {
+    labelled_process = detail(body, "process", cap=40)
+    notes = detail(body, "notes", cap=120)
+    rest = everything.replace(notes, " ") if notes else everything
+    item = {
         "id": f"{slug(roaster)}:{slug(p['handle'])}",
         "name": clean_name(p["title"])[:80],
         "roaster": roaster[:60],
         "origin": detect_origin(head) or detect_origin(everything),
-        "process": detect(PROCESSES, head) or detect(PROCESSES, everything),
+        "process": labelled_process or detect(PROCESSES, head) or detect(PROCESSES, rest),
         "roast": detect(ROASTS, everything),
+        "region": detail(body, "region"),
+        "producer": detail(body, "producer"),
+        "variety": detail(body, "variety"),
+        "altitude": detect_altitude(body),
+        "roastFor": detect_roast_for(head),
+        "roasterNotes": notes,
         "url": p["url"],
     }
+    if item["region"] and item["region"].lower() == item["origin"].lower():
+        item["region"] = ""
+    return item
 
 
 def merge(catalog, source_key, found, today):
@@ -445,7 +546,7 @@ def main():
     catalog = {}
     if out.exists():
         for it in json.loads(out.read_text(encoding="utf-8")).get("items", []):
-            if not is_junk(it.get("name", "")):  # drop anything an earlier, looser filter let in by mistake
+            if not is_junk(it.get("name", "")) and not is_pack(it.get("name", "")):  # drop what a looser filter let in
                 catalog[it["id"]] = it
     today = datetime.date.today().isoformat()
     fetcher = Fetcher(args.delay)
@@ -477,7 +578,11 @@ def main():
         top = lambda d: dict(sorted(d.items(), key=lambda kv: -kv[1])[:8])
         report.append({"url": src["url"], "ok": True, "reader": fetcher.reader, "info": fetcher.info, "products": len(products), "coffees": len(found),
                        "taken_types": top(taken), "skipped_types": top(left),
-                       "skipped_examples": [p["title"][:60] for p in products if not is_coffee(p, src)][:5]})
+                       "skipped_examples": [p["title"][:60] for p in products if not is_coffee(p, src)][:5],
+                       "detail_examples": [{k: v for k, v in i.items() if k in
+                                            ("name", "region", "producer", "variety", "altitude", "roastFor", "roasterNotes")
+                                            and v} for i in found[:3]],
+                       "with_details": sum(1 for i in found if i["variety"] or i["producer"] or i["altitude"])})
         if products and not found:
             log(f"! {src['url']}: {len(products)} products but none looked like coffee. Left untouched; "
                 f"add \"include\" words for this source.")
