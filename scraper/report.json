@@ -1,11 +1,6 @@
 {
- "ranAt": "2026-11-15T12:52:44+00:00",
+ "ranAt": "2026-11-15T12:58:35+00:00",
  "sources": [
-  {
-   "url": "https://friedhats.com",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
   {
    "url": "https://manhattancoffeeroasters.com",
    "ok": true,
@@ -76,11 +71,6 @@
    ]
   },
   {
-   "url": "https://lot61.com",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 403: Forbidden"
-  },
-  {
    "url": "https://rumbaba.nl",
    "ok": true,
    "products": 52,
@@ -131,11 +121,6 @@
     "Koffie-abonnement",
     "Groene Back to Black Mok"
    ]
-  },
-  {
-   "url": "https://whitelabelcoffee.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
   },
   {
    "url": "https://stookerspecialtycoffee.com",
@@ -217,23 +202,23 @@
    "url": "https://shokunin.coffee",
    "ok": true,
    "products": 43,
-   "coffees": 1,
+   "coffees": 32,
    "taken_types": {
-    "Africa": 1
-   },
-   "skipped_types": {
     "Africa": 16,
     "America": 14,
+    "Asia": 2
+   },
+   "skipped_types": {
     "Hardware": 9,
-    "Asia": 2,
-    "Green coffee": 1
+    "Green coffee": 1,
+    "Africa": 1
    },
    "skipped_examples": [
     "Beanie",
-    "Gogogu",
-    "Karimikui",
-    "San Isidro",
-    "Akililu Gobena"
+    "Origami Air Dripper",
+    "Origami Resin Holder",
+    "V60 Abaca filters",
+    "T-shirt"
    ]
   },
   {
@@ -288,11 +273,6 @@
    ]
   },
   {
-   "url": "https://blommers.coffee",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
    "url": "https://sampietro.nl",
    "ok": true,
    "products": 9,
@@ -311,11 +291,6 @@
     "Sage | the Barista Express",
     "Drago (blend no. 1)"
    ]
-  },
-  {
-   "url": "https://www.koffiebranderijvenetie.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nFound"
   },
   {
    "url": "https://koffiestation.nl",
@@ -340,11 +315,6 @@
     "Airscape Container Matte White (500 gram)",
     "Airscape Container Lichen (500 gram)"
    ]
-  },
-  {
-   "url": "https://30mlcoffeeroasters.nl",
-   "ok": false,
-   "error": "fetch_shopify: Expecting value: line 2 column 1 (char 2); fetch_woocommerce: Expecting value: line 2 column 1 (char 2)"
   },
   {
    "url": "https://luukscoffee.com",
@@ -374,16 +344,6 @@
     "LUUK'S LINE UP",
     "TOTE BAG"
    ]
-  },
-  {
-   "url": "https://www.moyeecoffee.com",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
-   "url": "https://www.simonlevelt.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
   },
   {
    "url": "https://kaldi.nl",
@@ -438,21 +398,6 @@
    ]
   },
   {
-   "url": "https://www.debonenbrander.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
-   "url": "https://brandzaak.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
-   "url": "https://keencoffee.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
    "url": "https://wakuli.com",
    "ok": true,
    "products": 42,
@@ -483,16 +428,6 @@
    ]
   },
   {
-   "url": "https://www.manmetbrilkoffie.nl",
-   "ok": false,
-   "error": "fetch_shopify: Expecting value: line 1 column 1 (char 0); fetch_woocommerce: Expecting value: line 1 column 1 (char 0)"
-  },
-  {
-   "url": "https://hoppercoffee.nl",
-   "ok": false,
-   "error": "fetch_shopify: <urlopen error [Errno 104] Connection reset by peer>; fetch_woocommerce: <urlopen error [Errno 104] Connection reset by peer>"
-  },
-  {
    "url": "https://monkscoffee.nl",
    "ok": true,
    "products": 24,
@@ -514,11 +449,6 @@
    ]
   },
   {
-   "url": "https://lucifercoffeeroasters.com",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
    "url": "https://blackandbloom.nl",
    "ok": true,
    "products": 5,
@@ -528,26 +458,6 @@
    },
    "skipped_types": {},
    "skipped_examples": []
-  },
-  {
-   "url": "https://www.blanchedael.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
-   "url": "https://www.peeze.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
-   "url": "https://www.bootkoffie.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
-   "url": "https://coffeecompany.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 500: Internal Server Error; fetch_woocommerce: HTTP Error 404: Not Found"
   },
   {
    "url": "https://screamingbeans.nl",
@@ -609,11 +519,6 @@
     "Sage machine – Oracle Jet",
     "Sage machine – Bambino Plus"
    ]
-  },
-  {
-   "url": "https://www.dekoffiejongens.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
   },
   {
    "url": "https://heiligeboontjes.com",
@@ -803,16 +708,6 @@
    ]
   },
   {
-   "url": "https://www.koffiecentrale.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
-   "url": "https://www.cafedujour.nl",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 404: Not Found"
-  },
-  {
    "url": "https://thebarn.de",
    "ok": true,
    "products": 206,
@@ -911,11 +806,6 @@
     "Ground Chocolate - Bejofo",
     "Würtz Set"
    ]
-  },
-  {
-   "url": "https://aprilcoffeeroasters.com",
-   "ok": false,
-   "error": "fetch_shopify: HTTP Error 404: Not Found; fetch_woocommerce: HTTP Error 403: Forbidden"
   },
   {
    "url": "https://timwendelboe.no",
