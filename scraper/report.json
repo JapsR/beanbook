@@ -1,9 +1,36 @@
 {
- "ranAt": "2026-11-15T12:58:35+00:00",
+ "ranAt": "2026-11-15T21:06:02+00:00",
  "sources": [
+  {
+   "url": "https://friedhats.com",
+   "ok": true,
+   "reader": "sitemap",
+   "info": "sitemap: 423 candidate pages, 80 read this run, 343 still to read, 80 products",
+   "products": 80,
+   "coffees": 72,
+   "taken_types": {
+    "Archived Coffee": 69,
+    "Coffee": 1,
+    "Espresso": 1,
+    "Filter": 1
+   },
+   "skipped_types": {
+    "Merchandise": 5,
+    "Tools": 3
+   },
+   "skipped_examples": [
+    "Aeropress Paper Filters",
+    "Friedhats \"Tearing Down Walls\" T-shirt",
+    "Friedhats \"Employee of the Month\" T-shirt",
+    "Friedhats \"King Kong\" T-shirt",
+    "Pällo Grindminder"
+   ]
+  },
   {
    "url": "https://manhattancoffeeroasters.com",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 72,
    "coffees": 29,
    "taken_types": {
@@ -29,10 +56,12 @@
   {
    "url": "https://dakcoffeeroasters.com",
    "ok": true,
-   "products": 32,
-   "coffees": 18,
+   "reader": "woocommerce",
+   "info": "",
+   "products": 33,
+   "coffees": 19,
    "taken_types": {
-    "Espresso": 12,
+    "Espresso": 13,
     "Filter": 6
    },
    "skipped_types": {
@@ -52,6 +81,8 @@
   {
    "url": "https://bocca.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 101,
    "coffees": 16,
    "taken_types": {
@@ -71,8 +102,15 @@
    ]
   },
   {
+   "url": "https://lot61.com",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 403: Forbidden; sitemap: no sitemap found"
+  },
+  {
    "url": "https://rumbaba.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 52,
    "coffees": 22,
    "taken_types": {
@@ -102,6 +140,8 @@
   {
    "url": "https://backtoblackcoffee.nl",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 24,
    "coffees": 10,
    "taken_types": {
@@ -123,8 +163,15 @@
    ]
   },
   {
+   "url": "https://whitelabelcoffee.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+  },
+  {
    "url": "https://stookerspecialtycoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 26,
    "coffees": 13,
    "taken_types": {
@@ -147,6 +194,8 @@
   {
    "url": "https://giraffecoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 210,
    "coffees": 20,
    "taken_types": {
@@ -174,6 +223,8 @@
   {
    "url": "https://amatterofconcrete.com",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 310,
    "coffees": 25,
    "taken_types": {
@@ -201,6 +252,8 @@
   {
    "url": "https://shokunin.coffee",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 43,
    "coffees": 32,
    "taken_types": {
@@ -224,6 +277,8 @@
   {
    "url": "https://www.schotkoffie.nl",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 61,
    "coffees": 20,
    "taken_types": {
@@ -249,6 +304,8 @@
   {
    "url": "https://www.singleestatecoffee.nl",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 42,
    "coffees": 16,
    "taken_types": {
@@ -273,8 +330,15 @@
    ]
   },
   {
+   "url": "https://blommers.coffee",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 94 candidate pages, 80 read this run, 14 still to read, 0 products)"
+  },
+  {
    "url": "https://sampietro.nl",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 9,
    "coffees": 4,
    "taken_types": {
@@ -293,8 +357,15 @@
    ]
   },
   {
+   "url": "https://www.koffiebranderijvenetie.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nFound; sitemap: sitemap reader found no product data (sitemap: 3 candidate pages, 3 read this run, 3 still to read, 0 produc"
+  },
+  {
    "url": "https://koffiestation.nl",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 88,
    "coffees": 13,
    "taken_types": {
@@ -317,8 +388,15 @@
    ]
   },
   {
+   "url": "https://30mlcoffeeroasters.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 500: Internal Server Error; woocommerce: HTTP Error 500: Internal Server Error; sitemap: no sitemap found"
+  },
+  {
    "url": "https://luukscoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 19,
    "coffees": 4,
    "taken_types": {
@@ -346,8 +424,38 @@
    ]
   },
   {
+   "url": "https://www.moyeecoffee.com",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 41 candidate pages, 41 read this run, 0 still to read, 0 products)"
+  },
+  {
+   "url": "https://www.simonlevelt.nl",
+   "ok": true,
+   "reader": "sitemap",
+   "info": "sitemap: 1410 candidate pages, 80 read this run, 1330 still to read, 80 products",
+   "products": 80,
+   "coffees": 2,
+   "taken_types": {
+    "be": 1,
+    "nl": 1
+   },
+   "skipped_types": {
+    "be": 39,
+    "nl": 39
+   },
+   "skipped_examples": [
+    "Aarke Kettle 1,2L",
+    "Aarke Kettle 1,2L",
+    "Ad Hoc Thee-ei",
+    "Ad Hoc Thee-ei",
+    "Aerolatte Melkopschuimer"
+   ]
+  },
+  {
    "url": "https://kaldi.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 276,
    "coffees": 50,
    "taken_types": {
@@ -374,6 +482,8 @@
   {
    "url": "https://hoekschebranders.nl",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 463,
    "coffees": 7,
    "taken_types": {
@@ -398,8 +508,25 @@
    ]
   },
   {
+   "url": "https://www.debonenbrander.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 1 candidate pages, 1 read this run, 0 still to read, 0 products)"
+  },
+  {
+   "url": "https://brandzaak.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 4 candidate pages, 4 read this run, 0 still to read, 0 products)"
+  },
+  {
+   "url": "https://keencoffee.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+  },
+  {
    "url": "https://wakuli.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 42,
    "coffees": 16,
    "taken_types": {
@@ -428,8 +555,20 @@
    ]
   },
   {
+   "url": "https://www.manmetbrilkoffie.nl",
+   "ok": false,
+   "error": "shopify: Expecting value: line 1 column 1 (char 0); woocommerce: Expecting value: line 1 column 1 (char 0); sitemap: no sitemap found"
+  },
+  {
+   "url": "https://hoppercoffee.nl",
+   "ok": false,
+   "error": "shopify: <urlopen error [Errno 104] Connection reset by peer>; woocommerce: <urlopen error [Errno 104] Connection reset by peer>; sitemap: no sitemap found"
+  },
+  {
    "url": "https://monkscoffee.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 24,
    "coffees": 17,
    "taken_types": {
@@ -449,8 +588,15 @@
    ]
   },
   {
+   "url": "https://lucifercoffeeroasters.com",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+  },
+  {
    "url": "https://blackandbloom.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 5,
    "coffees": 5,
    "taken_types": {
@@ -460,8 +606,45 @@
    "skipped_examples": []
   },
   {
+   "url": "https://www.blanchedael.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 9 candidate pages, 9 read this run, 0 still to read, 0 products)"
+  },
+  {
+   "url": "https://www.peeze.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 21 candidate pages, 21 read this run, 0 still to read, 0 products)"
+  },
+  {
+   "url": "https://www.bootkoffie.nl",
+   "ok": true,
+   "reader": "sitemap",
+   "info": "sitemap: 49 candidate pages, 49 read this run, 0 still to read, 5 products",
+   "products": 5,
+   "coffees": 0,
+   "taken_types": {},
+   "skipped_types": {
+    "catalog": 3,
+    "(none)": 2
+   },
+   "skipped_examples": [
+    "BOOT Koffie - Lungo kop",
+    "BOOT Koffie - Latte kop",
+    "Japan Sencha Premium Bio",
+    "Nana Munt Bio",
+    "* NIEUW * - Kruidige Vruchtenmelange Bio"
+   ]
+  },
+  {
+   "url": "https://coffeecompany.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 500: Internal Server Error; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+  },
+  {
    "url": "https://screamingbeans.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 13,
    "coffees": 5,
    "taken_types": {
@@ -483,6 +666,8 @@
   {
    "url": "https://espressofabriek.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 6,
    "coffees": 5,
    "taken_types": {
@@ -498,6 +683,8 @@
   {
    "url": "https://badeta.nl",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 83,
    "coffees": 13,
    "taken_types": {
@@ -521,8 +708,15 @@
    ]
   },
   {
+   "url": "https://www.dekoffiejongens.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: sitemap reader found no product data (sitemap: 42 candidate pages, 42 read this run, 0 still to read, 0 products)"
+  },
+  {
    "url": "https://heiligeboontjes.com",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 57,
    "coffees": 12,
    "taken_types": {
@@ -553,6 +747,8 @@
   {
    "url": "https://zwarteroes.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 66,
    "coffees": 28,
    "taken_types": {
@@ -575,6 +771,8 @@
   {
    "url": "https://www.specialtycoffee.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 120,
    "coffees": 17,
    "taken_types": {
@@ -600,6 +798,8 @@
   {
    "url": "https://labroast.com",
    "ok": true,
+   "reader": "woocommerce",
+   "info": "",
    "products": 103,
    "coffees": 80,
    "taken_types": {
@@ -628,6 +828,8 @@
   {
    "url": "https://koffiekenner.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 642,
    "coffees": 21,
    "taken_types": {
@@ -661,6 +863,8 @@
   {
    "url": "https://gerritskoffie.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 113,
    "coffees": 56,
    "taken_types": {
@@ -686,6 +890,8 @@
   {
    "url": "https://www.casabarista.nl",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 406,
    "coffees": 21,
    "taken_types": {
@@ -708,8 +914,28 @@
    ]
   },
   {
+   "url": "https://www.koffiecentrale.nl",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 404: Not Found; sitemap: no sitemap found"
+  },
+  {
+   "url": "https://www.cafedujour.nl",
+   "ok": true,
+   "reader": "sitemap",
+   "info": "sitemap: 103 candidate pages, 80 read this run, 23 still to read, 2 products",
+   "products": 2,
+   "coffees": 2,
+   "taken_types": {
+    "Koffie": 2
+   },
+   "skipped_types": {},
+   "skipped_examples": []
+  },
+  {
    "url": "https://thebarn.de",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 206,
    "coffees": 97,
    "taken_types": {
@@ -741,6 +967,8 @@
   {
    "url": "https://www.bonanzacoffee.de",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 23,
    "coffees": 14,
    "taken_types": {
@@ -762,6 +990,8 @@
   {
    "url": "https://coffeecollective.dk",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 222,
    "coffees": 70,
    "taken_types": {
@@ -783,6 +1013,8 @@
   {
    "url": "https://www.lacabra.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 68,
    "coffees": 11,
    "taken_types": {
@@ -808,8 +1040,15 @@
    ]
   },
   {
+   "url": "https://aprilcoffeeroasters.com",
+   "ok": false,
+   "error": "shopify: HTTP Error 404: Not Found; woocommerce: HTTP Error 403: Forbidden; sitemap: no sitemap found"
+  },
+  {
    "url": "https://timwendelboe.no",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 38,
    "coffees": 2,
    "taken_types": {
@@ -829,6 +1068,8 @@
   {
    "url": "https://www.dropcoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 40,
    "coffees": 14,
    "taken_types": {
@@ -854,6 +1095,8 @@
   {
    "url": "https://nomadcoffee.es",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 129,
    "coffees": 38,
    "taken_types": {
@@ -880,6 +1123,8 @@
   {
    "url": "https://shop.squaremilecoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 290,
    "coffees": 19,
    "taken_types": {
@@ -906,6 +1151,8 @@
   {
    "url": "https://www.hasbean.co.uk",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 248,
    "coffees": 26,
    "taken_types": {
@@ -932,6 +1179,8 @@
   {
    "url": "https://www.origincoffee.co.uk",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 265,
    "coffees": 31,
    "taken_types": {
@@ -965,6 +1214,8 @@
   {
    "url": "https://www.darkartscoffee.co.uk",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 87,
    "coffees": 11,
    "taken_types": {
@@ -989,6 +1240,8 @@
   {
    "url": "https://colonnacoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 140,
    "coffees": 21,
    "taken_types": {
@@ -1013,6 +1266,8 @@
   {
    "url": "https://workshopcoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 108,
    "coffees": 23,
    "taken_types": {
@@ -1046,6 +1301,8 @@
   {
    "url": "https://onyxcoffeelab.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 249,
    "coffees": 120,
    "taken_types": {
@@ -1073,6 +1330,8 @@
   {
    "url": "https://counterculturecoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 181,
    "coffees": 147,
    "taken_types": {
@@ -1098,6 +1357,8 @@
   {
    "url": "https://www.intelligentsia.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 246,
    "coffees": 162,
    "taken_types": {
@@ -1125,6 +1386,8 @@
   {
    "url": "https://www.stumptowncoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 122,
    "coffees": 25,
    "taken_types": {
@@ -1156,6 +1419,8 @@
   {
    "url": "https://www.heartroasters.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 38,
    "coffees": 10,
    "taken_types": {
@@ -1178,6 +1443,8 @@
   {
    "url": "https://www.passengercoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 583,
    "coffees": 273,
    "taken_types": {
@@ -1204,6 +1471,8 @@
   {
    "url": "https://www.blackwhiteroasters.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 248,
    "coffees": 17,
    "taken_types": {
@@ -1231,6 +1500,8 @@
   {
    "url": "https://www.vervecoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 179,
    "coffees": 122,
    "taken_types": {
@@ -1253,6 +1524,8 @@
   {
    "url": "https://georgehowellcoffee.com",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 109,
    "coffees": 40,
    "taken_types": {
@@ -1286,6 +1559,8 @@
   {
    "url": "https://www.roguewavecoffee.ca",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 804,
    "coffees": 324,
    "taken_types": {
@@ -1314,6 +1589,8 @@
   {
    "url": "https://www.subtext.coffee",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 104,
    "coffees": 23,
    "taken_types": {
@@ -1338,10 +1615,12 @@
   {
    "url": "https://marketlane.com.au",
    "ok": true,
-   "products": 104,
-   "coffees": 14,
+   "reader": "shopify",
+   "info": "",
+   "products": 103,
+   "coffees": 13,
    "taken_types": {
-    "Coffee Beans": 14
+    "Coffee Beans": 13
    },
    "skipped_types": {
     "Equipment": 37,
@@ -1364,6 +1643,8 @@
   {
    "url": "https://onacoffee.com.au",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 86,
    "coffees": 33,
    "taken_types": {
@@ -1386,12 +1667,14 @@
   {
    "url": "https://www.proudmarycoffee.com.au",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 885,
    "coffees": 779,
    "taken_types": {
-    "coffee-archive": 623,
+    "coffee-archive": 624,
     "upcoming-coffees": 141,
-    "coffee": 13,
+    "coffee": 12,
     "coffee-deluxe": 2
    },
    "skipped_types": {
@@ -1415,6 +1698,8 @@
   {
    "url": "https://sevenseeds.com.au",
    "ok": true,
+   "reader": "shopify",
+   "info": "",
    "products": 73,
    "coffees": 46,
    "taken_types": {
