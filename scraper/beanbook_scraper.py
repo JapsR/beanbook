@@ -18,13 +18,17 @@ Rules it follows
 - Sold out is not the same as removed: a listed but sold-out coffee stays active.
 - It reads robots.txt, identifies itself, and waits between requests.
 
-Needs Python 3.8+ and nothing else. Supported shop platforms:
+Needs Python 3.8+ and nothing else. How a shop is read ("type" in sources.json):
   "shopify"      -> <shop>/products.json
   "woocommerce"  -> <shop>/wp-json/wc/store/v1/products
-  "auto"         -> tries both
+  "sitemap"      -> any other shop: its sitemap lists the pages, and each product page describes itself
+                    in a standard block (schema.org Product). Slower, one page per product, so pages are
+                    remembered in state.json and only new ones are read on later runs.
+  "auto"         -> tries the three in that order
 """
 import argparse
 import datetime
+import gzip
 import html
 import json
 import pathlib
@@ -38,6 +42,14 @@ import urllib.robotparser
 
 USER_AGENT = "BeanbookCatalogBot/1.0 (personal coffee catalog; low volume)"
 MAX_PAGES = 40
+STATE = {}       # per shop: the product pages already read by the sitemap reader
+PAGE_CAP = 80    # new pages read per shop per run by the sitemap reader
+SKIP_PATH = re.compile(r"/(blogs?|nieuws|news|contact|account|cart|winkelwagen|checkout|pages?|categor[a-z]*|collections?|tags?|"
+                       r"over-ons|about[a-z-]*|faq|service|klantenservice|recept[a-z]*|recipes?|vacatures|jobs|privacy[a-z-]*|"
+                       r"voorwaarden|terms[a-z-]*|workshops?|cursus[a-z]*|training[a-z]*|locaties|locations|wp-content|author|"
+                       r"zakelijk|b2b|horeca|login|wishlist|search|zoeken)(/|$)", re.I)
+PRODUCT_PATH = re.compile(r"/(products?|produkt|producten|p|shop|winkel|webshop|koffie|koffiebonen|coffees?|bonen|beans)(/|-)", re.I)
+GENERIC_CRUMBS = {"home", "shop", "webshop", "winkel", "producten", "products", "product", "alle producten", "all products", "start"}
 
 # word in the shop text -> value stored in the catalog (English), longest names first when matching
 ORIGINS = {
@@ -107,6 +119,27 @@ class Fetcher:
             self.robots[root] = rp
         return self.robots[root].can_fetch(USER_AGENT, url)
 
+    def text(self, url, pause=None, limit=3_000_000):
+        if not self.allowed(url):
+            raise RuntimeError("robots.txt does not allow " + url)
+        wait = (self.delay if pause is None else pause) - (time.time() - self.last)
+        if wait > 0:
+            time.sleep(wait)
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xml,*/*"})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                raw = r.read(limit)
+        finally:
+            self.last = time.time()
+        if raw[:2] == b"\x1f\x8b":
+            raw = gzip.decompress(raw)
+        return raw.decode("utf-8", "replace")
+
+    def sitemaps(self, base):
+        self.allowed(base + "/")
+        p = urllib.parse.urlsplit(base)
+        return list(self.robots[f"{p.scheme}://{p.netloc}"].site_maps() or [])
+
     def json(self, url):
         if not self.allowed(url):
             raise RuntimeError("robots.txt does not allow " + url)
@@ -167,19 +200,120 @@ def fetch_woocommerce(f, base):
     return out
 
 
-def fetch_source(f, src):
+def host(url):
+    return urllib.parse.urlsplit(url).netloc.lower().replace("www.", "", 1)
+
+
+def sitemap_pages(f, base):
+    """All page addresses a shop lists in its sitemap: {url: listed in a product sitemap?}."""
+    queue = [(u, 0) for u in (f.sitemaps(base) or [base + "/sitemap.xml", base + "/sitemap_index.xml"])]
+    seen, pages = set(), {}
+    while queue and len(seen) < 25:
+        url, depth = queue.pop(0)
+        if url in seen:
+            continue
+        seen.add(url)
+        try:
+            xml = f.text(url, pause=1.0, limit=20_000_000)
+        except Exception:
+            continue
+        locs = [html.unescape(x.strip()) for x in re.findall(r"<loc>\s*(?:<!\[CDATA\[)?\s*(.*?)\s*(?:\]\]>)?\s*</loc>", xml, re.S)]
+        if "<sitemapindex" in xml:
+            product_maps = [k for k in locs if re.search(r"product", k, re.I)]
+            if depth < 2:
+                queue += [(k, depth + 1) for k in (product_maps or locs)[:20]]
+        else:
+            from_products = bool(re.search(r"product", url, re.I))
+            for loc in locs[:8000]:
+                if host(loc) == host(base):
+                    pages[loc] = pages.get(loc, False) or from_products
+    return pages
+
+
+def product_from_page(page, url):
+    """Read the schema.org Product block of a product page, or None when the page has none."""
+    crumbs, product = [], None
+    for raw in re.findall(r"<script[^>]+type=[\"']application/ld\+json[\"'][^>]*>(.*?)</script>", page, re.S | re.I):
+        try:
+            todo = [json.loads(raw.strip())]
+        except ValueError:
+            try:
+                todo = [json.loads(html.unescape(raw.strip()))]
+            except ValueError:
+                continue
+        while todo:
+            d = todo.pop()
+            if isinstance(d, list):
+                todo += d
+                continue
+            if not isinstance(d, dict):
+                continue
+            todo += d.get("@graph", []) if isinstance(d.get("@graph"), list) else []
+            types = d.get("@type") if isinstance(d.get("@type"), list) else [d.get("@type")]
+            if "BreadcrumbList" in types:
+                for el in d.get("itemListElement") or []:
+                    item = el.get("item") if isinstance(el, dict) else None
+                    name = (el.get("name") if isinstance(el, dict) else None) or (item.get("name") if isinstance(item, dict) else None)
+                    if isinstance(name, str):
+                        crumbs.append(plain(name))
+            if ("Product" in types or "ProductGroup" in types) and isinstance(d.get("name"), str) and product is None:
+                product = d
+    if product is None:
+        return None
+    brand = product.get("brand")
+    brand = brand.get("name") if isinstance(brand, dict) else brand
+    cats = product.get("category")
+    cats = [cats] if isinstance(cats, str) else [c for c in (cats or []) if isinstance(c, str)] if isinstance(cats, list) else []
+    path = [seg for seg in urllib.parse.urlsplit(url).path.split("/") if seg]
+    title = plain(product["name"])[:120]
+    kinds = [k for k in cats + crumbs + [seg.replace("-", " ") for seg in path[:-1]]
+             if k and k.strip().lower() not in GENERIC_CRUMBS and k.strip().lower() != title.lower()]
+    desc = product.get("description")
+    return {"p": 1, "handle": path[-1] if path else "home", "title": title, "vendor": brand if isinstance(brand, str) else "",
+            "kinds": kinds[:8], "text": plain(desc)[:600] if isinstance(desc, str) else ""}
+
+
+def fetch_sitemap(f, base, key):
+    known = STATE.setdefault(key, {})
+    pages = sitemap_pages(f, base)
+    if not pages:
+        raise RuntimeError("no sitemap found")
+    ok = lambda u: not SKIP_PATH.search(urllib.parse.urlsplit(u).path) and urllib.parse.urlsplit(u).path.strip("/")
+    cand = [u for u, prod in pages.items() if ok(u) and (prod or PRODUCT_PATH.search(urllib.parse.urlsplit(u).path + "/"))]
+    if not cand:  # flat addresses such as /ethiopia-guji: look at every page that is not clearly something else
+        cand = [u for u in pages if ok(u) and urllib.parse.urlsplit(u).path.strip("/").count("/") <= 2]
+    new = [u for u in cand if u not in known][:PAGE_CAP]
+    for u in new:
+        try:
+            known[u] = product_from_page(f.text(u, pause=1.0), u) or {"p": 0}
+        except urllib.error.HTTPError as e:
+            if e.code in (404, 410):
+                known[u] = {"p": 0}
+        except Exception:
+            pass  # try this page again on the next run
+    live = set(cand)
+    out = [dict(v, url=u) for u, v in known.items() if v.get("p") and u in live]
+    left = sum(1 for u in cand if u not in known)
+    f.info = f"sitemap: {len(cand)} candidate pages, {len(new)} read this run, {left} still to read, {len(out)} products"
+    if not out:
+        raise RuntimeError(f"sitemap reader found no product data ({f.info})")
+    return out
+
+
+def fetch_source(f, src, key):
     base = src["url"].rstrip("/")
     kind = src.get("type", "auto")
-    if kind == "shopify":
-        return fetch_shopify(f, base)
-    if kind == "woocommerce":
-        return fetch_woocommerce(f, base)
+    readers = {"shopify": lambda: fetch_shopify(f, base), "woocommerce": lambda: fetch_woocommerce(f, base),
+               "sitemap": lambda: fetch_sitemap(f, base, key)}
+    f.info = ""
     errors = []
-    for fn in (fetch_shopify, fetch_woocommerce):
+    for name in ([kind] if kind in readers else ["shopify", "woocommerce", "sitemap"]):
         try:
-            return fn(f, base)
-        except Exception as e:  # try the next platform
-            errors.append(f"{fn.__name__}: {e}")
+            products = readers[name]()
+            f.reader = name
+            return products
+        except Exception as e:  # try the next reader
+            errors.append(f"{name}: {e}")
     raise RuntimeError("; ".join(errors))
 
 
@@ -315,6 +449,9 @@ def main():
                 catalog[it["id"]] = it
     today = datetime.date.today().isoformat()
     fetcher = Fetcher(args.delay)
+    state_file = pathlib.Path(args.sources).with_name("state.json")
+    if state_file.exists():
+        STATE.update(json.loads(state_file.read_text(encoding="utf-8")))
     failed = 0
     report = []
     for src in sources:
@@ -322,7 +459,7 @@ def main():
             continue
         key = slug(urllib.parse.urlsplit(src["url"]).netloc)
         try:
-            products = fetch_source(fetcher, src)
+            products = fetch_source(fetcher, src, key)
         except Exception as e:
             failed += 1
             log(f"! {src['url']}: skipped ({e}). Its coffees are left as they were.")
@@ -338,7 +475,7 @@ def main():
             bucket = taken if is_coffee(p, src) else left
             bucket[kind_of(p)] = bucket.get(kind_of(p), 0) + 1
         top = lambda d: dict(sorted(d.items(), key=lambda kv: -kv[1])[:8])
-        report.append({"url": src["url"], "ok": True, "products": len(products), "coffees": len(found),
+        report.append({"url": src["url"], "ok": True, "reader": fetcher.reader, "info": fetcher.info, "products": len(products), "coffees": len(found),
                        "taken_types": top(taken), "skipped_types": top(left),
                        "skipped_examples": [p["title"][:60] for p in products if not is_coffee(p, src)][:5]})
         if products and not found:
@@ -361,6 +498,7 @@ def main():
         tmp.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
         tmp.replace(out)
         log(f"Wrote {out}")
+        state_file.write_text(json.dumps(STATE, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         rep = pathlib.Path(args.sources).with_name("report.json")
         rep.write_text(json.dumps({"ranAt": result["updatedAt"], "sources": report}, ensure_ascii=False, indent=1), encoding="utf-8")
     return 1 if failed and failed == len([s for s in sources if s.get("enabled") is not False]) else 0

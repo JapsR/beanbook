@@ -1,12 +1,11 @@
 {
- "_help": "One entry per web shop. Only Shopify and WooCommerce shops can be read; anything else, or a wrong address, is skipped with a message in the run log. 'roaster' is the display name; shops that sell several roasters have 'name' instead and use each product's brand. Optional per entry: type (auto | shopify | woocommerce), include / exclude (extra words to recognise or skip products), enabled (false to pause). 'note' says where the address came from.",
+ "_help": "One entry per web shop. Shopify and WooCommerce shops are read from their product feed; other shops through their sitemap and the product data on each page. A shop that offers none of these, or a wrong address, is skipped with a message in the run log and in report.json. 'roaster' is the display name; shops that sell several roasters have 'name' instead and use each product's brand. Optional per entry: type (auto | shopify | woocommerce), include / exclude (extra words to recognise or skip products), enabled (false to pause). 'note' says where the address came from.",
  "sources": [
   {
    "url": "https://friedhats.com",
    "roaster": "Friedhats",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://manhattancoffeeroasters.com",
@@ -30,8 +29,7 @@
    "url": "https://lot61.com",
    "roaster": "Lot Sixty One",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://rumbaba.nl",
@@ -49,8 +47,7 @@
    "url": "https://whitelabelcoffee.nl",
    "roaster": "White Label Coffee",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://stookerspecialtycoffee.com",
@@ -97,8 +94,7 @@
    "url": "https://blommers.coffee",
    "roaster": "Blommers Coffee Roasters",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://sampietro.nl",
@@ -110,8 +106,7 @@
    "url": "https://www.koffiebranderijvenetie.nl",
    "roaster": "Koffiebranderij Venetië",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://koffiestation.nl",
@@ -123,8 +118,7 @@
    "url": "https://30mlcoffeeroasters.nl",
    "roaster": "30ML Coffee Roasters",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://luukscoffee.com",
@@ -136,15 +130,13 @@
    "url": "https://www.moyeecoffee.com",
    "roaster": "Moyee Coffee",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://www.simonlevelt.nl",
    "roaster": "Simon Lévelt",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://kaldi.nl",
@@ -162,22 +154,19 @@
    "url": "https://www.debonenbrander.nl",
    "roaster": "De Bonen Brander",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://brandzaak.nl",
    "roaster": "Brandzaak",
    "country": "NL",
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://keencoffee.nl",
    "roaster": "Keen Coffee",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://wakuli.com",
@@ -189,15 +178,13 @@
    "url": "https://www.manmetbrilkoffie.nl",
    "roaster": "Man Met Bril Koffie",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://hoppercoffee.nl",
    "roaster": "Hopper Coffee",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://monkscoffee.nl",
@@ -209,8 +196,7 @@
    "url": "https://lucifercoffeeroasters.com",
    "roaster": "Lucifer Coffee Roasters",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://blackandbloom.nl",
@@ -222,29 +208,25 @@
    "url": "https://www.blanchedael.nl",
    "roaster": "Blanche Dael",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://www.peeze.nl",
    "roaster": "Peeze",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://www.bootkoffie.nl",
    "roaster": "Boot Koffie",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://coffeecompany.nl",
    "roaster": "Coffeecompany",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://screamingbeans.nl",
@@ -268,8 +250,7 @@
    "url": "https://www.dekoffiejongens.nl",
    "roaster": "De Koffiejongens",
    "country": "NL",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://heiligeboontjes.com",
@@ -323,16 +304,14 @@
    "name": "Koffiecentrale",
    "country": "NL",
    "shop": true,
-   "note": "found in a web search on 2026-11-15; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "found in a web search on 2026-11-15"
   },
   {
    "url": "https://www.cafedujour.nl",
    "name": "Café du Jour",
    "country": "NL",
    "shop": true,
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://thebarn.de",
@@ -357,8 +336,7 @@
   {
    "url": "https://aprilcoffeeroasters.com",
    "roaster": "April",
-   "note": "address from memory, not checked; not readable on 2026-11-15: the shop is not on Shopify or WooCommerce (or blocks the feed), so it needs its own reader",
-   "enabled": false
+   "note": "address from memory, not checked"
   },
   {
    "url": "https://timwendelboe.no",
