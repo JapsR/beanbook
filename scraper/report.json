@@ -1,11 +1,11 @@
 {
- "ranAt": "2026-11-16T09:29:43+00:00",
+ "ranAt": "2026-11-16T12:01:18+00:00",
  "sources": [
   {
    "url": "https://friedhats.com",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 423 candidate pages, 23 read this run, 0 still to read, 422 products",
+   "info": "sitemap: 423 candidate pages, 0 read this run, 0 still to read, 422 products",
    "products": 422,
    "coffees": 357,
    "taken_types": {
@@ -56,10 +56,10 @@
    "ok": true,
    "reader": "woocommerce",
    "info": "",
-   "products": 72,
-   "coffees": 27,
+   "products": 73,
+   "coffees": 28,
    "taken_types": {
-    "Coffees": 27
+    "Coffees": 28
    },
    "skipped_types": {
     "Accessories": 23,
@@ -96,7 +96,7 @@
      "roasterNotes": "cassis, bubble gum, grapefruit"
     }
    ],
-   "with_details": 20
+   "with_details": 21
   },
   {
    "url": "https://dakcoffeeroasters.com",
@@ -388,10 +388,10 @@
     "ALL": 1
    },
    "skipped_types": {
-    "+ ALL PRODUCTS": 144,
-    "BREWING EQUIPMENT": 50,
-    "BARISTA TOOLS": 43,
-    "+ A.M.O.C. ESSENTIALS": 13,
+    "+ ALL PRODUCTS": 131,
+    "BREWING EQUIPMENT": 54,
+    "BARISTA TOOLS": 45,
+    "+ A.M.O.C. ESSENTIALS": 12,
     "PESADO 58.5™": 11,
     "+ COFFEE": 10,
     "BARISTA HUSTLE™": 8,
@@ -720,36 +720,34 @@
    "url": "https://www.simonlevelt.nl",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 1410 candidate pages, 80 read this run, 930 still to read, 480 products",
-   "products": 480,
+   "info": "sitemap: 705 candidate pages, 120 read this run, 345 still to read, 359 products",
+   "products": 359,
    "coffees": 2,
    "taken_types": {
-    "be": 1,
-    "nl": 1
+    "nl": 2
    },
    "skipped_types": {
-    "be": 239,
-    "nl": 239
+    "nl": 357
    },
    "skipped_examples": [
     "Aarke Kettle 1,2L",
-    "Aarke Kettle 1,2L",
     "Ad Hoc Thee-ei",
-    "Ad Hoc Thee-ei",
-    "Aerolatte Melkopschuimer"
+    "Aerolatte Melkopschuimer",
+    "ASA Verana Espresso",
+    "ASA Verana Cappuccino"
    ],
    "detail_examples": [
     {
      "name": "Guji Ethiopië Bonen Ongeroosterd"
     },
     {
-     "name": "Guji Ethiopië Bonen Ongeroosterd"
+     "name": "Cloer Filterkoffie apparaat 5019"
     }
    ],
    "with_details": 0,
    "body_samples": [
     "Ongeroosterde specialty koffie uit Guji, Ethiopië, met een verfijnd en uitgesproken karakter.",
-    "Ongeroosterde specialty koffie uit Guji, Ethiopië, met een verfijnd en uitgesproken karakter."
+    "Levering koffiemachine: Na het bestellen van je koffiemachine gaat de lokale ondernemer van de speciaalzaak bij jou in de buurt direct voor je aan de slag. Je nieuwe koffiemachine wordt speciaal voor jou uit voorraad geleverd of besteld bij de leverancier. Indien de machine besteld dient te worden, kan de levering langer duren dan de aangegeven levertijd."
    ]
   },
   {
@@ -1701,7 +1699,7 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 129,
+   "products": 130,
    "coffees": 38,
    "taken_types": {
     "Café": 38
@@ -1713,15 +1711,15 @@
     "Textil": 6,
     "Merchandising": 2,
     "Suscripción": 2,
-    "Café": 1,
-    "Otras bebidas": 1
+    "Cafetera": 1,
+    "Café": 1
    },
    "skipped_examples": [
+    "Cafetera Sage Bambino Plus",
     "Vela Nomad x Cereria Subirà",
     "Camiseta Serveis de Café - Blanca",
     "Acaia Balanza Lunar",
-    "Cafetera de goteo Fellow - Aiden Precision Coffee Maker",
-    "Taza y plato Serveis de café V1"
+    "Cafetera de goteo Fellow - Aiden Precision Coffee Maker"
    ],
    "detail_examples": [
     {
@@ -1743,7 +1741,7 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 290,
+   "products": 288,
    "coffees": 13,
    "taken_types": {
     "Coffee": 13
@@ -1754,8 +1752,8 @@
     "Apparel": 21,
     "Brewing Equipment": 14,
     "Publication": 11,
-    "Coffee": 7,
-    "Sample": 5,
+    "Coffee": 6,
+    "Sample": 4,
     "Merchandise": 4
    },
    "skipped_examples": [
@@ -1763,19 +1761,20 @@
     "Rebero Sample",
     "Paya' Sample",
     "Filter Assortment Pack",
-    "Shortcut Sample"
+    "XBloom Studio Coffee Machine"
    ],
    "detail_examples": [
+    {
+     "name": "KCRS Cooperative",
+     "producer": "KCRS",
+     "roastFor": "espresso",
+     "roasterNotes": "purple gooseberry, smooth, syrupy textures"
+    },
     {
      "name": "Don Cayito",
      "variety": "Typica",
      "roastFor": "filter",
      "roasterNotes": "peach, white flowers"
-    },
-    {
-     "name": "San Martín",
-     "variety": "Gesha",
-     "roastFor": "espresso"
     },
     {
      "name": "Winter Espresso",
@@ -1784,8 +1783,8 @@
    ],
    "with_details": 2,
    "body_samples": [
-    "This natural process Typica variety from Don Cayito in Dota, Tarrazú creates an idealised version of Arabica’s original, historical cup profile. Head-turning berry flavours envelop notes of peach and white flowers.\nAvailable in 175g or 1kg bags. All single bag 175g orders will be sent in our letterbag packaging.",
-    "The third lot in our Costa Rica special projects highlight is another example of a Gesha, San Martín! Shining as espresso; expect a decadent, creamy texture amplified by blackberry and a floral sweetness."
+    "Delicately floral and sweet, this delicious washed lot from the KCRS Cooperative in Rwanda returns to fill your cups with notes of purple gooseberry and smooth, syrupy textures.",
+    "This natural process Typica variety from Don Cayito in Dota, Tarrazú creates an idealised version of Arabica’s original, historical cup profile. Head-turning berry flavours envelop notes of peach and white flowers.\nAvailable in 175g or 1kg bags. All single bag 175g orders will be sent in our letterbag packaging."
    ]
   },
   {
@@ -2507,10 +2506,10 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 104,
-   "coffees": 22,
+   "products": 103,
+   "coffees": 21,
    "taken_types": {
-    "Coffee": 20,
+    "Coffee": 19,
     "Classes and experiences": 2
    },
    "skipped_types": {
@@ -2545,7 +2544,7 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 10
+   "with_details": 9
   },
   {
    "url": "https://marketlane.com.au",

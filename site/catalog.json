@@ -1,7 +1,7 @@
 {
  "format": "beanbook-catalog",
  "version": 1,
- "updatedAt": "2026-11-16T09:29:43+00:00",
+ "updatedAt": "2026-11-16T12:01:18+00:00",
  "items": [
   {
    "id": "a-matter-of-concrete:001-c2-b3",
@@ -23932,6 +23932,25 @@
    "altitude": null,
    "roastFor": "",
    "roasterNotes": ""
+  },
+  {
+   "id": "manhattan-coffee-roasters:rio-dulce",
+   "name": "Rio Dulce",
+   "roaster": "Manhattan Coffee Roasters",
+   "origin": "",
+   "process": "",
+   "roast": "light",
+   "region": "",
+   "producer": "",
+   "variety": "Geisha",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "rose, plum, vanilla",
+   "url": "https://manhattancoffeeroasters.com/product/coffees/5world-class/rio-dulce/",
+   "source": "manhattancoffeeroasters-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
   },
   {
    "id": "manhattan-coffee-roasters:rosa-dominguez",
@@ -54981,6 +55000,25 @@
    "roasterNotes": ""
   },
   {
+   "id": "simon-l-velt:14055-m-html",
+   "name": "Cloer Filterkoffie apparaat 5019",
+   "roaster": "Simon Lévelt",
+   "origin": "",
+   "process": "",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://www.simonlevelt.nl/nl/cloer-filterkoffie-apparaat--5019/14055-M.html",
+   "source": "www-simonlevelt-nl",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "simon-l-velt:10348-m-html",
    "name": "Guji Ethiopië Bonen Ongeroosterd",
    "roaster": "Simon Lévelt",
@@ -55363,6 +55401,25 @@
    "roasterNotes": ""
   },
   {
+   "id": "square-mile:kcrs-cooperative",
+   "name": "KCRS Cooperative",
+   "roaster": "Square Mile",
+   "origin": "Rwanda",
+   "process": "Washed",
+   "roast": "",
+   "region": "",
+   "producer": "KCRS",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "espresso",
+   "roasterNotes": "purple gooseberry, smooth, syrupy textures",
+   "url": "https://shop.squaremilecoffee.com/products/kcrs-cooperative",
+   "source": "shop-squaremilecoffee-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "square-mile:la-cidra",
    "name": "La Cidra",
    "roaster": "Square Mile",
@@ -55411,13 +55468,14 @@
    "source": "shop-squaremilecoffee-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Gesha",
    "altitude": null,
    "roastFor": "espresso",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "square-mile:shoondhisa",
@@ -56470,13 +56528,14 @@
    "source": "www-subtext-coffee",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Catuai",
    "altitude": null,
    "roastFor": "filter",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "subtext:mujeres-de-axola-espresso-guatemala-washed-field-b",
