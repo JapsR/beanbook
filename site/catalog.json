@@ -1,7 +1,7 @@
 {
  "format": "beanbook-catalog",
  "version": 1,
- "updatedAt": "2026-11-16T12:01:18+00:00",
+ "updatedAt": "2026-11-16T12:52:23+00:00",
  "items": [
   {
    "id": "a-matter-of-concrete:001-c2-b3",
@@ -1931,13 +1931,14 @@
    "source": "www-bonanzacoffee-de",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Los Nogales",
    "variety": "Tabi",
    "altitude": null,
    "roastFor": "omni",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "boot:boot-colombia-organic",

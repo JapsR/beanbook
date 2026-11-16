@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-16T12:01:18+00:00",
+ "ranAt": "2026-11-16T12:52:23+00:00",
  "sources": [
   {
    "url": "https://friedhats.com",
@@ -720,14 +720,14 @@
    "url": "https://www.simonlevelt.nl",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 705 candidate pages, 120 read this run, 345 still to read, 359 products",
-   "products": 359,
+   "info": "sitemap: 705 candidate pages, 120 read this run, 225 still to read, 479 products",
+   "products": 479,
    "coffees": 2,
    "taken_types": {
     "nl": 2
    },
    "skipped_types": {
-    "nl": 357
+    "nl": 477
    },
    "skipped_examples": [
     "Aarke Kettle 1,2L",
@@ -1486,10 +1486,10 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 23,
-   "coffees": 13,
+   "products": 22,
+   "coffees": 12,
    "taken_types": {
-    "Coffee": 13
+    "Coffee": 12
    },
    "skipped_types": {
     "brewing gear": 6,
@@ -1514,13 +1514,12 @@
      "roastFor": "omni"
     },
     {
-     "name": "Los Nogales",
-     "producer": "Los Nogales",
-     "variety": "Tabi",
+     "name": "AB Kithungururu",
+     "variety": "Ruiru 11",
      "roastFor": "omni"
     }
    ],
-   "with_details": 5
+   "with_details": 4
   },
   {
    "url": "https://coffeecollective.dk",
@@ -1571,14 +1570,14 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 67,
+   "products": 66,
    "coffees": 11,
    "taken_types": {
     "Coffee": 10,
     "COFFEE": 1
    },
    "skipped_types": {
-    "Equipment": 26,
+    "Equipment": 25,
     "Würtz": 7,
     "Apparel": 6,
     "Coffee bundle": 4,
@@ -1843,7 +1842,7 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 266,
+   "products": 268,
    "coffees": 21,
    "taken_types": {
     "Coffee (Feature)": 10,
@@ -1856,19 +1855,19 @@
    "skipped_types": {
     "Ceramics": 28,
     "Enthusiast Course": 22,
-    "Espresso Machines": 20,
+    "Espresso Machines": 21,
     "Professional Course": 20,
     "Brewers": 19,
-    "Bundles": 15,
+    "Bundles": 16,
     "Grinders": 13,
     "Coffee (Gift Sets)": 12
    },
    "skipped_examples": [
+    "Sage Dual Boiler & Baratza Encore Pro Bundle - Black",
+    "Fellow Aiden Brewer & Fellow ODE Gen 2 Grinder Bundle",
     "Sage Bambino & Baratza Encore ESP Bundle - Black",
     "Sage Bambino & Baratza Encore ESP Bundle - Steel",
-    "Lelit Bianca & Baratza Encore Pro Bundle - Black",
-    "Lelit Bianca & Baratza Encore Pro Bundle - Steel",
-    "Lelit Elizabeth & Baratza Encore Pro Bundle"
+    "Lelit Bianca & Baratza Encore Pro Bundle - Black"
    ],
    "detail_examples": [
     {
@@ -2271,7 +2270,7 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 583,
+   "products": 585,
    "coffees": 253,
    "taken_types": {
     "Coffee": 253
@@ -2287,11 +2286,11 @@
     "Supplies": 10
    },
    "skipped_examples": [
+    "Twelve Days of Tea",
+    "Twelve Days of Coffee",
     "Archival Release #64 - Mercedes Flores - 2023",
     "Mainstay Tea Mini Bundle",
-    "2026 Holiday Tea Bundle",
-    "2026 Holiday Bundle",
-    "2026 Holiday Coffee & Herbal Blend"
+    "2026 Holiday Tea Bundle"
    ],
    "detail_examples": [
     {
