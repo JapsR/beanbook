@@ -366,13 +366,38 @@ EXCLUDE_ANYWHERE = ["machine", "molen", "grinder", "kettle", "waterkoker", "drip
                     "timemore", "fellow", "sage ", "rocket", "bezzera", "eureka", "rancilio", "lelit", "ecm ", "profitec",
                     "moccamaster", "kalita", "bialetti", "kinto", "acme", "puqpress", "baratza", "mazzer", "quamar", "quickmill",
                     "nivona", "everpure", "brita", "sanremo", "beker", "ecoffee", "testset", "filterbakje", "barista attitude",
-                    "abonnement", "giftcard", "cadeau", "proefpakket apparaat"]
+                    "abonnement", "giftcard", "cadeau", "proefpakket apparaat",
+                    # storage, filters and other gear, as Dutch shops spell it in one word
+                    "doseerder", "koffiebus", "bewaarbus", "voorraadbus", "koffieblik", "filterpapier",
+                    "koffiefilter", "zetapparaat", "koffiezetapparaat", "weegschal", "melkpoeder", "melkschuim",
+                    "wekker", "distributeur", "tubeset", "display", "siroop", "suikerstick", "honingstick",
+                    "bodum", "bonavita", "graycano", "joy resolve", "muvna", "xbloom", "delter press",
+                    "barista essentials", "aarke", "aerolatte", "dualit", "espressions", "subminimal"]
+
+# Tea, and the words only tea is sold under. "thee" and the rest are matched inside compounds
+# (kruidenthee, theezakje); the English ones only as whole words, so "steam" and "instead" are safe.
+TEA_ANYWHERE = ["thee", "rooibos", "matcha", "oolong", "pekoe", "sencha", "genmaicha", "gyokuro", "darjeeling",
+                "tisane", "yerba", "puerh", "pu-erh", "pu erh", "kamillebloes", "theeservies"]
+TEA_WORDS = ["tea", "teas", "chai", "infusion", "infusions", "herbal", "kruidenmelange"]
+TEA = None  # set below, after starts_word exists
+
+
+def is_tea(text):
+    text = (text or "").lower()
+    return any(x in text for x in TEA_ANYWHERE) or any(starts_word(text, x) for x in TEA_WORDS)
+
+
+# A page about coffee says so somewhere; a page about a teapot or a tea does not.
+COFFEE_TEXT = re.compile(r"(?i)(koffie|coffee|espresso|arabica|robusta|cafe\u00efne|caffeine|bonen|beans|filterkoffie)")
 
 
 def is_junk(text):
-    """True for equipment, merchandise and other things that are never a coffee."""
+    """True for equipment, merchandise, tea and other things that are never a coffee."""
     text = text.lower()
-    return any(x in text for x in EXCLUDE_ANYWHERE) or any(starts_word(text, x) for x in EXCLUDE)
+    if text.startswith("acaia "):      # the scale brand; Acaia is also a Brazilian variety, so only at the start
+        return True
+    return (any(x in text for x in EXCLUDE_ANYWHERE) or any(starts_word(text, x) for x in EXCLUDE)
+            or is_tea(text))
 
 
 def clean_name(name):
@@ -406,10 +431,17 @@ def is_coffee(p, src):
         return False
     if is_pack(title) or is_pack(ptype):
         return False
+    if any(is_tea(k) for k in kinds):      # a shop that files this under tea is right
+        return False
     wanted = COFFEE_KINDS | {x.lower() for x in src.get("include", [])}
     if any(k in wanted for k in kinds) or any(h in k for k in kinds for h in COFFEE_HINTS):
         return True
-    return detect_origin(title) != ""
+    # Nothing says "coffee" except a country in the title, as on shops that sell tea and gear beside coffee.
+    # Then the product's own text has to back it up.
+    if not detect_origin(title):
+        return False
+    body = (p.get("text") or "")[:800]
+    return bool(COFFEE_TEXT.search(title + " " + " ".join(kinds) + " " + body)) and not is_tea(body)
 
 
 def detect_origin(text):
