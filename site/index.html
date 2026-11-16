@@ -329,6 +329,7 @@ const avg=a=>a.length?a.reduce((s,x)=>s+x,0)/a.length:null;
 const hue=s=>{let h=0;for(const ch of String(s))h=(h*31+ch.charCodeAt(0))%360;return h};
 const fmtDay=s=>{const d=new Date(dayOf(s)+"T12:00");if(isNaN(d))return "";const t=dayOf(localStamp());const y=dayOf(localStamp(new Date(Date.now()-864e5)));
   if(dayOf(s)===t)return "Today";if(dayOf(s)===y)return "Yesterday";return d.toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short",year:d.getFullYear()===new Date().getFullYear()?undefined:"numeric"})};
+const okDate=x=>/^\d{4}-\d\d-\d\d/.test(x||"")?x.slice(0,10):"";
 const fmtDate=s=>{if(!s)return "–";const d=new Date(dayOf(s)+"T12:00");return isNaN(d)?"–":d.toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"})};
 
 const I={
@@ -420,7 +421,7 @@ function normCoffee(o){o=o||{};return keepExtra(o,{k:"coffee",id:okId(o.id)?o.id
   process:str(o.process,40),roast:ROASTV.includes(o.roast)?o.roast:"",
   form:o.form==="ground"?"ground":"beans",roastDate:/^\d{4}-\d\d-\d\d$/.test(o.roastDate||"")?o.roastDate:"",bought:/^\d{4}-\d\d-\d\d$/.test(o.bought||"")?o.bought:"",
   weight:num(o.weight,1,100000),price:num(o.price,0,100000),notes:str(o.notes,2000),photoId:okId(o.photoId)?o.photoId:null,
-  catalogId:str(o.catalogId,90),region:str(o.region,60),producer:str(o.producer,60),variety:str(o.variety,60),altitude:num(o.altitude,0,5000),
+  region:str(o.region,60),producer:str(o.producer,60),variety:str(o.variety,60),altitude:num(o.altitude,0,5000),
   roastFor:["filter","espresso","omni"].includes(o.roastFor)?o.roastFor:"",roasterNotes:str(o.roasterNotes,120),finished:!!o.finished,createdAt:Number(o.createdAt)||Date.now()})}
 function normBrew(o){o=o||{};const r=num(o.rating,0.25,5);return keepExtra(o,{k:"brew",id:okId(o.id)?o.id:newId(),coffeeId:String(o.coffeeId||""),method:typeof o.method==="string"&&/^[a-z0-9]{2,30}$/.test(o.method)?o.method:"other",
   date:/^\d{4}-\d\d-\d\dT\d\d:\d\d/.test(o.date||"")?o.date.slice(0,16):localStamp(),dose:num(o.dose,0.1,5000),water:num(o.water,1,50000),
@@ -706,9 +707,6 @@ function vData(){
       <div class="row-btns"><button class="btn primary" type="button" data-act="export">${ic("down",20)}Export</button>
       <label class="btn file-btn">${ic("up",20)}Import<input id="import-file" type="file" accept=".json,application/json" aria-label="Import a Beanbook export file"></label></div>
       <div class="status"><span class="dot ${st[0]}"></span><span>${st[1]}</span></div></div>
-    <div class="panel"><h3>Coffee catalog</h3><p>${CAT.items.length?`${CAT.items.length} coffees from ${new Set(CAT.items.map(i=>i.roaster)).size} roasters to pick from when you add a coffee.${CAT.updatedAt?" Updated "+esc(fmtDate(CAT.updatedAt))+".":""}`:"Empty for now. After the scraper has run, its coffees show up as suggestions when you add a coffee."}${CAT.items.length&&!Store.db?" It refreshes by itself.":""}</p>
-      ${CAT.canEdit?`<label class="btn file-btn">${ic("up",20)}Load scraper file<input id="catalog-file" type="file" accept=".json,application/json" aria-label="Load a catalog file made by the scraper"></label>`:""}</div>
-    ${customs().length?`<div class="panel"><h3>Your brew methods</h3><div>${customs().map(m=>`<div class="kv" style="align-items:center"><span>${mtag(m.id)}</span><span style="display:flex;gap:8px"><button class="btn small ghost" type="button" data-act="pour-method" data-id="${m.id}" aria-pressed="${!!m.pour}">Pouring stages: ${m.pour?"on":"off"}</button><button class="btn small ghost danger" type="button" data-act="del-method" data-id="${m.id}">Remove</button></span></div>`).join("")}</div></div>`:""}
     <div class="panel"><h3>Privacy</h3><p>Nothing here is shared with other people or used for statistics. There are no accounts to follow and no public feed.</p></div>
     <button class="btn ghost danger block" type="button" data-act="ask-wipe">${ic("trash",20)}Delete all my data</button></div>`;
 }
@@ -727,16 +725,15 @@ const photoField=()=>`<div class="f"><span class="lbl">Photo</span><div class="p
 const seg=(name,opts,val)=>`<div class="seg">${opts.map(([v,l])=>`<label><input type="radio" name="${name}" id="${name}-${v||"none"}" value="${v}" ${val===v?"checked":""}><span>${l}</span></label>`).join("")}</div>`;
 
 const procList=cur=>[...new Set([...PROCESSES,...coffees().filter(x=>!x.demo).map(x=>x.process),cur||""])];
-function setProcess(f,val){const sel=f.process;if(val&&![...sel.options].some(o=>o.value===val))sel.insertAdjacentHTML("afterbegin",`<option value="${esc(val)}">${esc(val)}</option>`);sel.value=val||"";$("#c-process-box").hidden=true}
 const moreOn=c=>!!(c.region||c.producer||c.variety||c.altitude||c.roastFor||c.roasterNotes);
 function coffeeForm(c){
   c=c||{form:"beans",roast:"",bought:dayOf(localStamp())};formPhoto={data:c.photoId?S.photos[c.photoId]||null:null,changed:false};
-  openSheet(`${head(c.id?"Edit coffee":"New coffee")}<form id="coffee-form" data-id="${c.id||""}" novalidate><div class="sheet-body"><input type="hidden" name="catalogId" id="c-catalog" value="${esc(c.catalogId)}">
-    <div class="f"><label for="c-name">Name</label><input id="c-name" name="name" type="text" required maxlength="80" placeholder="e.g. Guji Hambela" value="${esc(c.name)}" autocomplete="off">${c.id?"":`<div class="list" id="cat-results"></div>`}</div>
+  openSheet(`${head(c.id?"Edit coffee":"New coffee")}<form id="coffee-form" data-id="${c.id||""}" novalidate><div class="sheet-body">
+    <div class="f"><label for="c-name">Name</label><input id="c-name" name="name" type="text" required maxlength="80" placeholder="e.g. Guji Hambela" value="${esc(c.name)}" autocomplete="off"></div>
     <div class="grid2"><div class="f"><label for="c-roaster">Roaster</label><input id="c-roaster" name="roaster" type="text" maxlength="60" list="dl-roasters" value="${esc(c.roaster)}" autocomplete="off"></div>
       <div class="f"><label for="c-origin">Origin</label><input id="c-origin" name="origin" type="text" maxlength="60" list="dl-origins" value="${esc(c.origin)}" autocomplete="off"></div></div>
     <datalist id="dl-origins">${ORIGINS.map(o=>`<option value="${o}">`).join("")}</datalist>
-    <datalist id="dl-roasters">${[...new Set([...coffees().filter(x=>!x.demo).map(x=>x.roaster),...CAT.items.map(i=>i.roaster)].filter(Boolean))].slice(0,800).map(o=>`<option value="${esc(o)}">`).join("")}</datalist>
+    <datalist id="dl-roasters">${[...new Set(coffees().filter(x=>!x.demo).map(x=>x.roaster).filter(Boolean))].map(o=>`<option value="${esc(o)}">`).join("")}</datalist>
     <div class="f"><span class="lbl">Bought as</span>${seg("form",[["beans","Whole beans"],["ground","Ground"]],c.form)}</div>
     <div class="f"><div class="roast-top"><label for="c-roast">Roast</label><output id="c-roast-out" for="c-roast">${ROASTN[Math.max(0,ROASTV.indexOf(c.roast||""))]}</output></div>
       <input class="roast" id="c-roast" name="roastIdx" type="range" min="0" max="5" step="1" value="${Math.max(0,ROASTV.indexOf(c.roast||""))}" aria-valuetext="${ROASTN[Math.max(0,ROASTV.indexOf(c.roast||""))]}">
@@ -880,7 +877,7 @@ function saveCoffee(f){
   if(!str(fd.get("name"))){toast("Give the coffee a name first.");f.name.focus();return}
   if(!old&&S.demo){dropDemo();toast("Examples cleared. This is your shelf now.")}
   const c=normCoffee({...(old||{}),id:old?old.id:newId(),name:fd.get("name"),roaster:fd.get("roaster"),origin:fd.get("origin"),form:fd.get("form"),roast:ROASTV[Number(fd.get("roastIdx"))||0],
-    catalogId:fd.get("catalogId"),process:fd.get("process")==="__custom"?fd.get("processCustom"):fd.get("process"),region:fd.get("region"),producer:fd.get("producer"),variety:fd.get("variety"),altitude:fd.get("altitude"),roastFor:fd.get("roastFor"),roasterNotes:fd.get("roasterNotes"),roastDate:fd.get("roastDate"),bought:fd.get("bought"),weight:fd.get("weight"),price:fd.get("price"),notes:fd.get("notes")});
+    process:fd.get("process")==="__custom"?fd.get("processCustom"):fd.get("process"),region:fd.get("region"),producer:fd.get("producer"),variety:fd.get("variety"),altitude:fd.get("altitude"),roastFor:fd.get("roastFor"),roasterNotes:fd.get("roasterNotes"),roastDate:fd.get("roastDate"),bought:fd.get("bought"),weight:fd.get("weight"),price:fd.get("price"),notes:fd.get("notes")});
   applyPhoto(old,c);S.coffees[c.id]=c;Store.put("c_"+c.id,c);closeSheet();
   if(old)render();else go("coffee-"+c.id);checkBadges();
 }
@@ -936,55 +933,6 @@ function runImport(replace){
   saveMeta();closeSheet();go("coffees");toast(`Imported ${p.cs.length} coffees and ${p.bs.length} preparations`);checkBadges(true);
 }
 
-/* ---------- shared coffee catalog, filled by the scraper ---------- */
-const CAT={items:[],keys:[],updatedAt:"",canEdit:false};
-const okDate=x=>/^\d{4}-\d\d-\d\d/.test(x||"")?x.slice(0,10):"";
-function normCat(o){o=o||{};return{id:str(o.id,90).toLowerCase().replace(/[^a-z0-9:_.-]/g,""),name:str(o.name,80),roaster:str(o.roaster,60),origin:str(o.origin,60),
-  process:str(o.process,40),roast:ROASTV.includes(o.roast)?o.roast:"",
-  url:/^https?:\/\//.test(o.url||"")?str(o.url,300):"",firstSeen:okDate(o.firstSeen),lastSeen:okDate(o.lastSeen),removed:!!o.removed}}
-async function loadCatalog(){
-  if(!Store.db){ /* standalone site: the scheduled scraper publishes catalog.json next to this page */
-    try{const r=await fetch("catalog.json",{cache:"no-cache"});if(r.ok){const o=await r.json();
-      CAT.items=(Array.isArray(o.items)?o.items:[]).map(normCat).filter(i=>i.id&&i.name);CAT.updatedAt=okDate(o.updatedAt)}}catch(e){}
-    if(S.ready&&route().v==="data"&&!sheetRoot.classList.contains("open"))render();return}
-  try{const snap=await Store.db.collection("catalog").get();const items=[],keys=[];let up="";
-    snap.docs.forEach(d=>{if(!d.exists)return;const v=d.data();keys.push(d.id);if(typeof v.updatedAt==="string"&&v.updatedAt>up)up=v.updatedAt;
-      (Array.isArray(v.items)?v.items:[]).forEach(i=>{const n=normCat(i);if(n.id&&n.name)items.push(n)})});
-    CAT.items=items;CAT.keys=keys;CAT.updatedAt=okDate(up);
-    CAT.canEdit=Store.user?!!(await Store.user.canEdit()):false;
-  }catch(e){}
-  if(S.ready&&route().v==="data"&&!sheetRoot.classList.contains("open"))render();
-}
-async function importCatalog(file){
-  let o;try{o=JSON.parse(await file.text())}catch(e){o=null}
-  if(!o||o.format!=="beanbook-catalog"||!Array.isArray(o.items)){toast("That file is not a catalog made by the scraper.");return}
-  if(!Store.db){toast("The catalog can only be updated inside Claude.");return}
-  const today=dayOf(localStamp()),map=new Map(CAT.items.map(i=>[i.id,{...i,removed:true}]));let added=0;
-  o.items.slice(0,60000).forEach(x=>{const n=normCat(x);if(!n.id||!n.name)return;const old=map.get(n.id);if(!old)added++;
-    map.set(n.id,{...n,firstSeen:(old&&old.firstSeen)||n.firstSeen||today,lastSeen:n.lastSeen||today})});
-  const groups={};map.forEach(i=>{const k=(i.roaster.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,50))||"unknown";(groups[k]=groups[k]||[]).push(i)});
-  const docs={},stamp=new Date().toISOString();
-  Object.entries(groups).forEach(([k,l])=>{for(let p=0;p*500<l.length;p++)docs[p?k+"-p"+(p+1):k]={roaster:l[0].roaster,updatedAt:stamp,items:l.slice(p*500,p*500+500)}});
-  toast("Updating catalog…");
-  try{const col=Store.db.collection("catalog");
-    for(const[k,body]of Object.entries(docs))await col.doc(k).set(body);
-    for(const k of CAT.keys)if(!docs[k])await col.doc(k).delete();
-  }catch(e){toast("The catalog could not be saved. Only the owner or an editor can update it.");return}
-  await loadCatalog();toast(`Catalog updated: ${CAT.items.length} coffees, ${added} new`);render();
-}
-function catSearch(){
-  const box=$("#cat-results"),f=$("#coffee-form");if(!box||!f)return;
-  const q=f.name.value.trim().toLowerCase(),ro=f.roaster.value.trim().toLowerCase(),ts=q.split(/\s+/).filter(Boolean);
-  if(!CAT.items.length||q.length<2){box.innerHTML="";return}
-  const hits=[];
-  for(const i of CAT.items){const n=i.name.toLowerCase(),r=i.roaster.toLowerCase(),h=n+" "+r+" "+i.origin.toLowerCase();
-    if(ro&&!r.includes(ro))continue;if(!ts.every(t=>h.includes(t)))continue;
-    hits.push([(n.startsWith(q)?0:n.includes(q)?1:2)+(i.removed?3:0),i]);if(hits.length>400)break}
-  hits.sort((x,y)=>x[0]-y[0]||x[1].name.localeCompare(y[1].name));
-  box.innerHTML=hits.length?hits.slice(0,6).map(([,i])=>`<button class="card" type="button" data-act="cat-pick" data-id="${esc(i.id)}"><span class="body"><span class="t">${esc(i.name)}</span><span class="m">${esc([i.roaster,i.origin,i.process].filter(Boolean).join(" · "))}</span></span></button>`).join("")
-    :(q.length>2?`<p class="hint">Not in the catalog. Fill in the details yourself.</p>`:"");
-}
-
 /* ---------- events ---------- */
 const ACT={
   tab:id=>go(id),open:id=>go(id),"close-sheet":()=>closeSheet(),
@@ -1019,9 +967,6 @@ const ACT={
   "stage-preset":()=>{const f=$("#brew-form"),d=num(f.dose.value,0.1,5000),w=num(f.water.value,1,50000);if(!w){toast("Fill in the water amount first.");return}
     const bloom=Math.round(Math.min(w*.25,d?d*3:w*.15));
     $("#stage-list").innerHTML=[{t:"0:00",g:bloom,note:"Bloom"},{t:"0:45",g:Math.round(w*.6),note:""},{t:"1:30",g:Math.round(w),note:""}].map(stageRow).join("")},
-  "cat-pick":id=>{const i=CAT.items.find(x=>x.id===id),f=$("#coffee-form");if(!i||!f)return;
-    f.name.value=i.name;f.roaster.value=i.roaster;f.origin.value=i.origin;setProcess(f,i.process);f.catalogId.value=i.id;
-    const r=$("#c-roast");r.value=Math.max(0,ROASTV.indexOf(i.roast));r.dispatchEvent(new Event("input",{bubbles:true}));$("#cat-results").innerHTML="";toast("Filled in from the catalog")},
   export:()=>doExport(),"import-merge":()=>runImport(false),"import-replace":()=>runImport(true),
   "ask-wipe":()=>confirmSheet("Delete all your data?","Every coffee, preparation and photo is removed. Your badges stay. Export first if you want a copy.","Delete everything","wipe"),
   wipe:()=>{wipe();S.meta.demoOff=true;saveMeta();closeSheet();go("coffees");toast("All data deleted")},
@@ -1031,7 +976,6 @@ document.addEventListener("click",e=>{const el=e.target.closest("[data-act]");if
 document.addEventListener("submit",e=>{e.preventDefault();if(e.target.id==="coffee-form")saveCoffee(e.target);else if(e.target.id==="brew-form")saveBrew(e.target)});
 document.addEventListener("input",e=>{const t=e.target;
   if(t.id==="q"){ui.q=t.value;$("#coffee-list").innerHTML=coffeeList()}
-  else if(t.id==="c-name"||t.id==="c-roaster")catSearch()
   else if(t.id==="b-rating"){const r=Number(t.value);t.style.setProperty("--p",r*20+"%");$("#rate-out").textContent=r?fmtRate(r):"–";$("#rate-pips").innerHTML=pips(r||null)}
   else if(t.id==="b-dose"||t.id==="b-water")updRatio();
   else if(t.id==="ed-ang"){ED.ang=Number(t.value)||0;$("#ed-ang-out").textContent=ED.ang+"°";edDraw()}
@@ -1044,7 +988,6 @@ document.addEventListener("change",async e=>{const t=e.target;
   else if(t.id==="c-more")$("#c-more-box").hidden=!t.checked
   else if((t.id==="photo-file"||t.id==="photo-cam")&&t.files[0]){const f=t.files[0];t.value="";openEditor(URL.createObjectURL(f),true)}
   else if(t.id==="import-file"&&t.files[0]){const f=t.files[0];t.value="";readImport(f)}
-  else if(t.id==="catalog-file"&&t.files[0]){const f=t.files[0];t.value="";importCatalog(f)}
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!editor.hidden){closeEditor();return}
   if(e.key==="Escape"&&sheetRoot.classList.contains("open"))closeSheet();
@@ -1058,7 +1001,7 @@ async function boot(){
   hydrate(docs);
   if(!coffees().length&&!S.meta.demoOff)loadDemo();
   const h=location.hash.slice(1);if(h)cur=h;
-  S.ready=true;checkBadges(true);render(true);loadCatalog();
+  S.ready=true;checkBadges(true);render(true);
 }
 boot();
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}

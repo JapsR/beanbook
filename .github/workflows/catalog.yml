@@ -1,12 +1,17 @@
-# Refreshes the coffee catalog on a schedule and publishes the app with GitHub Pages.
-name: Update catalog and publish
+# Publishes the app with GitHub Pages on every push.
+# The coffee catalog is switched off: the app no longer uses it, and the scraper only
+# runs if you start this workflow by hand with "Update the coffee catalog" ticked.
+name: Publish Beanbook
 
 on:
-  schedule:
-    - cron: "17 4 * * 1,4"   # Mondays and Thursdays, 04:17 UTC
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      scrape:
+        description: "Update the coffee catalog"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -27,11 +32,12 @@ jobs:
         with:
           python-version: "3.12"
 
-      # Runs on the schedule, on manual runs and on every push (so a changed source list takes effect at once).
       - name: Update catalog
+        if: inputs.scrape
         run: python scraper/beanbook_scraper.py --sources scraper/sources.json --out site/catalog.json
 
       - name: Commit catalog
+        if: inputs.scrape
         run: |
           git config user.name "beanbook-bot"
           git config user.email "beanbook-bot@users.noreply.github.com"
