@@ -1,7 +1,7 @@
 {
  "format": "beanbook-catalog",
  "version": 1,
- "updatedAt": "2026-11-16T00:20:33+00:00",
+ "updatedAt": "2026-11-16T09:29:43+00:00",
  "items": [
   {
    "id": "a-matter-of-concrete:001-c2-b3",
@@ -128,13 +128,14 @@
    "source": "amatterofconcrete-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Arsenio Sandoval",
    "variety": "Chiroso, Caturra",
    "altitude": 1850,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "a-matter-of-concrete:058",
@@ -432,13 +433,14 @@
    "source": "amatterofconcrete-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Oscar Hernández",
    "variety": "TYPICA, CATURRA",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "a-matter-of-concrete:typica-mejorado-colombia-la-quebraditas",
@@ -470,25 +472,6 @@
    "producer": "Edinson Argote Variety Typica",
    "variety": "TYPICA MEJORADO, Gesha, Bourbon",
    "altitude": 1700,
-   "roastFor": "",
-   "roasterNotes": ""
-  },
-  {
-   "id": "acaia:acaia-orion-automatische-bonendoseerder-mat-grijs",
-   "name": "Acaia Orion Automatische Bonendoseerder",
-   "roaster": "Acaia",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/acaia-orion-automatische-bonendoseerder-mat-grijs",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "Acaia",
-   "altitude": null,
    "roastFor": "",
    "roasterNotes": ""
   },
@@ -968,25 +951,6 @@
    "roasterNotes": ""
   },
   {
-   "id": "barista-essentials:stijlvolle-vacuum-koffiebus-250-500g-glas-of-rvs-l",
-   "name": "Barista Essentials Vacuüm Koffiebus 250/500g",
-   "roaster": "Barista Essentials",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/stijlvolle-vacuum-koffiebus-250-500g-glas-of-rvs-lite-pro",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "",
-   "roasterNotes": ""
-  },
-  {
    "id": "black-bloom:espresso-brazil-caixa-de-fruta-natural",
    "name": "Espresso: Brazil Caixa de Fruta Natural",
    "roaster": "Black & Bloom",
@@ -1035,13 +999,14 @@
    "source": "blackandbloom-nl",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Wolemso",
    "variety": "",
    "altitude": null,
    "roastFor": "filter",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "black-bloom:decaf-colombia-divino-nino-washed-ea-process",
@@ -1972,25 +1937,6 @@
    "variety": "Tabi",
    "altitude": null,
    "roastFor": "omni",
-   "roasterNotes": ""
-  },
-  {
-   "id": "bonavita:bonavita-perfect-fit-filters-white",
-   "name": "Bonavita Perfect Fit Filterpapier Wit",
-   "roaster": "Bonavita",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/bonavita-perfect-fit-filters-white",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "filter",
    "roasterNotes": ""
   },
   {
@@ -7318,25 +7264,6 @@
    "roasterNotes": ""
   },
   {
-   "id": "delter-press:delter-press-cold-drip-koffiezetapparaat-met-drip-",
-   "name": "Delter Press Cold Drip",
-   "roaster": "Delter Press",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/delter-press-cold-drip-koffiezetapparaat-met-drip-control-technologie",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "",
-   "roasterNotes": ""
-  },
-  {
    "id": "drop-coffee:hunkute-sidamo-ethiopia",
    "name": "Hunkute, Washed Heirloom Cultivars, Ethiopia",
    "roaster": "Drop Coffee",
@@ -7508,6 +7435,25 @@
    "roasterNotes": "toffee, with roasted hazelnuts"
   },
   {
+   "id": "drop-coffee:little-drop-single-brew-kit",
+   "name": "Little Drop: Single Brew Kit",
+   "roaster": "Drop Coffee",
+   "origin": "",
+   "process": "Anaerobic",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "Caturra",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://www.dropcoffee.com/products/little-drop-single-brew-kit",
+   "source": "www-dropcoffee-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "drop-coffee:los-altares-washed-caturra-guatemala",
    "name": "Los Altares, Anaerobic Washed Caturra, Guatemala",
    "roaster": "Drop Coffee",
@@ -7651,13 +7597,14 @@
    "source": "espressofabriek-nl",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "Gihororo, Kayanza",
    "producer": "Masha",
    "variety": "Red bourbon",
    "altitude": null,
    "roastFor": "filter",
-   "roasterNotes": "apricot, honey, cinnamon tea, crafted with care, rooted in tradition"
+   "roasterNotes": "apricot, honey, cinnamon tea, crafted with care, rooted in tradition",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:brazil-035-espresso",
@@ -7866,7 +7813,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:colombia-pink-creation-semi-washed",
@@ -8340,6 +8288,25 @@
    "url": "https://friedhats.com/products/colombia-dulce-misterio-gesha-filter",
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:colombia-efren-echeverri-coferment",
+   "name": "Colombia Efrén Echeverri Coferment",
+   "roaster": "Friedhats",
+   "origin": "Colombia",
+   "process": "",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/colombia-efren-echeverri-coferment",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
    "removed": false
   },
@@ -9025,7 +8992,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:2025-colombia-la-muralla",
@@ -9063,7 +9031,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:colombia-la-muralla-gesha-omni",
@@ -9560,6 +9529,25 @@
    "removed": false
   },
   {
+   "id": "friedhats:colombia-san-francisco-washed",
+   "name": "Colombia San Francisco Washed",
+   "roaster": "Friedhats",
+   "origin": "Colombia",
+   "process": "Washed",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/colombia-san-francisco-washed",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:colombia-sebastian-gomez-caturra",
    "name": "Colombia Sebastian Gomez Caturra",
    "roaster": "Friedhats",
@@ -9633,7 +9621,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:colombia-seco-de-manrepo",
@@ -9731,6 +9720,44 @@
    "removed": false
   },
   {
+   "id": "friedhats:colombia-villa-betulia-anaerobic-natural",
+   "name": "Colombia Villa Betulia Anaerobic Natural",
+   "roaster": "Friedhats",
+   "origin": "Colombia",
+   "process": "Anaerobic",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/colombia-villa-betulia-anaerobic-natural",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:colombia-wilmer-cubillos-tabi-washed",
+   "name": "Colombia Wilmer Cubillos Tabi Washed",
+   "roaster": "Friedhats",
+   "origin": "Colombia",
+   "process": "Washed",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "Tabi, Typica, Bourbon",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/colombia-wilmer-cubillos-tabi-washed",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:colombia-wilmer-moncayo-papayo",
    "name": "Colombia Wilmer Moncayo Papayo",
    "roaster": "Friedhats",
@@ -9788,6 +9815,25 @@
    "removed": false
   },
   {
+   "id": "friedhats:costa-rica-ramiro-honey",
+   "name": "Costa Rica Adelina Fallas Honey",
+   "roaster": "Friedhats",
+   "origin": "Costa Rica",
+   "process": "Honey",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/costa-rica-ramiro-honey",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:costa-rica-anaerobic-natural",
    "name": "Costa Rica Aquiares Anaerobic",
    "roaster": "Friedhats",
@@ -9801,6 +9847,25 @@
    "roastFor": "",
    "roasterNotes": "",
    "url": "https://friedhats.com/products/costa-rica-anaerobic-natural",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:costa-rica-visa-paraiso",
+   "name": "Costa Rica Vista Paraiso",
+   "roaster": "Friedhats",
+   "origin": "Costa Rica",
+   "process": "Honey",
+   "roast": "",
+   "region": "",
+   "producer": "Finca Vista Paraíso",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/costa-rica-visa-paraiso",
    "source": "friedhats-com",
    "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
@@ -10298,7 +10363,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:ethiopia-arsosala",
@@ -10316,6 +10382,25 @@
    "url": "https://friedhats.com/products/ethiopia-arsosala",
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:ethiopia-ashenafi-getaneh-black-honey",
+   "name": "Ethiopia Ashenafi Getaneh Black Honey",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Honey",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-ashenafi-getaneh-black-honey",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
    "removed": false
   },
@@ -10434,6 +10519,25 @@
    "removed": false
   },
   {
+   "id": "friedhats:ethiopia-bogalech-dukkallee-natural-2",
+   "name": "Ethiopia Bogalech Dukalee Natural",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Natural",
+   "roast": "",
+   "region": "",
+   "producer": "Bogalech Dukkale",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-bogalech-dukkallee-natural-2",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:ethiopia-bogalech-dukallee",
    "name": "Ethiopia Bogalech Dukallee",
    "roaster": "Friedhats",
@@ -10489,6 +10593,25 @@
    "altitude": 2230,
    "roastFor": "filter",
    "roasterNotes": ""
+  },
+  {
+   "id": "friedhats:ethiopia-bombe-natural",
+   "name": "Ethiopia Bombe Natural",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Natural",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-bombe-natural",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
   },
   {
    "id": "friedhats:ethiopia-bookkisa",
@@ -10582,6 +10705,25 @@
    "url": "https://friedhats.com/products/ethiopia-buku-sayisa-anaerobic",
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:ethiopia-buku-sayisa-anaerobic-1",
+   "name": "Ethiopia Buku Sayisa Anaerobic",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Anaerobic",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-buku-sayisa-anaerobic-1",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
    "removed": false
   },
@@ -10716,7 +10858,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:ethiopia-diima-benti-3-natural-filter",
@@ -10736,6 +10879,25 @@
    "altitude": null,
    "roastFor": "filter",
    "roasterNotes": ""
+  },
+  {
+   "id": "friedhats:ethiopia-gesha-village-151-natural",
+   "name": "Ethiopia Gesha Village #151 Natural",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Natural",
+   "roast": "",
+   "region": "",
+   "producer": "La Esmeralda",
+   "variety": "Gesha",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-gesha-village-151-natural",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
   },
   {
    "id": "friedhats:2025-ethiopia-gesha-village",
@@ -10773,7 +10935,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:ethiopia-gesha-village-illubabor-forest-natural",
@@ -11023,6 +11186,25 @@
    "removed": false
   },
   {
+   "id": "friedhats:ethiopia-lalesa-black-honey",
+   "name": "Ethiopia Lalesa Black Honey",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Honey",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-lalesa-black-honey",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:ethiopia-lalesa-slow-dry",
    "name": "Ethiopia Lalesa Slow Dry",
    "roaster": "Friedhats",
@@ -11173,6 +11355,25 @@
    "altitude": null,
    "roastFor": "omni",
    "roasterNotes": ""
+  },
+  {
+   "id": "friedhats:ethiopia-negele-gorbitu-anaerobic-omni-2",
+   "name": "Ethiopia Negele Gorbitu Anaerobic Omni",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Anaerobic",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "omni",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-negele-gorbitu-anaerobic-omni-2",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
   },
   {
    "id": "friedhats:ethiopia-nesru-aba-nura-filter",
@@ -11365,6 +11566,44 @@
    "removed": false
   },
   {
+   "id": "friedhats:ethiopia-testi-small-beans-washed",
+   "name": "Ethiopia Testi Keramo Peaberry Washed",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Washed",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-testi-small-beans-washed",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:ethiopia-testi-faysel-abdosh-karamo",
+   "name": "Ethiopia Testi Small Beans Natural",
+   "roaster": "Friedhats",
+   "origin": "Ethiopia",
+   "process": "Natural",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/ethiopia-testi-faysel-abdosh-karamo",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:ethiopia-tibebu-roba",
    "name": "Ethiopia Tibebu Roba",
    "roaster": "Friedhats",
@@ -11513,6 +11752,25 @@
    "url": "https://friedhats.com/products/guatemala-catarina-leticia",
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:guatemala-el-anonal-natural",
+   "name": "Guatemala El Anonal Natural",
+   "roaster": "Friedhats",
+   "origin": "Guatemala",
+   "process": "Natural",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "Gesha, Pacamara",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/guatemala-el-anonal-natural",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
    "removed": false
   },
@@ -11669,6 +11927,25 @@
    "removed": false
   },
   {
+   "id": "friedhats:guatemala-juan-rodriguez-washed",
+   "name": "Guatemala Juan Rodriguez Washed",
+   "roaster": "Friedhats",
+   "origin": "Guatemala",
+   "process": "Washed",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/guatemala-juan-rodriguez-washed",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:guatemala-la-colina-washed",
    "name": "Guatemala La Colina Washed",
    "roaster": "Friedhats",
@@ -11722,6 +11999,25 @@
    "url": "https://friedhats.com/products/guatemala-las-brisas",
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:guatemala-las-brisas-washed",
+   "name": "Guatemala Las Brisas Washed",
+   "roaster": "Friedhats",
+   "origin": "Guatemala",
+   "process": "Washed",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/guatemala-las-brisas-washed",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
    "removed": false
   },
@@ -11914,6 +12210,25 @@
    "altitude": null,
    "roastFor": "filter",
    "roasterNotes": ""
+  },
+  {
+   "id": "friedhats:india-kaadkaapi-gundikhan-anoxic-natural",
+   "name": "India Kaadkaapi Gundikhan Anoxic Natural",
+   "roaster": "Friedhats",
+   "origin": "India",
+   "process": "Natural",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/india-kaadkaapi-gundikhan-anoxic-natural",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
   },
   {
    "id": "friedhats:india-ratnagiri-rw-7-espresso",
@@ -12467,6 +12782,25 @@
    "removed": false
   },
   {
+   "id": "friedhats:kenya-kamuchege-washed",
+   "name": "Kenya Kamuchege Washed",
+   "roaster": "Friedhats",
+   "origin": "Kenya",
+   "process": "Washed",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/kenya-kamuchege-washed",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:kenya-kariaini-aa-011-filter",
    "name": "Kenya Kariaini AA #011 Filter",
    "roaster": "Friedhats",
@@ -12483,7 +12817,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:kenya-karimikui-aa-1-filter",
@@ -12710,6 +13045,25 @@
    "url": "https://friedhats.com/products/kenya-ngunguini-pb",
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:kenya-rungeto-kiangoi-056",
+   "name": "Kenya Rung'eto Kiangoi #056",
+   "roaster": "Friedhats",
+   "origin": "Kenya",
+   "process": "Washed",
+   "roast": "",
+   "region": "Kirinyaga",
+   "producer": "Rung’eto Farmers",
+   "variety": "SL28, SL34",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/kenya-rungeto-kiangoi-056",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
    "removed": false
   },
@@ -13056,6 +13410,25 @@
    "removed": false
   },
   {
+   "id": "friedhats:panama-finca-la-alqueria-pacamara-omni",
+   "name": "Panama Finca La Alqueria Pacamara Natural",
+   "roaster": "Friedhats",
+   "origin": "Panama",
+   "process": "Natural",
+   "roast": "",
+   "region": "",
+   "producer": "La Alquería",
+   "variety": "Pacamara, Gesha, SL-28",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/panama-finca-la-alqueria-pacamara-omni",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
    "id": "friedhats:panama-franceschi-210-washed",
    "name": "Panama Franceschi #210 Washed",
    "roaster": "Friedhats",
@@ -13128,6 +13501,25 @@
    "url": "https://friedhats.com/products/panama-janson-omni",
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "friedhats:panama-kotowa-1524-gesha-natural",
+   "name": "Panama Kotowa 1524 Gesha Natural",
+   "roaster": "Friedhats",
+   "origin": "Panama",
+   "process": "Natural",
+   "roast": "",
+   "region": "",
+   "producer": "Las Brujas",
+   "variety": "Gesha",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://friedhats.com/products/panama-kotowa-1524-gesha-natural",
+   "source": "friedhats-com",
+   "firstSeen": "2026-11-16",
    "lastSeen": "2026-11-16",
    "removed": false
   },
@@ -13319,7 +13711,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:peru-amalia-compania-filter",
@@ -13357,7 +13750,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:peru-andres-torres-omni",
@@ -13395,7 +13789,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:peru-cruz-pata-filter",
@@ -13509,7 +13904,8 @@
    "source": "friedhats-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false
+   "removed": true,
+   "removedAt": "2026-11-16"
   },
   {
    "id": "friedhats:peru-gesha-hugo-pareja-omni",
@@ -14681,13 +15077,14 @@
    "source": "georgehowellcoffee-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Kanzu",
    "variety": "",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": "sweet plum, orange"
+   "roasterNotes": "sweet plum, orange",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "george-howell:tumaco-panama",
@@ -15105,25 +15502,6 @@
    "variety": "",
    "altitude": null,
    "roastFor": "omni",
-   "roasterNotes": ""
-  },
-  {
-   "id": "gerrits-koffie:coffeedelights-melkpoeder",
-   "name": "CoffeeDelights Melkpoeder 500g - Romige Koffiemelk Poeder",
-   "roaster": "Gerrits Koffie",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://gerritskoffie.nl/products/coffeedelights-melkpoeder",
-   "source": "gerritskoffie-nl",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "espresso",
    "roasterNotes": ""
   },
   {
@@ -16093,25 +16471,6 @@
    "variety": "",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": ""
-  },
-  {
-   "id": "graycano:graycano-gc01-conisch-filterpapier-100-stuks-voor-",
-   "name": "Graycano GC01 Conisch Filterpapier",
-   "roaster": "Graycano",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/graycano-gc01-conisch-filterpapier-100-stuks-voor-1-2-kopjes",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "omni",
    "roasterNotes": ""
   },
   {
@@ -17844,13 +18203,14 @@
    "source": "www-intelligentsia-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Pink Bourbon",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "intelligentsia:colombia-la-laja-geisha",
@@ -19079,13 +19439,14 @@
    "source": "www-intelligentsia-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Geisha",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "intelligentsia:honduras-caballero-pacamara-natural",
@@ -20168,25 +20529,6 @@
    "variety": "",
    "altitude": null,
    "roastFor": "espresso",
-   "roasterNotes": ""
-  },
-  {
-   "id": "joy-resolve:joy-resolve-barisieur-grande-koffie-wekker-wit-rub",
-   "name": "Joy Resolve Barisieur Grande Koffie Wekker",
-   "roaster": "Joy Resolve",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/joy-resolve-barisieur-grande-koffie-wekker-wit-rubberhout-zwart-notenhout-220-240v",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "",
    "roasterNotes": ""
   },
   {
@@ -21718,13 +22060,14 @@
    "source": "labroast-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "La Colina",
    "variety": "Gesha",
    "altitude": 1700,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "labroast:coffee-coconuts-raro-boda-ethiopia",
@@ -21889,13 +22232,14 @@
    "source": "labroast-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Danche",
    "variety": "Heirloom",
    "altitude": 2200,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "labroast:dak-coffee-roasters-jazz-fruits-ethiopia",
@@ -21984,13 +22328,14 @@
    "source": "labroast-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "Quindío, Colombia",
    "producer": "Sebastián Ramírez, El Placer",
    "variety": "Pink Bourbon",
    "altitude": 1825,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "labroast:dak-coffee-roasters-silky-way-colombia",
@@ -22098,13 +22443,14 @@
    "source": "labroast-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Gesha 1931",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "labroast:friedhats-ethiopia-testi-keramo-peaberry-ethiopia",
@@ -22440,13 +22786,14 @@
    "source": "labroast-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "La Sirena",
    "variety": "Castillo",
    "altitude": 1350,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "labroast:kolibri-coffee-geisha-gardens-colombia",
@@ -22763,13 +23110,14 @@
    "source": "labroast-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Single",
    "variety": "Sidra",
    "altitude": 1870,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "labroast:single-estate-coffee-el-salvador-himalaya-maragogy",
@@ -23181,13 +23529,14 @@
    "source": "luukscoffee-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "Sidamo",
    "producer": "",
    "variety": "Local Landraces (Ethiopian Heirloom)",
    "altitude": 2269,
    "roastFor": "filter",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "luuk-s-coffee:filter-coffee-kenya",
@@ -23200,13 +23549,14 @@
    "source": "luukscoffee-com",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "Central Region — Murang'a",
    "producer": "Kangiri Farmers",
    "variety": "Batian | Ruiru 11 | SL28 | SL34",
    "altitude": 1675,
    "roastFor": "filter",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "manhattan-coffee-roasters:bombe",
@@ -24206,63 +24556,6 @@
    "roasterNotes": ""
   },
   {
-   "id": "muvna:muvna-angel-coffee-display-tubeset",
-   "name": "MUVNA Display Tubeset",
-   "roaster": "MUVNA",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/muvna-angel-coffee-display-tubeset",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "",
-   "roasterNotes": ""
-  },
-  {
-   "id": "muvna:muvna-distributeur-58mm-v-series",
-   "name": "MUVNA Distributeur 58mm V‑Series",
-   "roaster": "MUVNA",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/muvna-distributeur-58mm-v-series",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "espresso",
-   "roasterNotes": ""
-  },
-  {
-   "id": "muvna:muvna-koffiebewaarbus-matzwart-750g",
-   "name": "MUVNA Koffiebewaarbus Matzwart 750g",
-   "roaster": "MUVNA",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/muvna-koffiebewaarbus-matzwart-750g",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "",
-   "roasterNotes": ""
-  },
-  {
    "id": "nomad-coffee:acacia-hills-pacamara-espresso",
    "name": "Acacia Hills Pacamara",
    "roaster": "Nomad Coffee",
@@ -24539,13 +24832,33 @@
    "source": "nomadcoffee-es",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Geisha",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
+  },
+  {
+   "id": "nomad-coffee:geisha-timbuyacu",
+   "name": "Geisha Timbuyaku",
+   "roaster": "Nomad Coffee",
+   "origin": "",
+   "process": "",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "Geisha",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://nomadcoffee.es/products/geisha-timbuyacu",
+   "source": "nomadcoffee-es",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
   },
   {
    "id": "nomad-coffee:immersion-bag-chiroso-las-flores",
@@ -24660,6 +24973,44 @@
    "altitude": null,
    "roastFor": "",
    "roasterNotes": ""
+  },
+  {
+   "id": "nomad-coffee:kent-espresso",
+   "name": "Kent",
+   "roaster": "Nomad Coffee",
+   "origin": "Tanzania",
+   "process": "",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://nomadcoffee.es/products/kent-espresso",
+   "source": "nomadcoffee-es",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
+  },
+  {
+   "id": "nomad-coffee:kent-filtro",
+   "name": "Kent",
+   "roaster": "Nomad Coffee",
+   "origin": "Tanzania",
+   "process": "",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "",
+   "roasterNotes": "",
+   "url": "https://nomadcoffee.es/products/kent-filtro",
+   "source": "nomadcoffee-es",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
   },
   {
    "id": "nomad-coffee:kii-ab",
@@ -24957,13 +25308,14 @@
    "source": "nomadcoffee-es",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Timbuyacu",
    "variety": "Bourbon",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "nomad-coffee:timbuyacu-filtro",
@@ -24976,13 +25328,14 @@
    "source": "nomadcoffee-es",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Timbuyacu",
    "variety": "Bourbon",
    "altitude": null,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "ona-coffee:aspen",
@@ -25052,13 +25405,14 @@
    "source": "onacoffee-com-au",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Geisha",
    "altitude": null,
    "roastFor": "filter",
-   "roasterNotes": "zesty lime, ripe strawberries"
+   "roasterNotes": "zesty lime, ripe strawberries",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "ona-coffee:drip-bag-filter-op1-q2",
@@ -25071,13 +25425,14 @@
    "source": "onacoffee-com-au",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Heirloom",
    "altitude": null,
    "roastFor": "filter",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "ona-coffee:drip-bag-filter-guji-yabitu-koba-g1-ethiopia-natur",
@@ -25223,13 +25578,14 @@
    "source": "onacoffee-com-au",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "",
    "altitude": null,
    "roastFor": "omni",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "ona-coffee:filter-single-originla-huerta-honduras-washed",
@@ -25280,13 +25636,14 @@
    "source": "onacoffee-com-au",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Bourbon",
    "altitude": null,
    "roastFor": "filter",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "ona-coffee:maple",
@@ -27796,6 +28153,25 @@
    "altitude": null,
    "roastFor": "omni",
    "roasterNotes": ""
+  },
+  {
+   "id": "origin-coffee:imbalu",
+   "name": "Imbalu",
+   "roaster": "Origin Coffee",
+   "origin": "",
+   "process": "",
+   "roast": "",
+   "region": "",
+   "producer": "",
+   "variety": "",
+   "altitude": null,
+   "roastFor": "omni",
+   "roasterNotes": "",
+   "url": "https://www.origincoffee.co.uk/products/imbalu",
+   "source": "www-origincoffee-co-uk",
+   "firstSeen": "2026-11-16",
+   "lastSeen": "2026-11-16",
+   "removed": false
   },
   {
    "id": "origin-coffee:kiamugumo",
@@ -46618,13 +46994,14 @@
    "source": "www-roguewavecoffee-ca",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Santa Lucía",
    "variety": "Caturra, Catuai",
    "altitude": 1800,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "rogue-wave:cascara-dried-coffee-cherry-nicaragua",
@@ -46637,13 +47014,14 @@
    "source": "www-roguewavecoffee-ca",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "Rene Paguaga",
    "variety": "",
    "altitude": 1475,
    "roastFor": "",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "rogue-wave:cascara-dried-coffee-cherry-peru",
@@ -46656,13 +47034,14 @@
    "source": "www-roguewavecoffee-ca",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "Junín",
    "producer": "",
    "variety": "Catuai, Caturra, Bourbon",
    "altitude": 1525,
    "roastFor": "",
-   "roasterNotes": "Raisin, sugarcane, plum, dried apple, honey, and orange"
+   "roasterNotes": "Raisin, sugarcane, plum, dried apple, honey, and orange",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "rogue-wave:test-roast",
@@ -54602,25 +54981,6 @@
    "roasterNotes": ""
   },
   {
-   "id": "simon-l-velt:bodk1-html",
-   "name": "Bodum Kenya",
-   "roaster": "Simon Lévelt",
-   "origin": "Kenya",
-   "process": "",
-   "roast": "",
-   "url": "https://www.simonlevelt.nl/nl/bodum-kenya/BODK1.html",
-   "source": "www-simonlevelt-nl",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "",
-   "roasterNotes": ""
-  },
-  {
    "id": "simon-l-velt:10348-m-html",
    "name": "Guji Ethiopië Bonen Ongeroosterd",
    "roaster": "Simon Lévelt",
@@ -54634,25 +54994,6 @@
    "roastFor": "",
    "roasterNotes": "",
    "url": "https://www.simonlevelt.nl/nl/guji-ethiopie-bonen--ongeroosterd/10348-M.html",
-   "source": "www-simonlevelt-nl",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false
-  },
-  {
-   "id": "simon-l-velt:10454-m-html",
-   "name": "Yunnan Flowery Orange Pekoe",
-   "roaster": "Simon Lévelt",
-   "origin": "China",
-   "process": "",
-   "roast": "",
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "",
-   "roasterNotes": "",
-   "url": "https://www.simonlevelt.nl/nl/yunnan-flowery-orange-pekoe/10454-M.html",
    "source": "www-simonlevelt-nl",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
@@ -54802,13 +55143,14 @@
    "source": "www-singleestatecoffee-nl",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Sidra, Typica, Bourbon",
    "altitude": 1870,
    "roastFor": "omni",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "single-estate-coffee-roasters:guatemala-puerta-verde",
@@ -54916,13 +55258,14 @@
    "source": "www-singleestatecoffee-nl",
    "firstSeen": "2026-11-15",
    "lastSeen": "2026-11-16",
-   "removed": false,
+   "removed": true,
    "region": "",
    "producer": "",
    "variety": "Bourbon, Caturra",
    "altitude": null,
    "roastFor": "omni",
-   "roasterNotes": ""
+   "roasterNotes": "",
+   "removedAt": "2026-11-16"
   },
   {
    "id": "square-mile:decaf-espresso",
@@ -60588,25 +60931,6 @@
    "variety": "",
    "altitude": null,
    "roastFor": "filter",
-   "roasterNotes": ""
-  },
-  {
-   "id": "xbloom:xbloom-studio-midnight-black",
-   "name": "xBloom Studio",
-   "roaster": "xBloom",
-   "origin": "",
-   "process": "",
-   "roast": "",
-   "url": "https://koffiekenner.com/products/xbloom-studio-midnight-black",
-   "source": "koffiekenner-com",
-   "firstSeen": "2026-11-15",
-   "lastSeen": "2026-11-16",
-   "removed": false,
-   "region": "",
-   "producer": "",
-   "variety": "",
-   "altitude": null,
-   "roastFor": "",
    "roasterNotes": ""
   },
   {

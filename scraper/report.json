@@ -1,24 +1,24 @@
 {
- "ranAt": "2026-11-16T00:20:33+00:00",
+ "ranAt": "2026-11-16T09:29:43+00:00",
  "sources": [
   {
    "url": "https://friedhats.com",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 423 candidate pages, 80 read this run, 23 still to read, 399 products",
-   "products": 399,
-   "coffees": 346,
+   "info": "sitemap: 423 candidate pages, 23 read this run, 0 still to read, 422 products",
+   "products": 422,
+   "coffees": 357,
    "taken_types": {
-    "Archived Coffee": 335,
-    "Coffee": 5,
+    "Archived Coffee": 333,
+    "Coffee": 18,
     "Espresso": 3,
     "Omni": 2,
     "Filter": 1
    },
    "skipped_types": {
     "Merchandise": 37,
+    "Archived Coffee": 16,
     "Tools": 10,
-    "Archived Coffee": 4,
     "Subscription": 1,
     "Coffee": 1
    },
@@ -49,7 +49,7 @@
      "roasterNotes": "stewed red berries, 60% chocolate, sweet dried fruit"
     }
    ],
-   "with_details": 178
+   "with_details": 181
   },
   {
    "url": "https://manhattancoffeeroasters.com",
@@ -382,13 +382,13 @@
    "reader": "woocommerce",
    "info": "",
    "products": 310,
-   "coffees": 24,
+   "coffees": 22,
    "taken_types": {
-    "+ ALL PRODUCTS": 23,
+    "+ ALL PRODUCTS": 21,
     "ALL": 1
    },
    "skipped_types": {
-    "+ ALL PRODUCTS": 142,
+    "+ ALL PRODUCTS": 144,
     "BREWING EQUIPMENT": 50,
     "BARISTA TOOLS": 43,
     "+ A.M.O.C. ESSENTIALS": 13,
@@ -425,7 +425,7 @@
      "roasterNotes": "stevia, honey"
     }
    ],
-   "with_details": 22
+   "with_details": 20
   },
   {
    "url": "https://shokunin.coffee",
@@ -531,9 +531,9 @@
    "reader": "woocommerce",
    "info": "",
    "products": 42,
-   "coffees": 14,
+   "coffees": 12,
    "taken_types": {
-    "Espresso": 13,
+    "Espresso": 11,
     "Filter": 1
    },
    "skipped_types": {
@@ -541,16 +541,17 @@
     "Sage Onderhoud": 4,
     "Sage Espressomachine": 4,
     "Training": 3,
+    "Espresso": 2,
     "Abonnementen": 2,
     "Boxen": 2,
     "Workshop": 1
    },
    "skipped_examples": [
+    "Peru – Canaris",
+    "Guatemala – Buena Vista",
     "Kalita Wave Filters",
     "Sokken",
-    "Kinto travel Tumbler",
-    "Tote bag XL",
-    "Sleutelhanger"
+    "Kinto travel Tumbler"
    ],
    "detail_examples": [
     {
@@ -576,7 +577,7 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 14
+   "with_details": 12
   },
   {
    "url": "https://sampietro.nl",
@@ -674,11 +675,9 @@
    "reader": "shopify",
    "info": "",
    "products": 19,
-   "coffees": 4,
+   "coffees": 2,
    "taken_types": {
     "LIMITED SEASONAL FILTER 250G": 1,
-    "KENYA FILTER 250G": 1,
-    "ETHIOPIA FILTER 250G": 1,
     "DECAF ESPRESSO 250G": 1
    },
    "skipped_types": {
@@ -687,9 +686,9 @@
     "CHRISTMAS SPECIAL FILTER 250G": 1,
     "bundle": 1,
     "FILTER BUNDLE": 1,
+    "KENYA FILTER 250G": 1,
     "tshirt": 1,
-    "socks": 1,
-    "ESPRESSO BUNDLE": 1
+    "socks": 1
    },
    "skipped_examples": [
     "CHRISTMAS SPECIAL 250G",
@@ -708,37 +707,29 @@
      "roastFor": "filter"
     },
     {
-     "name": "KENYA FILTER 250G",
-     "region": "Central Region — Murang'a",
-     "producer": "Kangiri Farmers",
-     "variety": "Batian | Ruiru 11 | SL28 | SL34",
-     "altitude": 1675,
-     "roastFor": "filter"
-    },
-    {
-     "name": "ETHIOPIA FILTER 250G",
-     "region": "Sidamo",
-     "variety": "Local Landraces (Ethiopian Heirloom)",
-     "altitude": 2269,
-     "roastFor": "filter"
+     "name": "BRAZIL DECAF 250G",
+     "region": "Cerrado",
+     "producer": "Flávio Márcio",
+     "altitude": 1200,
+     "roastFor": "espresso"
     }
    ],
-   "with_details": 4
+   "with_details": 2
   },
   {
    "url": "https://www.simonlevelt.nl",
    "ok": true,
    "reader": "sitemap",
-   "info": "sitemap: 1410 candidate pages, 80 read this run, 1010 still to read, 400 products",
-   "products": 400,
-   "coffees": 8,
+   "info": "sitemap: 1410 candidate pages, 80 read this run, 930 still to read, 480 products",
+   "products": 480,
+   "coffees": 2,
    "taken_types": {
-    "be": 4,
-    "nl": 4
+    "be": 1,
+    "nl": 1
    },
    "skipped_types": {
-    "be": 196,
-    "nl": 196
+    "be": 239,
+    "nl": 239
    },
    "skipped_examples": [
     "Aarke Kettle 1,2L",
@@ -749,10 +740,7 @@
    ],
    "detail_examples": [
     {
-     "name": "Bodum Kenya"
-    },
-    {
-     "name": "Bodum Kenya"
+     "name": "Guji Ethiopië Bonen Ongeroosterd"
     },
     {
      "name": "Guji Ethiopië Bonen Ongeroosterd"
@@ -760,8 +748,8 @@
    ],
    "with_details": 0,
    "body_samples": [
-    "Bodum Kenya cafetière 3 kops of 8 kops, een cafetière voor volle, aromatische koffie met pure smaak.",
-    "Bodum Kenya cafetière 3 kops of 8 kops, een cafetière voor volle, aromatische koffie met pure smaak."
+    "Ongeroosterde specialty koffie uit Guji, Ethiopië, met een verfijnd en uitgesproken karakter.",
+    "Ongeroosterde specialty koffie uit Guji, Ethiopië, met een verfijnd en uitgesproken karakter."
    ]
   },
   {
@@ -940,12 +928,16 @@
    "reader": "shopify",
    "info": "",
    "products": 5,
-   "coffees": 5,
+   "coffees": 4,
    "taken_types": {
-    "(none)": 5
+    "(none)": 4
    },
-   "skipped_types": {},
-   "skipped_examples": [],
+   "skipped_types": {
+    "(none)": 1
+   },
+   "skipped_examples": [
+    "Filter: Ethiopia Limu-2 Wolemso Washed"
+   ],
    "detail_examples": [
     {
      "name": "Special Series Filter: Colombia Huila Villa Pastora Natural Pink Bourbon",
@@ -959,12 +951,16 @@
      "roasterNotes": "cherry, plums, cocoa, vanilla hazelnut praline"
     },
     {
-     "name": "Filter: Ethiopia Limu-2 Wolemso Washed",
-     "producer": "Wolemso",
-     "roastFor": "filter"
+     "name": "Espresso: Panama Mi Finquita Washed Catuai/Caturra",
+     "region": "Chiriquí",
+     "producer": "Ratibor Hartmann",
+     "variety": "Catuai, Caturra, Bourbon",
+     "altitude": 900,
+     "roastFor": "espresso",
+     "roasterNotes": "jasmine"
     }
    ],
-   "with_details": 3
+   "with_details": 2
   },
   {
    "url": "https://www.bootkoffie.nl",
@@ -1035,25 +1031,18 @@
    "reader": "shopify",
    "info": "",
    "products": 6,
-   "coffees": 5,
+   "coffees": 4,
    "taken_types": {
-    "(none)": 5
+    "(none)": 4
    },
    "skipped_types": {
-    "(none)": 1
+    "(none)": 2
    },
    "skipped_examples": [
+    "Filter roast - Burundi - Masha",
     "Espressofabriek tote bag"
    ],
    "detail_examples": [
-    {
-     "name": "Filter roast - Burundi - Masha",
-     "region": "Gihororo, Kayanza",
-     "producer": "Masha",
-     "variety": "Red bourbon",
-     "roastFor": "filter",
-     "roasterNotes": "apricot, honey, cinnamon tea, crafted with care, rooted in tradition"
-    },
     {
      "name": "Espresso roast - Colombia - El bombo mujeres",
      "region": "Huila, Pitalito",
@@ -1068,9 +1057,17 @@
      "altitude": 1800,
      "roastFor": "espresso",
      "roasterNotes": "peach, smooth milk chocolate"
+    },
+    {
+     "name": "Espresso roast - Brazil - sítio dois irmãos",
+     "region": "Cerrado de Mineiro",
+     "producer": "COCARIVE",
+     "variety": "Red catuai",
+     "roastFor": "espresso",
+     "roasterNotes": "stone fruit, florals"
     }
    ],
-   "with_details": 5
+   "with_details": 4
   },
   {
    "url": "https://badeta.nl",
@@ -1256,15 +1253,15 @@
    "reader": "woocommerce",
    "info": "",
    "products": 103,
-   "coffees": 79,
+   "coffees": 73,
    "taken_types": {
-    "Vind jouw perfecte koffie": 36,
     "Single Origin": 33,
+    "Vind jouw perfecte koffie": 30,
     "Blend": 10
    },
    "skipped_types": {
+    "Vind jouw perfecte koffie": 10,
     "Barista Tools": 5,
-    "Vind jouw perfecte koffie": 4,
     "Discovery Boxes": 3,
     "Cadeaubon": 3,
     "Filters": 3,
@@ -1275,9 +1272,9 @@
    "skipped_examples": [
     "Onze Coffee Club – Discovery Box – Nederlandse branders",
     "Friedhats Espresso Blend",
-    "Dak Coffee Roasters Juice Box – Colombia",
-    "Coffee & Coconuts Maboya – Venezuela",
-    "50 gram Proefzakje"
+    "Friedhats Ethiopia Gesha Village #151 – Ethiopia",
+    "Kolibri Coffee Confiture – Colombia",
+    "Single Estate Coffee Buena Vista – Guatemala"
    ],
    "detail_examples": [
     {
@@ -1296,7 +1293,7 @@
      "variety": "Chiroso"
     }
    ],
-   "with_details": 52
+   "with_details": 46
   },
   {
    "url": "https://koffiekenner.com",
@@ -1304,16 +1301,11 @@
    "reader": "shopify",
    "info": "",
    "products": 642,
-   "coffees": 21,
+   "coffees": 11,
    "taken_types": {
     "Koffiebonen": 8,
-    "Voorraadbussen": 3,
-    "Koffiefilters": 2,
-    "Filterkoffiezetapparaten": 2,
     "(none)": 2,
-    "Koffie": 1,
-    "Weegschalen": 1,
-    "Cold brew": 1
+    "Koffie": 1
    },
    "skipped_types": {
     "(none)": 96,
@@ -1338,17 +1330,17 @@
      "roastFor": "filter"
     },
     {
-     "name": "Acaia Orion Automatische Bonendoseerder",
-     "variety": "Acaia"
+     "name": "Gutiti Lion"
     },
     {
-     "name": "Gutiti Lion"
+     "name": "Geisha Valley",
+     "variety": "Geisha"
     }
    ],
-   "with_details": 2,
+   "with_details": 1,
    "body_samples": [
     "Een frisse, florale filterkoffie uit Gedeb, Ethiopië, met levendige tonen van citrus, citroenschil en witte bloemen. De gewassen verwerking zorgt voor een helder, verfijnd kopje met een lange, gestructureerde afdronk.",
-    "Met de Acaia Orion doseer je koffiebonen razendsnel en uiterst nauwkeurig op gewicht voor de ultieme workflow. Dit slimme systeem schakelt moeiteloos tussen automatische porties en handmatige controle voor jouw ideale koffieroutine. Dankzij de robuuste aluminium behuizing, Bluetooth-connectiviteit en handige USB-C oplaadpoort tilt dit doseersysteem elke koffiebar of branderij naar een hoger niveau"
+    "Een licht geroosterde koffie met een verfrissende citrus- en perziktonen, vergezeld van een bloemige, lemongrassachtige geur. De body is medium, met een zachte, fruitige zuurgraad."
    ]
   },
   {
@@ -1357,44 +1349,26 @@
    "reader": "shopify",
    "info": "",
    "products": 113,
-   "coffees": 41,
-   "taken_types": {
-    "koffiebonen": 23,
-    "(none)": 14,
-    "Gemalen Koffie": 4
-   },
+   "coffees": 0,
+   "taken_types": {},
    "skipped_types": {
-    "(none)": 44,
+    "(none)": 58,
+    "koffiebonen": 27,
     "thee": 18,
     "Koffiecups": 5,
-    "koffiebonen": 4,
+    "Gemalen Koffie": 4,
     "bonenmaler": 1
    },
    "skipped_examples": [
     "De Italiaanse Collectie — 2,75 kg",
     "Noca decaf koffiecups",
-    "Carmen Classic Premium Koffie 500 g – Chocolade & Cacao",
-    "Bio Suikersticks Kristalsuiker - 500 Stuks Biologisch",
-    "Langnese Natuurlijke Honingsticks 80 Stuks"
+    "Test Product Organic Coffee - Do not order",
+    "Espresso Dark Roast Collectie – 3 x 500g Premium Bonen",
+    "Premium Biologische Koffie – 3 x 500g Duurzame Topmerken"
    ],
-   "detail_examples": [
-    {
-     "name": "Test Product Organic Coffee - Do not order"
-    },
-    {
-     "name": "Espresso Dark Roast Collectie – 3 x 500g Premium Bonen",
-     "roastFor": "espresso"
-    },
-    {
-     "name": "Premium Biologische Koffie – 3 x 500g Duurzame Topmerken",
-     "roastFor": "filter"
-    }
-   ],
+   "detail_examples": [],
    "with_details": 0,
-   "body_samples": [
-    "Organic Coffee: Biologische Koffie van Topkwaliteit\nGeniet van luxe koffie die goed is voor jou én de planeet. Organic Coffee biedt een intense smaakbeleving met rijke tonen van chocolade, kruiden en florale nuances.\nWaarom Kiezen voor Organic Coffee?\n100% Biologisch: Geen pesticiden of kunstmest voor een pure, natuurlijke smaak.\nClimate Neutral: Volledig CO2-gecompenseerd en duurzaam geproduceerd",
-    "Espresso Koffiebonen 1,5 KG – 3 x 500g Donker Gebrand\nVoor liefhebbers van krachtige espresso\nOntdek drie verschillende donker gebrande espresso koffiebonen in één premium bundel van 1,5 kg (3 x 500g). Speciaal geselecteerd voor een intense smaakbeleving met volle body, diepe aroma’s en een rijke cremalaag.\nDonkere Espresso Variatie\nDeze espresso koffiebonen behoren tot de smaakgroep donker en int"
-   ]
+   "body_samples": []
   },
   {
    "url": "https://www.casabarista.nl",
@@ -1599,7 +1573,7 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 68,
+   "products": 67,
    "coffees": 11,
    "taken_types": {
     "Coffee": 10,
@@ -1607,7 +1581,7 @@
    },
    "skipped_types": {
     "Equipment": 26,
-    "Würtz": 8,
+    "Würtz": 7,
     "Apparel": 6,
     "Coffee bundle": 4,
     "Single Serve": 4,
@@ -1618,9 +1592,9 @@
    "skipped_examples": [
     "K.H. Würtz Cup - Condesa",
     "Highlight Set",
-    "K.H. Würtz Cup - Justicia",
     "Ground Chocolate - Bejofo",
-    "Würtz Set"
+    "Würtz Set",
+    "Rare Set"
    ],
    "detail_examples": [
     {
@@ -1679,10 +1653,10 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 40,
-   "coffees": 12,
+   "products": 41,
+   "coffees": 13,
    "taken_types": {
-    "Coffee": 12
+    "Coffee": 13
    },
    "skipped_types": {
     "Brewing Equipment": 11,
@@ -1702,6 +1676,10 @@
    ],
    "detail_examples": [
     {
+     "name": "Little Drop: Single Brew Kit",
+     "variety": "Caturra"
+    },
+    {
      "name": "Los Altares, Anaerobic Washed Caturra, Guatemala",
      "producer": "Guadalupe Alberto Reyes with family",
      "variety": "Caturra",
@@ -1714,16 +1692,9 @@
      "variety": "Heirloom",
      "altitude": 1600,
      "roasterNotes": "milk chocolate, almond"
-    },
-    {
-     "name": "Vicente Paye, Washed Caturra, Bolivia",
-     "region": "Caranavi",
-     "producer": "Vicente Paye",
-     "variety": "Caturra",
-     "altitude": 1450
     }
    ],
-   "with_details": 12
+   "with_details": 13
   },
   {
    "url": "https://nomadcoffee.es",
@@ -1754,18 +1725,18 @@
    ],
    "detail_examples": [
     {
+     "name": "Kent"
+    },
+    {
+     "name": "Kent"
+    },
+    {
      "name": "Jhenrry Chávez",
      "producer": "Huachaqpampa",
      "variety": "Geisha"
-    },
-    {
-     "name": "OMBLIGÓN - LAS FLORES | EXCLUSIVO WHOLESALE CLIENTS"
-    },
-    {
-     "name": "Esperanza"
     }
    ],
-   "with_details": 16
+   "with_details": 14
   },
   {
    "url": "https://shop.squaremilecoffee.com",
@@ -1873,10 +1844,10 @@
    "ok": true,
    "reader": "shopify",
    "info": "",
-   "products": 265,
-   "coffees": 20,
+   "products": 266,
+   "coffees": 21,
    "taken_types": {
-    "Coffee (Feature)": 9,
+    "Coffee (Feature)": 10,
     "Coffee (Mainstay SO)": 5,
     "Coffee (Blend)": 3,
     "Coffee (Special Edition)": 1,
@@ -1902,23 +1873,22 @@
    ],
    "detail_examples": [
     {
+     "name": "Imbalu",
+     "roastFor": "omni"
+    },
+    {
      "name": "Guatalón / Kveik",
      "roastFor": "omni"
     },
     {
      "name": "Matazano / Philly Sour & Kveik",
      "roastFor": "omni"
-    },
-    {
-     "name": "Banko Gotiti",
-     "variety": "Heirloom",
-     "roastFor": "omni"
     }
    ],
    "with_details": 4,
    "body_samples": [
-    "The return of an experimental series exploring the influence of beer yeast on coffee fermentation. A Norwegian brewer's yeast, Voss Kviek develops a rich depth of flavour in the cup, balancing cherry sweetness with the full-bodied character of a fortified wine.\n*Coffee will be sent out in our mailer bags",
-    "The return of an experimental series exploring the influence of beer yeast on coffee fermentation. A two-stage fermentation and souring process creates a complex cup profile with striking fruit intensity.\n*Coffee will be sent out in our mailer bags"
+    "Grown on the slopes of Mount Elgon, Imbalu is an exciting representation of Ugandan speciality coffee. Anoxic fermentation enhances a sweet, Black Forest-like character, bringing layers of rich fruit, chocolate sweetness and depth to the cup.\n*Coffee will be sent out in our mailer bags",
+    "The return of an experimental series exploring the influence of beer yeast on coffee fermentation. A Norwegian brewer's yeast, Voss Kviek develops a rich depth of flavour in the cup, balancing cherry sweetness with the full-bodied character of a fortified wine.\n*Coffee will be sent out in our mailer bags"
    ]
   },
   {
@@ -2170,10 +2140,9 @@
    "reader": "shopify",
    "info": "",
    "products": 246,
-   "coffees": 157,
+   "coffees": 155,
    "taken_types": {
-    "Coffee": 155,
-    "(none)": 2
+    "Coffee": 155
    },
    "skipped_types": {
     "Equipment": 45,
@@ -2181,7 +2150,7 @@
     "Drinkware": 10,
     "Apparel": 8,
     "Coffee": 6,
-    "(none)": 3,
+    "(none)": 5,
     "Lattes + Cold Coffee": 3,
     "Tea Ware": 1
    },
@@ -2206,7 +2175,7 @@
      "roastFor": "espresso"
     }
    ],
-   "with_details": 94
+   "with_details": 92
   },
   {
    "url": "https://www.stumptowncoffee.com",
@@ -2435,7 +2404,7 @@
    "reader": "shopify",
    "info": "",
    "products": 109,
-   "coffees": 40,
+   "coffees": 39,
    "taken_types": {
     "Coffee - Limited": 15,
     "Coffee - Mamuto": 3,
@@ -2444,7 +2413,7 @@
     "Coffee - Mexico": 2,
     "Coffee - Daterra": 2,
     "Coffee - Decaf": 2,
-    "Coffee - Rwanda": 2
+    "Coffee - Eth Macro": 2
    },
    "skipped_types": {
     "Brew Equipment": 14,
@@ -2480,7 +2449,7 @@
      "roasterNotes": "sweet honey, orange sorbet, soft earl grey"
     }
    ],
-   "with_details": 22
+   "with_details": 21
   },
   {
    "url": "https://www.roguewavecoffee.ca",
@@ -2488,19 +2457,19 @@
    "reader": "shopify",
    "info": "",
    "products": 804,
-   "coffees": 319,
+   "coffees": 316,
    "taken_types": {
-    "Coffee": 312,
+    "Coffee": 310,
     "Espresso": 5,
-    "(none)": 2
+    "(none)": 1
    },
    "skipped_types": {
     "Brewer": 95,
     "Filters": 69,
     "Drinkware": 51,
     "Grinder": 35,
+    "(none)": 27,
     "Server": 26,
-    "(none)": 26,
     "Scale": 18,
     "Kettle": 13
    },
@@ -2531,7 +2500,7 @@
      "roastFor": "omni"
     }
    ],
-   "with_details": 262
+   "with_details": 259
   },
   {
    "url": "https://www.subtext.coffee",
@@ -2630,22 +2599,22 @@
    "reader": "shopify",
    "info": "",
    "products": 85,
-   "coffees": 23,
+   "coffees": 19,
    "taken_types": {
-    "Coffee": 23
+    "Coffee": 19
    },
    "skipped_types": {
     "Brew Gear": 23,
     "Merch": 17,
-    "(none)": 11,
-    "Coffee": 11
+    "Coffee": 15,
+    "(none)": 11
    },
    "skipped_examples": [
+    "Kuriru AB, Kenya, Washed",
+    "Los Pirineos Lot 07, El Salvador, Natural",
     "Crops + Cups Board Game",
     "Water For Good Bottle",
-    "Moku Ceremonial Matcha Latte",
-    "Single Origin Subscription (Filter Coffee)",
-    "Instant Coffee - Mutheka Kiandu AB, Kenya, Washed"
+    "Drip Bags - Iris Estate, Panama, Mixed Process"
    ],
    "detail_examples": [
     {
@@ -2661,7 +2630,11 @@
      "roastFor": "filter"
     }
    ],
-   "with_details": 5
+   "with_details": 2,
+   "body_samples": [
+    "A Peaberry selection from Kiambu's Washed regional lots, where the coffee delivers a concentrated, juicy cup of fresh plum and raisin over a sweet toffee finish.",
+    "Mandarin, caramel and lavender\n200g"
+   ]
   },
   {
    "url": "https://www.proudmarycoffee.com.au",
@@ -2671,8 +2644,8 @@
    "products": 885,
    "coffees": 774,
    "taken_types": {
-    "coffee-archive": 620,
-    "upcoming-coffees": 141,
+    "coffee-archive": 621,
+    "upcoming-coffees": 140,
     "coffee": 11,
     "coffee-deluxe": 2
    },
