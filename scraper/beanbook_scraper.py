@@ -43,7 +43,7 @@ import urllib.robotparser
 USER_AGENT = "BeanbookCatalogBot/1.0 (personal coffee catalog; low volume)"
 MAX_PAGES = 40
 STATE = {}       # per shop: the product pages already read by the sitemap reader
-PAGE_CAP = 80    # new pages read per shop per run by the sitemap reader
+PAGE_CAP = 120   # new pages read per shop per run by the sitemap reader
 SKIP_PATH = re.compile(r"/(blogs?|nieuws|news|contact|account|cart|winkelwagen|checkout|pages?|categor[a-z]*|collections?|tags?|"
                        r"over-ons|about[a-z-]*|faq|service|klantenservice|recept[a-z]*|recipes?|vacatures|jobs|privacy[a-z-]*|"
                        r"voorwaarden|terms[a-z-]*|workshops?|cursus[a-z]*|training[a-z]*|locaties|locations|wp-content|author|"
@@ -239,6 +239,41 @@ def host(url):
     return urllib.parse.urlsplit(url).netloc.lower().replace("www.", "", 1)
 
 
+COFFEE_URL = re.compile(r"(?i)(koffie|coffee|bonen|beans|espresso|arabica|robusta|cafe|decaf)")
+
+
+def one_language(urls):
+    """Shops that publish the same product under /nl/ and /be/ (or /en/, /de/) make the sitemap reader
+    fetch every page twice. Keep one page per product, preferring the site's own country."""
+    groups, order = {}, []
+    for u in urls:
+        parts = urllib.parse.urlsplit(u)
+        segs = [x for x in parts.path.split("/") if x]
+        lang = segs[0].lower() if segs and len(segs[0]) == 2 and segs[0].isalpha() else ""
+        stem = (parts.netloc, "/".join(segs[1:]) if lang else parts.path)
+        if stem not in groups:
+            groups[stem] = []
+            order.append(stem)
+        groups[stem].append((lang, u))
+    keep = set()
+    for stem in order:
+        items = groups[stem]
+        langs = {lang for lang, _ in items if lang}
+        if len(items) > 1 and len(langs) > 1:           # the same product in several languages
+            tld = stem[0].rsplit(".", 1)[-1].lower()
+            keep.add(next((u for lang, u in items if lang == tld), items[0][1]))
+        else:
+            keep.update(u for _, u in items)
+    return [u for u in urls if u in keep]
+
+
+def rank_page(url):
+    """Read the pages most likely to be coffee first, so a shop of 1400 pages yields coffees on day one."""
+    if COFFEE_URL.search(url):
+        return 0
+    return 1 if detect_origin(url.replace("-", " ")) else 2
+
+
 def sitemap_pages(f, base):
     """All page addresses a shop lists in its sitemap: {url: listed in a product sitemap?}."""
     queue = [(u, 0) for u in (f.sitemaps(base) or [base + "/sitemap.xml", base + "/sitemap_index.xml"])]
@@ -318,7 +353,8 @@ def fetch_sitemap(f, base, key):
     cand = [u for u, prod in pages.items() if ok(u) and (prod or PRODUCT_PATH.search(urllib.parse.urlsplit(u).path + "/"))]
     if not cand:  # flat addresses such as /ethiopia-guji: look at every page that is not clearly something else
         cand = [u for u in pages if ok(u) and urllib.parse.urlsplit(u).path.strip("/").count("/") <= 2]
-    new = [u for u in cand if u not in known][:PAGE_CAP]
+    cand = one_language(cand)
+    new = sorted((u for u in cand if u not in known), key=rank_page)[:PAGE_CAP]
     for u in new:
         try:
             known[u] = product_from_page(f.text(u, pause=1.0), u) or {"p": 0}
