@@ -491,6 +491,7 @@ VARIETY_RE = re.compile(r"(?<![\w-])(" + "|".join(sorted((re.escape(v) for v in 
 
 def good_name(v):
     v = re.sub(r"\s+", " ", (v or "")).strip(" .,;:'\u2019-")
+    v = re.sub(r"(?i)\s+(?:el|la|de|del|do|da|dos|of|the|in|at|and|on|y|e)$", "", v).strip()
     if not v or v.split()[0].lower() in STOP_NAME or len(v) < 3 or len(v) > 50:
         return ""
     return v
