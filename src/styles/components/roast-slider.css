@@ -1,0 +1,61 @@
+/* Roast level slider with its coloured track and labels. */
+.roast-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.roast-top output {
+  font-weight: 700;
+}
+
+.roast-top label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+input[type=range].roast::-webkit-slider-runnable-track {
+  background: linear-gradient(to right,var(--soft) 0 8%,#E2B77E 14%,#B8742F 55%,#4A2410 100%);
+}
+
+input[type=range].roast::-moz-range-track {
+  background: linear-gradient(to right,var(--soft) 0 8%,#E2B77E 14%,#B8742F 55%,#4A2410 100%);
+}
+
+input[type=range].roast::-moz-range-progress {
+  background: none;
+}
+
+input[type=range].roast::-webkit-slider-thumb {
+  border-color: var(--ink);
+}
+
+input[type=range].roast::-moz-range-thumb {
+  border-color: var(--ink);
+}
+
+.roast-ticks {
+  position: relative;
+  height: 18px;
+  margin: 0 15px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.roast-ticks span {
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.roast-ticks span:first-child {
+  transform: translateX(-15px);
+}
+
+.roast-ticks span:last-child {
+  transform: translateX(calc(-100% + 15px));
+}

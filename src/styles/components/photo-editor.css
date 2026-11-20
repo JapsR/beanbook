@@ -1,0 +1,65 @@
+/* Full-screen photo editor. */
+#editor {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.ed-stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  background: #0A0E17;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.ed-stage canvas {
+  touch-action: none;
+  cursor: grab;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.85);
+}
+
+.ed-tools {
+  padding: 12px 20px 2px;
+}
+
+.ed-zoom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.ed-zoom output {
+  min-width: 38px;
+  text-align: right;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+input[type=range].plain::-webkit-slider-runnable-track {
+  background: var(--soft);
+}
+
+input[type=range].plain::-moz-range-progress {
+  background: none;
+}
+
+.ed-hint {
+  color: rgba(255,255,255,.75);
+  font-size: 13px;
+  text-align: center;
+  margin: 0;
+  padding: 0 16px 14px;
+  background: #0A0E17;
+}

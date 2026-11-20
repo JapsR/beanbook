@@ -1,0 +1,111 @@
+/* Page headers, the stats strip, the sticky top bar and section titles. */
+.hero {
+  padding: 22px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero h1 {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.02;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.sub {
+  color: var(--muted);
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  background: var(--surface);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.strip div {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.strip div+div {
+  border-left: 1px solid var(--line);
+}
+
+.strip b {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.strip span {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 -16px;
+  padding: 10px 8px;
+  background: color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter: blur(10px);
+}
+
+.bar h2 {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ib {
+  width: 42px;
+  height: 42px;
+  border-radius: 21px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  transition: background .12s,transform .1s;
+  flex: none;
+}
+
+.ib:active {
+  background: var(--soft);
+  transform: scale(.92);
+}
+
+.section {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 22px 0 10px;
+}
+
+.section h3 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.section span {
+  color: var(--muted);
+  font-size: 13px;
+}

@@ -1,0 +1,111 @@
+/* Search field, filter chips and buttons. */
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0 14px;
+  height: 46px;
+  color: var(--muted);
+}
+
+.search input {
+  flex: 1;
+  border: 0;
+  background: none;
+  outline: 0;
+  min-width: 0;
+  color: var(--ink);
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 0 -16px;
+  padding: 2px 16px;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: none;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 17px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--muted);
+  transition: transform .1s,background .12s;
+}
+
+.chip:active {
+  transform: scale(.95);
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  background: var(--soft);
+  color: var(--ink);
+  transition: transform .1s,filter .12s;
+}
+
+.btn:active {
+  transform: scale(.97);
+  filter: brightness(.96);
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn.ghost {
+  background: none;
+  border: 1px solid var(--line);
+}
+
+.btn.danger {
+  color: var(--bad);
+}
+
+.btn.small {
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.btn.block {
+  width: 100%;
+}
+
+.row-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.row-btns .btn {
+  flex: 1;
+}

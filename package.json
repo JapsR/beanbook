@@ -1,0 +1,20 @@
+{
+  "name": "beanbook",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Track the coffees you buy, how you brew them, and rate every cup.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/build.mjs && node scripts/serve.mjs --dist",
+    "test": "node scripts/build.mjs && node --test tests/*.test.mjs",
+    "readme-image": "node scripts/build.mjs && node scripts/readme-header.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
+  }
+}

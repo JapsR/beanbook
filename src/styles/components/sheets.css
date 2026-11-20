@@ -1,0 +1,109 @@
+/* Bottom sheets and pop-up dialogs. */
+#sheet-root {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: none;
+}
+
+#sheet-root.open {
+  display: block;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(8,12,22,.5);
+  animation: fade .18s;
+}
+
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 94%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border-radius: 24px 24px 0 0;
+  animation: up .24s cubic-bezier(.2,.9,.25,1);
+  box-shadow: 0 -10px 40px rgba(0,0,0,.25);
+}
+
+.sheet.pop {
+  left: 20px;
+  right: 20px;
+  bottom: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 24px;
+  animation: pop .28s cubic-bezier(.2,1.3,.4,1);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes up {
+  from {
+    transform: translateY(40%);
+    opacity: .6;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: translateY(-50%) scale(.85);
+    opacity: .5;
+  }
+  to {
+    transform: translateY(-50%);
+    opacity: 1;
+  }
+}
+
+.sheet-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px 8px 20px;
+}
+
+.sheet-head h2 {
+  flex: 1;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.sheet-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sheet-foot {
+  padding: 12px 20px calc(14px + env(safe-area-inset-bottom,0px));
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  display: flex;
+  gap: 10px;
+}
+
+.sheet-foot .btn {
+  flex: 1;
+}
