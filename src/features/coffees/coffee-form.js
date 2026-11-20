@@ -24,6 +24,7 @@ export function coffeeForm(c) {
   c = c || { form: "beans", roast: "", bought: dayOf(localStamp()) };
   setFormPhoto(c.photoId ? state.photos[c.photoId] || null : null, false);
   openSheet(`${sheetHeader(c.id ? "Edit coffee" : "New coffee")}<form id="coffee-form" data-id="${c.id || ""}" novalidate><div class="sheet-body">
+  ${photoField()}
   <div class="f"><label for="c-name">Name</label><input id="c-name" name="name" type="text" required maxlength="80" placeholder="e.g. Guji Hambela" value="${esc(c.name)}" autocomplete="off"></div>
   <div class="grid2"><div class="f"><label for="c-roaster">Roaster</label><input id="c-roaster" name="roaster" type="text" maxlength="60" list="dl-roasters" value="${esc(c.roaster)}" autocomplete="off"></div>
     <div class="f"><label for="c-origin">Origin</label><input id="c-origin" name="origin" type="text" maxlength="60" list="dl-origins" value="${esc(c.origin)}" autocomplete="off"></div></div>
@@ -48,7 +49,6 @@ export function coffeeForm(c) {
   <div class="grid3"><div class="f"><label for="c-bought">Bought</label><input id="c-bought" name="bought" type="date" value="${esc(c.bought)}"></div>
     <div class="f"><label for="c-weight">Bag (g)</label><input id="c-weight" name="weight" type="text" inputmode="decimal" value="${c.weight ?? ""}" placeholder="250"></div>
     <div class="f"><label for="c-price">Price (€)</label><input id="c-price" name="price" type="text" inputmode="decimal" value="${c.price ?? ""}"></div></div>
-  ${photoField()}
   <div class="f"><label for="c-notes">Notes</label><textarea id="c-notes" name="notes" maxlength="2000" placeholder="What the bag says, where you bought it…">${esc(c.notes)}</textarea></div>
   </div><div class="sheet-foot"><button class="btn primary" type="submit">${c.id ? "Save changes" : "Add coffee"}</button></div></form>`);
   if (!c.id) {
