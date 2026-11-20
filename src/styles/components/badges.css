@@ -1,0 +1,135 @@
+/* Badges grid, medals and the "badge earned" sheet. */
+.progress {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--soft);
+  overflow: hidden;
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 5px;
+}
+
+.bgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(98px,1fr));
+  gap: 10px;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  background: var(--surface);
+  border-radius: var(--r);
+  padding: 14px 6px 12px;
+  box-shadow: var(--shadow);
+  transition: transform .1s;
+  min-width: 0;
+}
+
+.badge:active {
+  transform: scale(.95);
+}
+
+.badge b {
+  font-size: 13px;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.badge.off b {
+  color: var(--muted);
+}
+
+.lv {
+  display: flex;
+  gap: 4px;
+  height: 6px;
+}
+
+.lv i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.lv i.on {
+  background: var(--gold);
+}
+
+.medal .m-bg {
+  fill: var(--soft);
+}
+
+.medal .m-ring {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.medal .m-ic {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.medal.on .m-bg {
+  fill: var(--c);
+}
+
+.medal.on .m-ring {
+  stroke: rgba(255,255,255,.5);
+}
+
+.medal.on .m-ic {
+  stroke: #fff;
+}
+
+.won {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 26px 22px 8px;
+}
+
+.won .medal {
+  animation: spin .7s cubic-bezier(.2,1.4,.4,1);
+}
+
+@keyframes spin {
+  from {
+    transform: scale(.3) rotate(-90deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.won small {
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 12px;
+}
+
+.won h2 {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.won p {
+  margin: 0;
+  color: var(--muted);
+}

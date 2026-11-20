@@ -1,0 +1,105 @@
+/**
+ * One delegated listener per event type for the whole app (click, submit, input, change, keydown).
+ */
+import { $ } from "../core/dom.js";
+import { fmtRate } from "../core/format.js";
+import { pips } from "../ui/components.js";
+import { closeSheet, sheetRoot } from "../ui/sheet.js";
+import { ROASTN } from "../domain/vocabulary.js";
+import { ui } from "../data/state.js";
+import { readImport } from "../features/backup/import-data.js";
+import { addMethod, methodChanged, saveBrew, updRatio } from "../features/brews/brew-form.js";
+import { saveCoffee } from "../features/coffees/coffee-form.js";
+import { coffeeList } from "../features/coffees/coffee-list-page.js";
+import { closeEditor, crop, edDraw, edLayout, editor, openEditor } from "../features/photos/photo-editor.js";
+import { actions } from "./actions.js";
+import { onHashChange } from "./router.js";
+
+export function bindEvents() {
+  document.addEventListener("click", e => {
+    const el = e.target.closest("[data-act]");
+    if (!el) {
+      return;
+    }
+    const fn = actions[el.dataset.act];
+    if (fn) {
+      e.preventDefault();
+      fn(el.dataset.id, el);
+    }
+  });
+  document.addEventListener("submit", e => {
+    e.preventDefault();
+    if (e.target.id === "coffee-form") {
+      saveCoffee(e.target);
+    } else if (e.target.id === "brew-form") {
+      saveBrew(e.target);
+    }
+  });
+  document.addEventListener("input", e => {
+    const t = e.target;
+    if (t.id === "q") {
+      ui.q = t.value;
+      $("#coffee-list").innerHTML = coffeeList();
+    } else if (t.id === "b-rating") {
+      const r = Number(t.value);
+      t.style.setProperty("--p", r * 20 + "%");
+      $("#rate-out").textContent = r ? fmtRate(r) : "–";
+      $("#rate-pips").innerHTML = pips(r || null);
+    } else if (t.id === "b-dose" || t.id === "b-water") {
+      updRatio();
+    } else if (t.id === "ed-ang") {
+      crop.ang = Number(t.value) || 0;
+      $("#ed-ang-out").textContent = crop.ang + "°";
+      edDraw();
+    } else if (t.id === "c-roast") {
+      const n = ROASTN[Number(t.value) || 0];
+      $("#c-roast-out").textContent = n;
+      t.setAttribute("aria-valuetext", n);
+    }
+  });
+  document.addEventListener("change", e => {
+    const t = e.target;
+    if (t.name === "method" && t.form && t.form.id === "brew-form") {
+      methodChanged(t.value);
+    } else if (t.id === "adv-toggle") {
+      $("#adv-wrap").hidden = !t.checked;
+    } else if (t.id === "c-process") {
+      const on = t.value === "__custom";
+      $("#c-process-box").hidden = !on;
+      if (on) {
+        $("#c-process-custom").focus();
+      }
+    } else if (t.id === "c-more") {
+      $("#c-more-box").hidden = !t.checked;
+    } else if (t.id === "photo-file" && t.files[0]) {
+      const f = t.files[0];
+      t.value = "";
+      openEditor(URL.createObjectURL(f), true);
+    } else if (t.id === "import-file" && t.files[0]) {
+      const f = t.files[0];
+      t.value = "";
+      readImport(f);
+    }
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !editor.hidden) {
+      closeEditor();
+      return;
+    }
+    if (e.key === "Escape" && sheetRoot.classList.contains("open")) {
+      closeSheet();
+    }
+    if (e.key === "Enter" && e.target.tagName === "INPUT" && e.target.form && !e.target.name) {
+      e.preventDefault();
+      if (e.target.id === "new-method-name") {
+        addMethod();
+      }
+    }
+  });
+  addEventListener("hashchange", onHashChange);
+  addEventListener("resize", () => {
+    if (!editor.hidden) {
+      edLayout();
+    }
+  });
+}

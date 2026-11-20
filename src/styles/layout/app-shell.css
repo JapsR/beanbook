@@ -1,0 +1,102 @@
+/* Phone-first app shell: one scrolling column, bottom tabs and one floating action button. */
+#app {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#view {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 16px 104px;
+}
+
+#view.enter>* {
+  animation: rise .2s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes rise {
+  from {
+    opacity: .4;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+#tabs {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom,0px));
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 0 4px;
+  border-radius: 14px;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: color .12s,transform .1s;
+}
+
+.tab .pill {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 30px;
+  border-radius: 15px;
+  transition: background .15s;
+}
+
+.tab[aria-current="page"] {
+  color: var(--ink);
+}
+
+.tab[aria-current="page"] .pill {
+  background: color-mix(in srgb,var(--accent) 16%,var(--surface));
+  color: var(--accent);
+}
+
+.tab:active {
+  transform: scale(.94);
+}
+
+#fab {
+  position: absolute;
+  right: 16px;
+  bottom: calc(78px + env(safe-area-inset-bottom,0px));
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 54px;
+  padding: 0 20px 0 16px;
+  border-radius: 27px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  box-shadow: 0 8px 22px color-mix(in srgb,var(--accent) 40%,transparent);
+  transition: transform .1s;
+}
+
+#fab:active {
+  transform: scale(.95);
+}
+
+#fab[hidden] {
+  display: none;
+}

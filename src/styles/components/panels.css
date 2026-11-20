@@ -1,0 +1,63 @@
+/* Data page panels, key/value rows and the storage status line. */
+.panel {
+  background: var(--surface);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel h3 {
+  font-size: 17px;
+}
+
+.panel p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.kv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+  font-size: 14.5px;
+}
+
+.kv:first-of-type {
+  border-top: 0;
+}
+
+.kv span {
+  color: var(--muted);
+}
+
+.kv b {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.status {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--good);
+  flex: none;
+}
+
+.dot.warn {
+  background: var(--gold);
+}
