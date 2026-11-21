@@ -1,0 +1,44 @@
+/* Notes written in Markdown (coffee and preparation pages). */
+.note.md {
+  white-space: normal;
+  line-height: 1.55;
+}
+.note.md > :first-child { margin-top: 0; }
+.note.md > :last-child { margin-bottom: 0; }
+.note.md p, .note.md ul, .note.md ol, .note.md blockquote { margin: 0 0 10px; }
+.note.md h4, .note.md h5, .note.md h6 {
+  font-family: var(--font-display);
+  margin: 14px 0 6px;
+  line-height: 1.2;
+}
+.note.md h4 { font-size: 19px; }
+.note.md h5 { font-size: 16.5px; }
+.note.md h6 { font-size: 14.5px; color: var(--muted); }
+.note.md ul, .note.md ol { padding-left: 22px; }
+.note.md li + li { margin-top: 3px; }
+.note.md li.task { list-style: none; margin-left: -20px; }
+.note.md li .box {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 0 7px -2px 0;
+  border: 2px solid var(--muted);
+  border-radius: 4px;
+}
+.note.md li .box.on {
+  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3 4.7-5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat;
+  border-color: var(--accent);
+}
+.note.md blockquote {
+  padding: 2px 0 2px 12px;
+  border-left: 3px solid var(--line);
+  color: var(--muted);
+}
+.note.md code {
+  font: 0.9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--soft);
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+.note.md a { color: var(--accent); text-underline-offset: 2px; }
+.note.md hr { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }

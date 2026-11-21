@@ -8,7 +8,7 @@ import { str } from "../../core/validate.js";
 import { seg } from "../../ui/components.js";
 import { closeSheet, openSheet, sheetHeader } from "../../ui/sheet.js";
 import { toast } from "../../ui/toast.js";
-import { moreOn, normCoffee } from "../../domain/records.js";
+import { NOTES_MAX, moreOn, normCoffee } from "../../domain/records.js";
 import { ORIGINS, PROCESSES, ROASTN, ROASTV } from "../../domain/vocabulary.js";
 import { dropDemo } from "../../data/demo-data.js";
 import { coffees, state } from "../../data/state.js";
@@ -49,7 +49,7 @@ export function coffeeForm(c) {
   <div class="grid3"><div class="f"><label for="c-bought">Bought</label><input id="c-bought" name="bought" type="date" value="${esc(c.bought)}"></div>
     <div class="f"><label for="c-weight">Bag (g)</label><input id="c-weight" name="weight" type="text" inputmode="decimal" value="${c.weight ?? ""}" placeholder="250"></div>
     <div class="f"><label for="c-price">Price (€)</label><input id="c-price" name="price" type="text" inputmode="decimal" value="${c.price ?? ""}"></div></div>
-  <div class="f"><label for="c-notes">Notes</label><textarea id="c-notes" name="notes" maxlength="2000" placeholder="What the bag says, where you bought it…">${esc(c.notes)}</textarea></div>
+  <div class="f"><label for="c-notes">Notes</label><textarea id="c-notes" name="notes" rows="5" maxlength="${NOTES_MAX}" placeholder="What the bag says, where you bought it…">${esc(c.notes)}</textarea><p class="hint">Markdown works: **bold**, *italic*, - lists, [links](https://…)</p></div>
   </div><div class="sheet-foot"><button class="btn primary" type="submit">${c.id ? "Save changes" : "Add coffee"}</button></div></form>`);
   if (!c.id) {
     setTimeout(() => $("#c-name") && $("#c-name").focus(), 260);

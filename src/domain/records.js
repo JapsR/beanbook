@@ -9,13 +9,16 @@ import { normExtra, normStages } from "./brew-methods.js";
 import { keepExtra } from "./schema.js";
 import { ROASTV } from "./vocabulary.js";
 
+/* Longest coffee or preparation note, in characters (about 3,000 words). Notes are Markdown. */
+export const NOTES_MAX = 20000;
+
 export function normCoffee(o) {
   o = o || {};
   return keepExtra(o, {
     k: "coffee", id: okId(o.id) ? o.id : newId(), name: str(o.name, 80), roaster: str(o.roaster, 60), origin: str(o.origin, 60),
     process: str(o.process, 40), roast: ROASTV.includes(o.roast) ? o.roast : "",
     form: o.form === "ground" ? "ground" : "beans", roastDate: /^\d{4}-\d\d-\d\d$/.test(o.roastDate || "") ? o.roastDate : "", bought: /^\d{4}-\d\d-\d\d$/.test(o.bought || "") ? o.bought : "",
-    weight: num(o.weight, 1, 100000), price: num(o.price, 0, 100000), notes: str(o.notes, 2000), photoId: okId(o.photoId) ? o.photoId : null,
+    weight: num(o.weight, 1, 100000), price: num(o.price, 0, 100000), notes: str(o.notes, NOTES_MAX), photoId: okId(o.photoId) ? o.photoId : null,
     region: str(o.region, 60), producer: str(o.producer, 60), variety: str(o.variety, 60), altitude: num(o.altitude, 0, 5000),
     roastFor: ["filter", "espresso", "omni"].includes(o.roastFor) ? o.roastFor : "", roasterNotes: str(o.roasterNotes, 120), finished: !!o.finished, createdAt: Number(o.createdAt) || Date.now()
   });
@@ -28,7 +31,7 @@ export function normBrew(o) {
     k: "brew", id: okId(o.id) ? o.id : newId(), coffeeId: String(o.coffeeId || ""), method: typeof o.method === "string" && /^[a-z0-9]{2,30}$/.test(o.method) ? o.method : "other",
     date: /^\d{4}-\d\d-\d\dT\d\d:\d\d/.test(o.date || "") ? o.date.slice(0, 16) : localStamp(), dose: num(o.dose, 0.1, 5000), water: num(o.water, 1, 50000),
     temp: num(o.temp, 0, 100), time: str(o.time, 12), grind: str(o.grind, 40), rating: r == null ? null : Math.round(r * 4) / 4,
-    flavors: Array.isArray(o.flavors) ? o.flavors.filter(f => typeof f === "string" && f.length > 0 && f.length <= 30).slice(0, 16) : [], stages: normStages(o.stages), extra: normExtra(o.method, o.extra), notes: str(o.notes, 2000), photoId: okId(o.photoId) ? o.photoId : null
+    flavors: Array.isArray(o.flavors) ? o.flavors.filter(f => typeof f === "string" && f.length > 0 && f.length <= 30).slice(0, 16) : [], stages: normStages(o.stages), extra: normExtra(o.method, o.extra), notes: str(o.notes, NOTES_MAX), photoId: okId(o.photoId) ? o.photoId : null
   });
 }
 

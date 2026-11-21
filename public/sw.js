@@ -1,6 +1,8 @@
-/* Beanbook offline support. The app shell is served from cache and refreshed in the
-   background; the catalog is fetched fresh when online and falls back to the last copy. */
-const CACHE = "beanbook-v1";
+/* Beanbook offline support.
+   The page itself (index.html) is fetched fresh whenever there is a connection, so a new release
+   shows up on the next open; the cached copy is only used offline. Icons and the manifest are
+   served from cache and refreshed in the background. */
+const CACHE = "beanbook-v2";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
@@ -16,8 +18,8 @@ self.addEventListener("fetch", e => {
     if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
     return res;
   });
-  if (req.url.endsWith("catalog.json")) {
-    e.respondWith(fresh.catch(() => caches.match(req)));
+  if (req.mode === "navigate" || req.url.endsWith("catalog.json")) {
+    e.respondWith(fresh.catch(() => caches.match(req).then(hit => hit || caches.match("index.html"))));
   } else {
     e.respondWith(caches.match(req).then(hit => { if (hit) { fresh.catch(() => {}); return hit; } return fresh; }));
   }

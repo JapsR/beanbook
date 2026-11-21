@@ -3,6 +3,7 @@
  */
 import { fmtDay } from "../../core/dates.js";
 import { esc } from "../../core/dom.js";
+import { markdown } from "../../core/markdown.js";
 import { fmtNum, fmtRate } from "../../core/format.js";
 import { pips } from "../../ui/components.js";
 import { icon } from "../../ui/icons.js";
@@ -21,7 +22,7 @@ export function brewPage(b) {
   ${Object.keys(b.extra).length ? `<div class="section"><h3>Advanced</h3></div><div class="cmp">${(ADV[m.id] || []).filter(d => b.extra[d.k] != null).map(d => `<div class="kv"><span>${d.l}</span><b class="num">${esc(b.extra[d.k])}</b></div>`).join("")}</div>` : ""}
   ${b.stages.length && m.pour ? `<div class="section"><h3>Pouring stages</h3><span>${b.stages.length} pours</span></div><div class="cmp">${b.stages.map(x => `<div class="kv"><span class="num">${esc(x.t || "–")}</span><b class="num">${esc([x.g != null ? "to " + fmtNum(x.g, 0) + " g" : "", x.note].filter(Boolean).join(" · ") || "–")}</b></div>`).join("")}</div>` : ""}
   ${b.flavors.length ? `<div class="section"><h3>Tasting notes</h3></div><div class="tags">${b.flavors.map(f => `<span class="tag" style="font-size:13px;padding:6px 11px;border-radius:10px;background:var(--surface)">${esc(f)}</span>`).join("")}</div>` : ""}
-  ${b.notes ? `<div class="note">${esc(b.notes)}</div>` : ""}
+  ${b.notes ? `<div class="note md">${markdown(b.notes)}</div>` : ""}
   ${p ? `<div class="photo-full"><img src="${p}" alt="Photo of this preparation"></div>` : ""}
   ${b.demo || !c ? "" : `<div class="row-btns" style="margin-top:22px"><button class="btn" type="button" data-act="again" data-id="${b.id}">${icon("swap", 20)}Brew again</button><button class="btn danger" type="button" data-act="ask-del-brew" data-id="${b.id}">${icon("trash", 20)}Delete</button></div>`}`;
 }

@@ -11,7 +11,7 @@ import { icon } from "../../ui/icons.js";
 import { closeSheet, openSheet, sheetHeader } from "../../ui/sheet.js";
 import { toast } from "../../ui/toast.js";
 import { ADV, MCOLORS, METHODS, allMethods, customs, methodById, normMethod } from "../../domain/brew-methods.js";
-import { normBrew } from "../../domain/records.js";
+import { NOTES_MAX, normBrew } from "../../domain/records.js";
 import { FLAVORS } from "../../domain/vocabulary.js";
 import { brewsOf, state } from "../../data/state.js";
 import { Store, saveMeta } from "../../data/storage.js";
@@ -69,7 +69,7 @@ export function brewForm(coffeeId, b, copy) {
     <p class="hint">Start time of each pour and the total grams on the scale when it ends.</p></div></details>
   <div id="extras-box">${extrasBox(v.method, v.extra || {})}</div></div>
   <div class="f"><span class="lbl">Tasting notes</span><div class="opts">${[...FLAVORS, ...v.flavors.filter(f => !FLAVORS.includes(f))].map((f, i) => `<label class="opt"><input type="checkbox" name="flavors" id="fl-${i}" value="${esc(f)}" ${v.flavors.includes(f) ? "checked" : ""}><span>${esc(f)}</span></label>`).join("")}</div></div>
-  <div class="f"><label for="b-notes">In your own words</label><textarea id="b-notes" name="notes" maxlength="2000" placeholder="What worked, what to change next time…">${esc(v.notes)}</textarea></div>
+  <div class="f"><label for="b-notes">In your own words</label><textarea id="b-notes" name="notes" rows="5" maxlength="${NOTES_MAX}" placeholder="What worked, what to change next time…">${esc(v.notes)}</textarea><p class="hint">Markdown works: **bold**, *italic*, - lists, [links](https://…)</p></div>
   ${photoField()}
   <div class="f"><label for="b-date">When</label><input id="b-date" name="date" type="datetime-local" value="${esc(v.date)}"></div>
   </div><div class="sheet-foot"><button class="btn primary" type="submit">${editing ? "Save changes" : "Save preparation"}</button></div></form>`);

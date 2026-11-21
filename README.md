@@ -22,7 +22,8 @@ keeps your data on your own device.
   method (pre-infusion and pressure for espresso, inverted AeroPress, cold brew steep time). They are
   hidden until you tick "Show advanced options".
 - **Rate and describe every cup.** Rate from 0 to 5 in quarter steps, pick tasting notes (berry,
-  chocolate, floral…) and write your own notes. Add a photo; you can crop and rotate it.
+  chocolate, floral…) and write your own notes, with Markdown for headings, bold, lists,
+  checklists and links. Add a photo; you can crop and rotate it.
 - **See what works.** Each coffee page compares the average rating per brew method. The journal lists
   every cup, newest first, and the Data page shows your favourite method and best coffee.
 - **Earn badges.** 23 badges, many with several levels, for exploring origins and methods, brewing
