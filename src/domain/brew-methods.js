@@ -60,7 +60,7 @@ export function normMethod(o) {
 /* extra options per method; pouring stages are separate and only for methods with pour:true */
 export const ADV = {
   espresso: [{ k: "preinf", l: "Pre-infusion (s)", t: "num", max: 120 }, { k: "bar", l: "Pressure (bar)", t: "num", max: 20 }],
-  aeropress: [{ k: "pos", l: "Position", t: "seg", o: ["Standard", "Inverted"] }, { k: "steep", l: "Steep before pressing", t: "text", ph: "1:30" }],
+  aeropress: [{ k: "pos", l: "Position", t: "seg", o: ["Standard", "Inverted"] }, { k: "steep", l: "Steep before pressing", t: "dur", ph: "1:30" }],
   coldbrew: [{ k: "hours", l: "Steep time (hours)", t: "num", max: 200 }, { k: "where", l: "Steeped in", t: "seg", o: ["Fridge", "Room temp"] }],
   moka: [{ k: "start", l: "Water in the base", t: "seg", o: ["Cold", "Pre-heated"] }]
 };

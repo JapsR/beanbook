@@ -6,6 +6,7 @@ import { $, esc } from "../../core/dom.js";
 import { newId } from "../../core/ids.js";
 import { str } from "../../core/validate.js";
 import { seg } from "../../ui/components.js";
+import { fieldType } from "../../ui/field-types.js";
 import { closeSheet, openSheet, sheetHeader } from "../../ui/sheet.js";
 import { toast } from "../../ui/toast.js";
 import { NOTES_MAX, moreOn, normCoffee } from "../../domain/records.js";
@@ -42,13 +43,13 @@ export function coffeeForm(c) {
     <div class="grid2"><div class="f"><label for="c-region">Region</label><input id="c-region" name="region" type="text" maxlength="60" placeholder="e.g. Pitalito, Huila" value="${esc(c.region)}" autocomplete="off"></div>
     <div class="f"><label for="c-producer">Producer or farm</label><input id="c-producer" name="producer" type="text" maxlength="60" value="${esc(c.producer)}" autocomplete="off"></div></div>
     <div class="grid2"><div class="f"><label for="c-variety">Variety</label><input id="c-variety" name="variety" type="text" maxlength="60" placeholder="e.g. Caturra, Chiroso" value="${esc(c.variety)}" autocomplete="off"></div>
-    <div class="f"><label for="c-altitude">Altitude (m)</label><input id="c-altitude" name="altitude" type="text" inputmode="numeric" value="${c.altitude ?? ""}"></div></div>
+    <div class="f"><label for="c-altitude">Altitude (m)</label><input id="c-altitude" name="altitude" type="text" ${fieldType("integer")} maxlength="4" value="${c.altitude ?? ""}"></div></div>
     <div class="f"><span class="lbl">Roasted for</span>${seg("roastFor", [["", "Not sure"], ["filter", "Filter"], ["espresso", "Espresso"], ["omni", "Both"]], c.roastFor || "")}</div>
     <div class="f"><label for="c-rnotes">Roaster's tasting notes</label><input id="c-rnotes" name="roasterNotes" type="text" maxlength="120" placeholder="What the bag promises" value="${esc(c.roasterNotes)}" autocomplete="off"></div>
   </div>
   <div class="grid3"><div class="f"><label for="c-bought">Bought</label><input id="c-bought" name="bought" type="date" value="${esc(c.bought)}"></div>
-    <div class="f"><label for="c-weight">Bag (g)</label><input id="c-weight" name="weight" type="text" inputmode="decimal" value="${c.weight ?? ""}" placeholder="250"></div>
-    <div class="f"><label for="c-price">Price (€)</label><input id="c-price" name="price" type="text" inputmode="decimal" value="${c.price ?? ""}"></div></div>
+    <div class="f"><label for="c-weight">Bag (g)</label><input id="c-weight" name="weight" type="text" ${fieldType("decimal")} value="${c.weight ?? ""}" placeholder="250"></div>
+    <div class="f"><label for="c-price">Price (€)</label><input id="c-price" name="price" type="text" ${fieldType("decimal")} value="${c.price ?? ""}"></div></div>
   <div class="f"><label for="c-notes">Notes</label><textarea id="c-notes" name="notes" rows="5" maxlength="${NOTES_MAX}" placeholder="What the bag says, where you bought it…">${esc(c.notes)}</textarea><p class="hint">Markdown works: **bold**, *italic*, - lists, [links](https://…)</p></div>
   </div><div class="sheet-foot"><button class="btn primary" type="submit">${c.id ? "Save changes" : "Add coffee"}</button></div></form>`);
   if (!c.id) {

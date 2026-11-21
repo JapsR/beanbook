@@ -4,6 +4,7 @@
 import { $ } from "../core/dom.js";
 import { fmtRate } from "../core/format.js";
 import { pips } from "../ui/components.js";
+import { finishField, typeField } from "../ui/field-types.js";
 import { closeSheet, sheetRoot } from "../ui/sheet.js";
 import { ROASTN } from "../domain/vocabulary.js";
 import { ui } from "../data/state.js";
@@ -37,6 +38,9 @@ export function bindEvents() {
   });
   document.addEventListener("input", e => {
     const t = e.target;
+    if (t.dataset && t.dataset.field) {
+      typeField(t);
+    }
     if (t.id === "q") {
       ui.q = t.value;
       $("#coffee-list").innerHTML = coffeeList();
@@ -94,6 +98,11 @@ export function bindEvents() {
       if (e.target.id === "new-method-name") {
         addMethod();
       }
+    }
+  });
+  document.addEventListener("focusout", e => {
+    if (e.target.dataset && e.target.dataset.field) {
+      finishField(e.target);
     }
   });
   addEventListener("hashchange", onHashChange);

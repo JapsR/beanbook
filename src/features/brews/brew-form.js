@@ -7,6 +7,7 @@ import { fmtNum, fmtRate } from "../../core/format.js";
 import { newId } from "../../core/ids.js";
 import { num, str } from "../../core/validate.js";
 import { pips } from "../../ui/components.js";
+import { fieldType } from "../../ui/field-types.js";
 import { icon } from "../../ui/icons.js";
 import { closeSheet, openSheet, sheetHeader } from "../../ui/sheet.js";
 import { toast } from "../../ui/toast.js";
@@ -52,11 +53,11 @@ export function brewForm(coffeeId, b, copy) {
     <div class="opts"><label class="opt"><input type="checkbox" id="new-method-pour"><span>This method has pouring stages</span></label></div></div></div>
   <div class="rate"><div class="rate-top"><div><div class="lbl" style="font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Rating</div><output id="rate-out" for="b-rating" class="num">${r ? fmtRate(r) : "–"}</output></div><span id="rate-pips">${pips(r || null)}</span></div>
     <input id="b-rating" name="rating" type="range" min="0" max="5" step="0.25" value="${r}" style="--p:${r * 20}%" aria-label="Rating from 0 to 5 in quarter steps"><p class="hint">Slide to rate in quarter steps. Leave at zero to rate later.</p></div>
-  <div class="grid3"><div class="f"><label for="b-dose">Coffee (g)</label><input id="b-dose" name="dose" type="text" inputmode="decimal" value="${v.dose ?? ""}"></div>
-    <div class="f"><label for="b-water" id="b-water-lbl">${methodById(v.method).out || "Water"} (g)</label><input id="b-water" name="water" type="text" inputmode="decimal" value="${v.water ?? ""}"></div>
-    <div class="f"><label for="b-temp">Temp (°C)</label><input id="b-temp" name="temp" type="text" inputmode="decimal" value="${v.temp ?? ""}"></div></div>
+  <div class="grid3"><div class="f"><label for="b-dose">Coffee (g)</label><input id="b-dose" name="dose" type="text" ${fieldType("decimal")} value="${v.dose ?? ""}"></div>
+    <div class="f"><label for="b-water" id="b-water-lbl">${methodById(v.method).out || "Water"} (g)</label><input id="b-water" name="water" type="text" ${fieldType("decimal")} value="${v.water ?? ""}"></div>
+    <div class="f"><label for="b-temp">Temp (°C)</label><input id="b-temp" name="temp" type="text" ${fieldType("decimal")} value="${v.temp ?? ""}"></div></div>
   <p class="hint" id="ratio-line"></p>
-  <div class="grid2"><div class="f"><label for="b-time">Brew time</label><input id="b-time" name="time" type="text" inputmode="numeric" placeholder="2:30" maxlength="12" value="${esc(v.time)}"></div>
+  <div class="grid2"><div class="f"><label for="b-time">Brew time</label><input id="b-time" name="time" type="text" ${fieldType("duration")} placeholder="2:30" maxlength="12" value="${esc(v.time)}"></div>
     <div class="f"><label for="b-grind">Grind setting</label><input id="b-grind" name="grind" type="text" maxlength="40" placeholder="${c.form === "ground" ? "Pre-ground" : "e.g. 22 clicks"}" value="${esc(v.grind)}"></div></div>
   ${(() => {
     const m = methodById(v.method), has = m.pour || ADV[m.id], on = (m.pour && (v.stages || []).length) || Object.keys(v.extra || {}).length;
