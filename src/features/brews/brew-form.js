@@ -18,6 +18,7 @@ import { brewsOf, state } from "../../data/state.js";
 import { Store, saveMeta } from "../../data/storage.js";
 import { checkBadges } from "../badges/badge-progress.js";
 import { extrasBox, stageRow } from "./brew-advanced-fields.js";
+import { pauseTimer, resetTimer, timerBox, timerMethodChanged } from "./brew-timer.js";
 import { applyPhoto, photoField, setFormPhoto } from "../photos/photo-field.js";
 import { render } from "../../app/render.js";
 import { go } from "../../app/router.js";
@@ -44,6 +45,7 @@ export function brewForm(coffeeId, b, copy) {
     v.rating = null;
     v.notes = "";
   }
+  resetTimer();
   setFormPhoto(editing && v.photoId ? state.photos[v.photoId] || null : null, false);
   const r = v.rating || 0;
   openSheet(`${sheetHeader(editing ? "Edit preparation" : "New preparation")}<form id="brew-form" data-id="${editing ? b.id : ""}" data-coffee="${coffeeId}" novalidate><div class="sheet-body">
@@ -51,14 +53,12 @@ export function brewForm(coffeeId, b, copy) {
   <div class="f"><span class="lbl">Method</span><div class="opts" id="method-opts">${allMethods().map(m => methodOpt(m, v.method === m.id)).join("")}<button class="opt-add" type="button" data-act="new-method" id="new-method-btn">+ Custom</button></div>
     <div class="adv-body" id="new-method-row" style="padding:0" hidden><div class="add-row"><input id="new-method-name" type="text" maxlength="30" placeholder="e.g. Hario Switch" aria-label="Name of your brew method" autocomplete="off"><button class="btn small primary" type="button" data-act="add-method">Add</button></div>
     <div class="opts"><label class="opt"><input type="checkbox" id="new-method-pour"><span>This method has pouring stages</span></label></div></div></div>
-  <div class="rate"><div class="rate-top"><div><div class="lbl" style="font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Rating</div><output id="rate-out" for="b-rating" class="num">${r ? fmtRate(r) : "–"}</output></div><span id="rate-pips">${pips(r || null)}</span></div>
-    <input id="b-rating" name="rating" type="range" min="0" max="5" step="0.25" value="${r}" style="--p:${r * 20}%" aria-label="Rating from 0 to 5 in quarter steps"><p class="hint">Slide to rate in quarter steps. Leave at zero to rate later.</p></div>
   <div class="grid3"><div class="f"><label for="b-dose">Coffee (g)</label><input id="b-dose" name="dose" type="text" ${fieldType("decimal")} value="${v.dose ?? ""}"></div>
     <div class="f"><label for="b-water" id="b-water-lbl">${methodById(v.method).out || "Water"} (g)</label><input id="b-water" name="water" type="text" ${fieldType("decimal")} value="${v.water ?? ""}"></div>
     <div class="f"><label for="b-temp">Temp (°C)</label><input id="b-temp" name="temp" type="text" ${fieldType("decimal")} value="${v.temp ?? ""}"></div></div>
   <p class="hint" id="ratio-line"></p>
-  <div class="grid2"><div class="f"><label for="b-time">Brew time</label><input id="b-time" name="time" type="text" ${fieldType("duration")} placeholder="2:30" maxlength="12" value="${esc(v.time)}"></div>
-    <div class="f"><label for="b-grind">Grind setting</label><input id="b-grind" name="grind" type="text" maxlength="40" placeholder="${c.form === "ground" ? "Pre-ground" : "e.g. 22 clicks"}" value="${esc(v.grind)}"></div></div>
+  <div class="f"><label for="b-grind">Grind setting</label><input id="b-grind" name="grind" type="text" maxlength="40" placeholder="${c.form === "ground" ? "Pre-ground" : "e.g. 22 clicks"}" value="${esc(v.grind)}"></div>
+  ${timerBox(v.time, v.method)}
   ${(() => {
     const m = methodById(v.method), has = m.pour || ADV[m.id], on = (m.pour && (v.stages || []).length) || Object.keys(v.extra || {}).length;
     return `<label class="tick" id="adv-tick" ${has ? "" : "hidden"}><input type="checkbox" id="adv-toggle" ${on ? "checked" : ""}><span>Show advanced options</span></label><div id="adv-wrap" ${has && on ? "" : "hidden"}>`;
@@ -69,6 +69,8 @@ export function brewForm(coffeeId, b, copy) {
     <div class="row-btns"><button class="btn small" type="button" data-act="stage-add">${icon("plus", 18)}Add stage</button><button class="btn small ghost" type="button" data-act="stage-preset">Bloom + 2 pours</button></div>
     <p class="hint">Start time of each pour and the total grams on the scale when it ends.</p></div></details>
   <div id="extras-box">${extrasBox(v.method, v.extra || {})}</div></div>
+  <div class="rate"><div class="rate-top"><div><div class="lbl" style="font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Rating</div><output id="rate-out" for="b-rating" class="num">${r ? fmtRate(r) : "–"}</output></div><span id="rate-pips">${pips(r || null)}</span></div>
+    <input id="b-rating" name="rating" type="range" min="0" max="5" step="0.25" value="${r}" style="--p:${r * 20}%" aria-label="Rating from 0 to 5 in quarter steps"><p class="hint">Slide to rate in quarter steps. Leave at zero to rate later.</p></div>
   <div class="f"><span class="lbl">Tasting notes</span><div class="opts">${[...FLAVORS, ...v.flavors.filter(f => !FLAVORS.includes(f))].map((f, i) => `<label class="opt"><input type="checkbox" name="flavors" id="fl-${i}" value="${esc(f)}" ${v.flavors.includes(f) ? "checked" : ""}><span>${esc(f)}</span></label>`).join("")}</div></div>
   <div class="f"><label for="b-notes">In your own words</label><textarea id="b-notes" name="notes" rows="5" maxlength="${NOTES_MAX}" placeholder="What worked, what to change next time…">${esc(v.notes)}</textarea><p class="hint">Markdown works: **bold**, *italic*, - lists, [links](https://…)</p></div>
   ${photoField()}
@@ -87,6 +89,7 @@ export function methodChanged(id) {
   const has = !!(m.pour || ADV[m.id]);
   $("#adv-tick").hidden = !has;
   $("#adv-wrap").hidden = !has || !$("#adv-toggle").checked;
+  timerMethodChanged(id);
 }
 
 export function addMethod() {
@@ -126,6 +129,7 @@ export function updRatio() {
 }
 
 export function saveBrew(f) {
+  pauseTimer();   // saving while the timer runs keeps the time on the clock
   const fd = new FormData(f), old = state.brews[f.dataset.id], cid = f.dataset.coffee;
   if (!state.coffees[cid]) {
     return;

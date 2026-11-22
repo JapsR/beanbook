@@ -10,6 +10,7 @@ import { ROASTN } from "../domain/vocabulary.js";
 import { ui } from "../data/state.js";
 import { readImport } from "../features/backup/import-data.js";
 import { addMethod, methodChanged, saveBrew, updRatio } from "../features/brews/brew-form.js";
+import { timerVisible } from "../features/brews/brew-timer.js";
 import { saveCoffee } from "../features/coffees/coffee-form.js";
 import { coffeeList } from "../features/coffees/coffee-list-page.js";
 import { closeEditor, crop, edDraw, edLayout, editor, openEditor } from "../features/photos/photo-editor.js";
@@ -105,6 +106,7 @@ export function bindEvents() {
       finishField(e.target);
     }
   });
+  document.addEventListener("visibilitychange", timerVisible);
   addEventListener("hashchange", onHashChange);
   addEventListener("resize", () => {
     if (!editor.hidden) {

@@ -41,6 +41,13 @@ test("add a coffee and a preparation, export, reload and import", async t => {
   await page.click("label:has(#m-v60)");
   await page.click("label:has(#adv-toggle)");
   await page.click("[data-act=stage-preset]");
+  // brew timer: pausing fills in the brew time, Pour fills the planned stage start times in order
+  await page.click("#bt-toggle");
+  await page.waitForTimeout(1100);
+  await page.click("#bt-pour");
+  await page.click("#bt-toggle");
+  assert.match(await page.inputValue("#b-time"), /^0:0[1-2]$/);
+  assert.match(await page.inputValue("#stage-list .stage:first-child [name=st-t]"), /^0:0[1-2]$/);
   await page.locator("#b-rating").fill("4.25");
   await page.click("#brew-form button[type=submit]");
   await page.waitForSelector(".preps .card");
