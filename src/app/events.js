@@ -1,7 +1,7 @@
 /**
  * One delegated listener per event type for the whole app (click, submit, input, change, keydown).
  */
-import { $ } from "../core/dom.js";
+import { $, isTypingField } from "../core/dom.js";
 import { fmtRate } from "../core/format.js";
 import { pips } from "../ui/components.js";
 import { finishField, typeField } from "../ui/field-types.js";
@@ -18,6 +18,23 @@ import { actions } from "./actions.js";
 import { onHashChange } from "./router.js";
 
 export function bindEvents() {
+  /* Touching a slider, button or option while a text field is focused: let the text field go first.
+     Otherwise it keeps focus (and the phone keyboard), and the browser scrolls back to it as soon as
+     the slider changes the page. Plain scrolling is left alone. */
+  document.addEventListener("pointerdown", e => {
+    const active = document.activeElement;
+    if (!isTypingField(active)) {
+      return;
+    }
+    const ctl = e.target.closest("input, textarea, select, button, label, summary, a, [data-act]");
+    if (!ctl || ctl === active) {
+      return;
+    }
+    if (isTypingField(ctl) || (ctl.tagName === "LABEL" && isTypingField(ctl.control))) {
+      return;  // moving to another text field: the browser handles that
+    }
+    active.blur();
+  });
   document.addEventListener("click", e => {
     const el = e.target.closest("[data-act]");
     if (!el) {
