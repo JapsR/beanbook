@@ -12,14 +12,14 @@ import { icon } from "../../ui/icons.js";
 import { closeSheet, openSheet, sheetHeader } from "../../ui/sheet.js";
 import { toast } from "../../ui/toast.js";
 import { ADV, MCOLORS, METHODS, allMethods, customs, methodById, normMethod } from "../../domain/brew-methods.js";
-import { NOTES_MAX, normBrew } from "../../domain/records.js";
+import { NOTES_MAX, brewPhotoIds, normBrew } from "../../domain/records.js";
 import { FLAVORS } from "../../domain/vocabulary.js";
 import { brewsOf, state } from "../../data/state.js";
 import { Store, saveMeta } from "../../data/storage.js";
 import { checkBadges } from "../badges/badge-progress.js";
 import { extrasBox, stageRow } from "./brew-advanced-fields.js";
 import { pauseTimer, resetTimer, timerBox, timerMethodChanged } from "./brew-timer.js";
-import { applyPhoto, photoField, setFormPhoto } from "../photos/photo-field.js";
+import { applyPhoto, photoField, setFormPhotos } from "../photos/photo-field.js";
 import { render } from "../../app/render.js";
 import { go } from "../../app/router.js";
 
@@ -46,7 +46,7 @@ export function brewForm(coffeeId, b, copy) {
     v.notes = "";
   }
   resetTimer();
-  setFormPhoto(editing && v.photoId ? state.photos[v.photoId] || null : null, false);
+  setFormPhotos(editing ? brewPhotoIds(v) : [], true);
   const r = v.rating || 0;
   openSheet(`${sheetHeader(editing ? "Edit preparation" : "New preparation")}<form id="brew-form" data-id="${editing ? b.id : ""}" data-coffee="${coffeeId}" novalidate><div class="sheet-body">
   <p class="hint"><b style="color:var(--ink)">${esc(c.name)}</b>${!editing && (b || last) ? " · recipe copied from your last cup" : ""}</p>

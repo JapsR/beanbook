@@ -1,15 +1,17 @@
 /**
- * Deleting records (and their photos) from state and storage.
+ * Deleting and duplicating records (and their photos) in state and storage.
  */
+import { newId } from "../core/ids.js";
+import { brewPhotoIds, normCoffee } from "../domain/records.js";
 import { brewsOf, state } from "./state.js";
-import { Store, delPhoto } from "./storage.js";
+import { Store, addPhoto, delPhoto } from "./storage.js";
 
 export function delBrew(id) {
   const b = state.brews[id];
   if (!b) {
     return;
   }
-  delPhoto(b.photoId);
+  brewPhotoIds(b).forEach(delPhoto);
   delete state.brews[id];
   Store.del("b_" + id);
 }
@@ -23,6 +25,20 @@ export function delCoffee(id) {
   delPhoto(c.photoId);
   delete state.coffees[id];
   Store.del("c_" + id);
+}
+
+/* A copy of a coffee without its preparations, as an open bag. The photo is copied, not shared,
+   so deleting one coffee never removes the other's photo. Returns the new coffee. */
+export function duplicateCoffee(id) {
+  const c = state.coffees[id];
+  if (!c) {
+    return null;
+  }
+  const p = c.photoId && state.photos[c.photoId];
+  const copy = normCoffee({ ...c, id: newId(), name: (c.name + " (copy)").slice(0, 80), finished: false, createdAt: Date.now(), photoId: p ? addPhoto(p) : null });
+  state.coffees[copy.id] = copy;
+  Store.put("c_" + copy.id, copy);
+  return copy;
 }
 
 export function wipe() {

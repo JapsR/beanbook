@@ -15,7 +15,7 @@ import { dropDemo } from "../../data/demo-data.js";
 import { coffees, state } from "../../data/state.js";
 import { Store } from "../../data/storage.js";
 import { checkBadges } from "../badges/badge-progress.js";
-import { applyPhoto, photoField, setFormPhoto } from "../photos/photo-field.js";
+import { applyPhoto, photoField, setFormPhotos } from "../photos/photo-field.js";
 import { render } from "../../app/render.js";
 import { go } from "../../app/router.js";
 
@@ -23,7 +23,7 @@ const procList = cur => [...new Set([...PROCESSES, ...coffees().filter(x => !x.d
 
 export function coffeeForm(c) {
   c = c || { form: "beans", roast: "", bought: dayOf(localStamp()) };
-  setFormPhoto(c.photoId ? state.photos[c.photoId] || null : null, false);
+  setFormPhotos(c.photoId ? [c.photoId] : [], false);
   openSheet(`${sheetHeader(c.id ? "Edit coffee" : "New coffee")}<form id="coffee-form" data-id="${c.id || ""}" novalidate><div class="sheet-body">
   ${photoField()}
   <div class="f"><label for="c-name">Name</label><input id="c-name" name="name" type="text" required maxlength="80" placeholder="e.g. Guji Hambela" value="${esc(c.name)}" autocomplete="off"></div>

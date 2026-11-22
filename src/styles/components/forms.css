@@ -243,6 +243,53 @@ input[type=range]::-moz-range-thumb {
   align-items: flex-start;
 }
 
+/* Preparations: a wrapping row of thumbnails with a remove button each, then an Add tile. */
+.photo-pick.multi {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.photo-pick.multi .prev {
+  position: relative;
+}
+
+.photo-del {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(14,22,38,.62);
+  color: #fff;
+}
+
+.photo-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px dashed var(--line);
+  background: var(--surface);
+}
+
+.photo-count {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+.photo-pick.multi .hint {
+  flex-basis: 100%;
+  margin: 0;
+}
+
 .file-btn {
   position: relative;
   overflow: hidden;

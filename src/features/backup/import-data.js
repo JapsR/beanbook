@@ -51,7 +51,7 @@ export async function readImport(file) {
     map[c.id] = n.id;
     return n;
   });
-  const bs = o.brews.slice(0, 20000).filter(b => b && map[b.coffeeId]).map(b => normBrew({ ...upgrade("brew", b, from), coffeeId: map[b.coffeeId], photoId: pmap[b.photoId] }));
+  const bs = o.brews.slice(0, 20000).filter(b => b && map[b.coffeeId]).map(b => normBrew({ ...upgrade("brew", b, from), coffeeId: map[b.coffeeId], photoId: pmap[b.photoId], morePhotoIds: (Array.isArray(b.morePhotoIds) ? b.morePhotoIds : []).map(p => pmap[p]).filter(Boolean) }));
   pendingImport = { cs, bs, photos, badges: o.badges && typeof o.badges === "object" ? o.badges : {} };
   const mine = state.demo ? 0 : coffees().length;
   openSheet(`${sheetHeader("Import data")}<div class="sheet-body"><p class="hint" style="font-size:15px">This file holds <b style="color:var(--ink)">${cs.length} coffees</b> and <b style="color:var(--ink)">${bs.length} preparations</b>${Object.keys(photos).length ? ` with ${Object.keys(photos).length} photos` : ""}.</p>

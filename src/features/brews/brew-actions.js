@@ -11,7 +11,8 @@ import { coffees, state } from "../../data/state.js";
 import { stageRow } from "./brew-advanced-fields.js";
 import { addFlavor, addMethod, brewForm } from "./brew-form.js";
 import { clearTimer, markPour, toggleTimer } from "./brew-timer.js";
-import { go } from "../../app/router.js";
+import { render } from "../../app/render.js";
+import { go, route } from "../../app/router.js";
 
 export const brewActions = {
   "add-brew": id => brewForm(id), "edit-brew": id => {
@@ -28,10 +29,10 @@ export const brewActions = {
   "ask-del-brew": id => confirmSheet("Delete this preparation?", "This cannot be undone.", "Delete", "del-brew", id),
   "del-brew": id => {
     const b = state.brews[id];
-    const back = b && state.coffees[b.coffeeId] ? "coffee-" + b.coffeeId : "journal";
+    const back = b && state.coffees[b.coffeeId] ? "coffee-" + b.coffeeId : "journal", r = route();
     delBrew(id);
     closeSheet();
-    go(back);
+    r.v === "brew" && r.id === id ? go(back) : render();  // from a list's menu: stay on that list
     toast("Preparation deleted");
   },
   "new-method": () => {

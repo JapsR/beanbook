@@ -169,3 +169,30 @@
   margin-top: 12px;
   box-shadow: var(--shadow);
 }
+
+/* Several photos on a preparation: a swipeable strip; the next photo peeks in at the side. */
+.gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  align-items: flex-start;
+  padding-bottom: 12px;
+}
+
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery .photo-full {
+  flex: 0 0 88%;
+  scroll-snap-align: center;
+  margin-top: 0;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+}

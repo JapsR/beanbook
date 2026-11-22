@@ -193,3 +193,48 @@ button.card:active {
   letter-spacing: .06em;
   margin: 18px 2px 8px;
 }
+
+/* Cards with a long-press menu: no text selection or iOS link callout while holding. */
+.card[data-act="open"] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.card.pressing {
+  transform: scale(.97);
+  transition: transform .45s ease-out;
+}
+
+/* The long-press menu */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: var(--soft);
+  font-weight: 700;
+  text-align: left;
+  transition: transform .1s;
+}
+
+.menu-item:active {
+  transform: scale(.98);
+}
+
+.menu-item.danger {
+  color: var(--bad);
+}
+
+.menu-hint {
+  margin: -2px 4px 6px;
+}

@@ -5,7 +5,7 @@ import { $ } from "../../core/dom.js";
 import { icon } from "../../ui/icons.js";
 import { toast } from "../../ui/toast.js";
 import { okPhoto } from "../../domain/records.js";
-import { refreshPhotoField, setFormPhoto } from "./photo-field.js";
+import { pickedPhoto, refreshPhotoField } from "./photo-field.js";
 
 export const crop = {
   img: null, ang: 0, rot: 0, asp: "orig", zoom: 1, tx: 0, ty: 0, W: 0, H: 0, ptrs: new Map(), url: null
@@ -178,7 +178,7 @@ export function edDone() {
     toast("That photo could not be saved. Try another one.");
     return;
   }
-  setFormPhoto(out, true);
+  pickedPhoto(out);
   closeEditor();
   refreshPhotoField();
 }

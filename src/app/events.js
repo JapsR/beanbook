@@ -8,11 +8,13 @@ import { finishField, typeField } from "../ui/field-types.js";
 import { closeSheet, sheetRoot } from "../ui/sheet.js";
 import { ROASTN } from "../domain/vocabulary.js";
 import { ui } from "../data/state.js";
+import { bindLongPress } from "../ui/long-press.js";
 import { readImport } from "../features/backup/import-data.js";
 import { addFlavor, addMethod, methodChanged, saveBrew, updRatio } from "../features/brews/brew-form.js";
 import { timerVisible } from "../features/brews/brew-timer.js";
 import { saveCoffee } from "../features/coffees/coffee-form.js";
 import { coffeeList } from "../features/coffees/coffee-list-page.js";
+import { ITEM_MENU_TARGETS, openItemMenu } from "../features/item-menu/item-menu.js";
 import { closeEditor, crop, edDraw, edLayout, editor, openEditor } from "../features/photos/photo-editor.js";
 import { actions } from "./actions.js";
 import { onHashChange } from "./router.js";
@@ -126,6 +128,7 @@ export function bindEvents() {
     }
   });
   document.addEventListener("visibilitychange", timerVisible);
+  bindLongPress(ITEM_MENU_TARGETS, openItemMenu);
   addEventListener("hashchange", onHashChange);
   addEventListener("resize", () => {
     if (!editor.hidden) {

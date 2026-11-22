@@ -2,7 +2,7 @@
  * Button handlers for the photo editor and the photo field.
  */
 import { closeEditor, crop, edDone, edLayout } from "./photo-editor.js";
-import { refreshPhotoField, setFormPhoto } from "./photo-field.js";
+import { refreshPhotoField, removeFormPhoto } from "./photo-field.js";
 
 export const photoActions = {
   "ed-cancel": () => closeEditor(), "ed-done": () => edDone(),
@@ -11,8 +11,8 @@ export const photoActions = {
     crop.tx = crop.ty = 0;
     edLayout();
   },
-  "photo-clear": () => {
-    setFormPhoto(null, true);
+  "photo-clear": i => {
+    removeFormPhoto(i);
     refreshPhotoField();
   }
 };

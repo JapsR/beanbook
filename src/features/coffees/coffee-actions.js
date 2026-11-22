@@ -10,7 +10,7 @@ import { Store, saveMeta } from "../../data/storage.js";
 import { checkBadges } from "../badges/badge-progress.js";
 import { coffeeForm } from "./coffee-form.js";
 import { render } from "../../app/render.js";
-import { go } from "../../app/router.js";
+import { go, route } from "../../app/router.js";
 
 export const coffeeActions = {
   "add-coffee": () => coffeeForm(), "edit-coffee": id => coffeeForm(state.coffees[id]),
@@ -36,9 +36,10 @@ export const coffeeActions = {
     confirmSheet("Delete this coffee?", n ? `Its ${n} preparation${n === 1 ? "" : "s"} and photos are deleted too. This cannot be undone.` : "This cannot be undone.", "Delete", "del-coffee", id);
   },
   "del-coffee": id => {
+    const r = route();
     delCoffee(id);
     closeSheet();
-    go("coffees");
+    r.v === "coffee" && r.id === id ? go("coffees") : render();  // from a list's menu: stay on that list
     toast("Coffee deleted");
   }
 };
