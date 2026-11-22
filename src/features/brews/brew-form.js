@@ -52,7 +52,7 @@ export function brewForm(coffeeId, b, copy) {
   <p class="hint"><b style="color:var(--ink)">${esc(c.name)}</b>${!editing && (b || last) ? " · recipe copied from your last cup" : ""}</p>
   <div class="f"><span class="lbl">Method</span><div class="opts" id="method-opts">${allMethods().map(m => methodOpt(m, v.method === m.id)).join("")}<button class="opt-add" type="button" data-act="new-method" id="new-method-btn">+ Custom</button></div>
     <div class="adv-body" id="new-method-row" style="padding:0" hidden><div class="add-row"><input id="new-method-name" type="text" maxlength="30" placeholder="e.g. Hario Switch" aria-label="Name of your brew method" autocomplete="off"><button class="btn small primary" type="button" data-act="add-method">Add</button></div>
-    <div class="opts"><label class="opt"><input type="checkbox" id="new-method-pour"><span>This method has pouring stages</span></label></div></div></div>
+    <div class="opts"><label class="opt"><input type="checkbox" id="new-method-pour"><span>This method has pouring stages</span></label><label class="opt"><input type="checkbox" id="new-method-timer" checked><span>Uses the brew timer</span></label></div></div></div>
   <div class="grid3"><div class="f"><label for="b-dose">Coffee (g)</label><input id="b-dose" name="dose" type="text" ${fieldType("decimal")} value="${v.dose ?? ""}"></div>
     <div class="f"><label for="b-water" id="b-water-lbl">${methodById(v.method).out || "Water"} (g)</label><input id="b-water" name="water" type="text" ${fieldType("decimal")} value="${v.water ?? ""}"></div>
     <div class="f"><label for="b-temp">Temp (°C)</label><input id="b-temp" name="temp" type="text" ${fieldType("decimal")} value="${v.temp ?? ""}"></div></div>
@@ -71,12 +71,45 @@ export function brewForm(coffeeId, b, copy) {
   <div id="extras-box">${extrasBox(v.method, v.extra || {})}</div></div>
   <div class="rate"><div class="rate-top"><div><div class="lbl" style="font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Rating</div><output id="rate-out" for="b-rating" class="num">${r ? fmtRate(r) : "–"}</output></div><span id="rate-pips">${pips(r || null)}</span></div>
     <input id="b-rating" name="rating" type="range" min="0" max="5" step="0.25" value="${r}" style="--p:${r * 20}%" aria-label="Rating from 0 to 5 in quarter steps"><p class="hint">Slide to rate in quarter steps. Leave at zero to rate later.</p></div>
-  <div class="f"><span class="lbl">Tasting notes</span><div class="opts">${[...FLAVORS, ...v.flavors.filter(f => !FLAVORS.includes(f))].map((f, i) => `<label class="opt"><input type="checkbox" name="flavors" id="fl-${i}" value="${esc(f)}" ${v.flavors.includes(f) ? "checked" : ""}><span>${esc(f)}</span></label>`).join("")}</div></div>
+  <div class="f"><span class="lbl">Tasting notes</span><div class="opts" id="flavor-opts">${flavorChoices(v.flavors).map(f => flavorOpt(f, v.flavors.includes(f))).join("")}<button class="opt-add" type="button" data-act="new-flavor" id="new-flavor-btn">+ Custom</button></div>
+    <div class="add-row" id="new-flavor-row" hidden><input id="new-flavor-name" type="text" maxlength="30" placeholder="e.g. Bergamot" aria-label="Your own tasting note" autocomplete="off"><button class="btn small primary" type="button" data-act="add-flavor">Add</button></div></div>
   <div class="f"><label for="b-notes">In your own words</label><textarea id="b-notes" name="notes" rows="5" maxlength="${NOTES_MAX}" placeholder="What worked, what to change next time…">${esc(v.notes)}</textarea><p class="hint">Markdown works: **bold**, *italic*, - lists, [links](https://…)</p></div>
   ${photoField()}
   <div class="f"><label for="b-date">When</label><input id="b-date" name="date" type="datetime-local" value="${esc(v.date)}"></div>
   </div><div class="sheet-foot"><button class="btn primary" type="submit">${editing ? "Save changes" : "Save preparation"}</button></div></form>`);
   updRatio();
+}
+
+/* The standard tasting notes, then every custom one used in earlier preparations (A–Z), then this cup's. */
+function flavorChoices(mine) {
+  const own = new Set();
+  Object.values(state.brews).forEach(b => (b.flavors || []).forEach(f => own.add(f)));
+  mine.forEach(f => own.add(f));
+  return [...FLAVORS, ...[...own].filter(f => !FLAVORS.includes(f)).sort((a, b) => a.localeCompare(b))];
+}
+
+let flavorN = 0;
+const flavorOpt = (f, on) => `<label class="opt"><input type="checkbox" name="flavors" id="fl-${++flavorN}" value="${esc(f)}" ${on ? "checked" : ""}><span>${esc(f)}</span></label>`;
+
+/* Adds the typed tasting note as a ticked option, or ticks the existing one with the same name. */
+export function addFlavor() {
+  const inp = $("#new-flavor-name");
+  if (!inp) {
+    return;
+  }
+  const name = str(inp.value, 30);
+  if (!name) {
+    inp.focus();
+    return;
+  }
+  const same = [...document.querySelectorAll("#flavor-opts [name=flavors]")].find(x => x.value.toLowerCase() === name.toLowerCase());
+  if (same) {
+    same.checked = true;
+  } else {
+    $("#new-flavor-btn").insertAdjacentHTML("beforebegin", flavorOpt(name, true));
+  }
+  inp.value = "";
+  $("#new-flavor-row").hidden = true;
 }
 
 const methodOpt = (m, on) => `<label class="opt" style="--mc:${m.c}"><input type="radio" name="method" id="m-${m.id}" value="${m.id}" ${on ? "checked" : ""}><span>${esc(m.name)}</span></label>`;
@@ -104,7 +137,7 @@ export function addMethod() {
   }
   let m = allMethods().find(x => x.name.toLowerCase() === name.toLowerCase());
   if (!m) {
-    m = normMethod({ name, c: MCOLORS[customs().length % MCOLORS.length], pour: $("#new-method-pour").checked });
+    m = normMethod({ name, c: MCOLORS[customs().length % MCOLORS.length], pour: $("#new-method-pour").checked, timer: $("#new-method-timer").checked });
     state.meta.methods = [...customs(), m];
     saveMeta();
     $("#new-method-btn").insertAdjacentHTML("beforebegin", methodOpt(m, false));
@@ -116,6 +149,7 @@ export function addMethod() {
   }
   inp.value = "";
   $("#new-method-pour").checked = false;
+  $("#new-method-timer").checked = true;
   $("#new-method-row").hidden = true;
 }
 

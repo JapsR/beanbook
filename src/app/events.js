@@ -9,7 +9,7 @@ import { closeSheet, sheetRoot } from "../ui/sheet.js";
 import { ROASTN } from "../domain/vocabulary.js";
 import { ui } from "../data/state.js";
 import { readImport } from "../features/backup/import-data.js";
-import { addMethod, methodChanged, saveBrew, updRatio } from "../features/brews/brew-form.js";
+import { addFlavor, addMethod, methodChanged, saveBrew, updRatio } from "../features/brews/brew-form.js";
 import { timerVisible } from "../features/brews/brew-timer.js";
 import { saveCoffee } from "../features/coffees/coffee-form.js";
 import { coffeeList } from "../features/coffees/coffee-list-page.js";
@@ -98,6 +98,8 @@ export function bindEvents() {
       e.preventDefault();
       if (e.target.id === "new-method-name") {
         addMethod();
+      } else if (e.target.id === "new-flavor-name") {
+        addFlavor();
       }
     }
   });

@@ -26,22 +26,24 @@ export const METHODS = [
     id: "chemex", name: "Chemex", ab: "CX", c: "#0FA3B1", dose: 30, water: 500, temp: 94, time: "4:15", pour: true
   },
   {
-    id: "batch", name: "Filter machine", ab: "FM", c: "#5B6B8C", dose: 60, water: 1000, temp: null, time: ""
+    id: "batch", name: "Filter machine", ab: "FM", c: "#5B6B8C", dose: 60, water: 1000, temp: null, time: "", timer: false
   },
   {
-    id: "coldbrew", name: "Cold brew", ab: "CB", c: "#2F6BD9", dose: 80, water: 1000, temp: null, time: ""
+    id: "coldbrew", name: "Cold brew", ab: "CB", c: "#2F6BD9", dose: 80, water: 1000, temp: null, time: "", timer: false
   },
   {
     id: "cezve", name: "Cezve", ab: "CZ", c: "#B8741A", dose: 8, water: 70, temp: null, time: "2:30"
   },
   {
-    id: "other", name: "Other", ab: "··", c: "#8A93A3", dose: null, water: null, temp: null, time: ""
+    id: "other", name: "Other", ab: "··", c: "#8A93A3", dose: null, water: null, temp: null, time: "", timer: false
   }
 ];
 
 export const MCOLORS = ["#C2187A", "#0B8A6B", "#B4530A", "#4457D6", "#8E3FBF", "#00838F", "#A33B2A", "#5A7D0C"];
 export const customs = () => state.meta.methods || [];
 export const allMethods = () => [...METHODS.slice(0, -1), ...customs(), METHODS[METHODS.length - 1]];
+/* Whether the brew timer is offered: not for long or unattended brews (filter machine, cold brew). */
+export const hasTimer = m => m.timer !== false;
 export const methodById = id => METHODS.find(m => m.id === id) || customs().find(m => m.id === id) || METHODS[METHODS.length - 1];
 
 const abbr = n => {
@@ -53,7 +55,7 @@ export function normMethod(o) {
   o = o || {};
   const name = str(o.name, 30);
   return {
-    id: /^x[a-z0-9]{6,24}$/.test(o.id || "") ? o.id : "x" + newId(), name, ab: abbr(name), c: /^#[0-9a-fA-F]{6}$/.test(o.c || "") ? o.c : MCOLORS[0], pour: !!o.pour
+    id: /^x[a-z0-9]{6,24}$/.test(o.id || "") ? o.id : "x" + newId(), name, ab: abbr(name), c: /^#[0-9a-fA-F]{6}$/.test(o.c || "") ? o.c : MCOLORS[0], pour: !!o.pour, timer: o.timer !== false
   };
 }
 

@@ -66,3 +66,14 @@
 .timer .hint {
   margin: 0;
 }
+
+/* Methods without a timer: only the plain brew time field is left. */
+.timer[data-off] {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.timer[data-off] .timer-top,.timer[data-off] .hint {
+  display: none;
+}

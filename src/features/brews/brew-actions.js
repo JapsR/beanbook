@@ -1,5 +1,5 @@
 /**
- * Button handlers for preparations: add, edit, brew again, delete, custom methods, pouring stages and the brew timer.
+ * Button handlers for preparations: add, edit, brew again, delete, custom methods and tasting notes, pouring stages and the brew timer.
  */
 import { $, esc } from "../../core/dom.js";
 import { num } from "../../core/validate.js";
@@ -9,7 +9,7 @@ import { toast } from "../../ui/toast.js";
 import { delBrew } from "../../data/mutations.js";
 import { coffees, state } from "../../data/state.js";
 import { stageRow } from "./brew-advanced-fields.js";
-import { addMethod, brewForm } from "./brew-form.js";
+import { addFlavor, addMethod, brewForm } from "./brew-form.js";
 import { clearTimer, markPour, toggleTimer } from "./brew-timer.js";
 import { go } from "../../app/router.js";
 
@@ -42,6 +42,14 @@ export const brewActions = {
     }
   },
   "add-method": () => addMethod(),
+  "new-flavor": () => {
+    const r = $("#new-flavor-row");
+    r.hidden = !r.hidden;
+    if (!r.hidden) {
+      $("#new-flavor-name").focus();
+    }
+  },
+  "add-flavor": () => addFlavor(),
   "timer-toggle": () => toggleTimer(), "timer-reset": () => clearTimer(), "timer-pour": () => markPour(),
   "stage-add": () => {
     $("#stage-list").insertAdjacentHTML("beforeend", stageRow());
