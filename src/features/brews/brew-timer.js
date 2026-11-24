@@ -2,9 +2,9 @@
  * The brew timer on the preparation form.
  *
  * Start / pause / reset a stopwatch while brewing. Pausing writes the time into the "Brew time" field,
- * and on methods with pouring stages the "Pour" button records when each pour starts: it fills the
- * start times of the stages already listed (a recipe copied from the last cup) in order, then adds
- * new rows. The screen is kept awake while the timer runs, where the browser allows it.
+ * and on methods with pouring stages the "Pour" button records when each pour starts: the first press
+ * of a run replaces the stages already listed (the template copied from the last cup) with the pours
+ * you actually do, one row per press. The screen is kept awake while the timer runs, where the browser allows it.
  * Methods with timer:false (filter machine, cold brew, "Other") show only the brew time field.
  */
 import { $, esc } from "../../core/dom.js";
@@ -76,12 +76,10 @@ export function markPour() {
     tick.checked = true;
     wrap.hidden = false;
   }
-  const t = formatDuration(timerSeconds()), rows = list.querySelectorAll(".stage");
-  if (timer.pours < rows.length) {
-    rows[timer.pours].querySelector("[name=st-t]").value = t;
-  } else {
-    list.insertAdjacentHTML("beforeend", stageRow({ t }));
+  if (!timer.pours) {
+    list.innerHTML = "";   // the template stages make way for what is actually poured
   }
+  list.insertAdjacentHTML("beforeend", stageRow({ t: formatDuration(timerSeconds()) }));
   timer.pours++;
   drawTimer();
 }

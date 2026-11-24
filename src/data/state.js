@@ -9,7 +9,7 @@ export const state = {
   }, demo: false, ready: false
 };
 
-export const ui = { q: "", filter: "all", jm: "all" };
+export const ui = { q: "", filter: "all", jm: "all", notesOpen: {} };   // notesOpen: coffee ids whose notes are unfolded
 export const coffees = () => Object.values(state.coffees);
 export const brews = () => Object.values(state.brews);
 export const brewsOf = id => brews().filter(b => b.coffeeId === id).sort((a, b) => b.date.localeCompare(a.date));

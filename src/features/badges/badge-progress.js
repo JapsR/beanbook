@@ -1,5 +1,8 @@
 /**
- * Computes the numbers badges count and awards new badge levels.
+ * Computes the numbers badges count and keeps earned badge levels in line with the data.
+ *
+ * checkBadges runs after every change (add, edit, delete, import, bag finished). Levels go up when a
+ * goal is reached and back down, or away, when an edit or delete means the goal is no longer met.
  */
 import { dayOf, localStamp } from "../../core/dates.js";
 import { esc } from "../../core/dom.js";
@@ -63,18 +66,32 @@ export function checkBadges(quiet) {
   if (!f) {
     return;
   }
-  const won = [];
+  const won = [], lost = [];
   BADGES.forEach(b => {
-    const lvl = levelFor(b, f), have = (state.meta.badges[b.id] || {}).level || 0;
+    const lvl = levelFor(b, f), had = state.meta.badges[b.id], have = (had || {}).level || 0;
     if (lvl > have) {
       state.meta.badges[b.id] = { level: lvl, at: dayOf(localStamp()) };
       won.push({ b, lvl });
+    } else if (lvl < have) {
+      if (lvl) {
+        state.meta.badges[b.id] = { ...had, level: lvl };
+      } else {
+        delete state.meta.badges[b.id];
+      }
+      lost.push({ b, lvl });
     }
   });
-  if (!won.length) {
+  if (!won.length && !lost.length) {
     return;
   }
   saveMeta();
+  if (lost.length && state.ready) {
+    const l = lost[0];
+    toast(lost.length > 1 ? lost.length + " badges lost or lowered" : l.lvl ? `Badge lowered: ${l.b.name} · Level ${l.lvl}` : "Badge lost: " + l.b.name);
+  }
+  if (!won.length) {
+    return;
+  }
   if (quiet) {
     if (state.ready) {
       toast(won.length === 1 ? "Badge earned: " + won[0].b.name : won.length + " badges earned");

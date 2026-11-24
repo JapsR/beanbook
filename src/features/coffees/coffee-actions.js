@@ -41,5 +41,6 @@ export const coffeeActions = {
     closeSheet();
     r.v === "coffee" && r.id === id ? go("coffees") : render();  // from a list's menu: stay on that list
     toast("Coffee deleted");
+    checkBadges();
   }
 };

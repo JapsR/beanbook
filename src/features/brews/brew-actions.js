@@ -11,6 +11,7 @@ import { coffees, state } from "../../data/state.js";
 import { stageRow } from "./brew-advanced-fields.js";
 import { addFlavor, addMethod, brewForm } from "./brew-form.js";
 import { clearTimer, markPour, toggleTimer } from "./brew-timer.js";
+import { checkBadges } from "../badges/badge-progress.js";
 import { render } from "../../app/render.js";
 import { go, route } from "../../app/router.js";
 
@@ -34,6 +35,7 @@ export const brewActions = {
     closeSheet();
     r.v === "brew" && r.id === id ? go(back) : render();  // from a list's menu: stay on that list
     toast("Preparation deleted");
+    checkBadges();
   },
   "new-method": () => {
     const r = $("#new-method-row");

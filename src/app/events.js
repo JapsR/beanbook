@@ -129,6 +129,12 @@ export function bindEvents() {
   });
   document.addEventListener("visibilitychange", timerVisible);
   bindLongPress(ITEM_MENU_TARGETS, openItemMenu);
+  document.addEventListener("toggle", e => {   // "toggle" does not bubble: listen while capturing
+    const id = e.target.dataset?.notes;
+    if (id) {
+      ui.notesOpen[id] = e.target.open;
+    }
+  }, true);
   addEventListener("hashchange", onHashChange);
   addEventListener("resize", () => {
     if (!editor.hidden) {

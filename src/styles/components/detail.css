@@ -84,6 +84,74 @@
   overflow-wrap: anywhere;
 }
 
+/* The coffee's notes, folded to one line until opened */
+.notes-box {
+  margin-top: 12px;
+  background: var(--surface);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+
+.notes-box summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 14px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.notes-box summary::-webkit-details-marker {
+  display: none;
+}
+
+.notes-box .lbl {
+  margin: 0;
+  flex: none;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.notes-box .peek {
+  flex: 1;
+  min-width: 0;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notes-box[open] .peek {
+  visibility: hidden;
+}
+
+.notes-box summary svg {
+  flex: none;
+  color: var(--muted);
+  transition: transform .2s;
+}
+
+.notes-box[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.notes-box .note {
+  margin-top: 0;
+  box-shadow: none;
+  padding-top: 0;
+  background: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notes-box summary svg {
+    transition: none;
+  }
+}
+
 .note {
   background: var(--surface);
   border-radius: var(--r);

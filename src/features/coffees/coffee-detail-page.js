@@ -9,8 +9,15 @@ import { mtag } from "../../ui/components.js";
 import { icon } from "../../ui/icons.js";
 import { methodById } from "../../domain/brew-methods.js";
 import { moreOn, rated } from "../../domain/records.js";
-import { brewsOf, state } from "../../data/state.js";
+import { brewsOf, state, ui } from "../../data/state.js";
 import { brewRow } from "../brews/brew-row.js";
+
+/* Markdown reduced to plain text for the one-line preview: [text](url) keeps its text, markers go. */
+const plainText = md => md.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/^\s*([-*+>]|#+|\d+\.)\s+/gm, "").replace(/[*_`~]/g, "").replace(/\s+/g, " ").trim();
+
+/* The coffee's notes, folded to a one-line preview until opened. Stays open while the app is open. */
+const notesBox = c => `<details class="notes-box" data-notes="${c.id}" ${ui.notesOpen[c.id] ? "open" : ""}><summary><span class="lbl">Notes</span><span class="peek">${esc(plainText(c.notes))}</span>${icon("chev", 18)}</summary>
+  <div class="note md">${markdown(c.notes)}</div></details>`;
 
 export function coffeePage(c) {
   const bs = brewsOf(c.id), rs = rated(bs), p = c.photoId && state.photos[c.photoId];
@@ -26,7 +33,7 @@ export function coffeePage(c) {
   <div class="facts">${fact("Form", c.form === "ground" ? "Ground" : "Whole beans")}${fact("Roast", c.roast ? c.roast[0].toUpperCase() + c.roast.slice(1) : "–")}${fact("Process", c.process || "–")}
     ${fact("Roasted", c.roastDate ? fmtDate(c.roastDate) + (age != null && age >= 0 && !c.finished ? ` (${age} d)` : "") : "–")}${fact("Bag", c.weight ? fmtNum(c.weight, 0) + " g" : "–")}${fact("Price", c.price != null ? "€ " + c.price.toFixed(2) : "–")}</div>
   ${moreOn(c) ? `<div class="cmp" style="margin-top:12px">${[["Region", c.region], ["Producer", c.producer], ["Variety", c.variety], ["Altitude", c.altitude ? fmtNum(c.altitude, 0) + " m" : ""], ["Roasted for", { filter: "Filter", espresso: "Espresso", omni: "Filter and espresso" }[c.roastFor] || ""], ["Roaster's notes", c.roasterNotes]].filter(x => x[1]).map(([k, v]) => `<div class="kv"><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div>` : ""}
-  ${c.notes ? `<div class="note md">${markdown(c.notes)}</div>` : ""}
+  ${c.notes ? notesBox(c) : ""}
   ${cmp.length > 1 || rs.length > 1 ? `<div class="section"><h3>Best method</h3><span>average rating</span></div><div class="cmp">${cmp.map(x => `<div class="cmp-row" style="--mc:${x.m.c}"><span>${mtag(x.m.id)}</span><span class="track"><i style="width:${(x.a || 0) / 5 * 100}%"></i></span><span class="v num"><b>${fmtNum(x.a, 2)}</b> · ${x.n}×</span></div>`).join("")}</div>` : ""}
   <div class="section"><h3>Preparations</h3><span>${bs.length ? bs.length + " logged" : ""}</span></div>
   <div class="list preps">${bs.length ? bs.map(b => brewRow(b, false)).join("") : `<div class="empty"><h3>Not brewed yet</h3><p>Log each way you prepare this coffee. Each preparation gets its own rating.</p>${c.demo ? "" : `<button class="btn primary" type="button" data-act="add-brew" data-id="${c.id}">${icon("plus")}Add preparation</button>`}</div>`}</div>
