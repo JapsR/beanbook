@@ -41,12 +41,13 @@ test("add a coffee and a preparation, export, reload and import", async t => {
   await page.click("label:has(#m-v60)");
   await page.click("label:has(#adv-toggle)");
   await page.click("[data-act=stage-preset]");
-  // brew timer: pausing fills in the brew time, Pour fills the planned stage start times in order
+  // brew timer: pausing fills in the brew time; Pour replaces the template stages with the pours made
   await page.click("#bt-toggle");
   await page.waitForTimeout(1100);
   await page.click("#bt-pour");
   await page.click("#bt-toggle");
   assert.match(await page.inputValue("#b-time"), /^0:0[1-2]$/);
+  assert.equal(await page.locator("#stage-list .stage").count(), 1);
   assert.match(await page.inputValue("#stage-list .stage:first-child [name=st-t]"), /^0:0[1-2]$/);
   await page.locator("#b-rating").fill("4.25");
   await page.click("#brew-form button[type=submit]");
@@ -62,7 +63,7 @@ test("add a coffee and a preparation, export, reload and import", async t => {
   const data = JSON.parse(await readFile(file, "utf8"));
   assert.equal(data.format, "beanbook");
   assert.equal(data.coffees.length, 1);
-  assert.equal(data.brews[0].stages.length, 3);
+  assert.equal(data.brews[0].stages.length, 1);
   assert.match(download.suggestedFilename(), /^beanbook-\d{4}-\d\d-\d\d-\d{4}\.json$/);
 
   // data survives a reload
